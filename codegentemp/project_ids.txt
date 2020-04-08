@@ -1,0 +1,7 @@
+C:\Users\Matthew\Dropbox (MIT)\Sophomore Spring\6.115\6.115-Labs\project\DVDAC_Example01\DVDAC_Example01.cydsn\DVDAC_Example01.cyprj|b2fba84d-396a-40c6-b268-17f88486d2a1
+C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|01dea87d-9dea-47c1-974e-71784492ce85
+C:\Users\Matthew\Documents\PSoC Creator\4.2\Downloads ( 4.2).cylib\Downloads ( 4.2).cyprj|c4a2b853-220a-4ce2-a282-1313b5b29035
+C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|99425936-1a25-40f3-bbd6-4ecf00c16a2e
+C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|c3255a68-32e1-4ccd-b0fb-c617c78f9ed1
+C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|678f1a28-d27c-4394-b0ba-641340371237
+C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\default\CyReferenceLibrary\CyReferenceLibrary.cylib\CyReferenceLibrary.cyprj|d3ae7a88-9499-449c-be84-8418a17b5e4b

@@ -1,0 +1,40 @@
+# DVDAC_Example01
+# 2019-05-15 21:02:09Z
+
+# IO_0@[IOP=(1)][IoId=(0)] is reserved: SWDDebugEnabled
+dont_use_io iocell 1 0
+# IO_1@[IOP=(1)][IoId=(1)] is reserved: SWDDebugEnabled
+dont_use_io iocell 1 1
+# IO_3@[IOP=(1)][IoId=(3)] is reserved: SWDDebugEnabled
+dont_use_io iocell 1 3
+set_io "DAC_OUT(0)" iocell 1 6
+set_io "MUX_B(0)" iocell 4 1
+set_io "\LCD:LCDPort(0)\" iocell 2 0
+set_io "\LCD:LCDPort(1)\" iocell 2 1
+set_io "\LCD:LCDPort(2)\" iocell 2 2
+set_io "\LCD:LCDPort(3)\" iocell 2 3
+set_io "\LCD:LCDPort(4)\" iocell 2 4
+set_io "\LCD:LCDPort(5)\" iocell 2 5
+set_io "\LCD:LCDPort(6)\" iocell 2 6
+set_io "ADC_IN_6V(0)" iocell 0 0
+set_io "MUX_C(0)" iocell 4 2
+set_io "MUX_A(0)" iocell 4 0
+set_io "TC_1(0)" iocell 1 7
+set_io "RED_LED(0)" iocell 6 3
+set_io "MUX_D(0)" iocell 4 3
+set_io "MUX_INHIBIT(0)" iocell 4 4
+set_io "Button1(0)" iocell 3 7
+set_io "Button2(0)" iocell 3 6
+set_io "Button3(0)" iocell 3 5
+set_io "Button4(0)" iocell 3 4
+set_io "Pot(0)" iocell 6 5
+set_io "\Num_Notes_Selector_ADC:Bypass(0)\" iocell 0 2
+set_io "Button5(0)" iocell 6 1
+set_io "OLED_CS(0)" iocell 0 1
+set_io "OLED_DC(0)" iocell 3 0
+set_io "OLED_RES(0)" iocell 0 3
+set_io "OLED_SCK(0)" iocell 3 2
+set_io "OLED_SDA(0)" iocell 3 1
+set_location "\ADC_DelSig:DSM\" dsmodcell -1 -1 0
+set_location "\VDAC8_1:viDAC8\" vidaccell -1 -1 3
+set_location "\Num_Notes_Selector_ADC:ADC_SAR\" sarcell -1 -1 1

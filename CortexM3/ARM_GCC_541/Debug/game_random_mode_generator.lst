@@ -1,0 +1,2026 @@
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cc8wohvf.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"game_random_mode_generator.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.global	game_random_mode_generator_initVar
+  20              		.bss
+  21              		.type	game_random_mode_generator_initVar, %object
+  22              		.size	game_random_mode_generator_initVar, 1
+  23              	game_random_mode_generator_initVar:
+  24 0000 00       		.space	1
+  25              		.section	.text.game_random_mode_generator_Init,"ax",%progbits
+  26              		.align	2
+  27              		.global	game_random_mode_generator_Init
+  28              		.thumb
+  29              		.thumb_func
+  30              		.type	game_random_mode_generator_Init, %function
+  31              	game_random_mode_generator_Init:
+  32              	.LFB0:
+  33              		.file 1 "Generated_Source\\PSoC5\\game_random_mode_generator.c"
+   1:Generated_Source\PSoC5/game_random_mode_generator.c **** /*******************************************************************************
+   2:Generated_Source\PSoC5/game_random_mode_generator.c **** * File Name: game_random_mode_generator.c  
+   3:Generated_Source\PSoC5/game_random_mode_generator.c **** * Version 3.0
+   4:Generated_Source\PSoC5/game_random_mode_generator.c **** *
+   5:Generated_Source\PSoC5/game_random_mode_generator.c **** *  Description:
+   6:Generated_Source\PSoC5/game_random_mode_generator.c **** *     The Counter component consists of a 8, 16, 24 or 32-bit counter with
+   7:Generated_Source\PSoC5/game_random_mode_generator.c **** *     a selectable period between 2 and 2^Width - 1.  
+   8:Generated_Source\PSoC5/game_random_mode_generator.c **** *
+   9:Generated_Source\PSoC5/game_random_mode_generator.c **** *   Note:
+  10:Generated_Source\PSoC5/game_random_mode_generator.c **** *     None
+  11:Generated_Source\PSoC5/game_random_mode_generator.c **** *
+  12:Generated_Source\PSoC5/game_random_mode_generator.c **** ********************************************************************************
+  13:Generated_Source\PSoC5/game_random_mode_generator.c **** * Copyright 2008-2012, Cypress Semiconductor Corporation.  All rights reserved.
+  14:Generated_Source\PSoC5/game_random_mode_generator.c **** * You may use this file only in accordance with the license, terms, conditions, 
+  15:Generated_Source\PSoC5/game_random_mode_generator.c **** * disclaimers, and limitations in the end user license agreement accompanying 
+  16:Generated_Source\PSoC5/game_random_mode_generator.c **** * the software package with which this file was provided.
+  17:Generated_Source\PSoC5/game_random_mode_generator.c **** *******************************************************************************/
+  18:Generated_Source\PSoC5/game_random_mode_generator.c **** 
+  19:Generated_Source\PSoC5/game_random_mode_generator.c **** #include "game_random_mode_generator.h"
+  20:Generated_Source\PSoC5/game_random_mode_generator.c **** 
+  21:Generated_Source\PSoC5/game_random_mode_generator.c **** uint8 game_random_mode_generator_initVar = 0u;
+  22:Generated_Source\PSoC5/game_random_mode_generator.c **** 
+  23:Generated_Source\PSoC5/game_random_mode_generator.c **** 
+  24:Generated_Source\PSoC5/game_random_mode_generator.c **** /*******************************************************************************
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cc8wohvf.s 			page 2
+
+
+  25:Generated_Source\PSoC5/game_random_mode_generator.c **** * Function Name: game_random_mode_generator_Init
+  26:Generated_Source\PSoC5/game_random_mode_generator.c **** ********************************************************************************
+  27:Generated_Source\PSoC5/game_random_mode_generator.c **** * Summary:
+  28:Generated_Source\PSoC5/game_random_mode_generator.c **** *     Initialize to the schematic state
+  29:Generated_Source\PSoC5/game_random_mode_generator.c **** * 
+  30:Generated_Source\PSoC5/game_random_mode_generator.c **** * Parameters:  
+  31:Generated_Source\PSoC5/game_random_mode_generator.c **** *  void  
+  32:Generated_Source\PSoC5/game_random_mode_generator.c **** *
+  33:Generated_Source\PSoC5/game_random_mode_generator.c **** * Return: 
+  34:Generated_Source\PSoC5/game_random_mode_generator.c **** *  void
+  35:Generated_Source\PSoC5/game_random_mode_generator.c **** *
+  36:Generated_Source\PSoC5/game_random_mode_generator.c **** *******************************************************************************/
+  37:Generated_Source\PSoC5/game_random_mode_generator.c **** void game_random_mode_generator_Init(void) 
+  38:Generated_Source\PSoC5/game_random_mode_generator.c **** {
+  34              		.loc 1 38 0
+  35              		.cfi_startproc
+  36              		@ args = 0, pretend = 0, frame = 0
+  37              		@ frame_needed = 1, uses_anonymous_args = 0
+  38 0000 80B5     		push	{r7, lr}
+  39              		.cfi_def_cfa_offset 8
+  40              		.cfi_offset 7, -8
+  41              		.cfi_offset 14, -4
+  42 0002 00AF     		add	r7, sp, #0
+  43              		.cfi_def_cfa_register 7
+  39:Generated_Source\PSoC5/game_random_mode_generator.c ****         #if (!game_random_mode_generator_UsingFixedFunction && !game_random_mode_generator_ControlR
+  40:Generated_Source\PSoC5/game_random_mode_generator.c ****             uint8 ctrl;
+  41:Generated_Source\PSoC5/game_random_mode_generator.c ****         #endif /* (!game_random_mode_generator_UsingFixedFunction && !game_random_mode_generator_Co
+  42:Generated_Source\PSoC5/game_random_mode_generator.c ****         
+  43:Generated_Source\PSoC5/game_random_mode_generator.c ****         #if(!game_random_mode_generator_UsingFixedFunction) 
+  44:Generated_Source\PSoC5/game_random_mode_generator.c ****             /* Interrupt State Backup for Critical Region*/
+  45:Generated_Source\PSoC5/game_random_mode_generator.c ****             uint8 game_random_mode_generator_interruptState;
+  46:Generated_Source\PSoC5/game_random_mode_generator.c ****         #endif /* (!game_random_mode_generator_UsingFixedFunction) */
+  47:Generated_Source\PSoC5/game_random_mode_generator.c ****         
+  48:Generated_Source\PSoC5/game_random_mode_generator.c ****         #if (game_random_mode_generator_UsingFixedFunction)
+  49:Generated_Source\PSoC5/game_random_mode_generator.c ****             /* Clear all bits but the enable bit (if it's already set for Timer operation */
+  50:Generated_Source\PSoC5/game_random_mode_generator.c ****             game_random_mode_generator_CONTROL &= game_random_mode_generator_CTRL_ENABLE;
+  44              		.loc 1 50 0
+  45 0004 214A     		ldr	r2, .L2
+  46 0006 214B     		ldr	r3, .L2
+  47 0008 1B78     		ldrb	r3, [r3]
+  48 000a DBB2     		uxtb	r3, r3
+  49 000c 03F00103 		and	r3, r3, #1
+  50 0010 DBB2     		uxtb	r3, r3
+  51 0012 1370     		strb	r3, [r2]
+  51:Generated_Source\PSoC5/game_random_mode_generator.c ****             
+  52:Generated_Source\PSoC5/game_random_mode_generator.c ****             /* Clear the mode bits for continuous run mode */
+  53:Generated_Source\PSoC5/game_random_mode_generator.c ****             #if (CY_PSOC5A)
+  54:Generated_Source\PSoC5/game_random_mode_generator.c ****                 game_random_mode_generator_CONTROL2 &= ((uint8)(~game_random_mode_generator_CTRL_MO
+  55:Generated_Source\PSoC5/game_random_mode_generator.c ****             #endif /* (CY_PSOC5A) */
+  56:Generated_Source\PSoC5/game_random_mode_generator.c ****             #if (CY_PSOC3 || CY_PSOC5LP)
+  57:Generated_Source\PSoC5/game_random_mode_generator.c ****                 game_random_mode_generator_CONTROL3 &= ((uint8)(~game_random_mode_generator_CTRL_MO
+  52              		.loc 1 57 0
+  53 0014 1E4A     		ldr	r2, .L2+4
+  54 0016 1E4B     		ldr	r3, .L2+4
+  55 0018 1B78     		ldrb	r3, [r3]
+  56 001a DBB2     		uxtb	r3, r3
+  57 001c 23F00303 		bic	r3, r3, #3
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cc8wohvf.s 			page 3
+
+
+  58 0020 DBB2     		uxtb	r3, r3
+  59 0022 1370     		strb	r3, [r2]
+  58:Generated_Source\PSoC5/game_random_mode_generator.c ****             #endif /* (CY_PSOC3 || CY_PSOC5LP) */
+  59:Generated_Source\PSoC5/game_random_mode_generator.c ****             /* Check if One Shot mode is enabled i.e. RunMode !=0*/
+  60:Generated_Source\PSoC5/game_random_mode_generator.c ****             #if (game_random_mode_generator_RunModeUsed != 0x0u)
+  61:Generated_Source\PSoC5/game_random_mode_generator.c ****                 /* Set 3rd bit of Control register to enable one shot mode */
+  62:Generated_Source\PSoC5/game_random_mode_generator.c ****                 game_random_mode_generator_CONTROL |= game_random_mode_generator_ONESHOT;
+  63:Generated_Source\PSoC5/game_random_mode_generator.c ****             #endif /* (game_random_mode_generator_RunModeUsed != 0x0u) */
+  64:Generated_Source\PSoC5/game_random_mode_generator.c ****             
+  65:Generated_Source\PSoC5/game_random_mode_generator.c ****             /* Set the IRQ to use the status register interrupts */
+  66:Generated_Source\PSoC5/game_random_mode_generator.c ****             game_random_mode_generator_CONTROL2 |= game_random_mode_generator_CTRL2_IRQ_SEL;
+  60              		.loc 1 66 0
+  61 0024 1B4A     		ldr	r2, .L2+8
+  62 0026 1B4B     		ldr	r3, .L2+8
+  63 0028 1B78     		ldrb	r3, [r3]
+  64 002a DBB2     		uxtb	r3, r3
+  65 002c 43F00103 		orr	r3, r3, #1
+  66 0030 DBB2     		uxtb	r3, r3
+  67 0032 1370     		strb	r3, [r2]
+  67:Generated_Source\PSoC5/game_random_mode_generator.c ****             
+  68:Generated_Source\PSoC5/game_random_mode_generator.c ****             /* Clear and Set SYNCTC and SYNCCMP bits of RT1 register */
+  69:Generated_Source\PSoC5/game_random_mode_generator.c ****             game_random_mode_generator_RT1 &= ((uint8)(~game_random_mode_generator_RT1_MASK));
+  68              		.loc 1 69 0
+  69 0034 184A     		ldr	r2, .L2+12
+  70 0036 184B     		ldr	r3, .L2+12
+  71 0038 1B78     		ldrb	r3, [r3]
+  72 003a DBB2     		uxtb	r3, r3
+  73 003c 23F03003 		bic	r3, r3, #48
+  74 0040 DBB2     		uxtb	r3, r3
+  75 0042 1370     		strb	r3, [r2]
+  70:Generated_Source\PSoC5/game_random_mode_generator.c ****             game_random_mode_generator_RT1 |= game_random_mode_generator_SYNC;     
+  76              		.loc 1 70 0
+  77 0044 144A     		ldr	r2, .L2+12
+  78 0046 144B     		ldr	r3, .L2+12
+  79 0048 1B78     		ldrb	r3, [r3]
+  80 004a DBB2     		uxtb	r3, r3
+  81 004c 43F03003 		orr	r3, r3, #48
+  82 0050 DBB2     		uxtb	r3, r3
+  83 0052 1370     		strb	r3, [r2]
+  71:Generated_Source\PSoC5/game_random_mode_generator.c ****                     
+  72:Generated_Source\PSoC5/game_random_mode_generator.c ****             /*Enable DSI Sync all all inputs of the Timer*/
+  73:Generated_Source\PSoC5/game_random_mode_generator.c ****             game_random_mode_generator_RT1 &= ((uint8)(~game_random_mode_generator_SYNCDSI_MASK));
+  84              		.loc 1 73 0
+  85 0054 104A     		ldr	r2, .L2+12
+  86 0056 104B     		ldr	r3, .L2+12
+  87 0058 1B78     		ldrb	r3, [r3]
+  88 005a DBB2     		uxtb	r3, r3
+  89 005c 23F00F03 		bic	r3, r3, #15
+  90 0060 DBB2     		uxtb	r3, r3
+  91 0062 1370     		strb	r3, [r2]
+  74:Generated_Source\PSoC5/game_random_mode_generator.c ****             game_random_mode_generator_RT1 |= game_random_mode_generator_SYNCDSI_EN;
+  92              		.loc 1 74 0
+  93 0064 0C4A     		ldr	r2, .L2+12
+  94 0066 0C4B     		ldr	r3, .L2+12
+  95 0068 1B78     		ldrb	r3, [r3]
+  96 006a DBB2     		uxtb	r3, r3
+  97 006c 43F00F03 		orr	r3, r3, #15
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cc8wohvf.s 			page 4
+
+
+  98 0070 DBB2     		uxtb	r3, r3
+  99 0072 1370     		strb	r3, [r2]
+  75:Generated_Source\PSoC5/game_random_mode_generator.c **** 
+  76:Generated_Source\PSoC5/game_random_mode_generator.c ****         #else
+  77:Generated_Source\PSoC5/game_random_mode_generator.c ****             #if(!game_random_mode_generator_ControlRegRemoved)
+  78:Generated_Source\PSoC5/game_random_mode_generator.c ****             /* Set the default compare mode defined in the parameter */
+  79:Generated_Source\PSoC5/game_random_mode_generator.c ****             ctrl = game_random_mode_generator_CONTROL & ((uint8)(~game_random_mode_generator_CTRL_C
+  80:Generated_Source\PSoC5/game_random_mode_generator.c ****             game_random_mode_generator_CONTROL = ctrl | game_random_mode_generator_DEFAULT_COMPARE_
+  81:Generated_Source\PSoC5/game_random_mode_generator.c ****             
+  82:Generated_Source\PSoC5/game_random_mode_generator.c ****             /* Set the default capture mode defined in the parameter */
+  83:Generated_Source\PSoC5/game_random_mode_generator.c ****             ctrl = game_random_mode_generator_CONTROL & ((uint8)(~game_random_mode_generator_CTRL_C
+  84:Generated_Source\PSoC5/game_random_mode_generator.c ****             
+  85:Generated_Source\PSoC5/game_random_mode_generator.c ****             #if( 0 != game_random_mode_generator_CAPTURE_MODE_CONF)
+  86:Generated_Source\PSoC5/game_random_mode_generator.c ****                 game_random_mode_generator_CONTROL = ctrl | game_random_mode_generator_DEFAULT_CAPT
+  87:Generated_Source\PSoC5/game_random_mode_generator.c ****             #else
+  88:Generated_Source\PSoC5/game_random_mode_generator.c ****                 game_random_mode_generator_CONTROL = ctrl;
+  89:Generated_Source\PSoC5/game_random_mode_generator.c ****             #endif /* 0 != game_random_mode_generator_CAPTURE_MODE */ 
+  90:Generated_Source\PSoC5/game_random_mode_generator.c ****             
+  91:Generated_Source\PSoC5/game_random_mode_generator.c ****             #endif /* (!game_random_mode_generator_ControlRegRemoved) */
+  92:Generated_Source\PSoC5/game_random_mode_generator.c ****         #endif /* (game_random_mode_generator_UsingFixedFunction) */
+  93:Generated_Source\PSoC5/game_random_mode_generator.c ****         
+  94:Generated_Source\PSoC5/game_random_mode_generator.c ****         /* Clear all data in the FIFO's */
+  95:Generated_Source\PSoC5/game_random_mode_generator.c ****         #if (!game_random_mode_generator_UsingFixedFunction)
+  96:Generated_Source\PSoC5/game_random_mode_generator.c ****             game_random_mode_generator_ClearFIFO();
+  97:Generated_Source\PSoC5/game_random_mode_generator.c ****         #endif /* (!game_random_mode_generator_UsingFixedFunction) */
+  98:Generated_Source\PSoC5/game_random_mode_generator.c ****         
+  99:Generated_Source\PSoC5/game_random_mode_generator.c ****         /* Set Initial values from Configuration */
+ 100:Generated_Source\PSoC5/game_random_mode_generator.c ****         game_random_mode_generator_WritePeriod(game_random_mode_generator_INIT_PERIOD_VALUE);
+ 100              		.loc 1 100 0
+ 101 0074 4FF6FF70 		movw	r0, #65535
+ 102 0078 FFF7FEFF 		bl	game_random_mode_generator_WritePeriod
+ 101:Generated_Source\PSoC5/game_random_mode_generator.c ****         #if (!(game_random_mode_generator_UsingFixedFunction && (CY_PSOC5A)))
+ 102:Generated_Source\PSoC5/game_random_mode_generator.c ****             game_random_mode_generator_WriteCounter(game_random_mode_generator_INIT_COUNTER_VALUE);
+ 103              		.loc 1 102 0
+ 104 007c 0020     		movs	r0, #0
+ 105 007e FFF7FEFF 		bl	game_random_mode_generator_WriteCounter
+ 103:Generated_Source\PSoC5/game_random_mode_generator.c ****         #endif /* (!(game_random_mode_generator_UsingFixedFunction && (CY_PSOC5A))) */
+ 104:Generated_Source\PSoC5/game_random_mode_generator.c ****         game_random_mode_generator_SetInterruptMode(game_random_mode_generator_INIT_INTERRUPTS_MASK
+ 106              		.loc 1 104 0
+ 107 0082 0020     		movs	r0, #0
+ 108 0084 FFF7FEFF 		bl	game_random_mode_generator_SetInterruptMode
+ 105:Generated_Source\PSoC5/game_random_mode_generator.c ****         
+ 106:Generated_Source\PSoC5/game_random_mode_generator.c ****         #if (!game_random_mode_generator_UsingFixedFunction)
+ 107:Generated_Source\PSoC5/game_random_mode_generator.c ****             /* Read the status register to clear the unwanted interrupts */
+ 108:Generated_Source\PSoC5/game_random_mode_generator.c ****             (void)game_random_mode_generator_ReadStatusRegister();
+ 109:Generated_Source\PSoC5/game_random_mode_generator.c ****             /* Set the compare value (only available to non-fixed function implementation */
+ 110:Generated_Source\PSoC5/game_random_mode_generator.c ****             game_random_mode_generator_WriteCompare(game_random_mode_generator_INIT_COMPARE_VALUE);
+ 111:Generated_Source\PSoC5/game_random_mode_generator.c ****             /* Use the interrupt output of the status register for IRQ output */
+ 112:Generated_Source\PSoC5/game_random_mode_generator.c ****             
+ 113:Generated_Source\PSoC5/game_random_mode_generator.c ****             /* CyEnterCriticalRegion and CyExitCriticalRegion are used to mark following region cri
+ 114:Generated_Source\PSoC5/game_random_mode_generator.c ****             /* Enter Critical Region*/
+ 115:Generated_Source\PSoC5/game_random_mode_generator.c ****             game_random_mode_generator_interruptState = CyEnterCriticalSection();
+ 116:Generated_Source\PSoC5/game_random_mode_generator.c ****             
+ 117:Generated_Source\PSoC5/game_random_mode_generator.c ****             game_random_mode_generator_STATUS_AUX_CTRL |= game_random_mode_generator_STATUS_ACTL_IN
+ 118:Generated_Source\PSoC5/game_random_mode_generator.c ****             
+ 119:Generated_Source\PSoC5/game_random_mode_generator.c ****             /* Exit Critical Region*/
+ 120:Generated_Source\PSoC5/game_random_mode_generator.c ****             CyExitCriticalSection(game_random_mode_generator_interruptState);
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cc8wohvf.s 			page 5
+
+
+ 121:Generated_Source\PSoC5/game_random_mode_generator.c ****             
+ 122:Generated_Source\PSoC5/game_random_mode_generator.c ****         #endif /* (!game_random_mode_generator_UsingFixedFunction) */
+ 123:Generated_Source\PSoC5/game_random_mode_generator.c **** }
+ 109              		.loc 1 123 0
+ 110 0088 00BF     		nop
+ 111 008a 80BD     		pop	{r7, pc}
+ 112              	.L3:
+ 113              		.align	2
+ 114              	.L2:
+ 115 008c 0C4F0040 		.word	1073762060
+ 116 0090 0E4F0040 		.word	1073762062
+ 117 0094 0D4F0040 		.word	1073762061
+ 118 0098 174F0040 		.word	1073762071
+ 119              		.cfi_endproc
+ 120              	.LFE0:
+ 121              		.size	game_random_mode_generator_Init, .-game_random_mode_generator_Init
+ 122              		.section	.text.game_random_mode_generator_Enable,"ax",%progbits
+ 123              		.align	2
+ 124              		.global	game_random_mode_generator_Enable
+ 125              		.thumb
+ 126              		.thumb_func
+ 127              		.type	game_random_mode_generator_Enable, %function
+ 128              	game_random_mode_generator_Enable:
+ 129              	.LFB1:
+ 124:Generated_Source\PSoC5/game_random_mode_generator.c **** 
+ 125:Generated_Source\PSoC5/game_random_mode_generator.c **** 
+ 126:Generated_Source\PSoC5/game_random_mode_generator.c **** /*******************************************************************************
+ 127:Generated_Source\PSoC5/game_random_mode_generator.c **** * Function Name: game_random_mode_generator_Enable
+ 128:Generated_Source\PSoC5/game_random_mode_generator.c **** ********************************************************************************
+ 129:Generated_Source\PSoC5/game_random_mode_generator.c **** * Summary:
+ 130:Generated_Source\PSoC5/game_random_mode_generator.c **** *     Enable the Counter
+ 131:Generated_Source\PSoC5/game_random_mode_generator.c **** * 
+ 132:Generated_Source\PSoC5/game_random_mode_generator.c **** * Parameters:  
+ 133:Generated_Source\PSoC5/game_random_mode_generator.c **** *  void  
+ 134:Generated_Source\PSoC5/game_random_mode_generator.c **** *
+ 135:Generated_Source\PSoC5/game_random_mode_generator.c **** * Return: 
+ 136:Generated_Source\PSoC5/game_random_mode_generator.c **** *  void
+ 137:Generated_Source\PSoC5/game_random_mode_generator.c **** *
+ 138:Generated_Source\PSoC5/game_random_mode_generator.c **** * Side Effects: 
+ 139:Generated_Source\PSoC5/game_random_mode_generator.c **** *   If the Enable mode is set to Hardware only then this function has no effect 
+ 140:Generated_Source\PSoC5/game_random_mode_generator.c **** *   on the operation of the counter.
+ 141:Generated_Source\PSoC5/game_random_mode_generator.c **** *
+ 142:Generated_Source\PSoC5/game_random_mode_generator.c **** *******************************************************************************/
+ 143:Generated_Source\PSoC5/game_random_mode_generator.c **** void game_random_mode_generator_Enable(void) 
+ 144:Generated_Source\PSoC5/game_random_mode_generator.c **** {
+ 130              		.loc 1 144 0
+ 131              		.cfi_startproc
+ 132              		@ args = 0, pretend = 0, frame = 0
+ 133              		@ frame_needed = 1, uses_anonymous_args = 0
+ 134              		@ link register save eliminated.
+ 135 0000 80B4     		push	{r7}
+ 136              		.cfi_def_cfa_offset 4
+ 137              		.cfi_offset 7, -4
+ 138 0002 00AF     		add	r7, sp, #0
+ 139              		.cfi_def_cfa_register 7
+ 145:Generated_Source\PSoC5/game_random_mode_generator.c ****     /* Globally Enable the Fixed Function Block chosen */
+ 146:Generated_Source\PSoC5/game_random_mode_generator.c ****     #if (game_random_mode_generator_UsingFixedFunction)
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cc8wohvf.s 			page 6
+
+
+ 147:Generated_Source\PSoC5/game_random_mode_generator.c ****         game_random_mode_generator_GLOBAL_ENABLE |= game_random_mode_generator_BLOCK_EN_MASK;
+ 140              		.loc 1 147 0
+ 141 0004 0D4A     		ldr	r2, .L5
+ 142 0006 0D4B     		ldr	r3, .L5
+ 143 0008 1B78     		ldrb	r3, [r3]
+ 144 000a DBB2     		uxtb	r3, r3
+ 145 000c 43F00203 		orr	r3, r3, #2
+ 146 0010 DBB2     		uxtb	r3, r3
+ 147 0012 1370     		strb	r3, [r2]
+ 148:Generated_Source\PSoC5/game_random_mode_generator.c ****         game_random_mode_generator_GLOBAL_STBY_ENABLE |= game_random_mode_generator_BLOCK_STBY_EN_M
+ 148              		.loc 1 148 0
+ 149 0014 0A4A     		ldr	r2, .L5+4
+ 150 0016 0A4B     		ldr	r3, .L5+4
+ 151 0018 1B78     		ldrb	r3, [r3]
+ 152 001a DBB2     		uxtb	r3, r3
+ 153 001c 43F00203 		orr	r3, r3, #2
+ 154 0020 DBB2     		uxtb	r3, r3
+ 155 0022 1370     		strb	r3, [r2]
+ 149:Generated_Source\PSoC5/game_random_mode_generator.c ****     #endif /* (game_random_mode_generator_UsingFixedFunction) */  
+ 150:Generated_Source\PSoC5/game_random_mode_generator.c ****         
+ 151:Generated_Source\PSoC5/game_random_mode_generator.c ****     /* Enable the counter from the control register  */
+ 152:Generated_Source\PSoC5/game_random_mode_generator.c ****     /* If Fixed Function then make sure Mode is set correctly */
+ 153:Generated_Source\PSoC5/game_random_mode_generator.c ****     /* else make sure reset is clear */
+ 154:Generated_Source\PSoC5/game_random_mode_generator.c ****     #if(!game_random_mode_generator_ControlRegRemoved || game_random_mode_generator_UsingFixedFunct
+ 155:Generated_Source\PSoC5/game_random_mode_generator.c ****         game_random_mode_generator_CONTROL |= game_random_mode_generator_CTRL_ENABLE;              
+ 156              		.loc 1 155 0
+ 157 0024 074A     		ldr	r2, .L5+8
+ 158 0026 074B     		ldr	r3, .L5+8
+ 159 0028 1B78     		ldrb	r3, [r3]
+ 160 002a DBB2     		uxtb	r3, r3
+ 161 002c 43F00103 		orr	r3, r3, #1
+ 162 0030 DBB2     		uxtb	r3, r3
+ 163 0032 1370     		strb	r3, [r2]
+ 156:Generated_Source\PSoC5/game_random_mode_generator.c ****     #endif /* (!game_random_mode_generator_ControlRegRemoved || game_random_mode_generator_UsingFix
+ 157:Generated_Source\PSoC5/game_random_mode_generator.c ****     
+ 158:Generated_Source\PSoC5/game_random_mode_generator.c **** }
+ 164              		.loc 1 158 0
+ 165 0034 00BF     		nop
+ 166 0036 BD46     		mov	sp, r7
+ 167              		.cfi_def_cfa_register 13
+ 168              		@ sp needed
+ 169 0038 80BC     		pop	{r7}
+ 170              		.cfi_restore 7
+ 171              		.cfi_def_cfa_offset 0
+ 172 003a 7047     		bx	lr
+ 173              	.L6:
+ 174              		.align	2
+ 175              	.L5:
+ 176 003c A3430040 		.word	1073759139
+ 177 0040 B3430040 		.word	1073759155
+ 178 0044 0C4F0040 		.word	1073762060
+ 179              		.cfi_endproc
+ 180              	.LFE1:
+ 181              		.size	game_random_mode_generator_Enable, .-game_random_mode_generator_Enable
+ 182              		.section	.text.game_random_mode_generator_Start,"ax",%progbits
+ 183              		.align	2
+ 184              		.global	game_random_mode_generator_Start
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cc8wohvf.s 			page 7
+
+
+ 185              		.thumb
+ 186              		.thumb_func
+ 187              		.type	game_random_mode_generator_Start, %function
+ 188              	game_random_mode_generator_Start:
+ 189              	.LFB2:
+ 159:Generated_Source\PSoC5/game_random_mode_generator.c **** 
+ 160:Generated_Source\PSoC5/game_random_mode_generator.c **** 
+ 161:Generated_Source\PSoC5/game_random_mode_generator.c **** /*******************************************************************************
+ 162:Generated_Source\PSoC5/game_random_mode_generator.c **** * Function Name: game_random_mode_generator_Start
+ 163:Generated_Source\PSoC5/game_random_mode_generator.c **** ********************************************************************************
+ 164:Generated_Source\PSoC5/game_random_mode_generator.c **** * Summary:
+ 165:Generated_Source\PSoC5/game_random_mode_generator.c **** *  Enables the counter for operation 
+ 166:Generated_Source\PSoC5/game_random_mode_generator.c **** *
+ 167:Generated_Source\PSoC5/game_random_mode_generator.c **** * Parameters:  
+ 168:Generated_Source\PSoC5/game_random_mode_generator.c **** *  void  
+ 169:Generated_Source\PSoC5/game_random_mode_generator.c **** *
+ 170:Generated_Source\PSoC5/game_random_mode_generator.c **** * Return: 
+ 171:Generated_Source\PSoC5/game_random_mode_generator.c **** *  void
+ 172:Generated_Source\PSoC5/game_random_mode_generator.c **** *
+ 173:Generated_Source\PSoC5/game_random_mode_generator.c **** * Global variables:
+ 174:Generated_Source\PSoC5/game_random_mode_generator.c **** *  game_random_mode_generator_initVar: Is modified when this function is called for the  
+ 175:Generated_Source\PSoC5/game_random_mode_generator.c **** *   first time. Is used to ensure that initialization happens only once.
+ 176:Generated_Source\PSoC5/game_random_mode_generator.c **** *
+ 177:Generated_Source\PSoC5/game_random_mode_generator.c **** *******************************************************************************/
+ 178:Generated_Source\PSoC5/game_random_mode_generator.c **** void game_random_mode_generator_Start(void) 
+ 179:Generated_Source\PSoC5/game_random_mode_generator.c **** {
+ 190              		.loc 1 179 0
+ 191              		.cfi_startproc
+ 192              		@ args = 0, pretend = 0, frame = 0
+ 193              		@ frame_needed = 1, uses_anonymous_args = 0
+ 194 0000 80B5     		push	{r7, lr}
+ 195              		.cfi_def_cfa_offset 8
+ 196              		.cfi_offset 7, -8
+ 197              		.cfi_offset 14, -4
+ 198 0002 00AF     		add	r7, sp, #0
+ 199              		.cfi_def_cfa_register 7
+ 180:Generated_Source\PSoC5/game_random_mode_generator.c ****     if(game_random_mode_generator_initVar == 0u)
+ 200              		.loc 1 180 0
+ 201 0004 064B     		ldr	r3, .L9
+ 202 0006 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 203 0008 002B     		cmp	r3, #0
+ 204 000a 04D1     		bne	.L8
+ 181:Generated_Source\PSoC5/game_random_mode_generator.c ****     {
+ 182:Generated_Source\PSoC5/game_random_mode_generator.c ****         game_random_mode_generator_Init();
+ 205              		.loc 1 182 0
+ 206 000c FFF7FEFF 		bl	game_random_mode_generator_Init
+ 183:Generated_Source\PSoC5/game_random_mode_generator.c ****         
+ 184:Generated_Source\PSoC5/game_random_mode_generator.c ****         game_random_mode_generator_initVar = 1u; /* Clear this bit for Initialization */        
+ 207              		.loc 1 184 0
+ 208 0010 034B     		ldr	r3, .L9
+ 209 0012 0122     		movs	r2, #1
+ 210 0014 1A70     		strb	r2, [r3]
+ 211              	.L8:
+ 185:Generated_Source\PSoC5/game_random_mode_generator.c ****     }
+ 186:Generated_Source\PSoC5/game_random_mode_generator.c ****     
+ 187:Generated_Source\PSoC5/game_random_mode_generator.c ****     /* Enable the Counter */
+ 188:Generated_Source\PSoC5/game_random_mode_generator.c ****     game_random_mode_generator_Enable();        
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cc8wohvf.s 			page 8
+
+
+ 212              		.loc 1 188 0
+ 213 0016 FFF7FEFF 		bl	game_random_mode_generator_Enable
+ 189:Generated_Source\PSoC5/game_random_mode_generator.c **** }
+ 214              		.loc 1 189 0
+ 215 001a 00BF     		nop
+ 216 001c 80BD     		pop	{r7, pc}
+ 217              	.L10:
+ 218 001e 00BF     		.align	2
+ 219              	.L9:
+ 220 0020 00000000 		.word	game_random_mode_generator_initVar
+ 221              		.cfi_endproc
+ 222              	.LFE2:
+ 223              		.size	game_random_mode_generator_Start, .-game_random_mode_generator_Start
+ 224              		.section	.text.game_random_mode_generator_Stop,"ax",%progbits
+ 225              		.align	2
+ 226              		.global	game_random_mode_generator_Stop
+ 227              		.thumb
+ 228              		.thumb_func
+ 229              		.type	game_random_mode_generator_Stop, %function
+ 230              	game_random_mode_generator_Stop:
+ 231              	.LFB3:
+ 190:Generated_Source\PSoC5/game_random_mode_generator.c **** 
+ 191:Generated_Source\PSoC5/game_random_mode_generator.c **** 
+ 192:Generated_Source\PSoC5/game_random_mode_generator.c **** /*******************************************************************************
+ 193:Generated_Source\PSoC5/game_random_mode_generator.c **** * Function Name: game_random_mode_generator_Stop
+ 194:Generated_Source\PSoC5/game_random_mode_generator.c **** ********************************************************************************
+ 195:Generated_Source\PSoC5/game_random_mode_generator.c **** * Summary:
+ 196:Generated_Source\PSoC5/game_random_mode_generator.c **** * Halts the counter, but does not change any modes or disable interrupts.
+ 197:Generated_Source\PSoC5/game_random_mode_generator.c **** *
+ 198:Generated_Source\PSoC5/game_random_mode_generator.c **** * Parameters:  
+ 199:Generated_Source\PSoC5/game_random_mode_generator.c **** *  void  
+ 200:Generated_Source\PSoC5/game_random_mode_generator.c **** *
+ 201:Generated_Source\PSoC5/game_random_mode_generator.c **** * Return: 
+ 202:Generated_Source\PSoC5/game_random_mode_generator.c **** *  void
+ 203:Generated_Source\PSoC5/game_random_mode_generator.c **** *
+ 204:Generated_Source\PSoC5/game_random_mode_generator.c **** * Side Effects: If the Enable mode is set to Hardware only then this function
+ 205:Generated_Source\PSoC5/game_random_mode_generator.c **** *               has no effect on the operation of the counter.
+ 206:Generated_Source\PSoC5/game_random_mode_generator.c **** *
+ 207:Generated_Source\PSoC5/game_random_mode_generator.c **** *******************************************************************************/
+ 208:Generated_Source\PSoC5/game_random_mode_generator.c **** void game_random_mode_generator_Stop(void) 
+ 209:Generated_Source\PSoC5/game_random_mode_generator.c **** {
+ 232              		.loc 1 209 0
+ 233              		.cfi_startproc
+ 234              		@ args = 0, pretend = 0, frame = 0
+ 235              		@ frame_needed = 1, uses_anonymous_args = 0
+ 236              		@ link register save eliminated.
+ 237 0000 80B4     		push	{r7}
+ 238              		.cfi_def_cfa_offset 4
+ 239              		.cfi_offset 7, -4
+ 240 0002 00AF     		add	r7, sp, #0
+ 241              		.cfi_def_cfa_register 7
+ 210:Generated_Source\PSoC5/game_random_mode_generator.c ****     /* Disable Counter */
+ 211:Generated_Source\PSoC5/game_random_mode_generator.c ****     #if(!game_random_mode_generator_ControlRegRemoved || game_random_mode_generator_UsingFixedFunct
+ 212:Generated_Source\PSoC5/game_random_mode_generator.c ****         game_random_mode_generator_CONTROL &= ((uint8)(~game_random_mode_generator_CTRL_ENABLE));  
+ 242              		.loc 1 212 0
+ 243 0004 0D4A     		ldr	r2, .L12
+ 244 0006 0D4B     		ldr	r3, .L12
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cc8wohvf.s 			page 9
+
+
+ 245 0008 1B78     		ldrb	r3, [r3]
+ 246 000a DBB2     		uxtb	r3, r3
+ 247 000c 23F00103 		bic	r3, r3, #1
+ 248 0010 DBB2     		uxtb	r3, r3
+ 249 0012 1370     		strb	r3, [r2]
+ 213:Generated_Source\PSoC5/game_random_mode_generator.c ****     #endif /* (!game_random_mode_generator_ControlRegRemoved || game_random_mode_generator_UsingFix
+ 214:Generated_Source\PSoC5/game_random_mode_generator.c ****     
+ 215:Generated_Source\PSoC5/game_random_mode_generator.c ****     /* Globally disable the Fixed Function Block chosen */
+ 216:Generated_Source\PSoC5/game_random_mode_generator.c ****     #if (game_random_mode_generator_UsingFixedFunction)
+ 217:Generated_Source\PSoC5/game_random_mode_generator.c ****         game_random_mode_generator_GLOBAL_ENABLE &= ((uint8)(~game_random_mode_generator_BLOCK_EN_M
+ 250              		.loc 1 217 0
+ 251 0014 0A4A     		ldr	r2, .L12+4
+ 252 0016 0A4B     		ldr	r3, .L12+4
+ 253 0018 1B78     		ldrb	r3, [r3]
+ 254 001a DBB2     		uxtb	r3, r3
+ 255 001c 23F00203 		bic	r3, r3, #2
+ 256 0020 DBB2     		uxtb	r3, r3
+ 257 0022 1370     		strb	r3, [r2]
+ 218:Generated_Source\PSoC5/game_random_mode_generator.c ****         game_random_mode_generator_GLOBAL_STBY_ENABLE &= ((uint8)(~game_random_mode_generator_BLOCK
+ 258              		.loc 1 218 0
+ 259 0024 074A     		ldr	r2, .L12+8
+ 260 0026 074B     		ldr	r3, .L12+8
+ 261 0028 1B78     		ldrb	r3, [r3]
+ 262 002a DBB2     		uxtb	r3, r3
+ 263 002c 23F00203 		bic	r3, r3, #2
+ 264 0030 DBB2     		uxtb	r3, r3
+ 265 0032 1370     		strb	r3, [r2]
+ 219:Generated_Source\PSoC5/game_random_mode_generator.c ****     #endif /* (game_random_mode_generator_UsingFixedFunction) */
+ 220:Generated_Source\PSoC5/game_random_mode_generator.c **** }
+ 266              		.loc 1 220 0
+ 267 0034 00BF     		nop
+ 268 0036 BD46     		mov	sp, r7
+ 269              		.cfi_def_cfa_register 13
+ 270              		@ sp needed
+ 271 0038 80BC     		pop	{r7}
+ 272              		.cfi_restore 7
+ 273              		.cfi_def_cfa_offset 0
+ 274 003a 7047     		bx	lr
+ 275              	.L13:
+ 276              		.align	2
+ 277              	.L12:
+ 278 003c 0C4F0040 		.word	1073762060
+ 279 0040 A3430040 		.word	1073759139
+ 280 0044 B3430040 		.word	1073759155
+ 281              		.cfi_endproc
+ 282              	.LFE3:
+ 283              		.size	game_random_mode_generator_Stop, .-game_random_mode_generator_Stop
+ 284              		.section	.text.game_random_mode_generator_SetInterruptMode,"ax",%progbits
+ 285              		.align	2
+ 286              		.global	game_random_mode_generator_SetInterruptMode
+ 287              		.thumb
+ 288              		.thumb_func
+ 289              		.type	game_random_mode_generator_SetInterruptMode, %function
+ 290              	game_random_mode_generator_SetInterruptMode:
+ 291              	.LFB4:
+ 221:Generated_Source\PSoC5/game_random_mode_generator.c **** 
+ 222:Generated_Source\PSoC5/game_random_mode_generator.c **** 
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cc8wohvf.s 			page 10
+
+
+ 223:Generated_Source\PSoC5/game_random_mode_generator.c **** /*******************************************************************************
+ 224:Generated_Source\PSoC5/game_random_mode_generator.c **** * Function Name: game_random_mode_generator_SetInterruptMode
+ 225:Generated_Source\PSoC5/game_random_mode_generator.c **** ********************************************************************************
+ 226:Generated_Source\PSoC5/game_random_mode_generator.c **** * Summary:
+ 227:Generated_Source\PSoC5/game_random_mode_generator.c **** * Configures which interrupt sources are enabled to generate the final interrupt
+ 228:Generated_Source\PSoC5/game_random_mode_generator.c **** *
+ 229:Generated_Source\PSoC5/game_random_mode_generator.c **** * Parameters:  
+ 230:Generated_Source\PSoC5/game_random_mode_generator.c **** *  InterruptsMask: This parameter is an or'd collection of the status bits
+ 231:Generated_Source\PSoC5/game_random_mode_generator.c **** *                   which will be allowed to generate the counters interrupt.   
+ 232:Generated_Source\PSoC5/game_random_mode_generator.c **** *
+ 233:Generated_Source\PSoC5/game_random_mode_generator.c **** * Return: 
+ 234:Generated_Source\PSoC5/game_random_mode_generator.c **** *  void
+ 235:Generated_Source\PSoC5/game_random_mode_generator.c **** *
+ 236:Generated_Source\PSoC5/game_random_mode_generator.c **** *******************************************************************************/
+ 237:Generated_Source\PSoC5/game_random_mode_generator.c **** void game_random_mode_generator_SetInterruptMode(uint8 interruptsMask) 
+ 238:Generated_Source\PSoC5/game_random_mode_generator.c **** {
+ 292              		.loc 1 238 0
+ 293              		.cfi_startproc
+ 294              		@ args = 0, pretend = 0, frame = 8
+ 295              		@ frame_needed = 1, uses_anonymous_args = 0
+ 296              		@ link register save eliminated.
+ 297 0000 80B4     		push	{r7}
+ 298              		.cfi_def_cfa_offset 4
+ 299              		.cfi_offset 7, -4
+ 300 0002 83B0     		sub	sp, sp, #12
+ 301              		.cfi_def_cfa_offset 16
+ 302 0004 00AF     		add	r7, sp, #0
+ 303              		.cfi_def_cfa_register 7
+ 304 0006 0346     		mov	r3, r0
+ 305 0008 FB71     		strb	r3, [r7, #7]
+ 239:Generated_Source\PSoC5/game_random_mode_generator.c ****     game_random_mode_generator_STATUS_MASK = interruptsMask;
+ 306              		.loc 1 239 0
+ 307 000a 044A     		ldr	r2, .L15
+ 308 000c FB79     		ldrb	r3, [r7, #7]
+ 309 000e 1370     		strb	r3, [r2]
+ 240:Generated_Source\PSoC5/game_random_mode_generator.c **** }
+ 310              		.loc 1 240 0
+ 311 0010 00BF     		nop
+ 312 0012 0C37     		adds	r7, r7, #12
+ 313              		.cfi_def_cfa_offset 4
+ 314 0014 BD46     		mov	sp, r7
+ 315              		.cfi_def_cfa_register 13
+ 316              		@ sp needed
+ 317 0016 80BC     		pop	{r7}
+ 318              		.cfi_restore 7
+ 319              		.cfi_def_cfa_offset 0
+ 320 0018 7047     		bx	lr
+ 321              	.L16:
+ 322 001a 00BF     		.align	2
+ 323              	.L15:
+ 324 001c 0F4F0040 		.word	1073762063
+ 325              		.cfi_endproc
+ 326              	.LFE4:
+ 327              		.size	game_random_mode_generator_SetInterruptMode, .-game_random_mode_generator_SetInterruptMode
+ 328              		.section	.text.game_random_mode_generator_ReadStatusRegister,"ax",%progbits
+ 329              		.align	2
+ 330              		.global	game_random_mode_generator_ReadStatusRegister
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cc8wohvf.s 			page 11
+
+
+ 331              		.thumb
+ 332              		.thumb_func
+ 333              		.type	game_random_mode_generator_ReadStatusRegister, %function
+ 334              	game_random_mode_generator_ReadStatusRegister:
+ 335              	.LFB5:
+ 241:Generated_Source\PSoC5/game_random_mode_generator.c **** 
+ 242:Generated_Source\PSoC5/game_random_mode_generator.c **** 
+ 243:Generated_Source\PSoC5/game_random_mode_generator.c **** /*******************************************************************************
+ 244:Generated_Source\PSoC5/game_random_mode_generator.c **** * Function Name: game_random_mode_generator_ReadStatusRegister
+ 245:Generated_Source\PSoC5/game_random_mode_generator.c **** ********************************************************************************
+ 246:Generated_Source\PSoC5/game_random_mode_generator.c **** * Summary:
+ 247:Generated_Source\PSoC5/game_random_mode_generator.c **** *   Reads the status register and returns it's state. This function should use
+ 248:Generated_Source\PSoC5/game_random_mode_generator.c **** *       defined types for the bit-field information as the bits in this
+ 249:Generated_Source\PSoC5/game_random_mode_generator.c **** *       register may be permuteable.
+ 250:Generated_Source\PSoC5/game_random_mode_generator.c **** *
+ 251:Generated_Source\PSoC5/game_random_mode_generator.c **** * Parameters:  
+ 252:Generated_Source\PSoC5/game_random_mode_generator.c **** *  void
+ 253:Generated_Source\PSoC5/game_random_mode_generator.c **** *
+ 254:Generated_Source\PSoC5/game_random_mode_generator.c **** * Return: 
+ 255:Generated_Source\PSoC5/game_random_mode_generator.c **** *  (uint8) The contents of the status register
+ 256:Generated_Source\PSoC5/game_random_mode_generator.c **** *
+ 257:Generated_Source\PSoC5/game_random_mode_generator.c **** * Side Effects:
+ 258:Generated_Source\PSoC5/game_random_mode_generator.c **** *   Status register bits may be clear on read. 
+ 259:Generated_Source\PSoC5/game_random_mode_generator.c **** *
+ 260:Generated_Source\PSoC5/game_random_mode_generator.c **** *******************************************************************************/
+ 261:Generated_Source\PSoC5/game_random_mode_generator.c **** uint8   game_random_mode_generator_ReadStatusRegister(void) 
+ 262:Generated_Source\PSoC5/game_random_mode_generator.c **** {
+ 336              		.loc 1 262 0
+ 337              		.cfi_startproc
+ 338              		@ args = 0, pretend = 0, frame = 0
+ 339              		@ frame_needed = 1, uses_anonymous_args = 0
+ 340              		@ link register save eliminated.
+ 341 0000 80B4     		push	{r7}
+ 342              		.cfi_def_cfa_offset 4
+ 343              		.cfi_offset 7, -4
+ 344 0002 00AF     		add	r7, sp, #0
+ 345              		.cfi_def_cfa_register 7
+ 263:Generated_Source\PSoC5/game_random_mode_generator.c ****     return game_random_mode_generator_STATUS;
+ 346              		.loc 1 263 0
+ 347 0004 034B     		ldr	r3, .L19
+ 348 0006 1B78     		ldrb	r3, [r3]
+ 349 0008 DBB2     		uxtb	r3, r3
+ 264:Generated_Source\PSoC5/game_random_mode_generator.c **** }
+ 350              		.loc 1 264 0
+ 351 000a 1846     		mov	r0, r3
+ 352 000c BD46     		mov	sp, r7
+ 353              		.cfi_def_cfa_register 13
+ 354              		@ sp needed
+ 355 000e 80BC     		pop	{r7}
+ 356              		.cfi_restore 7
+ 357              		.cfi_def_cfa_offset 0
+ 358 0010 7047     		bx	lr
+ 359              	.L20:
+ 360 0012 00BF     		.align	2
+ 361              	.L19:
+ 362 0014 0F4F0040 		.word	1073762063
+ 363              		.cfi_endproc
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cc8wohvf.s 			page 12
+
+
+ 364              	.LFE5:
+ 365              		.size	game_random_mode_generator_ReadStatusRegister, .-game_random_mode_generator_ReadStatusRegist
+ 366              		.section	.text.game_random_mode_generator_ReadControlRegister,"ax",%progbits
+ 367              		.align	2
+ 368              		.global	game_random_mode_generator_ReadControlRegister
+ 369              		.thumb
+ 370              		.thumb_func
+ 371              		.type	game_random_mode_generator_ReadControlRegister, %function
+ 372              	game_random_mode_generator_ReadControlRegister:
+ 373              	.LFB6:
+ 265:Generated_Source\PSoC5/game_random_mode_generator.c **** 
+ 266:Generated_Source\PSoC5/game_random_mode_generator.c **** 
+ 267:Generated_Source\PSoC5/game_random_mode_generator.c **** #if(!game_random_mode_generator_ControlRegRemoved)
+ 268:Generated_Source\PSoC5/game_random_mode_generator.c **** /*******************************************************************************
+ 269:Generated_Source\PSoC5/game_random_mode_generator.c **** * Function Name: game_random_mode_generator_ReadControlRegister
+ 270:Generated_Source\PSoC5/game_random_mode_generator.c **** ********************************************************************************
+ 271:Generated_Source\PSoC5/game_random_mode_generator.c **** * Summary:
+ 272:Generated_Source\PSoC5/game_random_mode_generator.c **** *   Reads the control register and returns it's state. This function should use
+ 273:Generated_Source\PSoC5/game_random_mode_generator.c **** *       defined types for the bit-field information as the bits in this
+ 274:Generated_Source\PSoC5/game_random_mode_generator.c **** *       register may be permuteable.
+ 275:Generated_Source\PSoC5/game_random_mode_generator.c **** *
+ 276:Generated_Source\PSoC5/game_random_mode_generator.c **** * Parameters:  
+ 277:Generated_Source\PSoC5/game_random_mode_generator.c **** *  void
+ 278:Generated_Source\PSoC5/game_random_mode_generator.c **** *
+ 279:Generated_Source\PSoC5/game_random_mode_generator.c **** * Return: 
+ 280:Generated_Source\PSoC5/game_random_mode_generator.c **** *  (uint8) The contents of the control register
+ 281:Generated_Source\PSoC5/game_random_mode_generator.c **** *
+ 282:Generated_Source\PSoC5/game_random_mode_generator.c **** *******************************************************************************/
+ 283:Generated_Source\PSoC5/game_random_mode_generator.c **** uint8   game_random_mode_generator_ReadControlRegister(void) 
+ 284:Generated_Source\PSoC5/game_random_mode_generator.c **** {
+ 374              		.loc 1 284 0
+ 375              		.cfi_startproc
+ 376              		@ args = 0, pretend = 0, frame = 0
+ 377              		@ frame_needed = 1, uses_anonymous_args = 0
+ 378              		@ link register save eliminated.
+ 379 0000 80B4     		push	{r7}
+ 380              		.cfi_def_cfa_offset 4
+ 381              		.cfi_offset 7, -4
+ 382 0002 00AF     		add	r7, sp, #0
+ 383              		.cfi_def_cfa_register 7
+ 285:Generated_Source\PSoC5/game_random_mode_generator.c ****     return game_random_mode_generator_CONTROL;
+ 384              		.loc 1 285 0
+ 385 0004 034B     		ldr	r3, .L23
+ 386 0006 1B78     		ldrb	r3, [r3]
+ 387 0008 DBB2     		uxtb	r3, r3
+ 286:Generated_Source\PSoC5/game_random_mode_generator.c **** }
+ 388              		.loc 1 286 0
+ 389 000a 1846     		mov	r0, r3
+ 390 000c BD46     		mov	sp, r7
+ 391              		.cfi_def_cfa_register 13
+ 392              		@ sp needed
+ 393 000e 80BC     		pop	{r7}
+ 394              		.cfi_restore 7
+ 395              		.cfi_def_cfa_offset 0
+ 396 0010 7047     		bx	lr
+ 397              	.L24:
+ 398 0012 00BF     		.align	2
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cc8wohvf.s 			page 13
+
+
+ 399              	.L23:
+ 400 0014 0C4F0040 		.word	1073762060
+ 401              		.cfi_endproc
+ 402              	.LFE6:
+ 403              		.size	game_random_mode_generator_ReadControlRegister, .-game_random_mode_generator_ReadControlRegi
+ 404              		.section	.text.game_random_mode_generator_WriteControlRegister,"ax",%progbits
+ 405              		.align	2
+ 406              		.global	game_random_mode_generator_WriteControlRegister
+ 407              		.thumb
+ 408              		.thumb_func
+ 409              		.type	game_random_mode_generator_WriteControlRegister, %function
+ 410              	game_random_mode_generator_WriteControlRegister:
+ 411              	.LFB7:
+ 287:Generated_Source\PSoC5/game_random_mode_generator.c **** 
+ 288:Generated_Source\PSoC5/game_random_mode_generator.c **** 
+ 289:Generated_Source\PSoC5/game_random_mode_generator.c **** /*******************************************************************************
+ 290:Generated_Source\PSoC5/game_random_mode_generator.c **** * Function Name: game_random_mode_generator_WriteControlRegister
+ 291:Generated_Source\PSoC5/game_random_mode_generator.c **** ********************************************************************************
+ 292:Generated_Source\PSoC5/game_random_mode_generator.c **** * Summary:
+ 293:Generated_Source\PSoC5/game_random_mode_generator.c **** *   Sets the bit-field of the control register.  This function should use
+ 294:Generated_Source\PSoC5/game_random_mode_generator.c **** *       defined types for the bit-field information as the bits in this
+ 295:Generated_Source\PSoC5/game_random_mode_generator.c **** *       register may be permuteable.
+ 296:Generated_Source\PSoC5/game_random_mode_generator.c **** *
+ 297:Generated_Source\PSoC5/game_random_mode_generator.c **** * Parameters:  
+ 298:Generated_Source\PSoC5/game_random_mode_generator.c **** *  void
+ 299:Generated_Source\PSoC5/game_random_mode_generator.c **** *
+ 300:Generated_Source\PSoC5/game_random_mode_generator.c **** * Return: 
+ 301:Generated_Source\PSoC5/game_random_mode_generator.c **** *  (uint8) The contents of the control register
+ 302:Generated_Source\PSoC5/game_random_mode_generator.c **** *
+ 303:Generated_Source\PSoC5/game_random_mode_generator.c **** *******************************************************************************/
+ 304:Generated_Source\PSoC5/game_random_mode_generator.c **** void    game_random_mode_generator_WriteControlRegister(uint8 control) 
+ 305:Generated_Source\PSoC5/game_random_mode_generator.c **** {
+ 412              		.loc 1 305 0
+ 413              		.cfi_startproc
+ 414              		@ args = 0, pretend = 0, frame = 8
+ 415              		@ frame_needed = 1, uses_anonymous_args = 0
+ 416              		@ link register save eliminated.
+ 417 0000 80B4     		push	{r7}
+ 418              		.cfi_def_cfa_offset 4
+ 419              		.cfi_offset 7, -4
+ 420 0002 83B0     		sub	sp, sp, #12
+ 421              		.cfi_def_cfa_offset 16
+ 422 0004 00AF     		add	r7, sp, #0
+ 423              		.cfi_def_cfa_register 7
+ 424 0006 0346     		mov	r3, r0
+ 425 0008 FB71     		strb	r3, [r7, #7]
+ 306:Generated_Source\PSoC5/game_random_mode_generator.c ****     game_random_mode_generator_CONTROL = control;
+ 426              		.loc 1 306 0
+ 427 000a 044A     		ldr	r2, .L26
+ 428 000c FB79     		ldrb	r3, [r7, #7]
+ 429 000e 1370     		strb	r3, [r2]
+ 307:Generated_Source\PSoC5/game_random_mode_generator.c **** }
+ 430              		.loc 1 307 0
+ 431 0010 00BF     		nop
+ 432 0012 0C37     		adds	r7, r7, #12
+ 433              		.cfi_def_cfa_offset 4
+ 434 0014 BD46     		mov	sp, r7
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cc8wohvf.s 			page 14
+
+
+ 435              		.cfi_def_cfa_register 13
+ 436              		@ sp needed
+ 437 0016 80BC     		pop	{r7}
+ 438              		.cfi_restore 7
+ 439              		.cfi_def_cfa_offset 0
+ 440 0018 7047     		bx	lr
+ 441              	.L27:
+ 442 001a 00BF     		.align	2
+ 443              	.L26:
+ 444 001c 0C4F0040 		.word	1073762060
+ 445              		.cfi_endproc
+ 446              	.LFE7:
+ 447              		.size	game_random_mode_generator_WriteControlRegister, .-game_random_mode_generator_WriteControlRe
+ 448              		.section	.text.game_random_mode_generator_WriteCounter,"ax",%progbits
+ 449              		.align	2
+ 450              		.global	game_random_mode_generator_WriteCounter
+ 451              		.thumb
+ 452              		.thumb_func
+ 453              		.type	game_random_mode_generator_WriteCounter, %function
+ 454              	game_random_mode_generator_WriteCounter:
+ 455              	.LFB8:
+ 308:Generated_Source\PSoC5/game_random_mode_generator.c **** 
+ 309:Generated_Source\PSoC5/game_random_mode_generator.c **** #endif  /* (!game_random_mode_generator_ControlRegRemoved) */
+ 310:Generated_Source\PSoC5/game_random_mode_generator.c **** 
+ 311:Generated_Source\PSoC5/game_random_mode_generator.c **** 
+ 312:Generated_Source\PSoC5/game_random_mode_generator.c **** #if (!(game_random_mode_generator_UsingFixedFunction && (CY_PSOC5A)))
+ 313:Generated_Source\PSoC5/game_random_mode_generator.c **** /*******************************************************************************
+ 314:Generated_Source\PSoC5/game_random_mode_generator.c **** * Function Name: game_random_mode_generator_WriteCounter
+ 315:Generated_Source\PSoC5/game_random_mode_generator.c **** ********************************************************************************
+ 316:Generated_Source\PSoC5/game_random_mode_generator.c **** * Summary:
+ 317:Generated_Source\PSoC5/game_random_mode_generator.c **** *   This funtion is used to set the counter to a specific value
+ 318:Generated_Source\PSoC5/game_random_mode_generator.c **** *
+ 319:Generated_Source\PSoC5/game_random_mode_generator.c **** * Parameters:  
+ 320:Generated_Source\PSoC5/game_random_mode_generator.c **** *  counter:  New counter value. 
+ 321:Generated_Source\PSoC5/game_random_mode_generator.c **** *
+ 322:Generated_Source\PSoC5/game_random_mode_generator.c **** * Return: 
+ 323:Generated_Source\PSoC5/game_random_mode_generator.c **** *  void 
+ 324:Generated_Source\PSoC5/game_random_mode_generator.c **** *
+ 325:Generated_Source\PSoC5/game_random_mode_generator.c **** *******************************************************************************/
+ 326:Generated_Source\PSoC5/game_random_mode_generator.c **** void game_random_mode_generator_WriteCounter(uint16 counter) \
+ 327:Generated_Source\PSoC5/game_random_mode_generator.c ****                                    
+ 328:Generated_Source\PSoC5/game_random_mode_generator.c **** {
+ 456              		.loc 1 328 0
+ 457              		.cfi_startproc
+ 458              		@ args = 0, pretend = 0, frame = 8
+ 459              		@ frame_needed = 1, uses_anonymous_args = 0
+ 460 0000 80B5     		push	{r7, lr}
+ 461              		.cfi_def_cfa_offset 8
+ 462              		.cfi_offset 7, -8
+ 463              		.cfi_offset 14, -4
+ 464 0002 82B0     		sub	sp, sp, #8
+ 465              		.cfi_def_cfa_offset 16
+ 466 0004 00AF     		add	r7, sp, #0
+ 467              		.cfi_def_cfa_register 7
+ 468 0006 0346     		mov	r3, r0
+ 469 0008 FB80     		strh	r3, [r7, #6]	@ movhi
+ 329:Generated_Source\PSoC5/game_random_mode_generator.c ****     #if(game_random_mode_generator_UsingFixedFunction)
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cc8wohvf.s 			page 15
+
+
+ 330:Generated_Source\PSoC5/game_random_mode_generator.c ****         /* assert if block is already enabled */
+ 331:Generated_Source\PSoC5/game_random_mode_generator.c ****         CYASSERT (0u == (game_random_mode_generator_GLOBAL_ENABLE & game_random_mode_generator_BLOC
+ 470              		.loc 1 331 0
+ 471 000a 104B     		ldr	r3, .L30
+ 472 000c 1B78     		ldrb	r3, [r3]
+ 473 000e DBB2     		uxtb	r3, r3
+ 474 0010 03F00203 		and	r3, r3, #2
+ 475 0014 002B     		cmp	r3, #0
+ 476 0016 02D0     		beq	.L29
+ 477              		.loc 1 331 0 is_stmt 0 discriminator 1
+ 478 0018 0020     		movs	r0, #0
+ 479 001a FFF7FEFF 		bl	CyHalt
+ 480              	.L29:
+ 332:Generated_Source\PSoC5/game_random_mode_generator.c ****         /* If block is disabled, enable it and then write the counter */
+ 333:Generated_Source\PSoC5/game_random_mode_generator.c ****         game_random_mode_generator_GLOBAL_ENABLE |= game_random_mode_generator_BLOCK_EN_MASK;
+ 481              		.loc 1 333 0 is_stmt 1
+ 482 001e 0B4A     		ldr	r2, .L30
+ 483 0020 0A4B     		ldr	r3, .L30
+ 484 0022 1B78     		ldrb	r3, [r3]
+ 485 0024 DBB2     		uxtb	r3, r3
+ 486 0026 43F00203 		orr	r3, r3, #2
+ 487 002a DBB2     		uxtb	r3, r3
+ 488 002c 1370     		strb	r3, [r2]
+ 334:Generated_Source\PSoC5/game_random_mode_generator.c ****         CY_SET_REG16(game_random_mode_generator_COUNTER_LSB_PTR, (uint16)counter);
+ 489              		.loc 1 334 0
+ 490 002e 084A     		ldr	r2, .L30+4
+ 491 0030 FB88     		ldrh	r3, [r7, #6]	@ movhi
+ 492 0032 1380     		strh	r3, [r2]	@ movhi
+ 335:Generated_Source\PSoC5/game_random_mode_generator.c ****         game_random_mode_generator_GLOBAL_ENABLE &= ((uint8)(~game_random_mode_generator_BLOCK_EN_M
+ 493              		.loc 1 335 0
+ 494 0034 054A     		ldr	r2, .L30
+ 495 0036 054B     		ldr	r3, .L30
+ 496 0038 1B78     		ldrb	r3, [r3]
+ 497 003a DBB2     		uxtb	r3, r3
+ 498 003c 23F00203 		bic	r3, r3, #2
+ 499 0040 DBB2     		uxtb	r3, r3
+ 500 0042 1370     		strb	r3, [r2]
+ 336:Generated_Source\PSoC5/game_random_mode_generator.c ****     #else
+ 337:Generated_Source\PSoC5/game_random_mode_generator.c ****         CY_SET_REG16(game_random_mode_generator_COUNTER_LSB_PTR, counter);
+ 338:Generated_Source\PSoC5/game_random_mode_generator.c ****     #endif /* (game_random_mode_generator_UsingFixedFunction) */
+ 339:Generated_Source\PSoC5/game_random_mode_generator.c **** }
+ 501              		.loc 1 339 0
+ 502 0044 00BF     		nop
+ 503 0046 0837     		adds	r7, r7, #8
+ 504              		.cfi_def_cfa_offset 8
+ 505 0048 BD46     		mov	sp, r7
+ 506              		.cfi_def_cfa_register 13
+ 507              		@ sp needed
+ 508 004a 80BD     		pop	{r7, pc}
+ 509              	.L31:
+ 510              		.align	2
+ 511              	.L30:
+ 512 004c A3430040 		.word	1073759139
+ 513 0050 124F0040 		.word	1073762066
+ 514              		.cfi_endproc
+ 515              	.LFE8:
+ 516              		.size	game_random_mode_generator_WriteCounter, .-game_random_mode_generator_WriteCounter
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cc8wohvf.s 			page 16
+
+
+ 517              		.section	.text.game_random_mode_generator_ReadCounter,"ax",%progbits
+ 518              		.align	2
+ 519              		.global	game_random_mode_generator_ReadCounter
+ 520              		.thumb
+ 521              		.thumb_func
+ 522              		.type	game_random_mode_generator_ReadCounter, %function
+ 523              	game_random_mode_generator_ReadCounter:
+ 524              	.LFB9:
+ 340:Generated_Source\PSoC5/game_random_mode_generator.c **** #endif /* (!(game_random_mode_generator_UsingFixedFunction && (CY_PSOC5A))) */
+ 341:Generated_Source\PSoC5/game_random_mode_generator.c **** 
+ 342:Generated_Source\PSoC5/game_random_mode_generator.c **** 
+ 343:Generated_Source\PSoC5/game_random_mode_generator.c **** /*******************************************************************************
+ 344:Generated_Source\PSoC5/game_random_mode_generator.c **** * Function Name: game_random_mode_generator_ReadCounter
+ 345:Generated_Source\PSoC5/game_random_mode_generator.c **** ********************************************************************************
+ 346:Generated_Source\PSoC5/game_random_mode_generator.c **** * Summary:
+ 347:Generated_Source\PSoC5/game_random_mode_generator.c **** * Returns the current value of the counter.  It doesn't matter
+ 348:Generated_Source\PSoC5/game_random_mode_generator.c **** * if the counter is enabled or running.
+ 349:Generated_Source\PSoC5/game_random_mode_generator.c **** *
+ 350:Generated_Source\PSoC5/game_random_mode_generator.c **** * Parameters:  
+ 351:Generated_Source\PSoC5/game_random_mode_generator.c **** *  void:  
+ 352:Generated_Source\PSoC5/game_random_mode_generator.c **** *
+ 353:Generated_Source\PSoC5/game_random_mode_generator.c **** * Return: 
+ 354:Generated_Source\PSoC5/game_random_mode_generator.c **** *  (uint16) The present value of the counter.
+ 355:Generated_Source\PSoC5/game_random_mode_generator.c **** *
+ 356:Generated_Source\PSoC5/game_random_mode_generator.c **** *******************************************************************************/
+ 357:Generated_Source\PSoC5/game_random_mode_generator.c **** uint16 game_random_mode_generator_ReadCounter(void) 
+ 358:Generated_Source\PSoC5/game_random_mode_generator.c **** {
+ 525              		.loc 1 358 0
+ 526              		.cfi_startproc
+ 527              		@ args = 0, pretend = 0, frame = 0
+ 528              		@ frame_needed = 1, uses_anonymous_args = 0
+ 529              		@ link register save eliminated.
+ 530 0000 80B4     		push	{r7}
+ 531              		.cfi_def_cfa_offset 4
+ 532              		.cfi_offset 7, -4
+ 533 0002 00AF     		add	r7, sp, #0
+ 534              		.cfi_def_cfa_register 7
+ 359:Generated_Source\PSoC5/game_random_mode_generator.c ****     /* Force capture by reading Accumulator */
+ 360:Generated_Source\PSoC5/game_random_mode_generator.c ****     /* Must first do a software capture to be able to read the counter */
+ 361:Generated_Source\PSoC5/game_random_mode_generator.c ****     /* It is up to the user code to make sure there isn't already captured data in the FIFO */
+ 362:Generated_Source\PSoC5/game_random_mode_generator.c ****     #if(game_random_mode_generator_UsingFixedFunction)
+ 363:Generated_Source\PSoC5/game_random_mode_generator.c **** 		(void)CY_GET_REG16(game_random_mode_generator_COUNTER_LSB_PTR);
+ 535              		.loc 1 363 0
+ 536 0004 044B     		ldr	r3, .L34
+ 537 0006 1B88     		ldrh	r3, [r3]	@ movhi
+ 364:Generated_Source\PSoC5/game_random_mode_generator.c **** 	#else
+ 365:Generated_Source\PSoC5/game_random_mode_generator.c **** 		(void)CY_GET_REG8(game_random_mode_generator_COUNTER_LSB_PTR_8BIT);
+ 366:Generated_Source\PSoC5/game_random_mode_generator.c **** 	#endif/* (game_random_mode_generator_UsingFixedFunction) */
+ 367:Generated_Source\PSoC5/game_random_mode_generator.c ****     
+ 368:Generated_Source\PSoC5/game_random_mode_generator.c ****     /* Read the data from the FIFO (or capture register for Fixed Function)*/
+ 369:Generated_Source\PSoC5/game_random_mode_generator.c ****     #if(game_random_mode_generator_UsingFixedFunction)
+ 370:Generated_Source\PSoC5/game_random_mode_generator.c ****         return ((uint16)CY_GET_REG16(game_random_mode_generator_STATICCOUNT_LSB_PTR));
+ 538              		.loc 1 370 0
+ 539 0008 044B     		ldr	r3, .L34+4
+ 540 000a 1B88     		ldrh	r3, [r3]	@ movhi
+ 541 000c 9BB2     		uxth	r3, r3
+ 371:Generated_Source\PSoC5/game_random_mode_generator.c ****     #else
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cc8wohvf.s 			page 17
+
+
+ 372:Generated_Source\PSoC5/game_random_mode_generator.c ****         return (CY_GET_REG16(game_random_mode_generator_STATICCOUNT_LSB_PTR));
+ 373:Generated_Source\PSoC5/game_random_mode_generator.c ****     #endif /* (game_random_mode_generator_UsingFixedFunction) */
+ 374:Generated_Source\PSoC5/game_random_mode_generator.c **** }
+ 542              		.loc 1 374 0
+ 543 000e 1846     		mov	r0, r3
+ 544 0010 BD46     		mov	sp, r7
+ 545              		.cfi_def_cfa_register 13
+ 546              		@ sp needed
+ 547 0012 80BC     		pop	{r7}
+ 548              		.cfi_restore 7
+ 549              		.cfi_def_cfa_offset 0
+ 550 0014 7047     		bx	lr
+ 551              	.L35:
+ 552 0016 00BF     		.align	2
+ 553              	.L34:
+ 554 0018 124F0040 		.word	1073762066
+ 555 001c 144F0040 		.word	1073762068
+ 556              		.cfi_endproc
+ 557              	.LFE9:
+ 558              		.size	game_random_mode_generator_ReadCounter, .-game_random_mode_generator_ReadCounter
+ 559              		.section	.text.game_random_mode_generator_ReadCapture,"ax",%progbits
+ 560              		.align	2
+ 561              		.global	game_random_mode_generator_ReadCapture
+ 562              		.thumb
+ 563              		.thumb_func
+ 564              		.type	game_random_mode_generator_ReadCapture, %function
+ 565              	game_random_mode_generator_ReadCapture:
+ 566              	.LFB10:
+ 375:Generated_Source\PSoC5/game_random_mode_generator.c **** 
+ 376:Generated_Source\PSoC5/game_random_mode_generator.c **** 
+ 377:Generated_Source\PSoC5/game_random_mode_generator.c **** /*******************************************************************************
+ 378:Generated_Source\PSoC5/game_random_mode_generator.c **** * Function Name: game_random_mode_generator_ReadCapture
+ 379:Generated_Source\PSoC5/game_random_mode_generator.c **** ********************************************************************************
+ 380:Generated_Source\PSoC5/game_random_mode_generator.c **** * Summary:
+ 381:Generated_Source\PSoC5/game_random_mode_generator.c **** *   This function returns the last value captured.
+ 382:Generated_Source\PSoC5/game_random_mode_generator.c **** *
+ 383:Generated_Source\PSoC5/game_random_mode_generator.c **** * Parameters:  
+ 384:Generated_Source\PSoC5/game_random_mode_generator.c **** *  void
+ 385:Generated_Source\PSoC5/game_random_mode_generator.c **** *
+ 386:Generated_Source\PSoC5/game_random_mode_generator.c **** * Return: 
+ 387:Generated_Source\PSoC5/game_random_mode_generator.c **** *  (uint16) Present Capture value.
+ 388:Generated_Source\PSoC5/game_random_mode_generator.c **** *
+ 389:Generated_Source\PSoC5/game_random_mode_generator.c **** *******************************************************************************/
+ 390:Generated_Source\PSoC5/game_random_mode_generator.c **** uint16 game_random_mode_generator_ReadCapture(void) 
+ 391:Generated_Source\PSoC5/game_random_mode_generator.c **** {
+ 567              		.loc 1 391 0
+ 568              		.cfi_startproc
+ 569              		@ args = 0, pretend = 0, frame = 0
+ 570              		@ frame_needed = 1, uses_anonymous_args = 0
+ 571              		@ link register save eliminated.
+ 572 0000 80B4     		push	{r7}
+ 573              		.cfi_def_cfa_offset 4
+ 574              		.cfi_offset 7, -4
+ 575 0002 00AF     		add	r7, sp, #0
+ 576              		.cfi_def_cfa_register 7
+ 392:Generated_Source\PSoC5/game_random_mode_generator.c ****     #if(game_random_mode_generator_UsingFixedFunction)
+ 393:Generated_Source\PSoC5/game_random_mode_generator.c ****         return ((uint16)CY_GET_REG16(game_random_mode_generator_STATICCOUNT_LSB_PTR));
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cc8wohvf.s 			page 18
+
+
+ 577              		.loc 1 393 0
+ 578 0004 034B     		ldr	r3, .L38
+ 579 0006 1B88     		ldrh	r3, [r3]	@ movhi
+ 580 0008 9BB2     		uxth	r3, r3
+ 394:Generated_Source\PSoC5/game_random_mode_generator.c ****     #else
+ 395:Generated_Source\PSoC5/game_random_mode_generator.c ****         return (CY_GET_REG16(game_random_mode_generator_STATICCOUNT_LSB_PTR));
+ 396:Generated_Source\PSoC5/game_random_mode_generator.c ****     #endif /* (game_random_mode_generator_UsingFixedFunction) */
+ 397:Generated_Source\PSoC5/game_random_mode_generator.c **** }
+ 581              		.loc 1 397 0
+ 582 000a 1846     		mov	r0, r3
+ 583 000c BD46     		mov	sp, r7
+ 584              		.cfi_def_cfa_register 13
+ 585              		@ sp needed
+ 586 000e 80BC     		pop	{r7}
+ 587              		.cfi_restore 7
+ 588              		.cfi_def_cfa_offset 0
+ 589 0010 7047     		bx	lr
+ 590              	.L39:
+ 591 0012 00BF     		.align	2
+ 592              	.L38:
+ 593 0014 144F0040 		.word	1073762068
+ 594              		.cfi_endproc
+ 595              	.LFE10:
+ 596              		.size	game_random_mode_generator_ReadCapture, .-game_random_mode_generator_ReadCapture
+ 597              		.section	.text.game_random_mode_generator_WritePeriod,"ax",%progbits
+ 598              		.align	2
+ 599              		.global	game_random_mode_generator_WritePeriod
+ 600              		.thumb
+ 601              		.thumb_func
+ 602              		.type	game_random_mode_generator_WritePeriod, %function
+ 603              	game_random_mode_generator_WritePeriod:
+ 604              	.LFB11:
+ 398:Generated_Source\PSoC5/game_random_mode_generator.c **** 
+ 399:Generated_Source\PSoC5/game_random_mode_generator.c **** 
+ 400:Generated_Source\PSoC5/game_random_mode_generator.c **** /*******************************************************************************
+ 401:Generated_Source\PSoC5/game_random_mode_generator.c **** * Function Name: game_random_mode_generator_WritePeriod
+ 402:Generated_Source\PSoC5/game_random_mode_generator.c **** ********************************************************************************
+ 403:Generated_Source\PSoC5/game_random_mode_generator.c **** * Summary:
+ 404:Generated_Source\PSoC5/game_random_mode_generator.c **** * Changes the period of the counter.  The new period 
+ 405:Generated_Source\PSoC5/game_random_mode_generator.c **** * will be loaded the next time terminal count is detected.
+ 406:Generated_Source\PSoC5/game_random_mode_generator.c **** *
+ 407:Generated_Source\PSoC5/game_random_mode_generator.c **** * Parameters:  
+ 408:Generated_Source\PSoC5/game_random_mode_generator.c **** *  period: (uint16) A value of 0 will result in
+ 409:Generated_Source\PSoC5/game_random_mode_generator.c **** *         the counter remaining at zero.  
+ 410:Generated_Source\PSoC5/game_random_mode_generator.c **** *
+ 411:Generated_Source\PSoC5/game_random_mode_generator.c **** * Return: 
+ 412:Generated_Source\PSoC5/game_random_mode_generator.c **** *  void
+ 413:Generated_Source\PSoC5/game_random_mode_generator.c **** *
+ 414:Generated_Source\PSoC5/game_random_mode_generator.c **** *******************************************************************************/
+ 415:Generated_Source\PSoC5/game_random_mode_generator.c **** void game_random_mode_generator_WritePeriod(uint16 period) 
+ 416:Generated_Source\PSoC5/game_random_mode_generator.c **** {
+ 605              		.loc 1 416 0
+ 606              		.cfi_startproc
+ 607              		@ args = 0, pretend = 0, frame = 8
+ 608              		@ frame_needed = 1, uses_anonymous_args = 0
+ 609              		@ link register save eliminated.
+ 610 0000 80B4     		push	{r7}
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cc8wohvf.s 			page 19
+
+
+ 611              		.cfi_def_cfa_offset 4
+ 612              		.cfi_offset 7, -4
+ 613 0002 83B0     		sub	sp, sp, #12
+ 614              		.cfi_def_cfa_offset 16
+ 615 0004 00AF     		add	r7, sp, #0
+ 616              		.cfi_def_cfa_register 7
+ 617 0006 0346     		mov	r3, r0
+ 618 0008 FB80     		strh	r3, [r7, #6]	@ movhi
+ 417:Generated_Source\PSoC5/game_random_mode_generator.c ****     #if(game_random_mode_generator_UsingFixedFunction)
+ 418:Generated_Source\PSoC5/game_random_mode_generator.c ****         CY_SET_REG16(game_random_mode_generator_PERIOD_LSB_PTR,(uint16)period);
+ 619              		.loc 1 418 0
+ 620 000a 044A     		ldr	r2, .L41
+ 621 000c FB88     		ldrh	r3, [r7, #6]	@ movhi
+ 622 000e 1380     		strh	r3, [r2]	@ movhi
+ 419:Generated_Source\PSoC5/game_random_mode_generator.c ****     #else
+ 420:Generated_Source\PSoC5/game_random_mode_generator.c ****         CY_SET_REG16(game_random_mode_generator_PERIOD_LSB_PTR, period);
+ 421:Generated_Source\PSoC5/game_random_mode_generator.c ****     #endif /* (game_random_mode_generator_UsingFixedFunction) */
+ 422:Generated_Source\PSoC5/game_random_mode_generator.c **** }
+ 623              		.loc 1 422 0
+ 624 0010 00BF     		nop
+ 625 0012 0C37     		adds	r7, r7, #12
+ 626              		.cfi_def_cfa_offset 4
+ 627 0014 BD46     		mov	sp, r7
+ 628              		.cfi_def_cfa_register 13
+ 629              		@ sp needed
+ 630 0016 80BC     		pop	{r7}
+ 631              		.cfi_restore 7
+ 632              		.cfi_def_cfa_offset 0
+ 633 0018 7047     		bx	lr
+ 634              	.L42:
+ 635 001a 00BF     		.align	2
+ 636              	.L41:
+ 637 001c 104F0040 		.word	1073762064
+ 638              		.cfi_endproc
+ 639              	.LFE11:
+ 640              		.size	game_random_mode_generator_WritePeriod, .-game_random_mode_generator_WritePeriod
+ 641              		.section	.text.game_random_mode_generator_ReadPeriod,"ax",%progbits
+ 642              		.align	2
+ 643              		.global	game_random_mode_generator_ReadPeriod
+ 644              		.thumb
+ 645              		.thumb_func
+ 646              		.type	game_random_mode_generator_ReadPeriod, %function
+ 647              	game_random_mode_generator_ReadPeriod:
+ 648              	.LFB12:
+ 423:Generated_Source\PSoC5/game_random_mode_generator.c **** 
+ 424:Generated_Source\PSoC5/game_random_mode_generator.c **** 
+ 425:Generated_Source\PSoC5/game_random_mode_generator.c **** /*******************************************************************************
+ 426:Generated_Source\PSoC5/game_random_mode_generator.c **** * Function Name: game_random_mode_generator_ReadPeriod
+ 427:Generated_Source\PSoC5/game_random_mode_generator.c **** ********************************************************************************
+ 428:Generated_Source\PSoC5/game_random_mode_generator.c **** * Summary:
+ 429:Generated_Source\PSoC5/game_random_mode_generator.c **** * Reads the current period value without affecting counter operation.
+ 430:Generated_Source\PSoC5/game_random_mode_generator.c **** *
+ 431:Generated_Source\PSoC5/game_random_mode_generator.c **** * Parameters:  
+ 432:Generated_Source\PSoC5/game_random_mode_generator.c **** *  void:  
+ 433:Generated_Source\PSoC5/game_random_mode_generator.c **** *
+ 434:Generated_Source\PSoC5/game_random_mode_generator.c **** * Return: 
+ 435:Generated_Source\PSoC5/game_random_mode_generator.c **** *  (uint16) Present period value.
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cc8wohvf.s 			page 20
+
+
+ 436:Generated_Source\PSoC5/game_random_mode_generator.c **** *
+ 437:Generated_Source\PSoC5/game_random_mode_generator.c **** *******************************************************************************/
+ 438:Generated_Source\PSoC5/game_random_mode_generator.c **** uint16 game_random_mode_generator_ReadPeriod(void) 
+ 439:Generated_Source\PSoC5/game_random_mode_generator.c **** {
+ 649              		.loc 1 439 0
+ 650              		.cfi_startproc
+ 651              		@ args = 0, pretend = 0, frame = 0
+ 652              		@ frame_needed = 1, uses_anonymous_args = 0
+ 653              		@ link register save eliminated.
+ 654 0000 80B4     		push	{r7}
+ 655              		.cfi_def_cfa_offset 4
+ 656              		.cfi_offset 7, -4
+ 657 0002 00AF     		add	r7, sp, #0
+ 658              		.cfi_def_cfa_register 7
+ 440:Generated_Source\PSoC5/game_random_mode_generator.c ****     #if(game_random_mode_generator_UsingFixedFunction)
+ 441:Generated_Source\PSoC5/game_random_mode_generator.c ****         return ((uint16)CY_GET_REG16(game_random_mode_generator_PERIOD_LSB_PTR));
+ 659              		.loc 1 441 0
+ 660 0004 034B     		ldr	r3, .L45
+ 661 0006 1B88     		ldrh	r3, [r3]	@ movhi
+ 662 0008 9BB2     		uxth	r3, r3
+ 442:Generated_Source\PSoC5/game_random_mode_generator.c ****     #else
+ 443:Generated_Source\PSoC5/game_random_mode_generator.c ****         return (CY_GET_REG16(game_random_mode_generator_PERIOD_LSB_PTR));
+ 444:Generated_Source\PSoC5/game_random_mode_generator.c ****     #endif /* (game_random_mode_generator_UsingFixedFunction) */
+ 445:Generated_Source\PSoC5/game_random_mode_generator.c **** }
+ 663              		.loc 1 445 0
+ 664 000a 1846     		mov	r0, r3
+ 665 000c BD46     		mov	sp, r7
+ 666              		.cfi_def_cfa_register 13
+ 667              		@ sp needed
+ 668 000e 80BC     		pop	{r7}
+ 669              		.cfi_restore 7
+ 670              		.cfi_def_cfa_offset 0
+ 671 0010 7047     		bx	lr
+ 672              	.L46:
+ 673 0012 00BF     		.align	2
+ 674              	.L45:
+ 675 0014 104F0040 		.word	1073762064
+ 676              		.cfi_endproc
+ 677              	.LFE12:
+ 678              		.size	game_random_mode_generator_ReadPeriod, .-game_random_mode_generator_ReadPeriod
+ 679              		.text
+ 680              	.Letext0:
+ 681              		.file 2 "Generated_Source\\PSoC5\\cytypes.h"
+ 682              		.section	.debug_info,"",%progbits
+ 683              	.Ldebug_info0:
+ 684 0000 1E020000 		.4byte	0x21e
+ 685 0004 0400     		.2byte	0x4
+ 686 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 687 000a 04       		.byte	0x4
+ 688 000b 01       		.uleb128 0x1
+ 689 000c 81000000 		.4byte	.LASF35
+ 690 0010 0C       		.byte	0xc
+ 691 0011 26000000 		.4byte	.LASF36
+ 692 0015 E6020000 		.4byte	.LASF37
+ 693 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 694 001d 00000000 		.4byte	0
+ 695 0021 00000000 		.4byte	.Ldebug_line0
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cc8wohvf.s 			page 21
+
+
+ 696 0025 02       		.uleb128 0x2
+ 697 0026 01       		.byte	0x1
+ 698 0027 06       		.byte	0x6
+ 699 0028 04040000 		.4byte	.LASF0
+ 700 002c 02       		.uleb128 0x2
+ 701 002d 01       		.byte	0x1
+ 702 002e 08       		.byte	0x8
+ 703 002f A4010000 		.4byte	.LASF1
+ 704 0033 02       		.uleb128 0x2
+ 705 0034 02       		.byte	0x2
+ 706 0035 05       		.byte	0x5
+ 707 0036 91030000 		.4byte	.LASF2
+ 708 003a 02       		.uleb128 0x2
+ 709 003b 02       		.byte	0x2
+ 710 003c 07       		.byte	0x7
+ 711 003d 45010000 		.4byte	.LASF3
+ 712 0041 02       		.uleb128 0x2
+ 713 0042 04       		.byte	0x4
+ 714 0043 05       		.byte	0x5
+ 715 0044 C7030000 		.4byte	.LASF4
+ 716 0048 02       		.uleb128 0x2
+ 717 0049 04       		.byte	0x4
+ 718 004a 07       		.byte	0x7
+ 719 004b 09020000 		.4byte	.LASF5
+ 720 004f 02       		.uleb128 0x2
+ 721 0050 08       		.byte	0x8
+ 722 0051 05       		.byte	0x5
+ 723 0052 7E030000 		.4byte	.LASF6
+ 724 0056 02       		.uleb128 0x2
+ 725 0057 08       		.byte	0x8
+ 726 0058 07       		.byte	0x7
+ 727 0059 8D010000 		.4byte	.LASF7
+ 728 005d 03       		.uleb128 0x3
+ 729 005e 04       		.byte	0x4
+ 730 005f 05       		.byte	0x5
+ 731 0060 696E7400 		.ascii	"int\000"
+ 732 0064 02       		.uleb128 0x2
+ 733 0065 04       		.byte	0x4
+ 734 0066 07       		.byte	0x7
+ 735 0067 8A020000 		.4byte	.LASF8
+ 736 006b 04       		.uleb128 0x4
+ 737 006c C1030000 		.4byte	.LASF9
+ 738 0070 02       		.byte	0x2
+ 739 0071 9201     		.2byte	0x192
+ 740 0073 2C000000 		.4byte	0x2c
+ 741 0077 04       		.uleb128 0x4
+ 742 0078 83020000 		.4byte	.LASF10
+ 743 007c 02       		.byte	0x2
+ 744 007d 9301     		.2byte	0x193
+ 745 007f 3A000000 		.4byte	0x3a
+ 746 0083 02       		.uleb128 0x2
+ 747 0084 04       		.byte	0x4
+ 748 0085 04       		.byte	0x4
+ 749 0086 7F010000 		.4byte	.LASF11
+ 750 008a 02       		.uleb128 0x2
+ 751 008b 08       		.byte	0x8
+ 752 008c 04       		.byte	0x4
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cc8wohvf.s 			page 22
+
+
+ 753 008d 7C020000 		.4byte	.LASF12
+ 754 0091 02       		.uleb128 0x2
+ 755 0092 01       		.byte	0x1
+ 756 0093 08       		.byte	0x8
+ 757 0094 8C030000 		.4byte	.LASF13
+ 758 0098 04       		.uleb128 0x4
+ 759 0099 E2010000 		.4byte	.LASF14
+ 760 009d 02       		.byte	0x2
+ 761 009e 3C02     		.2byte	0x23c
+ 762 00a0 A4000000 		.4byte	0xa4
+ 763 00a4 05       		.uleb128 0x5
+ 764 00a5 6B000000 		.4byte	0x6b
+ 765 00a9 04       		.uleb128 0x4
+ 766 00aa 00000000 		.4byte	.LASF15
+ 767 00ae 02       		.byte	0x2
+ 768 00af 3D02     		.2byte	0x23d
+ 769 00b1 B5000000 		.4byte	0xb5
+ 770 00b5 05       		.uleb128 0x5
+ 771 00b6 77000000 		.4byte	0x77
+ 772 00ba 02       		.uleb128 0x2
+ 773 00bb 08       		.byte	0x8
+ 774 00bc 04       		.byte	0x4
+ 775 00bd F8030000 		.4byte	.LASF16
+ 776 00c1 02       		.uleb128 0x2
+ 777 00c2 04       		.byte	0x4
+ 778 00c3 07       		.byte	0x7
+ 779 00c4 75030000 		.4byte	.LASF17
+ 780 00c8 06       		.uleb128 0x6
+ 781 00c9 55030000 		.4byte	.LASF18
+ 782 00cd 01       		.byte	0x1
+ 783 00ce 25       		.byte	0x25
+ 784 00cf 00000000 		.4byte	.LFB0
+ 785 00d3 9C000000 		.4byte	.LFE0-.LFB0
+ 786 00d7 01       		.uleb128 0x1
+ 787 00d8 9C       		.byte	0x9c
+ 788 00d9 07       		.uleb128 0x7
+ 789 00da E7010000 		.4byte	.LASF19
+ 790 00de 01       		.byte	0x1
+ 791 00df 8F       		.byte	0x8f
+ 792 00e0 00000000 		.4byte	.LFB1
+ 793 00e4 48000000 		.4byte	.LFE1-.LFB1
+ 794 00e8 01       		.uleb128 0x1
+ 795 00e9 9C       		.byte	0x9c
+ 796 00ea 06       		.uleb128 0x6
+ 797 00eb 97020000 		.4byte	.LASF20
+ 798 00ef 01       		.byte	0x1
+ 799 00f0 B2       		.byte	0xb2
+ 800 00f1 00000000 		.4byte	.LFB2
+ 801 00f5 24000000 		.4byte	.LFE2-.LFB2
+ 802 00f9 01       		.uleb128 0x1
+ 803 00fa 9C       		.byte	0x9c
+ 804 00fb 07       		.uleb128 0x7
+ 805 00fc 06000000 		.4byte	.LASF21
+ 806 0100 01       		.byte	0x1
+ 807 0101 D0       		.byte	0xd0
+ 808 0102 00000000 		.4byte	.LFB3
+ 809 0106 48000000 		.4byte	.LFE3-.LFB3
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cc8wohvf.s 			page 23
+
+
+ 810 010a 01       		.uleb128 0x1
+ 811 010b 9C       		.byte	0x9c
+ 812 010c 08       		.uleb128 0x8
+ 813 010d 10040000 		.4byte	.LASF24
+ 814 0111 01       		.byte	0x1
+ 815 0112 ED       		.byte	0xed
+ 816 0113 00000000 		.4byte	.LFB4
+ 817 0117 20000000 		.4byte	.LFE4-.LFB4
+ 818 011b 01       		.uleb128 0x1
+ 819 011c 9C       		.byte	0x9c
+ 820 011d 30010000 		.4byte	0x130
+ 821 0121 09       		.uleb128 0x9
+ 822 0122 6D020000 		.4byte	.LASF26
+ 823 0126 01       		.byte	0x1
+ 824 0127 ED       		.byte	0xed
+ 825 0128 6B000000 		.4byte	0x6b
+ 826 012c 02       		.uleb128 0x2
+ 827 012d 91       		.byte	0x91
+ 828 012e 77       		.sleb128 -9
+ 829 012f 00       		.byte	0
+ 830 0130 0A       		.uleb128 0xa
+ 831 0131 B8020000 		.4byte	.LASF22
+ 832 0135 01       		.byte	0x1
+ 833 0136 0501     		.2byte	0x105
+ 834 0138 6B000000 		.4byte	0x6b
+ 835 013c 00000000 		.4byte	.LFB5
+ 836 0140 18000000 		.4byte	.LFE5-.LFB5
+ 837 0144 01       		.uleb128 0x1
+ 838 0145 9C       		.byte	0x9c
+ 839 0146 0A       		.uleb128 0xa
+ 840 0147 0F010000 		.4byte	.LASF23
+ 841 014b 01       		.byte	0x1
+ 842 014c 1B01     		.2byte	0x11b
+ 843 014e 6B000000 		.4byte	0x6b
+ 844 0152 00000000 		.4byte	.LFB6
+ 845 0156 18000000 		.4byte	.LFE6-.LFB6
+ 846 015a 01       		.uleb128 0x1
+ 847 015b 9C       		.byte	0x9c
+ 848 015c 0B       		.uleb128 0xb
+ 849 015d B2010000 		.4byte	.LASF25
+ 850 0161 01       		.byte	0x1
+ 851 0162 3001     		.2byte	0x130
+ 852 0164 00000000 		.4byte	.LFB7
+ 853 0168 20000000 		.4byte	.LFE7-.LFB7
+ 854 016c 01       		.uleb128 0x1
+ 855 016d 9C       		.byte	0x9c
+ 856 016e 82010000 		.4byte	0x182
+ 857 0172 0C       		.uleb128 0xc
+ 858 0173 65020000 		.4byte	.LASF27
+ 859 0177 01       		.byte	0x1
+ 860 0178 3001     		.2byte	0x130
+ 861 017a 6B000000 		.4byte	0x6b
+ 862 017e 02       		.uleb128 0x2
+ 863 017f 91       		.byte	0x91
+ 864 0180 77       		.sleb128 -9
+ 865 0181 00       		.byte	0
+ 866 0182 0D       		.uleb128 0xd
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cc8wohvf.s 			page 24
+
+
+ 867 0183 D0030000 		.4byte	.LASF28
+ 868 0187 01       		.byte	0x1
+ 869 0188 4601     		.2byte	0x146
+ 870 018a 00000000 		.4byte	.LFB8
+ 871 018e 54000000 		.4byte	.LFE8-.LFB8
+ 872 0192 01       		.uleb128 0x1
+ 873 0193 9C       		.byte	0x9c
+ 874 0194 A8010000 		.4byte	0x1a8
+ 875 0198 0C       		.uleb128 0xc
+ 876 0199 85010000 		.4byte	.LASF29
+ 877 019d 01       		.byte	0x1
+ 878 019e 4601     		.2byte	0x146
+ 879 01a0 77000000 		.4byte	0x77
+ 880 01a4 02       		.uleb128 0x2
+ 881 01a5 91       		.byte	0x91
+ 882 01a6 76       		.sleb128 -10
+ 883 01a7 00       		.byte	0
+ 884 01a8 0A       		.uleb128 0xa
+ 885 01a9 58010000 		.4byte	.LASF30
+ 886 01ad 01       		.byte	0x1
+ 887 01ae 6501     		.2byte	0x165
+ 888 01b0 77000000 		.4byte	0x77
+ 889 01b4 00000000 		.4byte	.LFB9
+ 890 01b8 20000000 		.4byte	.LFE9-.LFB9
+ 891 01bc 01       		.uleb128 0x1
+ 892 01bd 9C       		.byte	0x9c
+ 893 01be 0A       		.uleb128 0xa
+ 894 01bf 5A000000 		.4byte	.LASF31
+ 895 01c3 01       		.byte	0x1
+ 896 01c4 8601     		.2byte	0x186
+ 897 01c6 77000000 		.4byte	0x77
+ 898 01ca 00000000 		.4byte	.LFB10
+ 899 01ce 18000000 		.4byte	.LFE10-.LFB10
+ 900 01d2 01       		.uleb128 0x1
+ 901 01d3 9C       		.byte	0x9c
+ 902 01d4 0B       		.uleb128 0xb
+ 903 01d5 3E020000 		.4byte	.LASF32
+ 904 01d9 01       		.byte	0x1
+ 905 01da 9F01     		.2byte	0x19f
+ 906 01dc 00000000 		.4byte	.LFB11
+ 907 01e0 20000000 		.4byte	.LFE11-.LFB11
+ 908 01e4 01       		.uleb128 0x1
+ 909 01e5 9C       		.byte	0x9c
+ 910 01e6 FA010000 		.4byte	0x1fa
+ 911 01ea 0C       		.uleb128 0xc
+ 912 01eb 3E010000 		.4byte	.LASF33
+ 913 01ef 01       		.byte	0x1
+ 914 01f0 9F01     		.2byte	0x19f
+ 915 01f2 77000000 		.4byte	0x77
+ 916 01f6 02       		.uleb128 0x2
+ 917 01f7 91       		.byte	0x91
+ 918 01f8 76       		.sleb128 -10
+ 919 01f9 00       		.byte	0
+ 920 01fa 0A       		.uleb128 0xa
+ 921 01fb 9B030000 		.4byte	.LASF34
+ 922 01ff 01       		.byte	0x1
+ 923 0200 B601     		.2byte	0x1b6
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cc8wohvf.s 			page 25
+
+
+ 924 0202 77000000 		.4byte	0x77
+ 925 0206 00000000 		.4byte	.LFB12
+ 926 020a 18000000 		.4byte	.LFE12-.LFB12
+ 927 020e 01       		.uleb128 0x1
+ 928 020f 9C       		.byte	0x9c
+ 929 0210 0E       		.uleb128 0xe
+ 930 0211 1B020000 		.4byte	.LASF38
+ 931 0215 01       		.byte	0x1
+ 932 0216 15       		.byte	0x15
+ 933 0217 6B000000 		.4byte	0x6b
+ 934 021b 05       		.uleb128 0x5
+ 935 021c 03       		.byte	0x3
+ 936 021d 00000000 		.4byte	game_random_mode_generator_initVar
+ 937 0221 00       		.byte	0
+ 938              		.section	.debug_abbrev,"",%progbits
+ 939              	.Ldebug_abbrev0:
+ 940 0000 01       		.uleb128 0x1
+ 941 0001 11       		.uleb128 0x11
+ 942 0002 01       		.byte	0x1
+ 943 0003 25       		.uleb128 0x25
+ 944 0004 0E       		.uleb128 0xe
+ 945 0005 13       		.uleb128 0x13
+ 946 0006 0B       		.uleb128 0xb
+ 947 0007 03       		.uleb128 0x3
+ 948 0008 0E       		.uleb128 0xe
+ 949 0009 1B       		.uleb128 0x1b
+ 950 000a 0E       		.uleb128 0xe
+ 951 000b 55       		.uleb128 0x55
+ 952 000c 17       		.uleb128 0x17
+ 953 000d 11       		.uleb128 0x11
+ 954 000e 01       		.uleb128 0x1
+ 955 000f 10       		.uleb128 0x10
+ 956 0010 17       		.uleb128 0x17
+ 957 0011 00       		.byte	0
+ 958 0012 00       		.byte	0
+ 959 0013 02       		.uleb128 0x2
+ 960 0014 24       		.uleb128 0x24
+ 961 0015 00       		.byte	0
+ 962 0016 0B       		.uleb128 0xb
+ 963 0017 0B       		.uleb128 0xb
+ 964 0018 3E       		.uleb128 0x3e
+ 965 0019 0B       		.uleb128 0xb
+ 966 001a 03       		.uleb128 0x3
+ 967 001b 0E       		.uleb128 0xe
+ 968 001c 00       		.byte	0
+ 969 001d 00       		.byte	0
+ 970 001e 03       		.uleb128 0x3
+ 971 001f 24       		.uleb128 0x24
+ 972 0020 00       		.byte	0
+ 973 0021 0B       		.uleb128 0xb
+ 974 0022 0B       		.uleb128 0xb
+ 975 0023 3E       		.uleb128 0x3e
+ 976 0024 0B       		.uleb128 0xb
+ 977 0025 03       		.uleb128 0x3
+ 978 0026 08       		.uleb128 0x8
+ 979 0027 00       		.byte	0
+ 980 0028 00       		.byte	0
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cc8wohvf.s 			page 26
+
+
+ 981 0029 04       		.uleb128 0x4
+ 982 002a 16       		.uleb128 0x16
+ 983 002b 00       		.byte	0
+ 984 002c 03       		.uleb128 0x3
+ 985 002d 0E       		.uleb128 0xe
+ 986 002e 3A       		.uleb128 0x3a
+ 987 002f 0B       		.uleb128 0xb
+ 988 0030 3B       		.uleb128 0x3b
+ 989 0031 05       		.uleb128 0x5
+ 990 0032 49       		.uleb128 0x49
+ 991 0033 13       		.uleb128 0x13
+ 992 0034 00       		.byte	0
+ 993 0035 00       		.byte	0
+ 994 0036 05       		.uleb128 0x5
+ 995 0037 35       		.uleb128 0x35
+ 996 0038 00       		.byte	0
+ 997 0039 49       		.uleb128 0x49
+ 998 003a 13       		.uleb128 0x13
+ 999 003b 00       		.byte	0
+ 1000 003c 00       		.byte	0
+ 1001 003d 06       		.uleb128 0x6
+ 1002 003e 2E       		.uleb128 0x2e
+ 1003 003f 00       		.byte	0
+ 1004 0040 3F       		.uleb128 0x3f
+ 1005 0041 19       		.uleb128 0x19
+ 1006 0042 03       		.uleb128 0x3
+ 1007 0043 0E       		.uleb128 0xe
+ 1008 0044 3A       		.uleb128 0x3a
+ 1009 0045 0B       		.uleb128 0xb
+ 1010 0046 3B       		.uleb128 0x3b
+ 1011 0047 0B       		.uleb128 0xb
+ 1012 0048 27       		.uleb128 0x27
+ 1013 0049 19       		.uleb128 0x19
+ 1014 004a 11       		.uleb128 0x11
+ 1015 004b 01       		.uleb128 0x1
+ 1016 004c 12       		.uleb128 0x12
+ 1017 004d 06       		.uleb128 0x6
+ 1018 004e 40       		.uleb128 0x40
+ 1019 004f 18       		.uleb128 0x18
+ 1020 0050 9642     		.uleb128 0x2116
+ 1021 0052 19       		.uleb128 0x19
+ 1022 0053 00       		.byte	0
+ 1023 0054 00       		.byte	0
+ 1024 0055 07       		.uleb128 0x7
+ 1025 0056 2E       		.uleb128 0x2e
+ 1026 0057 00       		.byte	0
+ 1027 0058 3F       		.uleb128 0x3f
+ 1028 0059 19       		.uleb128 0x19
+ 1029 005a 03       		.uleb128 0x3
+ 1030 005b 0E       		.uleb128 0xe
+ 1031 005c 3A       		.uleb128 0x3a
+ 1032 005d 0B       		.uleb128 0xb
+ 1033 005e 3B       		.uleb128 0x3b
+ 1034 005f 0B       		.uleb128 0xb
+ 1035 0060 27       		.uleb128 0x27
+ 1036 0061 19       		.uleb128 0x19
+ 1037 0062 11       		.uleb128 0x11
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cc8wohvf.s 			page 27
+
+
+ 1038 0063 01       		.uleb128 0x1
+ 1039 0064 12       		.uleb128 0x12
+ 1040 0065 06       		.uleb128 0x6
+ 1041 0066 40       		.uleb128 0x40
+ 1042 0067 18       		.uleb128 0x18
+ 1043 0068 9742     		.uleb128 0x2117
+ 1044 006a 19       		.uleb128 0x19
+ 1045 006b 00       		.byte	0
+ 1046 006c 00       		.byte	0
+ 1047 006d 08       		.uleb128 0x8
+ 1048 006e 2E       		.uleb128 0x2e
+ 1049 006f 01       		.byte	0x1
+ 1050 0070 3F       		.uleb128 0x3f
+ 1051 0071 19       		.uleb128 0x19
+ 1052 0072 03       		.uleb128 0x3
+ 1053 0073 0E       		.uleb128 0xe
+ 1054 0074 3A       		.uleb128 0x3a
+ 1055 0075 0B       		.uleb128 0xb
+ 1056 0076 3B       		.uleb128 0x3b
+ 1057 0077 0B       		.uleb128 0xb
+ 1058 0078 27       		.uleb128 0x27
+ 1059 0079 19       		.uleb128 0x19
+ 1060 007a 11       		.uleb128 0x11
+ 1061 007b 01       		.uleb128 0x1
+ 1062 007c 12       		.uleb128 0x12
+ 1063 007d 06       		.uleb128 0x6
+ 1064 007e 40       		.uleb128 0x40
+ 1065 007f 18       		.uleb128 0x18
+ 1066 0080 9742     		.uleb128 0x2117
+ 1067 0082 19       		.uleb128 0x19
+ 1068 0083 01       		.uleb128 0x1
+ 1069 0084 13       		.uleb128 0x13
+ 1070 0085 00       		.byte	0
+ 1071 0086 00       		.byte	0
+ 1072 0087 09       		.uleb128 0x9
+ 1073 0088 05       		.uleb128 0x5
+ 1074 0089 00       		.byte	0
+ 1075 008a 03       		.uleb128 0x3
+ 1076 008b 0E       		.uleb128 0xe
+ 1077 008c 3A       		.uleb128 0x3a
+ 1078 008d 0B       		.uleb128 0xb
+ 1079 008e 3B       		.uleb128 0x3b
+ 1080 008f 0B       		.uleb128 0xb
+ 1081 0090 49       		.uleb128 0x49
+ 1082 0091 13       		.uleb128 0x13
+ 1083 0092 02       		.uleb128 0x2
+ 1084 0093 18       		.uleb128 0x18
+ 1085 0094 00       		.byte	0
+ 1086 0095 00       		.byte	0
+ 1087 0096 0A       		.uleb128 0xa
+ 1088 0097 2E       		.uleb128 0x2e
+ 1089 0098 00       		.byte	0
+ 1090 0099 3F       		.uleb128 0x3f
+ 1091 009a 19       		.uleb128 0x19
+ 1092 009b 03       		.uleb128 0x3
+ 1093 009c 0E       		.uleb128 0xe
+ 1094 009d 3A       		.uleb128 0x3a
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cc8wohvf.s 			page 28
+
+
+ 1095 009e 0B       		.uleb128 0xb
+ 1096 009f 3B       		.uleb128 0x3b
+ 1097 00a0 05       		.uleb128 0x5
+ 1098 00a1 27       		.uleb128 0x27
+ 1099 00a2 19       		.uleb128 0x19
+ 1100 00a3 49       		.uleb128 0x49
+ 1101 00a4 13       		.uleb128 0x13
+ 1102 00a5 11       		.uleb128 0x11
+ 1103 00a6 01       		.uleb128 0x1
+ 1104 00a7 12       		.uleb128 0x12
+ 1105 00a8 06       		.uleb128 0x6
+ 1106 00a9 40       		.uleb128 0x40
+ 1107 00aa 18       		.uleb128 0x18
+ 1108 00ab 9742     		.uleb128 0x2117
+ 1109 00ad 19       		.uleb128 0x19
+ 1110 00ae 00       		.byte	0
+ 1111 00af 00       		.byte	0
+ 1112 00b0 0B       		.uleb128 0xb
+ 1113 00b1 2E       		.uleb128 0x2e
+ 1114 00b2 01       		.byte	0x1
+ 1115 00b3 3F       		.uleb128 0x3f
+ 1116 00b4 19       		.uleb128 0x19
+ 1117 00b5 03       		.uleb128 0x3
+ 1118 00b6 0E       		.uleb128 0xe
+ 1119 00b7 3A       		.uleb128 0x3a
+ 1120 00b8 0B       		.uleb128 0xb
+ 1121 00b9 3B       		.uleb128 0x3b
+ 1122 00ba 05       		.uleb128 0x5
+ 1123 00bb 27       		.uleb128 0x27
+ 1124 00bc 19       		.uleb128 0x19
+ 1125 00bd 11       		.uleb128 0x11
+ 1126 00be 01       		.uleb128 0x1
+ 1127 00bf 12       		.uleb128 0x12
+ 1128 00c0 06       		.uleb128 0x6
+ 1129 00c1 40       		.uleb128 0x40
+ 1130 00c2 18       		.uleb128 0x18
+ 1131 00c3 9742     		.uleb128 0x2117
+ 1132 00c5 19       		.uleb128 0x19
+ 1133 00c6 01       		.uleb128 0x1
+ 1134 00c7 13       		.uleb128 0x13
+ 1135 00c8 00       		.byte	0
+ 1136 00c9 00       		.byte	0
+ 1137 00ca 0C       		.uleb128 0xc
+ 1138 00cb 05       		.uleb128 0x5
+ 1139 00cc 00       		.byte	0
+ 1140 00cd 03       		.uleb128 0x3
+ 1141 00ce 0E       		.uleb128 0xe
+ 1142 00cf 3A       		.uleb128 0x3a
+ 1143 00d0 0B       		.uleb128 0xb
+ 1144 00d1 3B       		.uleb128 0x3b
+ 1145 00d2 05       		.uleb128 0x5
+ 1146 00d3 49       		.uleb128 0x49
+ 1147 00d4 13       		.uleb128 0x13
+ 1148 00d5 02       		.uleb128 0x2
+ 1149 00d6 18       		.uleb128 0x18
+ 1150 00d7 00       		.byte	0
+ 1151 00d8 00       		.byte	0
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cc8wohvf.s 			page 29
+
+
+ 1152 00d9 0D       		.uleb128 0xd
+ 1153 00da 2E       		.uleb128 0x2e
+ 1154 00db 01       		.byte	0x1
+ 1155 00dc 3F       		.uleb128 0x3f
+ 1156 00dd 19       		.uleb128 0x19
+ 1157 00de 03       		.uleb128 0x3
+ 1158 00df 0E       		.uleb128 0xe
+ 1159 00e0 3A       		.uleb128 0x3a
+ 1160 00e1 0B       		.uleb128 0xb
+ 1161 00e2 3B       		.uleb128 0x3b
+ 1162 00e3 05       		.uleb128 0x5
+ 1163 00e4 27       		.uleb128 0x27
+ 1164 00e5 19       		.uleb128 0x19
+ 1165 00e6 11       		.uleb128 0x11
+ 1166 00e7 01       		.uleb128 0x1
+ 1167 00e8 12       		.uleb128 0x12
+ 1168 00e9 06       		.uleb128 0x6
+ 1169 00ea 40       		.uleb128 0x40
+ 1170 00eb 18       		.uleb128 0x18
+ 1171 00ec 9642     		.uleb128 0x2116
+ 1172 00ee 19       		.uleb128 0x19
+ 1173 00ef 01       		.uleb128 0x1
+ 1174 00f0 13       		.uleb128 0x13
+ 1175 00f1 00       		.byte	0
+ 1176 00f2 00       		.byte	0
+ 1177 00f3 0E       		.uleb128 0xe
+ 1178 00f4 34       		.uleb128 0x34
+ 1179 00f5 00       		.byte	0
+ 1180 00f6 03       		.uleb128 0x3
+ 1181 00f7 0E       		.uleb128 0xe
+ 1182 00f8 3A       		.uleb128 0x3a
+ 1183 00f9 0B       		.uleb128 0xb
+ 1184 00fa 3B       		.uleb128 0x3b
+ 1185 00fb 0B       		.uleb128 0xb
+ 1186 00fc 49       		.uleb128 0x49
+ 1187 00fd 13       		.uleb128 0x13
+ 1188 00fe 3F       		.uleb128 0x3f
+ 1189 00ff 19       		.uleb128 0x19
+ 1190 0100 02       		.uleb128 0x2
+ 1191 0101 18       		.uleb128 0x18
+ 1192 0102 00       		.byte	0
+ 1193 0103 00       		.byte	0
+ 1194 0104 00       		.byte	0
+ 1195              		.section	.debug_aranges,"",%progbits
+ 1196 0000 7C000000 		.4byte	0x7c
+ 1197 0004 0200     		.2byte	0x2
+ 1198 0006 00000000 		.4byte	.Ldebug_info0
+ 1199 000a 04       		.byte	0x4
+ 1200 000b 00       		.byte	0
+ 1201 000c 0000     		.2byte	0
+ 1202 000e 0000     		.2byte	0
+ 1203 0010 00000000 		.4byte	.LFB0
+ 1204 0014 9C000000 		.4byte	.LFE0-.LFB0
+ 1205 0018 00000000 		.4byte	.LFB1
+ 1206 001c 48000000 		.4byte	.LFE1-.LFB1
+ 1207 0020 00000000 		.4byte	.LFB2
+ 1208 0024 24000000 		.4byte	.LFE2-.LFB2
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cc8wohvf.s 			page 30
+
+
+ 1209 0028 00000000 		.4byte	.LFB3
+ 1210 002c 48000000 		.4byte	.LFE3-.LFB3
+ 1211 0030 00000000 		.4byte	.LFB4
+ 1212 0034 20000000 		.4byte	.LFE4-.LFB4
+ 1213 0038 00000000 		.4byte	.LFB5
+ 1214 003c 18000000 		.4byte	.LFE5-.LFB5
+ 1215 0040 00000000 		.4byte	.LFB6
+ 1216 0044 18000000 		.4byte	.LFE6-.LFB6
+ 1217 0048 00000000 		.4byte	.LFB7
+ 1218 004c 20000000 		.4byte	.LFE7-.LFB7
+ 1219 0050 00000000 		.4byte	.LFB8
+ 1220 0054 54000000 		.4byte	.LFE8-.LFB8
+ 1221 0058 00000000 		.4byte	.LFB9
+ 1222 005c 20000000 		.4byte	.LFE9-.LFB9
+ 1223 0060 00000000 		.4byte	.LFB10
+ 1224 0064 18000000 		.4byte	.LFE10-.LFB10
+ 1225 0068 00000000 		.4byte	.LFB11
+ 1226 006c 20000000 		.4byte	.LFE11-.LFB11
+ 1227 0070 00000000 		.4byte	.LFB12
+ 1228 0074 18000000 		.4byte	.LFE12-.LFB12
+ 1229 0078 00000000 		.4byte	0
+ 1230 007c 00000000 		.4byte	0
+ 1231              		.section	.debug_ranges,"",%progbits
+ 1232              	.Ldebug_ranges0:
+ 1233 0000 00000000 		.4byte	.LFB0
+ 1234 0004 9C000000 		.4byte	.LFE0
+ 1235 0008 00000000 		.4byte	.LFB1
+ 1236 000c 48000000 		.4byte	.LFE1
+ 1237 0010 00000000 		.4byte	.LFB2
+ 1238 0014 24000000 		.4byte	.LFE2
+ 1239 0018 00000000 		.4byte	.LFB3
+ 1240 001c 48000000 		.4byte	.LFE3
+ 1241 0020 00000000 		.4byte	.LFB4
+ 1242 0024 20000000 		.4byte	.LFE4
+ 1243 0028 00000000 		.4byte	.LFB5
+ 1244 002c 18000000 		.4byte	.LFE5
+ 1245 0030 00000000 		.4byte	.LFB6
+ 1246 0034 18000000 		.4byte	.LFE6
+ 1247 0038 00000000 		.4byte	.LFB7
+ 1248 003c 20000000 		.4byte	.LFE7
+ 1249 0040 00000000 		.4byte	.LFB8
+ 1250 0044 54000000 		.4byte	.LFE8
+ 1251 0048 00000000 		.4byte	.LFB9
+ 1252 004c 20000000 		.4byte	.LFE9
+ 1253 0050 00000000 		.4byte	.LFB10
+ 1254 0054 18000000 		.4byte	.LFE10
+ 1255 0058 00000000 		.4byte	.LFB11
+ 1256 005c 20000000 		.4byte	.LFE11
+ 1257 0060 00000000 		.4byte	.LFB12
+ 1258 0064 18000000 		.4byte	.LFE12
+ 1259 0068 00000000 		.4byte	0
+ 1260 006c 00000000 		.4byte	0
+ 1261              		.section	.debug_line,"",%progbits
+ 1262              	.Ldebug_line0:
+ 1263 0000 69010000 		.section	.debug_str,"MS",%progbits,1
+ 1263      02005700 
+ 1263      00000201 
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cc8wohvf.s 			page 31
+
+
+ 1263      FB0E0D00 
+ 1263      01010101 
+ 1264              	.LASF15:
+ 1265 0000 72656731 		.ascii	"reg16\000"
+ 1265      3600
+ 1266              	.LASF21:
+ 1267 0006 67616D65 		.ascii	"game_random_mode_generator_Stop\000"
+ 1267      5F72616E 
+ 1267      646F6D5F 
+ 1267      6D6F6465 
+ 1267      5F67656E 
+ 1268              	.LASF36:
+ 1269 0026 47656E65 		.ascii	"Generated_Source\\PSoC5\\game_random_mode_generator"
+ 1269      72617465 
+ 1269      645F536F 
+ 1269      75726365 
+ 1269      5C50536F 
+ 1270 0057 2E6300   		.ascii	".c\000"
+ 1271              	.LASF31:
+ 1272 005a 67616D65 		.ascii	"game_random_mode_generator_ReadCapture\000"
+ 1272      5F72616E 
+ 1272      646F6D5F 
+ 1272      6D6F6465 
+ 1272      5F67656E 
+ 1273              	.LASF35:
+ 1274 0081 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 1274      43313120 
+ 1274      352E342E 
+ 1274      31203230 
+ 1274      31363036 
+ 1275 00b4 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 1275      20726576 
+ 1275      6973696F 
+ 1275      6E203233 
+ 1275      37373135 
+ 1276 00e7 30202D66 		.ascii	"0 -ffunction-sections -ffat-lto-objects\000"
+ 1276      66756E63 
+ 1276      74696F6E 
+ 1276      2D736563 
+ 1276      74696F6E 
+ 1277              	.LASF23:
+ 1278 010f 67616D65 		.ascii	"game_random_mode_generator_ReadControlRegister\000"
+ 1278      5F72616E 
+ 1278      646F6D5F 
+ 1278      6D6F6465 
+ 1278      5F67656E 
+ 1279              	.LASF33:
+ 1280 013e 70657269 		.ascii	"period\000"
+ 1280      6F6400
+ 1281              	.LASF3:
+ 1282 0145 73686F72 		.ascii	"short unsigned int\000"
+ 1282      7420756E 
+ 1282      7369676E 
+ 1282      65642069 
+ 1282      6E7400
+ 1283              	.LASF30:
+ 1284 0158 67616D65 		.ascii	"game_random_mode_generator_ReadCounter\000"
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cc8wohvf.s 			page 32
+
+
+ 1284      5F72616E 
+ 1284      646F6D5F 
+ 1284      6D6F6465 
+ 1284      5F67656E 
+ 1285              	.LASF11:
+ 1286 017f 666C6F61 		.ascii	"float\000"
+ 1286      7400
+ 1287              	.LASF29:
+ 1288 0185 636F756E 		.ascii	"counter\000"
+ 1288      74657200 
+ 1289              	.LASF7:
+ 1290 018d 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 1290      206C6F6E 
+ 1290      6720756E 
+ 1290      7369676E 
+ 1290      65642069 
+ 1291              	.LASF1:
+ 1292 01a4 756E7369 		.ascii	"unsigned char\000"
+ 1292      676E6564 
+ 1292      20636861 
+ 1292      7200
+ 1293              	.LASF25:
+ 1294 01b2 67616D65 		.ascii	"game_random_mode_generator_WriteControlRegister\000"
+ 1294      5F72616E 
+ 1294      646F6D5F 
+ 1294      6D6F6465 
+ 1294      5F67656E 
+ 1295              	.LASF14:
+ 1296 01e2 72656738 		.ascii	"reg8\000"
+ 1296      00
+ 1297              	.LASF19:
+ 1298 01e7 67616D65 		.ascii	"game_random_mode_generator_Enable\000"
+ 1298      5F72616E 
+ 1298      646F6D5F 
+ 1298      6D6F6465 
+ 1298      5F67656E 
+ 1299              	.LASF5:
+ 1300 0209 6C6F6E67 		.ascii	"long unsigned int\000"
+ 1300      20756E73 
+ 1300      69676E65 
+ 1300      6420696E 
+ 1300      7400
+ 1301              	.LASF38:
+ 1302 021b 67616D65 		.ascii	"game_random_mode_generator_initVar\000"
+ 1302      5F72616E 
+ 1302      646F6D5F 
+ 1302      6D6F6465 
+ 1302      5F67656E 
+ 1303              	.LASF32:
+ 1304 023e 67616D65 		.ascii	"game_random_mode_generator_WritePeriod\000"
+ 1304      5F72616E 
+ 1304      646F6D5F 
+ 1304      6D6F6465 
+ 1304      5F67656E 
+ 1305              	.LASF27:
+ 1306 0265 636F6E74 		.ascii	"control\000"
+ 1306      726F6C00 
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cc8wohvf.s 			page 33
+
+
+ 1307              	.LASF26:
+ 1308 026d 696E7465 		.ascii	"interruptsMask\000"
+ 1308      72727570 
+ 1308      74734D61 
+ 1308      736B00
+ 1309              	.LASF12:
+ 1310 027c 646F7562 		.ascii	"double\000"
+ 1310      6C6500
+ 1311              	.LASF10:
+ 1312 0283 75696E74 		.ascii	"uint16\000"
+ 1312      313600
+ 1313              	.LASF8:
+ 1314 028a 756E7369 		.ascii	"unsigned int\000"
+ 1314      676E6564 
+ 1314      20696E74 
+ 1314      00
+ 1315              	.LASF20:
+ 1316 0297 67616D65 		.ascii	"game_random_mode_generator_Start\000"
+ 1316      5F72616E 
+ 1316      646F6D5F 
+ 1316      6D6F6465 
+ 1316      5F67656E 
+ 1317              	.LASF22:
+ 1318 02b8 67616D65 		.ascii	"game_random_mode_generator_ReadStatusRegister\000"
+ 1318      5F72616E 
+ 1318      646F6D5F 
+ 1318      6D6F6465 
+ 1318      5F67656E 
+ 1319              	.LASF37:
+ 1320 02e6 433A5C55 		.ascii	"C:\\Users\\Matthew\\Dropbox (MIT)\\Sophomore Spring"
+ 1320      73657273 
+ 1320      5C4D6174 
+ 1320      74686577 
+ 1320      5C44726F 
+ 1321 0315 5C362E31 		.ascii	"\\6.115\\6.115-Labs\\project\\DVDAC_Example01\\DVDA"
+ 1321      31355C36 
+ 1321      2E313135 
+ 1321      2D4C6162 
+ 1321      735C7072 
+ 1322 0343 435F4578 		.ascii	"C_Example01.cydsn\000"
+ 1322      616D706C 
+ 1322      6530312E 
+ 1322      63796473 
+ 1322      6E00
+ 1323              	.LASF18:
+ 1324 0355 67616D65 		.ascii	"game_random_mode_generator_Init\000"
+ 1324      5F72616E 
+ 1324      646F6D5F 
+ 1324      6D6F6465 
+ 1324      5F67656E 
+ 1325              	.LASF17:
+ 1326 0375 73697A65 		.ascii	"sizetype\000"
+ 1326      74797065 
+ 1326      00
+ 1327              	.LASF6:
+ 1328 037e 6C6F6E67 		.ascii	"long long int\000"
+ 1328      206C6F6E 
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cc8wohvf.s 			page 34
+
+
+ 1328      6720696E 
+ 1328      7400
+ 1329              	.LASF13:
+ 1330 038c 63686172 		.ascii	"char\000"
+ 1330      00
+ 1331              	.LASF2:
+ 1332 0391 73686F72 		.ascii	"short int\000"
+ 1332      7420696E 
+ 1332      7400
+ 1333              	.LASF34:
+ 1334 039b 67616D65 		.ascii	"game_random_mode_generator_ReadPeriod\000"
+ 1334      5F72616E 
+ 1334      646F6D5F 
+ 1334      6D6F6465 
+ 1334      5F67656E 
+ 1335              	.LASF9:
+ 1336 03c1 75696E74 		.ascii	"uint8\000"
+ 1336      3800
+ 1337              	.LASF4:
+ 1338 03c7 6C6F6E67 		.ascii	"long int\000"
+ 1338      20696E74 
+ 1338      00
+ 1339              	.LASF28:
+ 1340 03d0 67616D65 		.ascii	"game_random_mode_generator_WriteCounter\000"
+ 1340      5F72616E 
+ 1340      646F6D5F 
+ 1340      6D6F6465 
+ 1340      5F67656E 
+ 1341              	.LASF16:
+ 1342 03f8 6C6F6E67 		.ascii	"long double\000"
+ 1342      20646F75 
+ 1342      626C6500 
+ 1343              	.LASF0:
+ 1344 0404 7369676E 		.ascii	"signed char\000"
+ 1344      65642063 
+ 1344      68617200 
+ 1345              	.LASF24:
+ 1346 0410 67616D65 		.ascii	"game_random_mode_generator_SetInterruptMode\000"
+ 1346      5F72616E 
+ 1346      646F6D5F 
+ 1346      6D6F6465 
+ 1346      5F67656E 
+ 1347              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

@@ -1,0 +1,3156 @@
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccG75yKH.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"wav_tables.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.global	c4_sustain_vals
+  20              		.data
+  21              		.align	2
+  22              		.type	c4_sustain_vals, %object
+  23              		.size	c4_sustain_vals, 169
+  24              	c4_sustain_vals:
+  25 0000 80       		.byte	-128
+  26 0001 FF       		.byte	-1
+  27 0002 F1       		.byte	-15
+  28 0003 BE       		.byte	-66
+  29 0004 AE       		.byte	-82
+  30 0005 B4       		.byte	-76
+  31 0006 BB       		.byte	-69
+  32 0007 B6       		.byte	-74
+  33 0008 B2       		.byte	-78
+  34 0009 AB       		.byte	-85
+  35 000a A0       		.byte	-96
+  36 000b 97       		.byte	-105
+  37 000c 94       		.byte	-108
+  38 000d 98       		.byte	-104
+  39 000e 9B       		.byte	-101
+  40 000f 98       		.byte	-104
+  41 0010 8F       		.byte	-113
+  42 0011 8A       		.byte	-118
+  43 0012 8A       		.byte	-118
+  44 0013 8C       		.byte	-116
+  45 0014 92       		.byte	-110
+  46 0015 99       		.byte	-103
+  47 0016 9F       		.byte	-97
+  48 0017 A6       		.byte	-90
+  49 0018 A8       		.byte	-88
+  50 0019 A6       		.byte	-90
+  51 001a 9E       		.byte	-98
+  52 001b 91       		.byte	-111
+  53 001c 8C       		.byte	-116
+  54 001d 8F       		.byte	-113
+  55 001e 90       		.byte	-112
+  56 001f 8A       		.byte	-118
+  57 0020 89       		.byte	-119
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccG75yKH.s 			page 2
+
+
+  58 0021 8D       		.byte	-115
+  59 0022 8E       		.byte	-114
+  60 0023 8E       		.byte	-114
+  61 0024 8E       		.byte	-114
+  62 0025 8E       		.byte	-114
+  63 0026 8E       		.byte	-114
+  64 0027 8D       		.byte	-115
+  65 0028 8E       		.byte	-114
+  66 0029 91       		.byte	-111
+  67 002a 94       		.byte	-108
+  68 002b 93       		.byte	-109
+  69 002c 90       		.byte	-112
+  70 002d 8D       		.byte	-115
+  71 002e 89       		.byte	-119
+  72 002f 86       		.byte	-122
+  73 0030 83       		.byte	-125
+  74 0031 80       		.byte	-128
+  75 0032 7C       		.byte	124
+  76 0033 7B       		.byte	123
+  77 0034 7C       		.byte	124
+  78 0035 7E       		.byte	126
+  79 0036 7E       		.byte	126
+  80 0037 7E       		.byte	126
+  81 0038 7F       		.byte	127
+  82 0039 7E       		.byte	126
+  83 003a 7D       		.byte	125
+  84 003b 7C       		.byte	124
+  85 003c 7D       		.byte	125
+  86 003d 82       		.byte	-126
+  87 003e 88       		.byte	-120
+  88 003f 8D       		.byte	-115
+  89 0040 8E       		.byte	-114
+  90 0041 8D       		.byte	-115
+  91 0042 8A       		.byte	-118
+  92 0043 88       		.byte	-120
+  93 0044 88       		.byte	-120
+  94 0045 8A       		.byte	-118
+  95 0046 8B       		.byte	-117
+  96 0047 8C       		.byte	-116
+  97 0048 90       		.byte	-112
+  98 0049 90       		.byte	-112
+  99 004a 8E       		.byte	-114
+ 100 004b 8F       		.byte	-113
+ 101 004c 97       		.byte	-105
+ 102 004d A0       		.byte	-96
+ 103 004e 9B       		.byte	-101
+ 104 004f 8C       		.byte	-116
+ 105 0050 84       		.byte	-124
+ 106 0051 86       		.byte	-122
+ 107 0052 8B       		.byte	-117
+ 108 0053 8A       		.byte	-118
+ 109 0054 85       		.byte	-123
+ 110 0055 7F       		.byte	127
+ 111 0056 7C       		.byte	124
+ 112 0057 7E       		.byte	126
+ 113 0058 84       		.byte	-124
+ 114 0059 82       		.byte	-126
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccG75yKH.s 			page 3
+
+
+ 115 005a 74       		.byte	116
+ 116 005b 67       		.byte	103
+ 117 005c 69       		.byte	105
+ 118 005d 74       		.byte	116
+ 119 005e 7A       		.byte	122
+ 120 005f 79       		.byte	121
+ 121 0060 77       		.byte	119
+ 122 0061 79       		.byte	121
+ 123 0062 7D       		.byte	125
+ 124 0063 7E       		.byte	126
+ 125 0064 7F       		.byte	127
+ 126 0065 81       		.byte	-127
+ 127 0066 80       		.byte	-128
+ 128 0067 7D       		.byte	125
+ 129 0068 7A       		.byte	122
+ 130 0069 79       		.byte	121
+ 131 006a 7C       		.byte	124
+ 132 006b 82       		.byte	-126
+ 133 006c 88       		.byte	-120
+ 134 006d 8C       		.byte	-116
+ 135 006e 8C       		.byte	-116
+ 136 006f 8B       		.byte	-117
+ 137 0070 8A       		.byte	-118
+ 138 0071 89       		.byte	-119
+ 139 0072 8A       		.byte	-118
+ 140 0073 8B       		.byte	-117
+ 141 0074 8B       		.byte	-117
+ 142 0075 8C       		.byte	-116
+ 143 0076 8C       		.byte	-116
+ 144 0077 89       		.byte	-119
+ 145 0078 86       		.byte	-122
+ 146 0079 83       		.byte	-125
+ 147 007a 81       		.byte	-127
+ 148 007b 7D       		.byte	125
+ 149 007c 79       		.byte	121
+ 150 007d 77       		.byte	119
+ 151 007e 75       		.byte	117
+ 152 007f 77       		.byte	119
+ 153 0080 7B       		.byte	123
+ 154 0081 7F       		.byte	127
+ 155 0082 7E       		.byte	126
+ 156 0083 7D       		.byte	125
+ 157 0084 7D       		.byte	125
+ 158 0085 7D       		.byte	125
+ 159 0086 7B       		.byte	123
+ 160 0087 7B       		.byte	123
+ 161 0088 7D       		.byte	125
+ 162 0089 7D       		.byte	125
+ 163 008a 79       		.byte	121
+ 164 008b 77       		.byte	119
+ 165 008c 78       		.byte	120
+ 166 008d 78       		.byte	120
+ 167 008e 70       		.byte	112
+ 168 008f 66       		.byte	102
+ 169 0090 64       		.byte	100
+ 170 0091 67       		.byte	103
+ 171 0092 68       		.byte	104
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccG75yKH.s 			page 4
+
+
+ 172 0093 6A       		.byte	106
+ 173 0094 71       		.byte	113
+ 174 0095 7A       		.byte	122
+ 175 0096 80       		.byte	-128
+ 176 0097 7F       		.byte	127
+ 177 0098 7A       		.byte	122
+ 178 0099 73       		.byte	115
+ 179 009a 6E       		.byte	110
+ 180 009b 6D       		.byte	109
+ 181 009c 6F       		.byte	111
+ 182 009d 6F       		.byte	111
+ 183 009e 6A       		.byte	106
+ 184 009f 62       		.byte	98
+ 185 00a0 5D       		.byte	93
+ 186 00a1 5C       		.byte	92
+ 187 00a2 5A       		.byte	90
+ 188 00a3 5C       		.byte	92
+ 189 00a4 65       		.byte	101
+ 190 00a5 5F       		.byte	95
+ 191 00a6 42       		.byte	66
+ 192 00a7 2C       		.byte	44
+ 193 00a8 54       		.byte	84
+ 194              		.global	c4_sus
+ 195 00a9 000000   		.align	2
+ 196              		.type	c4_sus, %object
+ 197              		.size	c4_sus, 8
+ 198              	c4_sus:
+ 199 00ac 00000000 		.word	c4_sustain_vals
+ 200 00b0 0000     		.short	0
+ 201 00b2 A900     		.short	169
+ 202              		.global	d4_sustain_vals
+ 203              		.align	2
+ 204              		.type	d4_sustain_vals, %object
+ 205              		.size	d4_sustain_vals, 150
+ 206              	d4_sustain_vals:
+ 207 00b4 80       		.byte	-128
+ 208 00b5 FF       		.byte	-1
+ 209 00b6 FC       		.byte	-4
+ 210 00b7 DC       		.byte	-36
+ 211 00b8 E3       		.byte	-29
+ 212 00b9 E9       		.byte	-23
+ 213 00ba D6       		.byte	-42
+ 214 00bb C3       		.byte	-61
+ 215 00bc B7       		.byte	-73
+ 216 00bd B4       		.byte	-76
+ 217 00be B6       		.byte	-74
+ 218 00bf B1       		.byte	-79
+ 219 00c0 A7       		.byte	-89
+ 220 00c1 A6       		.byte	-90
+ 221 00c2 AC       		.byte	-84
+ 222 00c3 A9       		.byte	-87
+ 223 00c4 A0       		.byte	-96
+ 224 00c5 A1       		.byte	-95
+ 225 00c6 AB       		.byte	-85
+ 226 00c7 B3       		.byte	-77
+ 227 00c8 B2       		.byte	-78
+ 228 00c9 AD       		.byte	-83
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccG75yKH.s 			page 5
+
+
+ 229 00ca AB       		.byte	-85
+ 230 00cb AB       		.byte	-85
+ 231 00cc A9       		.byte	-87
+ 232 00cd A1       		.byte	-95
+ 233 00ce 97       		.byte	-105
+ 234 00cf 8F       		.byte	-113
+ 235 00d0 8B       		.byte	-117
+ 236 00d1 8C       		.byte	-116
+ 237 00d2 8D       		.byte	-115
+ 238 00d3 8F       		.byte	-113
+ 239 00d4 95       		.byte	-107
+ 240 00d5 98       		.byte	-104
+ 241 00d6 96       		.byte	-106
+ 242 00d7 93       		.byte	-109
+ 243 00d8 91       		.byte	-111
+ 244 00d9 91       		.byte	-111
+ 245 00da 8F       		.byte	-113
+ 246 00db 88       		.byte	-120
+ 247 00dc 83       		.byte	-125
+ 248 00dd 80       		.byte	-128
+ 249 00de 7D       		.byte	125
+ 250 00df 7E       		.byte	126
+ 251 00e0 7D       		.byte	125
+ 252 00e1 80       		.byte	-128
+ 253 00e2 83       		.byte	-125
+ 254 00e3 84       		.byte	-124
+ 255 00e4 87       		.byte	-121
+ 256 00e5 90       		.byte	-112
+ 257 00e6 97       		.byte	-105
+ 258 00e7 9D       		.byte	-99
+ 259 00e8 A7       		.byte	-89
+ 260 00e9 AD       		.byte	-83
+ 261 00ea AA       		.byte	-86
+ 262 00eb A8       		.byte	-88
+ 263 00ec A8       		.byte	-88
+ 264 00ed A3       		.byte	-93
+ 265 00ee 9E       		.byte	-98
+ 266 00ef 9D       		.byte	-99
+ 267 00f0 9C       		.byte	-100
+ 268 00f1 9A       		.byte	-102
+ 269 00f2 98       		.byte	-104
+ 270 00f3 94       		.byte	-108
+ 271 00f4 92       		.byte	-110
+ 272 00f5 91       		.byte	-111
+ 273 00f6 90       		.byte	-112
+ 274 00f7 8F       		.byte	-113
+ 275 00f8 93       		.byte	-109
+ 276 00f9 98       		.byte	-104
+ 277 00fa 95       		.byte	-107
+ 278 00fb 8E       		.byte	-114
+ 279 00fc 87       		.byte	-121
+ 280 00fd 85       		.byte	-123
+ 281 00fe 85       		.byte	-123
+ 282 00ff 83       		.byte	-125
+ 283 0100 80       		.byte	-128
+ 284 0101 7E       		.byte	126
+ 285 0102 7B       		.byte	123
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccG75yKH.s 			page 6
+
+
+ 286 0103 75       		.byte	117
+ 287 0104 70       		.byte	112
+ 288 0105 6D       		.byte	109
+ 289 0106 70       		.byte	112
+ 290 0107 75       		.byte	117
+ 291 0108 75       		.byte	117
+ 292 0109 71       		.byte	113
+ 293 010a 72       		.byte	114
+ 294 010b 70       		.byte	112
+ 295 010c 6B       		.byte	107
+ 296 010d 67       		.byte	103
+ 297 010e 64       		.byte	100
+ 298 010f 61       		.byte	97
+ 299 0110 62       		.byte	98
+ 300 0111 61       		.byte	97
+ 301 0112 5E       		.byte	94
+ 302 0113 5E       		.byte	94
+ 303 0114 61       		.byte	97
+ 304 0115 63       		.byte	99
+ 305 0116 66       		.byte	102
+ 306 0117 6B       		.byte	107
+ 307 0118 72       		.byte	114
+ 308 0119 79       		.byte	121
+ 309 011a 7E       		.byte	126
+ 310 011b 7F       		.byte	127
+ 311 011c 7F       		.byte	127
+ 312 011d 80       		.byte	-128
+ 313 011e 80       		.byte	-128
+ 314 011f 80       		.byte	-128
+ 315 0120 7F       		.byte	127
+ 316 0121 7D       		.byte	125
+ 317 0122 7B       		.byte	123
+ 318 0123 77       		.byte	119
+ 319 0124 74       		.byte	116
+ 320 0125 73       		.byte	115
+ 321 0126 75       		.byte	117
+ 322 0127 76       		.byte	118
+ 323 0128 74       		.byte	116
+ 324 0129 71       		.byte	113
+ 325 012a 73       		.byte	115
+ 326 012b 75       		.byte	117
+ 327 012c 74       		.byte	116
+ 328 012d 72       		.byte	114
+ 329 012e 70       		.byte	112
+ 330 012f 6D       		.byte	109
+ 331 0130 68       		.byte	104
+ 332 0131 63       		.byte	99
+ 333 0132 5F       		.byte	95
+ 334 0133 60       		.byte	96
+ 335 0134 63       		.byte	99
+ 336 0135 63       		.byte	99
+ 337 0136 5E       		.byte	94
+ 338 0137 5B       		.byte	91
+ 339 0138 5F       		.byte	95
+ 340 0139 65       		.byte	101
+ 341 013a 63       		.byte	99
+ 342 013b 5D       		.byte	93
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccG75yKH.s 			page 7
+
+
+ 343 013c 59       		.byte	89
+ 344 013d 5A       		.byte	90
+ 345 013e 58       		.byte	88
+ 346 013f 50       		.byte	80
+ 347 0140 4E       		.byte	78
+ 348 0141 53       		.byte	83
+ 349 0142 57       		.byte	87
+ 350 0143 53       		.byte	83
+ 351 0144 4C       		.byte	76
+ 352 0145 47       		.byte	71
+ 353 0146 4B       		.byte	75
+ 354 0147 4F       		.byte	79
+ 355 0148 41       		.byte	65
+ 356 0149 43       		.byte	67
+ 357              		.global	d4_sus
+ 358 014a 0000     		.align	2
+ 359              		.type	d4_sus, %object
+ 360              		.size	d4_sus, 8
+ 361              	d4_sus:
+ 362 014c 00000000 		.word	d4_sustain_vals
+ 363 0150 0000     		.short	0
+ 364 0152 9600     		.short	150
+ 365              		.global	e4_sustain_vals
+ 366              		.align	2
+ 367              		.type	e4_sustain_vals, %object
+ 368              		.size	e4_sustain_vals, 134
+ 369              	e4_sustain_vals:
+ 370 0154 80       		.byte	-128
+ 371 0155 FF       		.byte	-1
+ 372 0156 ED       		.byte	-19
+ 373 0157 D7       		.byte	-41
+ 374 0158 E5       		.byte	-27
+ 375 0159 DA       		.byte	-38
+ 376 015a C4       		.byte	-60
+ 377 015b B6       		.byte	-74
+ 378 015c B2       		.byte	-78
+ 379 015d B3       		.byte	-77
+ 380 015e AD       		.byte	-83
+ 381 015f A3       		.byte	-93
+ 382 0160 A7       		.byte	-89
+ 383 0161 A9       		.byte	-87
+ 384 0162 A0       		.byte	-96
+ 385 0163 9E       		.byte	-98
+ 386 0164 A8       		.byte	-88
+ 387 0165 B1       		.byte	-79
+ 388 0166 AF       		.byte	-81
+ 389 0167 AA       		.byte	-86
+ 390 0168 A9       		.byte	-87
+ 391 0169 A8       		.byte	-88
+ 392 016a A2       		.byte	-94
+ 393 016b 98       		.byte	-104
+ 394 016c 8E       		.byte	-114
+ 395 016d 8B       		.byte	-117
+ 396 016e 8C       		.byte	-116
+ 397 016f 8D       		.byte	-115
+ 398 0170 91       		.byte	-111
+ 399 0171 96       		.byte	-106
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccG75yKH.s 			page 8
+
+
+ 400 0172 96       		.byte	-106
+ 401 0173 92       		.byte	-110
+ 402 0174 90       		.byte	-112
+ 403 0175 91       		.byte	-111
+ 404 0176 8E       		.byte	-114
+ 405 0177 86       		.byte	-122
+ 406 0178 82       		.byte	-126
+ 407 0179 7E       		.byte	126
+ 408 017a 7E       		.byte	126
+ 409 017b 7E       		.byte	126
+ 410 017c 80       		.byte	-128
+ 411 017d 83       		.byte	-125
+ 412 017e 84       		.byte	-124
+ 413 017f 89       		.byte	-119
+ 414 0180 92       		.byte	-110
+ 415 0181 98       		.byte	-104
+ 416 0182 A2       		.byte	-94
+ 417 0183 AA       		.byte	-86
+ 418 0184 A8       		.byte	-88
+ 419 0185 A6       		.byte	-90
+ 420 0186 A6       		.byte	-90
+ 421 0187 A0       		.byte	-96
+ 422 0188 9C       		.byte	-100
+ 423 0189 9C       		.byte	-100
+ 424 018a 99       		.byte	-103
+ 425 018b 97       		.byte	-105
+ 426 018c 94       		.byte	-108
+ 427 018d 91       		.byte	-111
+ 428 018e 90       		.byte	-112
+ 429 018f 8E       		.byte	-114
+ 430 0190 8F       		.byte	-113
+ 431 0191 95       		.byte	-107
+ 432 0192 96       		.byte	-106
+ 433 0193 8F       		.byte	-113
+ 434 0194 88       		.byte	-120
+ 435 0195 85       		.byte	-123
+ 436 0196 84       		.byte	-124
+ 437 0197 82       		.byte	-126
+ 438 0198 7F       		.byte	127
+ 439 0199 7D       		.byte	125
+ 440 019a 77       		.byte	119
+ 441 019b 72       		.byte	114
+ 442 019c 6E       		.byte	110
+ 443 019d 70       		.byte	112
+ 444 019e 76       		.byte	118
+ 445 019f 75       		.byte	117
+ 446 01a0 71       		.byte	113
+ 447 01a1 72       		.byte	114
+ 448 01a2 6E       		.byte	110
+ 449 01a3 6A       		.byte	106
+ 450 01a4 66       		.byte	102
+ 451 01a5 63       		.byte	99
+ 452 01a6 63       		.byte	99
+ 453 01a7 62       		.byte	98
+ 454 01a8 5F       		.byte	95
+ 455 01a9 61       		.byte	97
+ 456 01aa 64       		.byte	100
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccG75yKH.s 			page 9
+
+
+ 457 01ab 66       		.byte	102
+ 458 01ac 6B       		.byte	107
+ 459 01ad 72       		.byte	114
+ 460 01ae 79       		.byte	121
+ 461 01af 7E       		.byte	126
+ 462 01b0 7F       		.byte	127
+ 463 01b1 7F       		.byte	127
+ 464 01b2 80       		.byte	-128
+ 465 01b3 81       		.byte	-127
+ 466 01b4 7F       		.byte	127
+ 467 01b5 7D       		.byte	125
+ 468 01b6 7B       		.byte	123
+ 469 01b7 77       		.byte	119
+ 470 01b8 74       		.byte	116
+ 471 01b9 75       		.byte	117
+ 472 01ba 77       		.byte	119
+ 473 01bb 75       		.byte	117
+ 474 01bc 72       		.byte	114
+ 475 01bd 73       		.byte	115
+ 476 01be 76       		.byte	118
+ 477 01bf 74       		.byte	116
+ 478 01c0 72       		.byte	114
+ 479 01c1 70       		.byte	112
+ 480 01c2 6C       		.byte	108
+ 481 01c3 66       		.byte	102
+ 482 01c4 61       		.byte	97
+ 483 01c5 61       		.byte	97
+ 484 01c6 64       		.byte	100
+ 485 01c7 64       		.byte	100
+ 486 01c8 5F       		.byte	95
+ 487 01c9 5D       		.byte	93
+ 488 01ca 63       		.byte	99
+ 489 01cb 66       		.byte	102
+ 490 01cc 60       		.byte	96
+ 491 01cd 5B       		.byte	91
+ 492 01ce 5C       		.byte	92
+ 493 01cf 59       		.byte	89
+ 494 01d0 51       		.byte	81
+ 495 01d1 51       		.byte	81
+ 496 01d2 57       		.byte	87
+ 497 01d3 57       		.byte	87
+ 498 01d4 50       		.byte	80
+ 499 01d5 4A       		.byte	74
+ 500 01d6 4D       		.byte	77
+ 501 01d7 51       		.byte	81
+ 502 01d8 41       		.byte	65
+ 503 01d9 52       		.byte	82
+ 504              		.global	e4_sus
+ 505 01da 0000     		.align	2
+ 506              		.type	e4_sus, %object
+ 507              		.size	e4_sus, 8
+ 508              	e4_sus:
+ 509 01dc 00000000 		.word	e4_sustain_vals
+ 510 01e0 0000     		.short	0
+ 511 01e2 8600     		.short	134
+ 512              		.global	g4_sustain_vals
+ 513              		.align	2
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccG75yKH.s 			page 10
+
+
+ 514              		.type	g4_sustain_vals, %object
+ 515              		.size	g4_sustain_vals, 112
+ 516              	g4_sustain_vals:
+ 517 01e4 80       		.byte	-128
+ 518 01e5 CD       		.byte	-51
+ 519 01e6 F9       		.byte	-7
+ 520 01e7 FF       		.byte	-1
+ 521 01e8 F1       		.byte	-15
+ 522 01e9 E5       		.byte	-27
+ 523 01ea E1       		.byte	-31
+ 524 01eb E3       		.byte	-29
+ 525 01ec E3       		.byte	-29
+ 526 01ed DA       		.byte	-38
+ 527 01ee CA       		.byte	-54
+ 528 01ef B9       		.byte	-71
+ 529 01f0 AE       		.byte	-82
+ 530 01f1 AA       		.byte	-86
+ 531 01f2 AC       		.byte	-84
+ 532 01f3 AE       		.byte	-82
+ 533 01f4 AF       		.byte	-81
+ 534 01f5 AE       		.byte	-82
+ 535 01f6 AE       		.byte	-82
+ 536 01f7 AF       		.byte	-81
+ 537 01f8 AF       		.byte	-81
+ 538 01f9 AF       		.byte	-81
+ 539 01fa AC       		.byte	-84
+ 540 01fb A6       		.byte	-90
+ 541 01fc 9F       		.byte	-97
+ 542 01fd 98       		.byte	-104
+ 543 01fe 90       		.byte	-112
+ 544 01ff 8A       		.byte	-118
+ 545 0200 86       		.byte	-122
+ 546 0201 86       		.byte	-122
+ 547 0202 89       		.byte	-119
+ 548 0203 8E       		.byte	-114
+ 549 0204 92       		.byte	-110
+ 550 0205 93       		.byte	-109
+ 551 0206 94       		.byte	-108
+ 552 0207 94       		.byte	-108
+ 553 0208 97       		.byte	-105
+ 554 0209 9A       		.byte	-102
+ 555 020a 9C       		.byte	-100
+ 556 020b 9C       		.byte	-100
+ 557 020c 99       		.byte	-103
+ 558 020d 93       		.byte	-109
+ 559 020e 90       		.byte	-112
+ 560 020f 92       		.byte	-110
+ 561 0210 98       		.byte	-104
+ 562 0211 9F       		.byte	-97
+ 563 0212 A1       		.byte	-95
+ 564 0213 A0       		.byte	-96
+ 565 0214 9C       		.byte	-100
+ 566 0215 9A       		.byte	-102
+ 567 0216 9A       		.byte	-102
+ 568 0217 9E       		.byte	-98
+ 569 0218 A0       		.byte	-96
+ 570 0219 9F       		.byte	-97
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccG75yKH.s 			page 11
+
+
+ 571 021a 9A       		.byte	-102
+ 572 021b 95       		.byte	-107
+ 573 021c 93       		.byte	-109
+ 574 021d 93       		.byte	-109
+ 575 021e 93       		.byte	-109
+ 576 021f 8F       		.byte	-113
+ 577 0220 87       		.byte	-121
+ 578 0221 80       		.byte	-128
+ 579 0222 7B       		.byte	123
+ 580 0223 79       		.byte	121
+ 581 0224 7B       		.byte	123
+ 582 0225 7E       		.byte	126
+ 583 0226 80       		.byte	-128
+ 584 0227 82       		.byte	-126
+ 585 0228 82       		.byte	-126
+ 586 0229 82       		.byte	-126
+ 587 022a 80       		.byte	-128
+ 588 022b 7E       		.byte	126
+ 589 022c 7D       		.byte	125
+ 590 022d 7B       		.byte	123
+ 591 022e 79       		.byte	121
+ 592 022f 77       		.byte	119
+ 593 0230 77       		.byte	119
+ 594 0231 78       		.byte	120
+ 595 0232 78       		.byte	120
+ 596 0233 76       		.byte	118
+ 597 0234 73       		.byte	115
+ 598 0235 6F       		.byte	111
+ 599 0236 6C       		.byte	108
+ 600 0237 6C       		.byte	108
+ 601 0238 6E       		.byte	110
+ 602 0239 71       		.byte	113
+ 603 023a 76       		.byte	118
+ 604 023b 7D       		.byte	125
+ 605 023c 82       		.byte	-126
+ 606 023d 86       		.byte	-122
+ 607 023e 88       		.byte	-120
+ 608 023f 89       		.byte	-119
+ 609 0240 8A       		.byte	-118
+ 610 0241 8C       		.byte	-116
+ 611 0242 8D       		.byte	-115
+ 612 0243 8D       		.byte	-115
+ 613 0244 8B       		.byte	-117
+ 614 0245 89       		.byte	-119
+ 615 0246 85       		.byte	-123
+ 616 0247 82       		.byte	-126
+ 617 0248 80       		.byte	-128
+ 618 0249 7D       		.byte	125
+ 619 024a 7B       		.byte	123
+ 620 024b 7B       		.byte	123
+ 621 024c 7E       		.byte	126
+ 622 024d 85       		.byte	-123
+ 623 024e 8D       		.byte	-115
+ 624 024f 93       		.byte	-109
+ 625 0250 93       		.byte	-109
+ 626 0251 8E       		.byte	-114
+ 627 0252 88       		.byte	-120
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccG75yKH.s 			page 12
+
+
+ 628 0253 83       		.byte	-125
+ 629              		.global	g4_sus
+ 630              		.align	2
+ 631              		.type	g4_sus, %object
+ 632              		.size	g4_sus, 8
+ 633              	g4_sus:
+ 634 0254 00000000 		.word	g4_sustain_vals
+ 635 0258 0000     		.short	0
+ 636 025a 7000     		.short	112
+ 637              		.global	b4_sustain_vals
+ 638              		.align	2
+ 639              		.type	b4_sustain_vals, %object
+ 640              		.size	b4_sustain_vals, 89
+ 641              	b4_sustain_vals:
+ 642 025c 80       		.byte	-128
+ 643 025d FF       		.byte	-1
+ 644 025e FC       		.byte	-4
+ 645 025f D7       		.byte	-41
+ 646 0260 CD       		.byte	-51
+ 647 0261 C4       		.byte	-60
+ 648 0262 AE       		.byte	-82
+ 649 0263 AC       		.byte	-84
+ 650 0264 BF       		.byte	-65
+ 651 0265 CF       		.byte	-49
+ 652 0266 D9       		.byte	-39
+ 653 0267 E4       		.byte	-28
+ 654 0268 E3       		.byte	-29
+ 655 0269 CE       		.byte	-50
+ 656 026a B8       		.byte	-72
+ 657 026b B8       		.byte	-72
+ 658 026c C2       		.byte	-62
+ 659 026d BE       		.byte	-66
+ 660 026e B9       		.byte	-71
+ 661 026f C1       		.byte	-63
+ 662 0270 CB       		.byte	-53
+ 663 0271 C5       		.byte	-59
+ 664 0272 C0       		.byte	-64
+ 665 0273 C3       		.byte	-61
+ 666 0274 BD       		.byte	-67
+ 667 0275 AE       		.byte	-82
+ 668 0276 AE       		.byte	-82
+ 669 0277 BC       		.byte	-68
+ 670 0278 C1       		.byte	-63
+ 671 0279 BD       		.byte	-67
+ 672 027a BB       		.byte	-69
+ 673 027b BA       		.byte	-70
+ 674 027c B3       		.byte	-77
+ 675 027d AB       		.byte	-85
+ 676 027e A7       		.byte	-89
+ 677 027f AC       		.byte	-84
+ 678 0280 B2       		.byte	-78
+ 679 0281 B4       		.byte	-76
+ 680 0282 B4       		.byte	-76
+ 681 0283 B0       		.byte	-80
+ 682 0284 A6       		.byte	-90
+ 683 0285 9E       		.byte	-98
+ 684 0286 98       		.byte	-104
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccG75yKH.s 			page 13
+
+
+ 685 0287 98       		.byte	-104
+ 686 0288 92       		.byte	-110
+ 687 0289 79       		.byte	121
+ 688 028a 6B       		.byte	107
+ 689 028b 69       		.byte	105
+ 690 028c 6A       		.byte	106
+ 691 028d 64       		.byte	100
+ 692 028e 5C       		.byte	92
+ 693 028f 58       		.byte	88
+ 694 0290 58       		.byte	88
+ 695 0291 5A       		.byte	90
+ 696 0292 61       		.byte	97
+ 697 0293 66       		.byte	102
+ 698 0294 64       		.byte	100
+ 699 0295 5D       		.byte	93
+ 700 0296 55       		.byte	85
+ 701 0297 52       		.byte	82
+ 702 0298 4E       		.byte	78
+ 703 0299 49       		.byte	73
+ 704 029a 4B       		.byte	75
+ 705 029b 58       		.byte	88
+ 706 029c 5A       		.byte	90
+ 707 029d 4D       		.byte	77
+ 708 029e 46       		.byte	70
+ 709 029f 48       		.byte	72
+ 710 02a0 45       		.byte	69
+ 711 02a1 3F       		.byte	63
+ 712 02a2 47       		.byte	71
+ 713 02a3 51       		.byte	81
+ 714 02a4 4C       		.byte	76
+ 715 02a5 48       		.byte	72
+ 716 02a6 51       		.byte	81
+ 717 02a7 56       		.byte	86
+ 718 02a8 44       		.byte	68
+ 719 02a9 30       		.byte	48
+ 720 02aa 30       		.byte	48
+ 721 02ab 3C       		.byte	60
+ 722 02ac 4A       		.byte	74
+ 723 02ad 58       		.byte	88
+ 724 02ae 6D       		.byte	109
+ 725 02af 6F       		.byte	111
+ 726 02b0 5A       		.byte	90
+ 727 02b1 4D       		.byte	77
+ 728 02b2 44       		.byte	68
+ 729 02b3 20       		.byte	32
+ 730 02b4 0E       		.byte	14
+ 731              		.global	b4_sus
+ 732 02b5 000000   		.align	2
+ 733              		.type	b4_sus, %object
+ 734              		.size	b4_sus, 8
+ 735              	b4_sus:
+ 736 02b8 00000000 		.word	b4_sustain_vals
+ 737 02bc 0000     		.short	0
+ 738 02be 5900     		.short	89
+ 739              		.global	c5_sustain_vals
+ 740              		.align	2
+ 741              		.type	c5_sustain_vals, %object
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccG75yKH.s 			page 14
+
+
+ 742              		.size	c5_sustain_vals, 84
+ 743              	c5_sustain_vals:
+ 744 02c0 80       		.byte	-128
+ 745 02c1 FF       		.byte	-1
+ 746 02c2 F4       		.byte	-12
+ 747 02c3 D1       		.byte	-47
+ 748 02c4 CA       		.byte	-54
+ 749 02c5 BD       		.byte	-67
+ 750 02c6 A9       		.byte	-87
+ 751 02c7 B2       		.byte	-78
+ 752 02c8 C6       		.byte	-58
+ 753 02c9 D3       		.byte	-45
+ 754 02ca DD       		.byte	-35
+ 755 02cb E4       		.byte	-28
+ 756 02cc D3       		.byte	-45
+ 757 02cd BA       		.byte	-70
+ 758 02ce B5       		.byte	-75
+ 759 02cf BF       		.byte	-65
+ 760 02d0 BD       		.byte	-67
+ 761 02d1 B7       		.byte	-73
+ 762 02d2 C0       		.byte	-64
+ 763 02d3 C9       		.byte	-55
+ 764 02d4 C2       		.byte	-62
+ 765 02d5 BF       		.byte	-65
+ 766 02d6 C1       		.byte	-63
+ 767 02d7 B6       		.byte	-74
+ 768 02d8 AB       		.byte	-85
+ 769 02d9 B3       		.byte	-77
+ 770 02da BF       		.byte	-65
+ 771 02db BD       		.byte	-67
+ 772 02dc BA       		.byte	-70
+ 773 02dd BA       		.byte	-70
+ 774 02de B3       		.byte	-77
+ 775 02df AB       		.byte	-85
+ 776 02e0 A6       		.byte	-90
+ 777 02e1 AA       		.byte	-86
+ 778 02e2 B0       		.byte	-80
+ 779 02e3 B3       		.byte	-77
+ 780 02e4 B2       		.byte	-78
+ 781 02e5 AD       		.byte	-83
+ 782 02e6 A2       		.byte	-94
+ 783 02e7 9C       		.byte	-100
+ 784 02e8 96       		.byte	-106
+ 785 02e9 98       		.byte	-104
+ 786 02ea 86       		.byte	-122
+ 787 02eb 6F       		.byte	111
+ 788 02ec 6A       		.byte	106
+ 789 02ed 6B       		.byte	107
+ 790 02ee 67       		.byte	103
+ 791 02ef 5E       		.byte	94
+ 792 02f0 59       		.byte	89
+ 793 02f1 59       		.byte	89
+ 794 02f2 5B       		.byte	91
+ 795 02f3 62       		.byte	98
+ 796 02f4 67       		.byte	103
+ 797 02f5 64       		.byte	100
+ 798 02f6 5C       		.byte	92
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccG75yKH.s 			page 15
+
+
+ 799 02f7 54       		.byte	84
+ 800 02f8 52       		.byte	82
+ 801 02f9 4D       		.byte	77
+ 802 02fa 49       		.byte	73
+ 803 02fb 52       		.byte	82
+ 804 02fc 5C       		.byte	92
+ 805 02fd 54       		.byte	84
+ 806 02fe 48       		.byte	72
+ 807 02ff 49       		.byte	73
+ 808 0300 48       		.byte	72
+ 809 0301 41       		.byte	65
+ 810 0302 47       		.byte	71
+ 811 0303 52       		.byte	82
+ 812 0304 4D       		.byte	77
+ 813 0305 4A       		.byte	74
+ 814 0306 54       		.byte	84
+ 815 0307 55       		.byte	85
+ 816 0308 3F       		.byte	63
+ 817 0309 30       		.byte	48
+ 818 030a 36       		.byte	54
+ 819 030b 44       		.byte	68
+ 820 030c 52       		.byte	82
+ 821 030d 65       		.byte	101
+ 822 030e 72       		.byte	114
+ 823 030f 61       		.byte	97
+ 824 0310 50       		.byte	80
+ 825 0311 48       		.byte	72
+ 826 0312 28       		.byte	40
+ 827 0313 0F       		.byte	15
+ 828              		.global	c5_sus
+ 829              		.align	2
+ 830              		.type	c5_sus, %object
+ 831              		.size	c5_sus, 8
+ 832              	c5_sus:
+ 833 0314 00000000 		.word	c5_sustain_vals
+ 834 0318 0000     		.short	0
+ 835 031a 5400     		.short	84
+ 836              		.global	d5_sustain_vals
+ 837              		.align	2
+ 838              		.type	d5_sustain_vals, %object
+ 839              		.size	d5_sustain_vals, 75
+ 840              	d5_sustain_vals:
+ 841 031c 80       		.byte	-128
+ 842 031d FF       		.byte	-1
+ 843 031e D7       		.byte	-41
+ 844 031f BC       		.byte	-68
+ 845 0320 C2       		.byte	-62
+ 846 0321 BD       		.byte	-67
+ 847 0322 BD       		.byte	-67
+ 848 0323 C7       		.byte	-57
+ 849 0324 D1       		.byte	-47
+ 850 0325 E1       		.byte	-31
+ 851 0326 E5       		.byte	-27
+ 852 0327 DC       		.byte	-36
+ 853 0328 C8       		.byte	-56
+ 854 0329 B2       		.byte	-78
+ 855 032a BA       		.byte	-70
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccG75yKH.s 			page 16
+
+
+ 856 032b C7       		.byte	-57
+ 857 032c C5       		.byte	-59
+ 858 032d CA       		.byte	-54
+ 859 032e C6       		.byte	-58
+ 860 032f BC       		.byte	-68
+ 861 0330 BA       		.byte	-70
+ 862 0331 AD       		.byte	-83
+ 863 0332 A6       		.byte	-90
+ 864 0333 BA       		.byte	-70
+ 865 0334 C7       		.byte	-57
+ 866 0335 C2       		.byte	-62
+ 867 0336 C0       		.byte	-64
+ 868 0337 BB       		.byte	-69
+ 869 0338 AF       		.byte	-81
+ 870 0339 B2       		.byte	-78
+ 871 033a C3       		.byte	-61
+ 872 033b C9       		.byte	-55
+ 873 033c BA       		.byte	-70
+ 874 033d AA       		.byte	-86
+ 875 033e A4       		.byte	-92
+ 876 033f 98       		.byte	-104
+ 877 0340 91       		.byte	-111
+ 878 0341 8D       		.byte	-115
+ 879 0342 7B       		.byte	123
+ 880 0343 77       		.byte	119
+ 881 0344 71       		.byte	113
+ 882 0345 66       		.byte	102
+ 883 0346 5D       		.byte	93
+ 884 0347 4F       		.byte	79
+ 885 0348 44       		.byte	68
+ 886 0349 45       		.byte	69
+ 887 034a 56       		.byte	86
+ 888 034b 59       		.byte	89
+ 889 034c 4D       		.byte	77
+ 890 034d 47       		.byte	71
+ 891 034e 45       		.byte	69
+ 892 034f 3F       		.byte	63
+ 893 0350 49       		.byte	73
+ 894 0351 5E       		.byte	94
+ 895 0352 58       		.byte	88
+ 896 0353 4C       		.byte	76
+ 897 0354 4B       		.byte	75
+ 898 0355 42       		.byte	66
+ 899 0356 3D       		.byte	61
+ 900 0357 41       		.byte	65
+ 901 0358 3E       		.byte	62
+ 902 0359 49       		.byte	73
+ 903 035a 53       		.byte	83
+ 904 035b 40       		.byte	64
+ 905 035c 2F       		.byte	47
+ 906 035d 29       		.byte	41
+ 907 035e 2F       		.byte	47
+ 908 035f 41       		.byte	65
+ 909 0360 4D       		.byte	77
+ 910 0361 57       		.byte	87
+ 911 0362 5A       		.byte	90
+ 912 0363 54       		.byte	84
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccG75yKH.s 			page 17
+
+
+ 913 0364 59       		.byte	89
+ 914 0365 3B       		.byte	59
+ 915 0366 0E       		.byte	14
+ 916              		.global	d5_sus
+ 917 0367 00       		.align	2
+ 918              		.type	d5_sus, %object
+ 919              		.size	d5_sus, 8
+ 920              	d5_sus:
+ 921 0368 00000000 		.word	d5_sustain_vals
+ 922 036c 0000     		.short	0
+ 923 036e 4B00     		.short	75
+ 924              		.global	e5_sustain_vals
+ 925              		.align	2
+ 926              		.type	e5_sustain_vals, %object
+ 927              		.size	e5_sustain_vals, 67
+ 928              	e5_sustain_vals:
+ 929 0370 80       		.byte	-128
+ 930 0371 FF       		.byte	-1
+ 931 0372 C9       		.byte	-55
+ 932 0373 BE       		.byte	-66
+ 933 0374 BF       		.byte	-65
+ 934 0375 BA       		.byte	-70
+ 935 0376 C3       		.byte	-61
+ 936 0377 CE       		.byte	-50
+ 937 0378 DF       		.byte	-33
+ 938 0379 E3       		.byte	-29
+ 939 037a D7       		.byte	-41
+ 940 037b BE       		.byte	-66
+ 941 037c B1       		.byte	-79
+ 942 037d C3       		.byte	-61
+ 943 037e C5       		.byte	-59
+ 944 037f C8       		.byte	-56
+ 945 0380 C5       		.byte	-59
+ 946 0381 BB       		.byte	-69
+ 947 0382 B7       		.byte	-73
+ 948 0383 A7       		.byte	-89
+ 949 0384 AC       		.byte	-84
+ 950 0385 C4       		.byte	-60
+ 951 0386 C3       		.byte	-61
+ 952 0387 BF       		.byte	-65
+ 953 0388 BB       		.byte	-69
+ 954 0389 AD       		.byte	-83
+ 955 038a B4       		.byte	-76
+ 956 038b C7       		.byte	-57
+ 957 038c C3       		.byte	-61
+ 958 038d AF       		.byte	-81
+ 959 038e A5       		.byte	-91
+ 960 038f 9B       		.byte	-101
+ 961 0390 91       		.byte	-111
+ 962 0391 8C       		.byte	-116
+ 963 0392 79       		.byte	121
+ 964 0393 77       		.byte	119
+ 965 0394 6C       		.byte	108
+ 966 0395 63       		.byte	99
+ 967 0396 54       		.byte	84
+ 968 0397 46       		.byte	70
+ 969 0398 44       		.byte	68
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccG75yKH.s 			page 18
+
+
+ 970 0399 57       		.byte	87
+ 971 039a 58       		.byte	88
+ 972 039b 4B       		.byte	75
+ 973 039c 48       		.byte	72
+ 974 039d 43       		.byte	67
+ 975 039e 43       		.byte	67
+ 976 039f 5B       		.byte	91
+ 977 03a0 5B       		.byte	91
+ 978 03a1 4D       		.byte	77
+ 979 03a2 4B       		.byte	75
+ 980 03a3 40       		.byte	64
+ 981 03a4 3F       		.byte	63
+ 982 03a5 41       		.byte	65
+ 983 03a6 43       		.byte	67
+ 984 03a7 54       		.byte	84
+ 985 03a8 44       		.byte	68
+ 986 03a9 31       		.byte	49
+ 987 03aa 2A       		.byte	42
+ 988 03ab 34       		.byte	52
+ 989 03ac 46       		.byte	70
+ 990 03ad 52       		.byte	82
+ 991 03ae 5B       		.byte	91
+ 992 03af 56       		.byte	86
+ 993 03b0 59       		.byte	89
+ 994 03b1 3F       		.byte	63
+ 995 03b2 12       		.byte	18
+ 996              		.global	e5_sus
+ 997 03b3 00       		.align	2
+ 998              		.type	e5_sus, %object
+ 999              		.size	e5_sus, 8
+ 1000              	e5_sus:
+ 1001 03b4 00000000 		.word	e5_sustain_vals
+ 1002 03b8 0000     		.short	0
+ 1003 03ba 4300     		.short	67
+ 1004              		.global	f5_sustain_vals
+ 1005              		.align	2
+ 1006              		.type	f5_sustain_vals, %object
+ 1007              		.size	f5_sustain_vals, 63
+ 1008              	f5_sustain_vals:
+ 1009 03bc 80       		.byte	-128
+ 1010 03bd FF       		.byte	-1
+ 1011 03be C4       		.byte	-60
+ 1012 03bf BF       		.byte	-65
+ 1013 03c0 BD       		.byte	-67
+ 1014 03c1 BC       		.byte	-68
+ 1015 03c2 C7       		.byte	-57
+ 1016 03c3 D5       		.byte	-43
+ 1017 03c4 E4       		.byte	-28
+ 1018 03c5 DE       		.byte	-34
+ 1019 03c6 CA       		.byte	-54
+ 1020 03c7 B1       		.byte	-79
+ 1021 03c8 BE       		.byte	-66
+ 1022 03c9 C6       		.byte	-58
+ 1023 03ca C7       		.byte	-57
+ 1024 03cb C7       		.byte	-57
+ 1025 03cc BB       		.byte	-69
+ 1026 03cd B7       		.byte	-73
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccG75yKH.s 			page 19
+
+
+ 1027 03ce A6       		.byte	-90
+ 1028 03cf B0       		.byte	-80
+ 1029 03d0 C6       		.byte	-58
+ 1030 03d1 C1       		.byte	-63
+ 1031 03d2 BF       		.byte	-65
+ 1032 03d3 B6       		.byte	-74
+ 1033 03d4 AD       		.byte	-83
+ 1034 03d5 BE       		.byte	-66
+ 1035 03d6 C9       		.byte	-55
+ 1036 03d7 B7       		.byte	-73
+ 1037 03d8 A7       		.byte	-89
+ 1038 03d9 9F       		.byte	-97
+ 1039 03da 91       		.byte	-111
+ 1040 03db 8F       		.byte	-113
+ 1041 03dc 7A       		.byte	122
+ 1042 03dd 77       		.byte	119
+ 1043 03de 6B       		.byte	107
+ 1044 03df 62       		.byte	98
+ 1045 03e0 52       		.byte	82
+ 1046 03e1 44       		.byte	68
+ 1047 03e2 48       		.byte	72
+ 1048 03e3 5B       		.byte	91
+ 1049 03e4 53       		.byte	83
+ 1050 03e5 48       		.byte	72
+ 1051 03e6 46       		.byte	70
+ 1052 03e7 40       		.byte	64
+ 1053 03e8 52       		.byte	82
+ 1054 03e9 5F       		.byte	95
+ 1055 03ea 4F       		.byte	79
+ 1056 03eb 4B       		.byte	75
+ 1057 03ec 42       		.byte	66
+ 1058 03ed 3F       		.byte	63
+ 1059 03ee 41       		.byte	65
+ 1060 03ef 44       		.byte	68
+ 1061 03f0 54       		.byte	84
+ 1062 03f1 40       		.byte	64
+ 1063 03f2 2E       		.byte	46
+ 1064 03f3 2A       		.byte	42
+ 1065 03f4 3A       		.byte	58
+ 1066 03f5 4B       		.byte	75
+ 1067 03f6 58       		.byte	88
+ 1068 03f7 5A       		.byte	90
+ 1069 03f8 55       		.byte	85
+ 1070 03f9 52       		.byte	82
+ 1071 03fa 12       		.byte	18
+ 1072              		.global	f5_sus
+ 1073 03fb 00       		.align	2
+ 1074              		.type	f5_sus, %object
+ 1075              		.size	f5_sus, 8
+ 1076              	f5_sus:
+ 1077 03fc 00000000 		.word	f5_sustain_vals
+ 1078 0400 0000     		.short	0
+ 1079 0402 3F00     		.short	63
+ 1080              		.global	g5_sustain_vals
+ 1081              		.align	2
+ 1082              		.type	g5_sustain_vals, %object
+ 1083              		.size	g5_sustain_vals, 56
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccG75yKH.s 			page 20
+
+
+ 1084              	g5_sustain_vals:
+ 1085 0404 80       		.byte	-128
+ 1086 0405 FF       		.byte	-1
+ 1087 0406 BE       		.byte	-66
+ 1088 0407 C3       		.byte	-61
+ 1089 0408 BC       		.byte	-68
+ 1090 0409 C4       		.byte	-60
+ 1091 040a D2       		.byte	-46
+ 1092 040b E6       		.byte	-26
+ 1093 040c E1       		.byte	-31
+ 1094 040d C9       		.byte	-55
+ 1095 040e B2       		.byte	-78
+ 1096 040f C6       		.byte	-58
+ 1097 0410 C6       		.byte	-58
+ 1098 0411 CC       		.byte	-52
+ 1099 0412 BF       		.byte	-65
+ 1100 0413 BA       		.byte	-70
+ 1101 0414 A8       		.byte	-88
+ 1102 0415 B3       		.byte	-77
+ 1103 0416 C8       		.byte	-56
+ 1104 0417 C1       		.byte	-63
+ 1105 0418 BF       		.byte	-65
+ 1106 0419 AF       		.byte	-81
+ 1107 041a B8       		.byte	-72
+ 1108 041b CB       		.byte	-53
+ 1109 041c BA       		.byte	-70
+ 1110 041d A8       		.byte	-88
+ 1111 041e 9D       		.byte	-99
+ 1112 041f 91       		.byte	-111
+ 1113 0420 87       		.byte	-121
+ 1114 0421 76       		.byte	118
+ 1115 0422 70       		.byte	112
+ 1116 0423 63       		.byte	99
+ 1117 0424 52       		.byte	82
+ 1118 0425 42       		.byte	66
+ 1119 0426 4A       		.byte	74
+ 1120 0427 5A       		.byte	90
+ 1121 0428 4C       		.byte	76
+ 1122 0429 46       		.byte	70
+ 1123 042a 40       		.byte	64
+ 1124 042b 4A       		.byte	74
+ 1125 042c 5F       		.byte	95
+ 1126 042d 4D       		.byte	77
+ 1127 042e 4A       		.byte	74
+ 1128 042f 3D       		.byte	61
+ 1129 0430 3F       		.byte	63
+ 1130 0431 3E       		.byte	62
+ 1131 0432 4F       		.byte	79
+ 1132 0433 46       		.byte	70
+ 1133 0434 2D       		.byte	45
+ 1134 0435 28       		.byte	40
+ 1135 0436 3B       		.byte	59
+ 1136 0437 4D       		.byte	77
+ 1137 0438 5A       		.byte	90
+ 1138 0439 55       		.byte	85
+ 1139 043a 58       		.byte	88
+ 1140 043b 1F       		.byte	31
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccG75yKH.s 			page 21
+
+
+ 1141              		.global	g5_sus
+ 1142              		.align	2
+ 1143              		.type	g5_sus, %object
+ 1144              		.size	g5_sus, 8
+ 1145              	g5_sus:
+ 1146 043c 00000000 		.word	g5_sustain_vals
+ 1147 0440 0000     		.short	0
+ 1148 0442 3800     		.short	56
+ 1149              		.global	a5_sustain_vals
+ 1150              		.align	2
+ 1151              		.type	a5_sustain_vals, %object
+ 1152              		.size	a5_sustain_vals, 50
+ 1153              	a5_sustain_vals:
+ 1154 0444 80       		.byte	-128
+ 1155 0445 FF       		.byte	-1
+ 1156 0446 C1       		.byte	-63
+ 1157 0447 C5       		.byte	-59
+ 1158 0448 C2       		.byte	-62
+ 1159 0449 D1       		.byte	-47
+ 1160 044a E8       		.byte	-24
+ 1161 044b E9       		.byte	-23
+ 1162 044c CE       		.byte	-50
+ 1163 044d B6       		.byte	-74
+ 1164 044e CD       		.byte	-51
+ 1165 044f CC       		.byte	-52
+ 1166 0450 CB       		.byte	-53
+ 1167 0451 BF       		.byte	-65
+ 1168 0452 B0       		.byte	-80
+ 1169 0453 B1       		.byte	-79
+ 1170 0454 CD       		.byte	-51
+ 1171 0455 C5       		.byte	-59
+ 1172 0456 C0       		.byte	-64
+ 1173 0457 B0       		.byte	-80
+ 1174 0458 C8       		.byte	-56
+ 1175 0459 C9       		.byte	-55
+ 1176 045a AE       		.byte	-82
+ 1177 045b A2       		.byte	-94
+ 1178 045c 92       		.byte	-110
+ 1179 045d 86       		.byte	-122
+ 1180 045e 76       		.byte	118
+ 1181 045f 69       		.byte	105
+ 1182 0460 5B       		.byte	91
+ 1183 0461 45       		.byte	69
+ 1184 0462 40       		.byte	64
+ 1185 0463 58       		.byte	88
+ 1186 0464 4A       		.byte	74
+ 1187 0465 43       		.byte	67
+ 1188 0466 3B       		.byte	59
+ 1189 0467 51       		.byte	81
+ 1190 0468 56       		.byte	86
+ 1191 0469 47       		.byte	71
+ 1192 046a 3E       		.byte	62
+ 1193 046b 3A       		.byte	58
+ 1194 046c 3A       		.byte	58
+ 1195 046d 4D       		.byte	77
+ 1196 046e 3D       		.byte	61
+ 1197 046f 25       		.byte	37
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccG75yKH.s 			page 22
+
+
+ 1198 0470 28       		.byte	40
+ 1199 0471 42       		.byte	66
+ 1200 0472 53       		.byte	83
+ 1201 0473 55       		.byte	85
+ 1202 0474 56       		.byte	86
+ 1203 0475 19       		.byte	25
+ 1204              		.global	a5_sus
+ 1205 0476 0000     		.align	2
+ 1206              		.type	a5_sus, %object
+ 1207              		.size	a5_sus, 8
+ 1208              	a5_sus:
+ 1209 0478 00000000 		.word	a5_sustain_vals
+ 1210 047c 0000     		.short	0
+ 1211 047e 3200     		.short	50
+ 1212              		.global	c6_sustain_vals
+ 1213              		.align	2
+ 1214              		.type	c6_sustain_vals, %object
+ 1215              		.size	c6_sustain_vals, 42
+ 1216              	c6_sustain_vals:
+ 1217 0480 80       		.byte	-128
+ 1218 0481 FF       		.byte	-1
+ 1219 0482 B5       		.byte	-75
+ 1220 0483 B8       		.byte	-72
+ 1221 0484 C1       		.byte	-63
+ 1222 0485 C0       		.byte	-64
+ 1223 0486 C7       		.byte	-57
+ 1224 0487 AD       		.byte	-83
+ 1225 0488 BA       		.byte	-70
+ 1226 0489 C2       		.byte	-62
+ 1227 048a A0       		.byte	-96
+ 1228 048b A4       		.byte	-92
+ 1229 048c A5       		.byte	-91
+ 1230 048d AC       		.byte	-84
+ 1231 048e C1       		.byte	-63
+ 1232 048f B8       		.byte	-72
+ 1233 0490 AB       		.byte	-85
+ 1234 0491 A8       		.byte	-88
+ 1235 0492 A6       		.byte	-90
+ 1236 0493 A6       		.byte	-90
+ 1237 0494 88       		.byte	-120
+ 1238 0495 80       		.byte	-128
+ 1239 0496 7F       		.byte	127
+ 1240 0497 62       		.byte	98
+ 1241 0498 5E       		.byte	94
+ 1242 0499 5E       		.byte	94
+ 1243 049a 59       		.byte	89
+ 1244 049b 50       		.byte	80
+ 1245 049c 43       		.byte	67
+ 1246 049d 54       		.byte	84
+ 1247 049e 61       		.byte	97
+ 1248 049f 61       		.byte	97
+ 1249 04a0 66       		.byte	102
+ 1250 04a1 4D       		.byte	77
+ 1251 04a2 4C       		.byte	76
+ 1252 04a3 5B       		.byte	91
+ 1253 04a4 45       		.byte	69
+ 1254 04a5 4B       		.byte	75
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccG75yKH.s 			page 23
+
+
+ 1255 04a6 50       		.byte	80
+ 1256 04a7 55       		.byte	85
+ 1257 04a8 63       		.byte	99
+ 1258 04a9 22       		.byte	34
+ 1259              		.global	c6_sus
+ 1260 04aa 0000     		.align	2
+ 1261              		.type	c6_sus, %object
+ 1262              		.size	c6_sus, 8
+ 1263              	c6_sus:
+ 1264 04ac 00000000 		.word	c6_sustain_vals
+ 1265 04b0 0000     		.short	0
+ 1266 04b2 2A00     		.short	42
+ 1267              		.global	b5_sustain_vals
+ 1268              		.align	2
+ 1269              		.type	b5_sustain_vals, %object
+ 1270              		.size	b5_sustain_vals, 45
+ 1271              	b5_sustain_vals:
+ 1272 04b4 80       		.byte	-128
+ 1273 04b5 FF       		.byte	-1
+ 1274 04b6 F9       		.byte	-7
+ 1275 04b7 CD       		.byte	-51
+ 1276 04b8 9F       		.byte	-97
+ 1277 04b9 8B       		.byte	-117
+ 1278 04ba 90       		.byte	-112
+ 1279 04bb A8       		.byte	-88
+ 1280 04bc C1       		.byte	-63
+ 1281 04bd D3       		.byte	-45
+ 1282 04be C8       		.byte	-56
+ 1283 04bf AC       		.byte	-84
+ 1284 04c0 A6       		.byte	-90
+ 1285 04c1 AF       		.byte	-81
+ 1286 04c2 A9       		.byte	-87
+ 1287 04c3 9F       		.byte	-97
+ 1288 04c4 A7       		.byte	-89
+ 1289 04c5 BB       		.byte	-69
+ 1290 04c6 B5       		.byte	-75
+ 1291 04c7 A3       		.byte	-93
+ 1292 04c8 8E       		.byte	-114
+ 1293 04c9 7E       		.byte	126
+ 1294 04ca 7E       		.byte	126
+ 1295 04cb 85       		.byte	-123
+ 1296 04cc 83       		.byte	-125
+ 1297 04cd 72       		.byte	114
+ 1298 04ce 5E       		.byte	94
+ 1299 04cf 4B       		.byte	75
+ 1300 04d0 52       		.byte	82
+ 1301 04d1 66       		.byte	102
+ 1302 04d2 65       		.byte	101
+ 1303 04d3 5A       		.byte	90
+ 1304 04d4 5B       		.byte	91
+ 1305 04d5 64       		.byte	100
+ 1306 04d6 57       		.byte	87
+ 1307 04d7 3F       		.byte	63
+ 1308 04d8 40       		.byte	64
+ 1309 04d9 57       		.byte	87
+ 1310 04da 71       		.byte	113
+ 1311 04db 7F       		.byte	127
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccG75yKH.s 			page 24
+
+
+ 1312 04dc 7A       		.byte	122
+ 1313 04dd 5F       		.byte	95
+ 1314 04de 36       		.byte	54
+ 1315 04df 15       		.byte	21
+ 1316 04e0 32       		.byte	50
+ 1317              		.global	b5_sus
+ 1318 04e1 000000   		.align	2
+ 1319              		.type	b5_sus, %object
+ 1320              		.size	b5_sus, 8
+ 1321              	b5_sus:
+ 1322 04e4 00000000 		.word	b5_sustain_vals
+ 1323 04e8 0000     		.short	0
+ 1324 04ea 2D00     		.short	45
+ 1325              		.global	e6_sustain_vals
+ 1326              		.align	2
+ 1327              		.type	e6_sustain_vals, %object
+ 1328              		.size	e6_sustain_vals, 33
+ 1329              	e6_sustain_vals:
+ 1330 04ec 80       		.byte	-128
+ 1331 04ed F1       		.byte	-15
+ 1332 04ee E8       		.byte	-24
+ 1333 04ef E1       		.byte	-31
+ 1334 04f0 ED       		.byte	-19
+ 1335 04f1 FD       		.byte	-3
+ 1336 04f2 FF       		.byte	-1
+ 1337 04f3 F5       		.byte	-11
+ 1338 04f4 F3       		.byte	-13
+ 1339 04f5 FB       		.byte	-5
+ 1340 04f6 FD       		.byte	-3
+ 1341 04f7 FA       		.byte	-6
+ 1342 04f8 F5       		.byte	-11
+ 1343 04f9 DC       		.byte	-36
+ 1344 04fa C5       		.byte	-59
+ 1345 04fb B0       		.byte	-80
+ 1346 04fc 91       		.byte	-111
+ 1347 04fd 7F       		.byte	127
+ 1348 04fe 65       		.byte	101
+ 1349 04ff 4B       		.byte	75
+ 1350 0500 3B       		.byte	59
+ 1351 0501 1F       		.byte	31
+ 1352 0502 11       		.byte	17
+ 1353 0503 0F       		.byte	15
+ 1354 0504 0F       		.byte	15
+ 1355 0505 19       		.byte	25
+ 1356 0506 1F       		.byte	31
+ 1357 0507 19       		.byte	25
+ 1358 0508 14       		.byte	20
+ 1359 0509 22       		.byte	34
+ 1360 050a 33       		.byte	51
+ 1361 050b 3B       		.byte	59
+ 1362 050c 2C       		.byte	44
+ 1363              		.global	e6_sus
+ 1364 050d 000000   		.align	2
+ 1365              		.type	e6_sus, %object
+ 1366              		.size	e6_sus, 8
+ 1367              	e6_sus:
+ 1368 0510 00000000 		.word	e6_sustain_vals
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccG75yKH.s 			page 25
+
+
+ 1369 0514 0000     		.short	0
+ 1370 0516 2100     		.short	33
+ 1371              		.global	d6_sustain_vals
+ 1372              		.align	2
+ 1373              		.type	d6_sustain_vals, %object
+ 1374              		.size	d6_sustain_vals, 38
+ 1375              	d6_sustain_vals:
+ 1376 0518 80       		.byte	-128
+ 1377 0519 EA       		.byte	-22
+ 1378 051a EC       		.byte	-20
+ 1379 051b DF       		.byte	-33
+ 1380 051c E6       		.byte	-26
+ 1381 051d F3       		.byte	-13
+ 1382 051e FF       		.byte	-1
+ 1383 051f FB       		.byte	-5
+ 1384 0520 F3       		.byte	-13
+ 1385 0521 F2       		.byte	-14
+ 1386 0522 F9       		.byte	-7
+ 1387 0523 FC       		.byte	-4
+ 1388 0524 F9       		.byte	-7
+ 1389 0525 F7       		.byte	-9
+ 1390 0526 EA       		.byte	-22
+ 1391 0527 D0       		.byte	-48
+ 1392 0528 C0       		.byte	-64
+ 1393 0529 AB       		.byte	-85
+ 1394 052a 90       		.byte	-112
+ 1395 052b 81       		.byte	-127
+ 1396 052c 6B       		.byte	107
+ 1397 052d 51       		.byte	81
+ 1398 052e 43       		.byte	67
+ 1399 052f 2F       		.byte	47
+ 1400 0530 18       		.byte	24
+ 1401 0531 12       		.byte	18
+ 1402 0532 10       		.byte	16
+ 1403 0533 11       		.byte	17
+ 1404 0534 1A       		.byte	26
+ 1405 0535 20       		.byte	32
+ 1406 0536 1D       		.byte	29
+ 1407 0537 16       		.byte	22
+ 1408 0538 1B       		.byte	27
+ 1409 0539 2A       		.byte	42
+ 1410 053a 38       		.byte	56
+ 1411 053b 3B       		.byte	59
+ 1412 053c 2C       		.byte	44
+ 1413 053d 4E       		.byte	78
+ 1414              		.global	d6_sus
+ 1415 053e 0000     		.align	2
+ 1416              		.type	d6_sus, %object
+ 1417              		.size	d6_sus, 8
+ 1418              	d6_sus:
+ 1419 0540 00000000 		.word	d6_sustain_vals
+ 1420 0544 0000     		.short	0
+ 1421 0546 2600     		.short	38
+ 1422              		.global	g6_sustain_vals
+ 1423              		.align	2
+ 1424              		.type	g6_sustain_vals, %object
+ 1425              		.size	g6_sustain_vals, 28
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccG75yKH.s 			page 26
+
+
+ 1426              	g6_sustain_vals:
+ 1427 0548 80       		.byte	-128
+ 1428 0549 FF       		.byte	-1
+ 1429 054a E6       		.byte	-26
+ 1430 054b FD       		.byte	-3
+ 1431 054c F9       		.byte	-7
+ 1432 054d EC       		.byte	-20
+ 1433 054e F5       		.byte	-11
+ 1434 054f F0       		.byte	-16
+ 1435 0550 F1       		.byte	-15
+ 1436 0551 FA       		.byte	-6
+ 1437 0552 EA       		.byte	-22
+ 1438 0553 E0       		.byte	-32
+ 1439 0554 D8       		.byte	-40
+ 1440 0555 A5       		.byte	-91
+ 1441 0556 83       		.byte	-125
+ 1442 0557 64       		.byte	100
+ 1443 0558 2D       		.byte	45
+ 1444 0559 1E       		.byte	30
+ 1445 055a 17       		.byte	23
+ 1446 055b 07       		.byte	7
+ 1447 055c 0F       		.byte	15
+ 1448 055d 13       		.byte	19
+ 1449 055e 11       		.byte	17
+ 1450 055f 1C       		.byte	28
+ 1451 0560 18       		.byte	24
+ 1452 0561 10       		.byte	16
+ 1453 0562 2B       		.byte	43
+ 1454 0563 1A       		.byte	26
+ 1455              		.global	g6_sus
+ 1456              		.align	2
+ 1457              		.type	g6_sus, %object
+ 1458              		.size	g6_sus, 8
+ 1459              	g6_sus:
+ 1460 0564 00000000 		.word	g6_sustain_vals
+ 1461 0568 0000     		.short	0
+ 1462 056a 1C00     		.short	28
+ 1463              		.global	f6_sustain_vals
+ 1464              		.align	2
+ 1465              		.type	f6_sustain_vals, %object
+ 1466              		.size	f6_sustain_vals, 32
+ 1467              	f6_sustain_vals:
+ 1468 056c 80       		.byte	-128
+ 1469 056d FF       		.byte	-1
+ 1470 056e EE       		.byte	-18
+ 1471 056f EB       		.byte	-21
+ 1472 0570 EC       		.byte	-20
+ 1473 0571 D3       		.byte	-45
+ 1474 0572 CC       		.byte	-52
+ 1475 0573 D6       		.byte	-42
+ 1476 0574 C5       		.byte	-59
+ 1477 0575 C4       		.byte	-60
+ 1478 0576 CB       		.byte	-53
+ 1479 0577 D3       		.byte	-45
+ 1480 0578 DA       		.byte	-38
+ 1481 0579 E1       		.byte	-31
+ 1482 057a D3       		.byte	-45
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccG75yKH.s 			page 27
+
+
+ 1483 057b B2       		.byte	-78
+ 1484 057c 74       		.byte	116
+ 1485 057d 3F       		.byte	63
+ 1486 057e 26       		.byte	38
+ 1487 057f 27       		.byte	39
+ 1488 0580 2F       		.byte	47
+ 1489 0581 36       		.byte	54
+ 1490 0582 3F       		.byte	63
+ 1491 0583 49       		.byte	73
+ 1492 0584 40       		.byte	64
+ 1493 0585 3A       		.byte	58
+ 1494 0586 45       		.byte	69
+ 1495 0587 35       		.byte	53
+ 1496 0588 24       		.byte	36
+ 1497 0589 2F       		.byte	47
+ 1498 058a 1F       		.byte	31
+ 1499 058b 36       		.byte	54
+ 1500              		.global	f6_sus
+ 1501              		.align	2
+ 1502              		.type	f6_sus, %object
+ 1503              		.size	f6_sus, 8
+ 1504              	f6_sus:
+ 1505 058c 00000000 		.word	f6_sustain_vals
+ 1506 0590 0000     		.short	0
+ 1507 0592 2000     		.short	32
+ 1508              		.global	c7_sustain_vals
+ 1509              		.align	2
+ 1510              		.type	c7_sustain_vals, %object
+ 1511              		.size	c7_sustain_vals, 21
+ 1512              	c7_sustain_vals:
+ 1513 0594 80       		.byte	-128
+ 1514 0595 FF       		.byte	-1
+ 1515 0596 DD       		.byte	-35
+ 1516 0597 D3       		.byte	-45
+ 1517 0598 D4       		.byte	-44
+ 1518 0599 BA       		.byte	-70
+ 1519 059a BE       		.byte	-66
+ 1520 059b CE       		.byte	-50
+ 1521 059c CD       		.byte	-51
+ 1522 059d B8       		.byte	-72
+ 1523 059e 91       		.byte	-111
+ 1524 059f 72       		.byte	114
+ 1525 05a0 53       		.byte	83
+ 1526 05a1 3B       		.byte	59
+ 1527 05a2 38       		.byte	56
+ 1528 05a3 4B       		.byte	75
+ 1529 05a4 54       		.byte	84
+ 1530 05a5 45       		.byte	69
+ 1531 05a6 45       		.byte	69
+ 1532 05a7 41       		.byte	65
+ 1533 05a8 2A       		.byte	42
+ 1534              		.global	c7_sus
+ 1535 05a9 000000   		.align	2
+ 1536              		.type	c7_sus, %object
+ 1537              		.size	c7_sus, 8
+ 1538              	c7_sus:
+ 1539 05ac 00000000 		.word	c7_sustain_vals
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccG75yKH.s 			page 28
+
+
+ 1540 05b0 0000     		.short	0
+ 1541 05b2 1500     		.short	21
+ 1542              		.global	a6_sustain_vals
+ 1543              		.align	2
+ 1544              		.type	a6_sustain_vals, %object
+ 1545              		.size	a6_sustain_vals, 25
+ 1546              	a6_sustain_vals:
+ 1547 05b4 80       		.byte	-128
+ 1548 05b5 F8       		.byte	-8
+ 1549 05b6 FF       		.byte	-1
+ 1550 05b7 F4       		.byte	-12
+ 1551 05b8 E4       		.byte	-28
+ 1552 05b9 E3       		.byte	-29
+ 1553 05ba EE       		.byte	-18
+ 1554 05bb E9       		.byte	-23
+ 1555 05bc E5       		.byte	-27
+ 1556 05bd DF       		.byte	-33
+ 1557 05be CC       		.byte	-52
+ 1558 05bf B4       		.byte	-76
+ 1559 05c0 93       		.byte	-109
+ 1560 05c1 70       		.byte	112
+ 1561 05c2 4C       		.byte	76
+ 1562 05c3 32       		.byte	50
+ 1563 05c4 24       		.byte	36
+ 1564 05c5 20       		.byte	32
+ 1565 05c6 1F       		.byte	31
+ 1566 05c7 20       		.byte	32
+ 1567 05c8 2F       		.byte	47
+ 1568 05c9 36       		.byte	54
+ 1569 05ca 29       		.byte	41
+ 1570 05cb 1F       		.byte	31
+ 1571 05cc 29       		.byte	41
+ 1572              		.global	a6_sus
+ 1573 05cd 000000   		.align	2
+ 1574              		.type	a6_sus, %object
+ 1575              		.size	a6_sus, 8
+ 1576              	a6_sus:
+ 1577 05d0 00000000 		.word	a6_sustain_vals
+ 1578 05d4 0000     		.short	0
+ 1579 05d6 1900     		.short	25
+ 1580              		.section	.text.get_wav_val_and_inc,"ax",%progbits
+ 1581              		.align	2
+ 1582              		.global	get_wav_val_and_inc
+ 1583              		.thumb
+ 1584              		.thumb_func
+ 1585              		.type	get_wav_val_and_inc, %function
+ 1586              	get_wav_val_and_inc:
+ 1587              	.LFB0:
+ 1588              		.file 1 "wav_tables.c"
+   1:wav_tables.c  **** /* ========================================
+   2:wav_tables.c  ****  *
+   3:wav_tables.c  ****  * Copyright YOUR COMPANY, THE YEAR
+   4:wav_tables.c  ****  * All Rights Reserved
+   5:wav_tables.c  ****  * UNPUBLISHED, LICENSED SOFTWARE.
+   6:wav_tables.c  ****  *
+   7:wav_tables.c  ****  * CONFIDENTIAL AND PROPRIETARY INFORMATION
+   8:wav_tables.c  ****  * WHICH IS THE PROPERTY OF your company.
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccG75yKH.s 			page 29
+
+
+   9:wav_tables.c  ****  *
+  10:wav_tables.c  ****  * ========================================
+  11:wav_tables.c  **** */
+  12:wav_tables.c  **** #include "wav_tables.h"
+  13:wav_tables.c  **** 
+  14:wav_tables.c  **** //int c4_sustain[168] = {119, 101, 99, 110, 131, 150, 158, 150, 134, 123, 112, 89, 57, 22, 2, 20, 5
+  15:wav_tables.c  **** //int c4_num_vals = 168;
+  16:wav_tables.c  **** ////
+  17:wav_tables.c  **** ////uint8 c4_sustain_vals[168] = {128, 132, 137, 142, 146, 151, 156, 160, 165, 169, 174, 178, 183, 
+  18:wav_tables.c  **** ////WAV_TABLE c4_sus = {.table = c4_sustain_vals, .index = 0, .period = 168};
+  19:wav_tables.c  **** //uint8 c4_sustain_vals[169] = {128, 255, 242, 190, 174, 180, 187, 183, 178, 171, 160, 151, 148, 15
+  20:wav_tables.c  **** //WAV_TABLE c4_sus = {.table = c4_sustain_vals, .index = 0, .period = 169};
+  21:wav_tables.c  **** //
+  22:wav_tables.c  **** //uint8 d4_sustain_vals[150] = {128, 133, 138, 143, 149, 154, 159, 164, 169, 174, 179, 184, 189, 19
+  23:wav_tables.c  **** //WAV_TABLE d4_sus = {.table = d4_sustain_vals, .index = 0, .period = 150};
+  24:wav_tables.c  **** //
+  25:wav_tables.c  **** //uint8 e4_sustain_vals[133] = {128, 133, 139, 145, 151, 157, 163, 169, 174, 180, 185, 190, 196, 20
+  26:wav_tables.c  **** //WAV_TABLE e4_sus = {.table = e4_sustain_vals, .index = 0, .period = 133};
+  27:wav_tables.c  **** //
+  28:wav_tables.c  **** ////uint8 g4_sustain_vals[112] = {128, 135, 142, 149, 156, 163, 169, 176, 183, 189, 195, 201, 207, 
+  29:wav_tables.c  **** ////WAV_TABLE g4_sus = {.table = g4_sustain_vals, .index = 0, .period = 112};
+  30:wav_tables.c  **** //uint8 g4_sustain_vals[112] = {128, 238, 250, 243, 255, 246, 215, 197, 194, 194, 199, 204, 201, 18
+  31:wav_tables.c  **** //WAV_TABLE g4_sus = {.table = g4_sustain_vals, .index = 0, .period = 112};
+  32:wav_tables.c  **** //
+  33:wav_tables.c  **** //uint8 g5_sustain_vals[56] = {128, 142, 156, 169, 183, 195, 207, 217, 227, 235, 242, 248, 252, 254
+  34:wav_tables.c  **** //WAV_TABLE g5_sus = {.table = g5_sustain_vals, .index = 0, .period = 56};
+  35:wav_tables.c  **** //
+  36:wav_tables.c  **** ////uint8 b4_sustain_vals[89] = {128, 136, 145, 154, 163, 171, 180, 188, 196, 203, 210, 217, 223, 2
+  37:wav_tables.c  **** ////WAV_TABLE b4_sus = {.table = b4_sustain_vals, .index = 0, .period = 89};
+  38:wav_tables.c  **** //uint8 b4_sustain_vals[88] = {128, 255, 251, 214, 204, 195, 173, 173, 192, 208, 218, 228, 225, 202
+  39:wav_tables.c  **** //WAV_TABLE b4_sus = {.table = b4_sustain_vals, .index = 0, .period = 88};
+  40:wav_tables.c  **** //
+  41:wav_tables.c  **** //uint8 c5_sustain_vals[84] = {128, 137, 146, 156, 165, 174, 183, 191, 199, 207, 214, 221, 227, 233
+  42:wav_tables.c  **** //WAV_TABLE c5_sus = {.table = c5_sustain_vals, .index = 0, .period = 84};
+  43:wav_tables.c  **** //
+  44:wav_tables.c  **** //
+  45:wav_tables.c  **** ////uint8 d5_sustain_vals[75] = {128, 138, 149, 159, 169, 179, 189, 198, 207, 215, 222, 229, 235, 2
+  46:wav_tables.c  **** ////WAV_TABLE d5_sus = {.table = d5_sustain_vals, .index = 0, .period = 75};
+  47:wav_tables.c  **** //uint8 d5_sustain_vals[74] = {128, 255, 214, 188, 193, 188, 189, 199, 210, 226, 229, 218, 196, 177
+  48:wav_tables.c  **** //WAV_TABLE d5_sus = {.table = d5_sustain_vals, .index = 0, .period = 74};
+  49:wav_tables.c  **** //
+  50:wav_tables.c  **** //uint8 e5_sustain_vals[66] = {128, 139, 151, 163, 174, 185, 196, 205, 215, 223, 230, 237, 243, 247
+  51:wav_tables.c  **** //WAV_TABLE e5_sus = {.table = e5_sustain_vals, .index = 0, .period = 66};
+  52:wav_tables.c  **** //
+  53:wav_tables.c  **** //
+  54:wav_tables.c  **** //uint8 f5_sustain_vals[63] = {128, 140, 153, 165, 177, 188, 199, 209, 219, 227, 234, 241, 246, 250
+  55:wav_tables.c  **** //WAV_TABLE f5_sus = {.table = f5_sustain_vals, .index = 0, .period = 63};
+  56:wav_tables.c  **** //
+  57:wav_tables.c  **** //
+  58:wav_tables.c  **** //uint8 g6_sustain_vals[28] = {128, 156, 183, 207, 227, 242, 252, 255, 252, 243, 228, 208, 184, 157
+  59:wav_tables.c  **** //WAV_TABLE g6_sus = {.table = g6_sustain_vals, .index = 0, .period = 28};
+  60:wav_tables.c  **** //
+  61:wav_tables.c  **** //
+  62:wav_tables.c  **** //uint8 a5_sustain_vals[50] = {128, 143, 159, 174, 189, 202, 215, 226, 235, 243, 249, 253, 255, 255
+  63:wav_tables.c  **** //
+  64:wav_tables.c  **** //
+  65:wav_tables.c  **** //uint8 c6_sustain_vals[42] = {128, 146, 165, 183, 199, 214, 227, 238, 246, 252, 255, 255, 252, 246
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccG75yKH.s 			page 30
+
+
+  66:wav_tables.c  **** //WAV_TABLE c6_sus = {.table = c6_sustain_vals, .index = 0, .period = 42};
+  67:wav_tables.c  **** //
+  68:wav_tables.c  **** //
+  69:wav_tables.c  **** //uint8 b6_sustain_vals[22] = {128, 163, 196, 223, 243, 253, 254, 245, 227, 200, 168, 133, 98, 64, 
+  70:wav_tables.c  **** //
+  71:wav_tables.c  **** //WAV_TABLE b6_sus = {.table = b6_sustain_vals, .index = 0, .period = 22};
+  72:wav_tables.c  **** //
+  73:wav_tables.c  **** //
+  74:wav_tables.c  **** ////uint8 e6_sustain_vals[33] = {128, 151, 174, 196, 215, 230, 243, 251, 255, 254, 249, 240, 226, 2
+  75:wav_tables.c  **** ////WAV_TABLE e6_sus = {.table = e6_sustain_vals, .index = 0, .period = 33};
+  76:wav_tables.c  **** //uint8 e6_sustain_vals[33] = {128, 242, 232, 226, 238, 255, 255, 245, 244, 252, 253, 250, 243, 216
+  77:wav_tables.c  **** //WAV_TABLE e6_sus = {.table = e6_sustain_vals, .index = 0, .period = 33};
+  78:wav_tables.c  **** //
+  79:wav_tables.c  **** ////uint8 d6_sustain_vals[37] = {128, 149, 169, 189, 207, 222, 235, 245, 252, 255, 254, 250, 243, 2
+  80:wav_tables.c  **** ////WAV_TABLE d6_sus = {.table = d6_sustain_vals, .index = 0, .period = 37};
+  81:wav_tables.c  **** //uint8 d6_sustain_vals[37] = {128, 250, 237, 215, 224, 242, 248, 245, 233, 218, 212, 239, 255, 239
+  82:wav_tables.c  **** //WAV_TABLE d6_sus = {.table = d6_sustain_vals, .index = 0, .period = 37};
+  83:wav_tables.c  **** //
+  84:wav_tables.c  **** //uint8 f6_sustain_vals[31] = {128, 153, 177, 199, 219, 234, 246, 253, 255, 252, 244, 231, 215, 195
+  85:wav_tables.c  **** //WAV_TABLE f6_sus = {.table = f6_sustain_vals, .index = 0, .period = 31};
+  86:wav_tables.c  **** //
+  87:wav_tables.c  **** //
+  88:wav_tables.c  **** //uint8 c7_sustain_vals[21] = {128, 165, 199, 227, 246, 255, 252, 238, 215, 184, 148, 110, 74, 42, 
+  89:wav_tables.c  **** //WAV_TABLE c7_sus = {.table = c7_sustain_vals, .index = 0, .period = 21};
+  90:wav_tables.c  **** //
+  91:wav_tables.c  **** //
+  92:wav_tables.c  **** //uint8 a6_sustain_vals[25] = {128, 159, 189, 215, 235, 249, 255, 253, 243, 226, 203, 175, 144, 112
+  93:wav_tables.c  **** //WAV_TABLE a6_sus = {.table = a6_sustain_vals, .index = 0, .period = 25};
+  94:wav_tables.c  **** //
+  95:wav_tables.c  **** //uint8 b5_sustain_vals[44] = {128, 145, 163, 180, 196, 210, 223, 234, 243, 249, 253, 255, 254, 251
+  96:wav_tables.c  **** //WAV_TABLE b5_sus = {.table = b5_sustain_vals, .index = 0, .period = 44};
+  97:wav_tables.c  **** 
+  98:wav_tables.c  **** uint8 c4_sustain_vals[169] = {128, 255, 241, 190, 174, 180, 187, 182, 178, 171, 160, 151, 148, 152,
+  99:wav_tables.c  **** WAV_TABLE c4_sus = {.table = c4_sustain_vals, .index = 0, .period = 169};
+ 100:wav_tables.c  **** 
+ 101:wav_tables.c  **** uint8 d4_sustain_vals[150] = {128, 255, 252, 220, 227, 233, 214, 195, 183, 180, 182, 177, 167, 166,
+ 102:wav_tables.c  **** WAV_TABLE d4_sus = {.table = d4_sustain_vals, .index = 0, .period = 150};
+ 103:wav_tables.c  **** 
+ 104:wav_tables.c  **** uint8 e4_sustain_vals[134] = {128, 255, 237, 215, 229, 218, 196, 182, 178, 179, 173, 163, 167, 169,
+ 105:wav_tables.c  **** WAV_TABLE e4_sus = {.table = e4_sustain_vals, .index = 0, .period = 134};
+ 106:wav_tables.c  **** 
+ 107:wav_tables.c  **** uint8 g4_sustain_vals[112] = {128, 205, 249, 255, 241, 229, 225, 227, 227, 218, 202, 185, 174, 170,
+ 108:wav_tables.c  **** WAV_TABLE g4_sus = {.table = g4_sustain_vals, .index = 0, .period = 112};
+ 109:wav_tables.c  **** 
+ 110:wav_tables.c  **** uint8 b4_sustain_vals[89] = {128, 255, 252, 215, 205, 196, 174, 172, 191, 207, 217, 228, 227, 206, 
+ 111:wav_tables.c  **** WAV_TABLE b4_sus = {.table = b4_sustain_vals, .index = 0, .period = 89};
+ 112:wav_tables.c  **** 
+ 113:wav_tables.c  **** uint8 c5_sustain_vals[84] = {128, 255, 244, 209, 202, 189, 169, 178, 198, 211, 221, 228, 211, 186, 
+ 114:wav_tables.c  **** WAV_TABLE c5_sus = {.table = c5_sustain_vals, .index = 0, .period = 84};
+ 115:wav_tables.c  **** 
+ 116:wav_tables.c  **** uint8 d5_sustain_vals[75] = {128, 255, 215, 188, 194, 189, 189, 199, 209, 225, 229, 220, 200, 178, 
+ 117:wav_tables.c  **** 
+ 118:wav_tables.c  **** uint8 e5_sustain_vals[67] = {128, 255, 201, 190, 191, 186, 195, 206, 223, 227, 215, 190, 177, 195, 
+ 119:wav_tables.c  **** WAV_TABLE e5_sus = {.table = e5_sustain_vals, .index = 0, .period = 67};
+ 120:wav_tables.c  **** 
+ 121:wav_tables.c  **** uint8 f5_sustain_vals[63] = {128, 255, 196, 191, 189, 188, 199, 213, 228, 222, 202, 177, 190, 198, 
+ 122:wav_tables.c  **** WAV_TABLE f5_sus = {.table = f5_sustain_vals, .index = 0, .period = 63};
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccG75yKH.s 			page 31
+
+
+ 123:wav_tables.c  **** 
+ 124:wav_tables.c  **** uint8 g5_sustain_vals[56] = {128, 255, 190, 195, 188, 196, 210, 230, 225, 201, 178, 198, 198, 204, 
+ 125:wav_tables.c  **** WAV_TABLE g5_sus = {.table = g5_sustain_vals, .index = 0, .period = 56};
+ 126:wav_tables.c  **** 
+ 127:wav_tables.c  **** uint8 a5_sustain_vals[50] = {128, 255, 193, 197, 194, 209, 232, 233, 206, 182, 205, 204, 203, 191, 
+ 128:wav_tables.c  **** WAV_TABLE a5_sus = {.table = a5_sustain_vals, .index = 0, .period = 50};
+ 129:wav_tables.c  **** 
+ 130:wav_tables.c  **** uint8 c6_sustain_vals[42] = {128, 255, 181, 184, 193, 192, 199, 173, 186, 194, 160, 164, 165, 172, 
+ 131:wav_tables.c  **** WAV_TABLE c6_sus = {.table = c6_sustain_vals, .index = 0, .period = 42};
+ 132:wav_tables.c  **** 
+ 133:wav_tables.c  **** uint8 b5_sustain_vals[45] = {128, 255, 249, 205, 159, 139, 144, 168, 193, 211, 200, 172, 166, 175, 
+ 134:wav_tables.c  **** WAV_TABLE b5_sus = {.table = b5_sustain_vals, .index = 0, .period = 45};
+ 135:wav_tables.c  **** 
+ 136:wav_tables.c  **** uint8 e6_sustain_vals[33] = {128, 241, 232, 225, 237, 253, 255, 245, 243, 251, 253, 250, 245, 220, 
+ 137:wav_tables.c  **** WAV_TABLE e6_sus = {.table = e6_sustain_vals, .index = 0, .period = 33};
+ 138:wav_tables.c  **** 
+ 139:wav_tables.c  **** uint8 d6_sustain_vals[38] = {128, 234, 236, 223, 230, 243, 255, 251, 243, 242, 249, 252, 249, 247, 
+ 140:wav_tables.c  **** WAV_TABLE d6_sus = {.table = d6_sustain_vals, .index = 0, .period = 38};
+ 141:wav_tables.c  **** 
+ 142:wav_tables.c  **** uint8 g6_sustain_vals[28] = {128, 255, 230, 253, 249, 236, 245, 240, 241, 250, 234, 224, 216, 165, 
+ 143:wav_tables.c  **** WAV_TABLE g6_sus = {.table = g6_sustain_vals, .index = 0, .period = 28};
+ 144:wav_tables.c  **** 
+ 145:wav_tables.c  **** uint8 f6_sustain_vals[32] = {128, 255, 238, 235, 236, 211, 204, 214, 197, 196, 203, 211, 218, 225, 
+ 146:wav_tables.c  **** WAV_TABLE f6_sus = {.table = f6_sustain_vals, .index = 0, .period = 32};
+ 147:wav_tables.c  **** 
+ 148:wav_tables.c  **** uint8 c7_sustain_vals[21] = {128, 255, 221, 211, 212, 186, 190, 206, 205, 184, 145, 114, 83, 59, 56
+ 149:wav_tables.c  **** WAV_TABLE c7_sus = {.table = c7_sustain_vals, .index = 0, .period = 21};
+ 150:wav_tables.c  **** 
+ 151:wav_tables.c  **** uint8 a6_sustain_vals[25] = {128, 248, 255, 244, 228, 227, 238, 233, 229, 223, 204, 180, 147, 112, 
+ 152:wav_tables.c  **** WAV_TABLE a6_sus = {.table = a6_sustain_vals, .index = 0, .period = 25};
+ 153:wav_tables.c  **** 
+ 154:wav_tables.c  **** uint8 get_wav_val_and_inc(WAV_TABLE* wav_table) {
+ 1589              		.loc 1 154 0
+ 1590              		.cfi_startproc
+ 1591              		@ args = 0, pretend = 0, frame = 16
+ 1592              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1593              		@ link register save eliminated.
+ 1594 0000 80B4     		push	{r7}
+ 1595              		.cfi_def_cfa_offset 4
+ 1596              		.cfi_offset 7, -4
+ 1597 0002 85B0     		sub	sp, sp, #20
+ 1598              		.cfi_def_cfa_offset 24
+ 1599 0004 00AF     		add	r7, sp, #0
+ 1600              		.cfi_def_cfa_register 7
+ 1601 0006 7860     		str	r0, [r7, #4]
+ 155:wav_tables.c  ****     uint8 value = wav_table->table[wav_table->index];
+ 1602              		.loc 1 155 0
+ 1603 0008 7B68     		ldr	r3, [r7, #4]
+ 1604 000a 1B68     		ldr	r3, [r3]
+ 1605 000c 7A68     		ldr	r2, [r7, #4]
+ 1606 000e 9288     		ldrh	r2, [r2, #4]
+ 1607 0010 1344     		add	r3, r3, r2
+ 1608 0012 1B78     		ldrb	r3, [r3]
+ 1609 0014 FB73     		strb	r3, [r7, #15]
+ 156:wav_tables.c  ****     wav_table->index += 2;
+ 1610              		.loc 1 156 0
+ 1611 0016 7B68     		ldr	r3, [r7, #4]
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccG75yKH.s 			page 32
+
+
+ 1612 0018 9B88     		ldrh	r3, [r3, #4]
+ 1613 001a 0233     		adds	r3, r3, #2
+ 1614 001c 9AB2     		uxth	r2, r3
+ 1615 001e 7B68     		ldr	r3, [r7, #4]
+ 1616 0020 9A80     		strh	r2, [r3, #4]	@ movhi
+ 157:wav_tables.c  ****     wav_table->index = wav_table->index % wav_table->period;
+ 1617              		.loc 1 157 0
+ 1618 0022 7B68     		ldr	r3, [r7, #4]
+ 1619 0024 9B88     		ldrh	r3, [r3, #4]
+ 1620 0026 7A68     		ldr	r2, [r7, #4]
+ 1621 0028 D288     		ldrh	r2, [r2, #6]
+ 1622 002a B3FBF2F1 		udiv	r1, r3, r2
+ 1623 002e 02FB01F2 		mul	r2, r2, r1
+ 1624 0032 9B1A     		subs	r3, r3, r2
+ 1625 0034 9AB2     		uxth	r2, r3
+ 1626 0036 7B68     		ldr	r3, [r7, #4]
+ 1627 0038 9A80     		strh	r2, [r3, #4]	@ movhi
+ 158:wav_tables.c  ****     return value;
+ 1628              		.loc 1 158 0
+ 1629 003a FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+ 159:wav_tables.c  **** }
+ 1630              		.loc 1 159 0
+ 1631 003c 1846     		mov	r0, r3
+ 1632 003e 1437     		adds	r7, r7, #20
+ 1633              		.cfi_def_cfa_offset 4
+ 1634 0040 BD46     		mov	sp, r7
+ 1635              		.cfi_def_cfa_register 13
+ 1636              		@ sp needed
+ 1637 0042 80BC     		pop	{r7}
+ 1638              		.cfi_restore 7
+ 1639              		.cfi_def_cfa_offset 0
+ 1640 0044 7047     		bx	lr
+ 1641              		.cfi_endproc
+ 1642              	.LFE0:
+ 1643              		.size	get_wav_val_and_inc, .-get_wav_val_and_inc
+ 1644 0046 00BF     		.section	.text.reset_wav_tables_counter,"ax",%progbits
+ 1645              		.align	2
+ 1646              		.global	reset_wav_tables_counter
+ 1647              		.thumb
+ 1648              		.thumb_func
+ 1649              		.type	reset_wav_tables_counter, %function
+ 1650              	reset_wav_tables_counter:
+ 1651              	.LFB1:
+ 160:wav_tables.c  **** 
+ 161:wav_tables.c  **** void reset_wav_tables_counter(void) {
+ 1652              		.loc 1 161 0
+ 1653              		.cfi_startproc
+ 1654              		@ args = 0, pretend = 0, frame = 0
+ 1655              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1656              		@ link register save eliminated.
+ 1657 0000 80B4     		push	{r7}
+ 1658              		.cfi_def_cfa_offset 4
+ 1659              		.cfi_offset 7, -4
+ 1660 0002 00AF     		add	r7, sp, #0
+ 1661              		.cfi_def_cfa_register 7
+ 162:wav_tables.c  ****     c4_sus.index = 0;
+ 1662              		.loc 1 162 0
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccG75yKH.s 			page 33
+
+
+ 1663 0004 094B     		ldr	r3, .L4
+ 1664 0006 0022     		movs	r2, #0
+ 1665 0008 9A80     		strh	r2, [r3, #4]	@ movhi
+ 163:wav_tables.c  ****     d4_sus.index = 0;
+ 1666              		.loc 1 163 0
+ 1667 000a 094B     		ldr	r3, .L4+4
+ 1668 000c 0022     		movs	r2, #0
+ 1669 000e 9A80     		strh	r2, [r3, #4]	@ movhi
+ 164:wav_tables.c  ****     e4_sus.index = 0;
+ 1670              		.loc 1 164 0
+ 1671 0010 084B     		ldr	r3, .L4+8
+ 1672 0012 0022     		movs	r2, #0
+ 1673 0014 9A80     		strh	r2, [r3, #4]	@ movhi
+ 165:wav_tables.c  ****     g4_sus.index = 0;
+ 1674              		.loc 1 165 0
+ 1675 0016 084B     		ldr	r3, .L4+12
+ 1676 0018 0022     		movs	r2, #0
+ 1677 001a 9A80     		strh	r2, [r3, #4]	@ movhi
+ 166:wav_tables.c  ****     g5_sus.index = 0;
+ 1678              		.loc 1 166 0
+ 1679 001c 074B     		ldr	r3, .L4+16
+ 1680 001e 0022     		movs	r2, #0
+ 1681 0020 9A80     		strh	r2, [r3, #4]	@ movhi
+ 167:wav_tables.c  **** }
+ 1682              		.loc 1 167 0
+ 1683 0022 00BF     		nop
+ 1684 0024 BD46     		mov	sp, r7
+ 1685              		.cfi_def_cfa_register 13
+ 1686              		@ sp needed
+ 1687 0026 80BC     		pop	{r7}
+ 1688              		.cfi_restore 7
+ 1689              		.cfi_def_cfa_offset 0
+ 1690 0028 7047     		bx	lr
+ 1691              	.L5:
+ 1692 002a 00BF     		.align	2
+ 1693              	.L4:
+ 1694 002c 00000000 		.word	c4_sus
+ 1695 0030 00000000 		.word	d4_sus
+ 1696 0034 00000000 		.word	e4_sus
+ 1697 0038 00000000 		.word	g4_sus
+ 1698 003c 00000000 		.word	g5_sus
+ 1699              		.cfi_endproc
+ 1700              	.LFE1:
+ 1701              		.size	reset_wav_tables_counter, .-reset_wav_tables_counter
+ 1702              		.text
+ 1703              	.Letext0:
+ 1704              		.file 2 "Generated_Source\\PSoC5/cytypes.h"
+ 1705              		.file 3 "wav_tables.h"
+ 1706              		.section	.debug_info,"",%progbits
+ 1707              	.Ldebug_info0:
+ 1708 0000 DD040000 		.4byte	0x4dd
+ 1709 0004 0400     		.2byte	0x4
+ 1710 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 1711 000a 04       		.byte	0x4
+ 1712 000b 01       		.uleb128 0x1
+ 1713 000c 6C000000 		.4byte	.LASF57
+ 1714 0010 0C       		.byte	0xc
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccG75yKH.s 			page 34
+
+
+ 1715 0011 27000000 		.4byte	.LASF58
+ 1716 0015 94020000 		.4byte	.LASF59
+ 1717 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 1718 001d 00000000 		.4byte	0
+ 1719 0021 00000000 		.4byte	.Ldebug_line0
+ 1720 0025 02       		.uleb128 0x2
+ 1721 0026 01       		.byte	0x1
+ 1722 0027 06       		.byte	0x6
+ 1723 0028 C9010000 		.4byte	.LASF0
+ 1724 002c 02       		.uleb128 0x2
+ 1725 002d 01       		.byte	0x1
+ 1726 002e 08       		.byte	0x8
+ 1727 002f 97010000 		.4byte	.LASF1
+ 1728 0033 02       		.uleb128 0x2
+ 1729 0034 02       		.byte	0x2
+ 1730 0035 05       		.byte	0x5
+ 1731 0036 42000000 		.4byte	.LASF2
+ 1732 003a 02       		.uleb128 0x2
+ 1733 003b 02       		.byte	0x2
+ 1734 003c 07       		.byte	0x7
+ 1735 003d 37020000 		.4byte	.LASF3
+ 1736 0041 02       		.uleb128 0x2
+ 1737 0042 04       		.byte	0x4
+ 1738 0043 05       		.byte	0x5
+ 1739 0044 62010000 		.4byte	.LASF4
+ 1740 0048 02       		.uleb128 0x2
+ 1741 0049 04       		.byte	0x4
+ 1742 004a 07       		.byte	0x7
+ 1743 004b 1A030000 		.4byte	.LASF5
+ 1744 004f 02       		.uleb128 0x2
+ 1745 0050 08       		.byte	0x8
+ 1746 0051 05       		.byte	0x5
+ 1747 0052 4D010000 		.4byte	.LASF6
+ 1748 0056 02       		.uleb128 0x2
+ 1749 0057 08       		.byte	0x8
+ 1750 0058 07       		.byte	0x7
+ 1751 0059 E5010000 		.4byte	.LASF7
+ 1752 005d 03       		.uleb128 0x3
+ 1753 005e 04       		.byte	0x4
+ 1754 005f 05       		.byte	0x5
+ 1755 0060 696E7400 		.ascii	"int\000"
+ 1756 0064 02       		.uleb128 0x2
+ 1757 0065 04       		.byte	0x4
+ 1758 0066 07       		.byte	0x7
+ 1759 0067 FC010000 		.4byte	.LASF8
+ 1760 006b 04       		.uleb128 0x4
+ 1761 006c 3B010000 		.4byte	.LASF9
+ 1762 0070 02       		.byte	0x2
+ 1763 0071 9201     		.2byte	0x192
+ 1764 0073 2C000000 		.4byte	0x2c
+ 1765 0077 04       		.uleb128 0x4
+ 1766 0078 20010000 		.4byte	.LASF10
+ 1767 007c 02       		.byte	0x2
+ 1768 007d 9301     		.2byte	0x193
+ 1769 007f 3A000000 		.4byte	0x3a
+ 1770 0083 02       		.uleb128 0x2
+ 1771 0084 04       		.byte	0x4
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccG75yKH.s 			page 35
+
+
+ 1772 0085 04       		.byte	0x4
+ 1773 0086 47010000 		.4byte	.LASF11
+ 1774 008a 02       		.uleb128 0x2
+ 1775 008b 08       		.byte	0x8
+ 1776 008c 04       		.byte	0x4
+ 1777 008d 2C030000 		.4byte	.LASF12
+ 1778 0091 02       		.uleb128 0x2
+ 1779 0092 01       		.byte	0x1
+ 1780 0093 08       		.byte	0x8
+ 1781 0094 6A020000 		.4byte	.LASF13
+ 1782 0098 05       		.uleb128 0x5
+ 1783 0099 08       		.byte	0x8
+ 1784 009a 03       		.byte	0x3
+ 1785 009b 13       		.byte	0x13
+ 1786 009c C5000000 		.4byte	0xc5
+ 1787 00a0 06       		.uleb128 0x6
+ 1788 00a1 41010000 		.4byte	.LASF14
+ 1789 00a5 03       		.byte	0x3
+ 1790 00a6 14       		.byte	0x14
+ 1791 00a7 C5000000 		.4byte	0xc5
+ 1792 00ab 00       		.byte	0
+ 1793 00ac 06       		.uleb128 0x6
+ 1794 00ad 2E010000 		.4byte	.LASF15
+ 1795 00b1 03       		.byte	0x3
+ 1796 00b2 15       		.byte	0x15
+ 1797 00b3 77000000 		.4byte	0x77
+ 1798 00b7 04       		.byte	0x4
+ 1799 00b8 06       		.uleb128 0x6
+ 1800 00b9 72010000 		.4byte	.LASF16
+ 1801 00bd 03       		.byte	0x3
+ 1802 00be 16       		.byte	0x16
+ 1803 00bf 77000000 		.4byte	0x77
+ 1804 00c3 06       		.byte	0x6
+ 1805 00c4 00       		.byte	0
+ 1806 00c5 07       		.uleb128 0x7
+ 1807 00c6 04       		.byte	0x4
+ 1808 00c7 6B000000 		.4byte	0x6b
+ 1809 00cb 08       		.uleb128 0x8
+ 1810 00cc 5D030000 		.4byte	.LASF17
+ 1811 00d0 03       		.byte	0x3
+ 1812 00d1 17       		.byte	0x17
+ 1813 00d2 98000000 		.4byte	0x98
+ 1814 00d6 09       		.uleb128 0x9
+ 1815 00d7 B5010000 		.4byte	.LASF60
+ 1816 00db 01       		.byte	0x1
+ 1817 00dc 9A       		.byte	0x9a
+ 1818 00dd 6B000000 		.4byte	0x6b
+ 1819 00e1 00000000 		.4byte	.LFB0
+ 1820 00e5 46000000 		.4byte	.LFE0-.LFB0
+ 1821 00e9 01       		.uleb128 0x1
+ 1822 00ea 9C       		.byte	0x9c
+ 1823 00eb 0C010000 		.4byte	0x10c
+ 1824 00ef 0A       		.uleb128 0xa
+ 1825 00f0 53030000 		.4byte	.LASF61
+ 1826 00f4 01       		.byte	0x1
+ 1827 00f5 9A       		.byte	0x9a
+ 1828 00f6 0C010000 		.4byte	0x10c
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccG75yKH.s 			page 36
+
+
+ 1829 00fa 02       		.uleb128 0x2
+ 1830 00fb 91       		.byte	0x91
+ 1831 00fc 6C       		.sleb128 -20
+ 1832 00fd 0B       		.uleb128 0xb
+ 1833 00fe 1A010000 		.4byte	.LASF62
+ 1834 0102 01       		.byte	0x1
+ 1835 0103 9B       		.byte	0x9b
+ 1836 0104 6B000000 		.4byte	0x6b
+ 1837 0108 02       		.uleb128 0x2
+ 1838 0109 91       		.byte	0x91
+ 1839 010a 77       		.sleb128 -9
+ 1840 010b 00       		.byte	0
+ 1841 010c 07       		.uleb128 0x7
+ 1842 010d 04       		.byte	0x4
+ 1843 010e CB000000 		.4byte	0xcb
+ 1844 0112 0C       		.uleb128 0xc
+ 1845 0113 1E020000 		.4byte	.LASF63
+ 1846 0117 01       		.byte	0x1
+ 1847 0118 A1       		.byte	0xa1
+ 1848 0119 00000000 		.4byte	.LFB1
+ 1849 011d 40000000 		.4byte	.LFE1-.LFB1
+ 1850 0121 01       		.uleb128 0x1
+ 1851 0122 9C       		.byte	0x9c
+ 1852 0123 0D       		.uleb128 0xd
+ 1853 0124 6B010000 		.4byte	.LASF18
+ 1854 0128 01       		.byte	0x1
+ 1855 0129 63       		.byte	0x63
+ 1856 012a CB000000 		.4byte	0xcb
+ 1857 012e 05       		.uleb128 0x5
+ 1858 012f 03       		.byte	0x3
+ 1859 0130 00000000 		.4byte	c4_sus
+ 1860 0134 0D       		.uleb128 0xd
+ 1861 0135 8E030000 		.4byte	.LASF19
+ 1862 0139 01       		.byte	0x1
+ 1863 013a 66       		.byte	0x66
+ 1864 013b CB000000 		.4byte	0xcb
+ 1865 013f 05       		.uleb128 0x5
+ 1866 0140 03       		.byte	0x3
+ 1867 0141 00000000 		.4byte	d4_sus
+ 1868 0145 0D       		.uleb128 0xd
+ 1869 0146 17020000 		.4byte	.LASF20
+ 1870 014a 01       		.byte	0x1
+ 1871 014b 69       		.byte	0x69
+ 1872 014c CB000000 		.4byte	0xcb
+ 1873 0150 05       		.uleb128 0x5
+ 1874 0151 03       		.byte	0x3
+ 1875 0152 00000000 		.4byte	e4_sus
+ 1876 0156 0D       		.uleb128 0xd
+ 1877 0157 77030000 		.4byte	.LASF21
+ 1878 015b 01       		.byte	0x1
+ 1879 015c 6C       		.byte	0x6c
+ 1880 015d CB000000 		.4byte	0xcb
+ 1881 0161 05       		.uleb128 0x5
+ 1882 0162 03       		.byte	0x3
+ 1883 0163 00000000 		.4byte	g4_sus
+ 1884 0167 0D       		.uleb128 0xd
+ 1885 0168 5B010000 		.4byte	.LASF22
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccG75yKH.s 			page 37
+
+
+ 1886 016c 01       		.byte	0x1
+ 1887 016d 7D       		.byte	0x7d
+ 1888 016e CB000000 		.4byte	0xcb
+ 1889 0172 05       		.uleb128 0x5
+ 1890 0173 03       		.byte	0x3
+ 1891 0174 00000000 		.4byte	g5_sus
+ 1892 0178 0D       		.uleb128 0xd
+ 1893 0179 86020000 		.4byte	.LASF23
+ 1894 017d 01       		.byte	0x1
+ 1895 017e 6F       		.byte	0x6f
+ 1896 017f CB000000 		.4byte	0xcb
+ 1897 0183 05       		.uleb128 0x5
+ 1898 0184 03       		.byte	0x3
+ 1899 0185 00000000 		.4byte	b4_sus
+ 1900 0189 0D       		.uleb128 0xd
+ 1901 018a 34010000 		.4byte	.LASF24
+ 1902 018e 01       		.byte	0x1
+ 1903 018f 86       		.byte	0x86
+ 1904 0190 CB000000 		.4byte	0xcb
+ 1905 0194 05       		.uleb128 0x5
+ 1906 0195 03       		.byte	0x3
+ 1907 0196 00000000 		.4byte	b5_sus
+ 1908 019a 0D       		.uleb128 0xd
+ 1909 019b 03030000 		.4byte	.LASF25
+ 1910 019f 01       		.byte	0x1
+ 1911 01a0 72       		.byte	0x72
+ 1912 01a1 CB000000 		.4byte	0xcb
+ 1913 01a5 05       		.uleb128 0x5
+ 1914 01a6 03       		.byte	0x3
+ 1915 01a7 00000000 		.4byte	c5_sus
+ 1916 01ab 0D       		.uleb128 0xd
+ 1917 01ac 27010000 		.4byte	.LASF26
+ 1918 01b0 01       		.byte	0x1
+ 1919 01b1 74       		.byte	0x74
+ 1920 01b2 CB000000 		.4byte	0xcb
+ 1921 01b6 05       		.uleb128 0x5
+ 1922 01b7 03       		.byte	0x3
+ 1923 01b8 00000000 		.4byte	d5_sus
+ 1924 01bc 0D       		.uleb128 0xd
+ 1925 01bd 8D020000 		.4byte	.LASF27
+ 1926 01c1 01       		.byte	0x1
+ 1927 01c2 77       		.byte	0x77
+ 1928 01c3 CB000000 		.4byte	0xcb
+ 1929 01c7 05       		.uleb128 0x5
+ 1930 01c8 03       		.byte	0x3
+ 1931 01c9 00000000 		.4byte	e5_sus
+ 1932 01cd 0D       		.uleb128 0xd
+ 1933 01ce 7F020000 		.4byte	.LASF28
+ 1934 01d2 01       		.byte	0x1
+ 1935 01d3 7A       		.byte	0x7a
+ 1936 01d4 CB000000 		.4byte	0xcb
+ 1937 01d8 05       		.uleb128 0x5
+ 1938 01d9 03       		.byte	0x3
+ 1939 01da 00000000 		.4byte	f5_sus
+ 1940 01de 0D       		.uleb128 0xd
+ 1941 01df 09020000 		.4byte	.LASF29
+ 1942 01e3 01       		.byte	0x1
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccG75yKH.s 			page 38
+
+
+ 1943 01e4 8F       		.byte	0x8f
+ 1944 01e5 CB000000 		.4byte	0xcb
+ 1945 01e9 05       		.uleb128 0x5
+ 1946 01ea 03       		.byte	0x3
+ 1947 01eb 00000000 		.4byte	g6_sus
+ 1948 01ef 0D       		.uleb128 0xd
+ 1949 01f0 10020000 		.4byte	.LASF30
+ 1950 01f4 01       		.byte	0x1
+ 1951 01f5 80       		.byte	0x80
+ 1952 01f6 CB000000 		.4byte	0xcb
+ 1953 01fa 05       		.uleb128 0x5
+ 1954 01fb 03       		.byte	0x3
+ 1955 01fc 00000000 		.4byte	a5_sus
+ 1956 0200 0D       		.uleb128 0xd
+ 1957 0201 3B000000 		.4byte	.LASF31
+ 1958 0205 01       		.byte	0x1
+ 1959 0206 83       		.byte	0x83
+ 1960 0207 CB000000 		.4byte	0xcb
+ 1961 020b 05       		.uleb128 0x5
+ 1962 020c 03       		.byte	0x3
+ 1963 020d 00000000 		.4byte	c6_sus
+ 1964 0211 0D       		.uleb128 0xd
+ 1965 0212 34000000 		.4byte	.LASF32
+ 1966 0216 01       		.byte	0x1
+ 1967 0217 89       		.byte	0x89
+ 1968 0218 CB000000 		.4byte	0xcb
+ 1969 021c 05       		.uleb128 0x5
+ 1970 021d 03       		.byte	0x3
+ 1971 021e 00000000 		.4byte	e6_sus
+ 1972 0222 0D       		.uleb128 0xd
+ 1973 0223 10000000 		.4byte	.LASF33
+ 1974 0227 01       		.byte	0x1
+ 1975 0228 8C       		.byte	0x8c
+ 1976 0229 CB000000 		.4byte	0xcb
+ 1977 022d 05       		.uleb128 0x5
+ 1978 022e 03       		.byte	0x3
+ 1979 022f 00000000 		.4byte	d6_sus
+ 1980 0233 0D       		.uleb128 0xd
+ 1981 0234 79010000 		.4byte	.LASF34
+ 1982 0238 01       		.byte	0x1
+ 1983 0239 92       		.byte	0x92
+ 1984 023a CB000000 		.4byte	0xcb
+ 1985 023e 05       		.uleb128 0x5
+ 1986 023f 03       		.byte	0x3
+ 1987 0240 00000000 		.4byte	f6_sus
+ 1988 0244 0D       		.uleb128 0xd
+ 1989 0245 80010000 		.4byte	.LASF35
+ 1990 0249 01       		.byte	0x1
+ 1991 024a 95       		.byte	0x95
+ 1992 024b CB000000 		.4byte	0xcb
+ 1993 024f 05       		.uleb128 0x5
+ 1994 0250 03       		.byte	0x3
+ 1995 0251 00000000 		.4byte	c7_sus
+ 1996 0255 0D       		.uleb128 0xd
+ 1997 0256 55000000 		.4byte	.LASF36
+ 1998 025a 01       		.byte	0x1
+ 1999 025b 98       		.byte	0x98
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccG75yKH.s 			page 39
+
+
+ 2000 025c CB000000 		.4byte	0xcb
+ 2001 0260 05       		.uleb128 0x5
+ 2002 0261 03       		.byte	0x3
+ 2003 0262 00000000 		.4byte	a6_sus
+ 2004 0266 0E       		.uleb128 0xe
+ 2005 0267 6B000000 		.4byte	0x6b
+ 2006 026b 76020000 		.4byte	0x276
+ 2007 026f 0F       		.uleb128 0xf
+ 2008 0270 76020000 		.4byte	0x276
+ 2009 0274 A8       		.byte	0xa8
+ 2010 0275 00       		.byte	0
+ 2011 0276 02       		.uleb128 0x2
+ 2012 0277 04       		.byte	0x4
+ 2013 0278 07       		.byte	0x7
+ 2014 0279 4C000000 		.4byte	.LASF37
+ 2015 027d 0D       		.uleb128 0xd
+ 2016 027e 33030000 		.4byte	.LASF38
+ 2017 0282 01       		.byte	0x1
+ 2018 0283 62       		.byte	0x62
+ 2019 0284 66020000 		.4byte	0x266
+ 2020 0288 05       		.uleb128 0x5
+ 2021 0289 03       		.byte	0x3
+ 2022 028a 00000000 		.4byte	c4_sustain_vals
+ 2023 028e 0E       		.uleb128 0xe
+ 2024 028f 6B000000 		.4byte	0x6b
+ 2025 0293 9E020000 		.4byte	0x29e
+ 2026 0297 0F       		.uleb128 0xf
+ 2027 0298 76020000 		.4byte	0x276
+ 2028 029c 95       		.byte	0x95
+ 2029 029d 00       		.byte	0
+ 2030 029e 0D       		.uleb128 0xd
+ 2031 029f 17000000 		.4byte	.LASF39
+ 2032 02a3 01       		.byte	0x1
+ 2033 02a4 65       		.byte	0x65
+ 2034 02a5 8E020000 		.4byte	0x28e
+ 2035 02a9 05       		.uleb128 0x5
+ 2036 02aa 03       		.byte	0x3
+ 2037 02ab 00000000 		.4byte	d4_sustain_vals
+ 2038 02af 0E       		.uleb128 0xe
+ 2039 02b0 6B000000 		.4byte	0x6b
+ 2040 02b4 BF020000 		.4byte	0x2bf
+ 2041 02b8 0F       		.uleb128 0xf
+ 2042 02b9 76020000 		.4byte	0x276
+ 2043 02bd 85       		.byte	0x85
+ 2044 02be 00       		.byte	0
+ 2045 02bf 0D       		.uleb128 0xd
+ 2046 02c0 43030000 		.4byte	.LASF40
+ 2047 02c4 01       		.byte	0x1
+ 2048 02c5 68       		.byte	0x68
+ 2049 02c6 AF020000 		.4byte	0x2af
+ 2050 02ca 05       		.uleb128 0x5
+ 2051 02cb 03       		.byte	0x3
+ 2052 02cc 00000000 		.4byte	e4_sustain_vals
+ 2053 02d0 0E       		.uleb128 0xe
+ 2054 02d1 6B000000 		.4byte	0x6b
+ 2055 02d5 E0020000 		.4byte	0x2e0
+ 2056 02d9 0F       		.uleb128 0xf
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccG75yKH.s 			page 40
+
+
+ 2057 02da 76020000 		.4byte	0x276
+ 2058 02de 6F       		.byte	0x6f
+ 2059 02df 00       		.byte	0
+ 2060 02e0 0D       		.uleb128 0xd
+ 2061 02e1 5C000000 		.4byte	.LASF41
+ 2062 02e5 01       		.byte	0x1
+ 2063 02e6 6B       		.byte	0x6b
+ 2064 02e7 D0020000 		.4byte	0x2d0
+ 2065 02eb 05       		.uleb128 0x5
+ 2066 02ec 03       		.byte	0x3
+ 2067 02ed 00000000 		.4byte	g4_sustain_vals
+ 2068 02f1 0E       		.uleb128 0xe
+ 2069 02f2 6B000000 		.4byte	0x6b
+ 2070 02f6 01030000 		.4byte	0x301
+ 2071 02fa 0F       		.uleb128 0xf
+ 2072 02fb 76020000 		.4byte	0x276
+ 2073 02ff 58       		.byte	0x58
+ 2074 0300 00       		.byte	0
+ 2075 0301 0D       		.uleb128 0xd
+ 2076 0302 D5010000 		.4byte	.LASF42
+ 2077 0306 01       		.byte	0x1
+ 2078 0307 6E       		.byte	0x6e
+ 2079 0308 F1020000 		.4byte	0x2f1
+ 2080 030c 05       		.uleb128 0x5
+ 2081 030d 03       		.byte	0x3
+ 2082 030e 00000000 		.4byte	b4_sustain_vals
+ 2083 0312 0E       		.uleb128 0xe
+ 2084 0313 6B000000 		.4byte	0x6b
+ 2085 0317 22030000 		.4byte	0x322
+ 2086 031b 0F       		.uleb128 0xf
+ 2087 031c 76020000 		.4byte	0x276
+ 2088 0320 53       		.byte	0x53
+ 2089 0321 00       		.byte	0
+ 2090 0322 0D       		.uleb128 0xd
+ 2091 0323 5A020000 		.4byte	.LASF43
+ 2092 0327 01       		.byte	0x1
+ 2093 0328 71       		.byte	0x71
+ 2094 0329 12030000 		.4byte	0x312
+ 2095 032d 05       		.uleb128 0x5
+ 2096 032e 03       		.byte	0x3
+ 2097 032f 00000000 		.4byte	c5_sustain_vals
+ 2098 0333 0E       		.uleb128 0xe
+ 2099 0334 6B000000 		.4byte	0x6b
+ 2100 0338 43030000 		.4byte	0x343
+ 2101 033c 0F       		.uleb128 0xf
+ 2102 033d 76020000 		.4byte	0x276
+ 2103 0341 4A       		.byte	0x4a
+ 2104 0342 00       		.byte	0
+ 2105 0343 0D       		.uleb128 0xd
+ 2106 0344 95030000 		.4byte	.LASF44
+ 2107 0348 01       		.byte	0x1
+ 2108 0349 74       		.byte	0x74
+ 2109 034a 33030000 		.4byte	0x333
+ 2110 034e 05       		.uleb128 0x5
+ 2111 034f 03       		.byte	0x3
+ 2112 0350 00000000 		.4byte	d5_sustain_vals
+ 2113 0354 0E       		.uleb128 0xe
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccG75yKH.s 			page 41
+
+
+ 2114 0355 6B000000 		.4byte	0x6b
+ 2115 0359 64030000 		.4byte	0x364
+ 2116 035d 0F       		.uleb128 0xf
+ 2117 035e 76020000 		.4byte	0x276
+ 2118 0362 42       		.byte	0x42
+ 2119 0363 00       		.byte	0
+ 2120 0364 0D       		.uleb128 0xd
+ 2121 0365 6F020000 		.4byte	.LASF45
+ 2122 0369 01       		.byte	0x1
+ 2123 036a 76       		.byte	0x76
+ 2124 036b 54030000 		.4byte	0x354
+ 2125 036f 05       		.uleb128 0x5
+ 2126 0370 03       		.byte	0x3
+ 2127 0371 00000000 		.4byte	e5_sustain_vals
+ 2128 0375 0E       		.uleb128 0xe
+ 2129 0376 6B000000 		.4byte	0x6b
+ 2130 037a 85030000 		.4byte	0x385
+ 2131 037e 0F       		.uleb128 0xf
+ 2132 037f 76020000 		.4byte	0x276
+ 2133 0383 3E       		.byte	0x3e
+ 2134 0384 00       		.byte	0
+ 2135 0385 0D       		.uleb128 0xd
+ 2136 0386 A5030000 		.4byte	.LASF46
+ 2137 038a 01       		.byte	0x1
+ 2138 038b 79       		.byte	0x79
+ 2139 038c 75030000 		.4byte	0x375
+ 2140 0390 05       		.uleb128 0x5
+ 2141 0391 03       		.byte	0x3
+ 2142 0392 00000000 		.4byte	f5_sustain_vals
+ 2143 0396 0E       		.uleb128 0xe
+ 2144 0397 6B000000 		.4byte	0x6b
+ 2145 039b A6030000 		.4byte	0x3a6
+ 2146 039f 0F       		.uleb128 0xf
+ 2147 03a0 76020000 		.4byte	0x276
+ 2148 03a4 37       		.byte	0x37
+ 2149 03a5 00       		.byte	0
+ 2150 03a6 0D       		.uleb128 0xd
+ 2151 03a7 FA000000 		.4byte	.LASF47
+ 2152 03ab 01       		.byte	0x1
+ 2153 03ac 7C       		.byte	0x7c
+ 2154 03ad 96030000 		.4byte	0x396
+ 2155 03b1 05       		.uleb128 0x5
+ 2156 03b2 03       		.byte	0x3
+ 2157 03b3 00000000 		.4byte	g5_sustain_vals
+ 2158 03b7 0E       		.uleb128 0xe
+ 2159 03b8 6B000000 		.4byte	0x6b
+ 2160 03bc C7030000 		.4byte	0x3c7
+ 2161 03c0 0F       		.uleb128 0xf
+ 2162 03c1 76020000 		.4byte	0x276
+ 2163 03c5 31       		.byte	0x31
+ 2164 03c6 00       		.byte	0
+ 2165 03c7 0D       		.uleb128 0xd
+ 2166 03c8 4A020000 		.4byte	.LASF48
+ 2167 03cc 01       		.byte	0x1
+ 2168 03cd 7F       		.byte	0x7f
+ 2169 03ce B7030000 		.4byte	0x3b7
+ 2170 03d2 05       		.uleb128 0x5
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccG75yKH.s 			page 42
+
+
+ 2171 03d3 03       		.byte	0x3
+ 2172 03d4 00000000 		.4byte	a5_sustain_vals
+ 2173 03d8 0E       		.uleb128 0xe
+ 2174 03d9 6B000000 		.4byte	0x6b
+ 2175 03dd E8030000 		.4byte	0x3e8
+ 2176 03e1 0F       		.uleb128 0xf
+ 2177 03e2 76020000 		.4byte	0x276
+ 2178 03e6 29       		.byte	0x29
+ 2179 03e7 00       		.byte	0
+ 2180 03e8 0D       		.uleb128 0xd
+ 2181 03e9 A5010000 		.4byte	.LASF49
+ 2182 03ed 01       		.byte	0x1
+ 2183 03ee 82       		.byte	0x82
+ 2184 03ef D8030000 		.4byte	0x3d8
+ 2185 03f3 05       		.uleb128 0x5
+ 2186 03f4 03       		.byte	0x3
+ 2187 03f5 00000000 		.4byte	c6_sustain_vals
+ 2188 03f9 0E       		.uleb128 0xe
+ 2189 03fa 6B000000 		.4byte	0x6b
+ 2190 03fe 09040000 		.4byte	0x409
+ 2191 0402 0F       		.uleb128 0xf
+ 2192 0403 76020000 		.4byte	0x276
+ 2193 0407 2C       		.byte	0x2c
+ 2194 0408 00       		.byte	0
+ 2195 0409 0D       		.uleb128 0xd
+ 2196 040a 7E030000 		.4byte	.LASF50
+ 2197 040e 01       		.byte	0x1
+ 2198 040f 85       		.byte	0x85
+ 2199 0410 F9030000 		.4byte	0x3f9
+ 2200 0414 05       		.uleb128 0x5
+ 2201 0415 03       		.byte	0x3
+ 2202 0416 00000000 		.4byte	b5_sustain_vals
+ 2203 041a 0E       		.uleb128 0xe
+ 2204 041b 6B000000 		.4byte	0x6b
+ 2205 041f 2A040000 		.4byte	0x42a
+ 2206 0423 0F       		.uleb128 0xf
+ 2207 0424 76020000 		.4byte	0x276
+ 2208 0428 20       		.byte	0x20
+ 2209 0429 00       		.byte	0
+ 2210 042a 0D       		.uleb128 0xd
+ 2211 042b B5030000 		.4byte	.LASF51
+ 2212 042f 01       		.byte	0x1
+ 2213 0430 88       		.byte	0x88
+ 2214 0431 1A040000 		.4byte	0x41a
+ 2215 0435 05       		.uleb128 0x5
+ 2216 0436 03       		.byte	0x3
+ 2217 0437 00000000 		.4byte	e6_sustain_vals
+ 2218 043b 0E       		.uleb128 0xe
+ 2219 043c 6B000000 		.4byte	0x6b
+ 2220 0440 4B040000 		.4byte	0x44b
+ 2221 0444 0F       		.uleb128 0xf
+ 2222 0445 76020000 		.4byte	0x276
+ 2223 0449 25       		.byte	0x25
+ 2224 044a 00       		.byte	0
+ 2225 044b 0D       		.uleb128 0xd
+ 2226 044c 0A030000 		.4byte	.LASF52
+ 2227 0450 01       		.byte	0x1
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccG75yKH.s 			page 43
+
+
+ 2228 0451 8B       		.byte	0x8b
+ 2229 0452 3B040000 		.4byte	0x43b
+ 2230 0456 05       		.uleb128 0x5
+ 2231 0457 03       		.byte	0x3
+ 2232 0458 00000000 		.4byte	d6_sustain_vals
+ 2233 045c 0E       		.uleb128 0xe
+ 2234 045d 6B000000 		.4byte	0x6b
+ 2235 0461 6C040000 		.4byte	0x46c
+ 2236 0465 0F       		.uleb128 0xf
+ 2237 0466 76020000 		.4byte	0x276
+ 2238 046a 1B       		.byte	0x1b
+ 2239 046b 00       		.byte	0
+ 2240 046c 0D       		.uleb128 0xd
+ 2241 046d 00000000 		.4byte	.LASF53
+ 2242 0471 01       		.byte	0x1
+ 2243 0472 8E       		.byte	0x8e
+ 2244 0473 5C040000 		.4byte	0x45c
+ 2245 0477 05       		.uleb128 0x5
+ 2246 0478 03       		.byte	0x3
+ 2247 0479 00000000 		.4byte	g6_sustain_vals
+ 2248 047d 0E       		.uleb128 0xe
+ 2249 047e 6B000000 		.4byte	0x6b
+ 2250 0482 8D040000 		.4byte	0x48d
+ 2251 0486 0F       		.uleb128 0xf
+ 2252 0487 76020000 		.4byte	0x276
+ 2253 048b 1F       		.byte	0x1f
+ 2254 048c 00       		.byte	0
+ 2255 048d 0D       		.uleb128 0xd
+ 2256 048e 0A010000 		.4byte	.LASF54
+ 2257 0492 01       		.byte	0x1
+ 2258 0493 91       		.byte	0x91
+ 2259 0494 7D040000 		.4byte	0x47d
+ 2260 0498 05       		.uleb128 0x5
+ 2261 0499 03       		.byte	0x3
+ 2262 049a 00000000 		.4byte	f6_sustain_vals
+ 2263 049e 0E       		.uleb128 0xe
+ 2264 049f 6B000000 		.4byte	0x6b
+ 2265 04a3 AE040000 		.4byte	0x4ae
+ 2266 04a7 0F       		.uleb128 0xf
+ 2267 04a8 76020000 		.4byte	0x276
+ 2268 04ac 14       		.byte	0x14
+ 2269 04ad 00       		.byte	0
+ 2270 04ae 0D       		.uleb128 0xd
+ 2271 04af 67030000 		.4byte	.LASF55
+ 2272 04b3 01       		.byte	0x1
+ 2273 04b4 94       		.byte	0x94
+ 2274 04b5 9E040000 		.4byte	0x49e
+ 2275 04b9 05       		.uleb128 0x5
+ 2276 04ba 03       		.byte	0x3
+ 2277 04bb 00000000 		.4byte	c7_sustain_vals
+ 2278 04bf 0E       		.uleb128 0xe
+ 2279 04c0 6B000000 		.4byte	0x6b
+ 2280 04c4 CF040000 		.4byte	0x4cf
+ 2281 04c8 0F       		.uleb128 0xf
+ 2282 04c9 76020000 		.4byte	0x276
+ 2283 04cd 18       		.byte	0x18
+ 2284 04ce 00       		.byte	0
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccG75yKH.s 			page 44
+
+
+ 2285 04cf 0D       		.uleb128 0xd
+ 2286 04d0 87010000 		.4byte	.LASF56
+ 2287 04d4 01       		.byte	0x1
+ 2288 04d5 97       		.byte	0x97
+ 2289 04d6 BF040000 		.4byte	0x4bf
+ 2290 04da 05       		.uleb128 0x5
+ 2291 04db 03       		.byte	0x3
+ 2292 04dc 00000000 		.4byte	a6_sustain_vals
+ 2293 04e0 00       		.byte	0
+ 2294              		.section	.debug_abbrev,"",%progbits
+ 2295              	.Ldebug_abbrev0:
+ 2296 0000 01       		.uleb128 0x1
+ 2297 0001 11       		.uleb128 0x11
+ 2298 0002 01       		.byte	0x1
+ 2299 0003 25       		.uleb128 0x25
+ 2300 0004 0E       		.uleb128 0xe
+ 2301 0005 13       		.uleb128 0x13
+ 2302 0006 0B       		.uleb128 0xb
+ 2303 0007 03       		.uleb128 0x3
+ 2304 0008 0E       		.uleb128 0xe
+ 2305 0009 1B       		.uleb128 0x1b
+ 2306 000a 0E       		.uleb128 0xe
+ 2307 000b 55       		.uleb128 0x55
+ 2308 000c 17       		.uleb128 0x17
+ 2309 000d 11       		.uleb128 0x11
+ 2310 000e 01       		.uleb128 0x1
+ 2311 000f 10       		.uleb128 0x10
+ 2312 0010 17       		.uleb128 0x17
+ 2313 0011 00       		.byte	0
+ 2314 0012 00       		.byte	0
+ 2315 0013 02       		.uleb128 0x2
+ 2316 0014 24       		.uleb128 0x24
+ 2317 0015 00       		.byte	0
+ 2318 0016 0B       		.uleb128 0xb
+ 2319 0017 0B       		.uleb128 0xb
+ 2320 0018 3E       		.uleb128 0x3e
+ 2321 0019 0B       		.uleb128 0xb
+ 2322 001a 03       		.uleb128 0x3
+ 2323 001b 0E       		.uleb128 0xe
+ 2324 001c 00       		.byte	0
+ 2325 001d 00       		.byte	0
+ 2326 001e 03       		.uleb128 0x3
+ 2327 001f 24       		.uleb128 0x24
+ 2328 0020 00       		.byte	0
+ 2329 0021 0B       		.uleb128 0xb
+ 2330 0022 0B       		.uleb128 0xb
+ 2331 0023 3E       		.uleb128 0x3e
+ 2332 0024 0B       		.uleb128 0xb
+ 2333 0025 03       		.uleb128 0x3
+ 2334 0026 08       		.uleb128 0x8
+ 2335 0027 00       		.byte	0
+ 2336 0028 00       		.byte	0
+ 2337 0029 04       		.uleb128 0x4
+ 2338 002a 16       		.uleb128 0x16
+ 2339 002b 00       		.byte	0
+ 2340 002c 03       		.uleb128 0x3
+ 2341 002d 0E       		.uleb128 0xe
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccG75yKH.s 			page 45
+
+
+ 2342 002e 3A       		.uleb128 0x3a
+ 2343 002f 0B       		.uleb128 0xb
+ 2344 0030 3B       		.uleb128 0x3b
+ 2345 0031 05       		.uleb128 0x5
+ 2346 0032 49       		.uleb128 0x49
+ 2347 0033 13       		.uleb128 0x13
+ 2348 0034 00       		.byte	0
+ 2349 0035 00       		.byte	0
+ 2350 0036 05       		.uleb128 0x5
+ 2351 0037 13       		.uleb128 0x13
+ 2352 0038 01       		.byte	0x1
+ 2353 0039 0B       		.uleb128 0xb
+ 2354 003a 0B       		.uleb128 0xb
+ 2355 003b 3A       		.uleb128 0x3a
+ 2356 003c 0B       		.uleb128 0xb
+ 2357 003d 3B       		.uleb128 0x3b
+ 2358 003e 0B       		.uleb128 0xb
+ 2359 003f 01       		.uleb128 0x1
+ 2360 0040 13       		.uleb128 0x13
+ 2361 0041 00       		.byte	0
+ 2362 0042 00       		.byte	0
+ 2363 0043 06       		.uleb128 0x6
+ 2364 0044 0D       		.uleb128 0xd
+ 2365 0045 00       		.byte	0
+ 2366 0046 03       		.uleb128 0x3
+ 2367 0047 0E       		.uleb128 0xe
+ 2368 0048 3A       		.uleb128 0x3a
+ 2369 0049 0B       		.uleb128 0xb
+ 2370 004a 3B       		.uleb128 0x3b
+ 2371 004b 0B       		.uleb128 0xb
+ 2372 004c 49       		.uleb128 0x49
+ 2373 004d 13       		.uleb128 0x13
+ 2374 004e 38       		.uleb128 0x38
+ 2375 004f 0B       		.uleb128 0xb
+ 2376 0050 00       		.byte	0
+ 2377 0051 00       		.byte	0
+ 2378 0052 07       		.uleb128 0x7
+ 2379 0053 0F       		.uleb128 0xf
+ 2380 0054 00       		.byte	0
+ 2381 0055 0B       		.uleb128 0xb
+ 2382 0056 0B       		.uleb128 0xb
+ 2383 0057 49       		.uleb128 0x49
+ 2384 0058 13       		.uleb128 0x13
+ 2385 0059 00       		.byte	0
+ 2386 005a 00       		.byte	0
+ 2387 005b 08       		.uleb128 0x8
+ 2388 005c 16       		.uleb128 0x16
+ 2389 005d 00       		.byte	0
+ 2390 005e 03       		.uleb128 0x3
+ 2391 005f 0E       		.uleb128 0xe
+ 2392 0060 3A       		.uleb128 0x3a
+ 2393 0061 0B       		.uleb128 0xb
+ 2394 0062 3B       		.uleb128 0x3b
+ 2395 0063 0B       		.uleb128 0xb
+ 2396 0064 49       		.uleb128 0x49
+ 2397 0065 13       		.uleb128 0x13
+ 2398 0066 00       		.byte	0
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccG75yKH.s 			page 46
+
+
+ 2399 0067 00       		.byte	0
+ 2400 0068 09       		.uleb128 0x9
+ 2401 0069 2E       		.uleb128 0x2e
+ 2402 006a 01       		.byte	0x1
+ 2403 006b 3F       		.uleb128 0x3f
+ 2404 006c 19       		.uleb128 0x19
+ 2405 006d 03       		.uleb128 0x3
+ 2406 006e 0E       		.uleb128 0xe
+ 2407 006f 3A       		.uleb128 0x3a
+ 2408 0070 0B       		.uleb128 0xb
+ 2409 0071 3B       		.uleb128 0x3b
+ 2410 0072 0B       		.uleb128 0xb
+ 2411 0073 27       		.uleb128 0x27
+ 2412 0074 19       		.uleb128 0x19
+ 2413 0075 49       		.uleb128 0x49
+ 2414 0076 13       		.uleb128 0x13
+ 2415 0077 11       		.uleb128 0x11
+ 2416 0078 01       		.uleb128 0x1
+ 2417 0079 12       		.uleb128 0x12
+ 2418 007a 06       		.uleb128 0x6
+ 2419 007b 40       		.uleb128 0x40
+ 2420 007c 18       		.uleb128 0x18
+ 2421 007d 9742     		.uleb128 0x2117
+ 2422 007f 19       		.uleb128 0x19
+ 2423 0080 01       		.uleb128 0x1
+ 2424 0081 13       		.uleb128 0x13
+ 2425 0082 00       		.byte	0
+ 2426 0083 00       		.byte	0
+ 2427 0084 0A       		.uleb128 0xa
+ 2428 0085 05       		.uleb128 0x5
+ 2429 0086 00       		.byte	0
+ 2430 0087 03       		.uleb128 0x3
+ 2431 0088 0E       		.uleb128 0xe
+ 2432 0089 3A       		.uleb128 0x3a
+ 2433 008a 0B       		.uleb128 0xb
+ 2434 008b 3B       		.uleb128 0x3b
+ 2435 008c 0B       		.uleb128 0xb
+ 2436 008d 49       		.uleb128 0x49
+ 2437 008e 13       		.uleb128 0x13
+ 2438 008f 02       		.uleb128 0x2
+ 2439 0090 18       		.uleb128 0x18
+ 2440 0091 00       		.byte	0
+ 2441 0092 00       		.byte	0
+ 2442 0093 0B       		.uleb128 0xb
+ 2443 0094 34       		.uleb128 0x34
+ 2444 0095 00       		.byte	0
+ 2445 0096 03       		.uleb128 0x3
+ 2446 0097 0E       		.uleb128 0xe
+ 2447 0098 3A       		.uleb128 0x3a
+ 2448 0099 0B       		.uleb128 0xb
+ 2449 009a 3B       		.uleb128 0x3b
+ 2450 009b 0B       		.uleb128 0xb
+ 2451 009c 49       		.uleb128 0x49
+ 2452 009d 13       		.uleb128 0x13
+ 2453 009e 02       		.uleb128 0x2
+ 2454 009f 18       		.uleb128 0x18
+ 2455 00a0 00       		.byte	0
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccG75yKH.s 			page 47
+
+
+ 2456 00a1 00       		.byte	0
+ 2457 00a2 0C       		.uleb128 0xc
+ 2458 00a3 2E       		.uleb128 0x2e
+ 2459 00a4 00       		.byte	0
+ 2460 00a5 3F       		.uleb128 0x3f
+ 2461 00a6 19       		.uleb128 0x19
+ 2462 00a7 03       		.uleb128 0x3
+ 2463 00a8 0E       		.uleb128 0xe
+ 2464 00a9 3A       		.uleb128 0x3a
+ 2465 00aa 0B       		.uleb128 0xb
+ 2466 00ab 3B       		.uleb128 0x3b
+ 2467 00ac 0B       		.uleb128 0xb
+ 2468 00ad 27       		.uleb128 0x27
+ 2469 00ae 19       		.uleb128 0x19
+ 2470 00af 11       		.uleb128 0x11
+ 2471 00b0 01       		.uleb128 0x1
+ 2472 00b1 12       		.uleb128 0x12
+ 2473 00b2 06       		.uleb128 0x6
+ 2474 00b3 40       		.uleb128 0x40
+ 2475 00b4 18       		.uleb128 0x18
+ 2476 00b5 9742     		.uleb128 0x2117
+ 2477 00b7 19       		.uleb128 0x19
+ 2478 00b8 00       		.byte	0
+ 2479 00b9 00       		.byte	0
+ 2480 00ba 0D       		.uleb128 0xd
+ 2481 00bb 34       		.uleb128 0x34
+ 2482 00bc 00       		.byte	0
+ 2483 00bd 03       		.uleb128 0x3
+ 2484 00be 0E       		.uleb128 0xe
+ 2485 00bf 3A       		.uleb128 0x3a
+ 2486 00c0 0B       		.uleb128 0xb
+ 2487 00c1 3B       		.uleb128 0x3b
+ 2488 00c2 0B       		.uleb128 0xb
+ 2489 00c3 49       		.uleb128 0x49
+ 2490 00c4 13       		.uleb128 0x13
+ 2491 00c5 3F       		.uleb128 0x3f
+ 2492 00c6 19       		.uleb128 0x19
+ 2493 00c7 02       		.uleb128 0x2
+ 2494 00c8 18       		.uleb128 0x18
+ 2495 00c9 00       		.byte	0
+ 2496 00ca 00       		.byte	0
+ 2497 00cb 0E       		.uleb128 0xe
+ 2498 00cc 01       		.uleb128 0x1
+ 2499 00cd 01       		.byte	0x1
+ 2500 00ce 49       		.uleb128 0x49
+ 2501 00cf 13       		.uleb128 0x13
+ 2502 00d0 01       		.uleb128 0x1
+ 2503 00d1 13       		.uleb128 0x13
+ 2504 00d2 00       		.byte	0
+ 2505 00d3 00       		.byte	0
+ 2506 00d4 0F       		.uleb128 0xf
+ 2507 00d5 21       		.uleb128 0x21
+ 2508 00d6 00       		.byte	0
+ 2509 00d7 49       		.uleb128 0x49
+ 2510 00d8 13       		.uleb128 0x13
+ 2511 00d9 2F       		.uleb128 0x2f
+ 2512 00da 0B       		.uleb128 0xb
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccG75yKH.s 			page 48
+
+
+ 2513 00db 00       		.byte	0
+ 2514 00dc 00       		.byte	0
+ 2515 00dd 00       		.byte	0
+ 2516              		.section	.debug_aranges,"",%progbits
+ 2517 0000 24000000 		.4byte	0x24
+ 2518 0004 0200     		.2byte	0x2
+ 2519 0006 00000000 		.4byte	.Ldebug_info0
+ 2520 000a 04       		.byte	0x4
+ 2521 000b 00       		.byte	0
+ 2522 000c 0000     		.2byte	0
+ 2523 000e 0000     		.2byte	0
+ 2524 0010 00000000 		.4byte	.LFB0
+ 2525 0014 46000000 		.4byte	.LFE0-.LFB0
+ 2526 0018 00000000 		.4byte	.LFB1
+ 2527 001c 40000000 		.4byte	.LFE1-.LFB1
+ 2528 0020 00000000 		.4byte	0
+ 2529 0024 00000000 		.4byte	0
+ 2530              		.section	.debug_ranges,"",%progbits
+ 2531              	.Ldebug_ranges0:
+ 2532 0000 00000000 		.4byte	.LFB0
+ 2533 0004 46000000 		.4byte	.LFE0
+ 2534 0008 00000000 		.4byte	.LFB1
+ 2535 000c 40000000 		.4byte	.LFE1
+ 2536 0010 00000000 		.4byte	0
+ 2537 0014 00000000 		.4byte	0
+ 2538              		.section	.debug_line,"",%progbits
+ 2539              	.Ldebug_line0:
+ 2540 0000 88000000 		.section	.debug_str,"MS",%progbits,1
+ 2540      02005700 
+ 2540      00000201 
+ 2540      FB0E0D00 
+ 2540      01010101 
+ 2541              	.LASF53:
+ 2542 0000 67365F73 		.ascii	"g6_sustain_vals\000"
+ 2542      75737461 
+ 2542      696E5F76 
+ 2542      616C7300 
+ 2543              	.LASF33:
+ 2544 0010 64365F73 		.ascii	"d6_sus\000"
+ 2544      757300
+ 2545              	.LASF39:
+ 2546 0017 64345F73 		.ascii	"d4_sustain_vals\000"
+ 2546      75737461 
+ 2546      696E5F76 
+ 2546      616C7300 
+ 2547              	.LASF58:
+ 2548 0027 7761765F 		.ascii	"wav_tables.c\000"
+ 2548      7461626C 
+ 2548      65732E63 
+ 2548      00
+ 2549              	.LASF32:
+ 2550 0034 65365F73 		.ascii	"e6_sus\000"
+ 2550      757300
+ 2551              	.LASF31:
+ 2552 003b 63365F73 		.ascii	"c6_sus\000"
+ 2552      757300
+ 2553              	.LASF2:
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccG75yKH.s 			page 49
+
+
+ 2554 0042 73686F72 		.ascii	"short int\000"
+ 2554      7420696E 
+ 2554      7400
+ 2555              	.LASF37:
+ 2556 004c 73697A65 		.ascii	"sizetype\000"
+ 2556      74797065 
+ 2556      00
+ 2557              	.LASF36:
+ 2558 0055 61365F73 		.ascii	"a6_sus\000"
+ 2558      757300
+ 2559              	.LASF41:
+ 2560 005c 67345F73 		.ascii	"g4_sustain_vals\000"
+ 2560      75737461 
+ 2560      696E5F76 
+ 2560      616C7300 
+ 2561              	.LASF57:
+ 2562 006c 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 2562      43313120 
+ 2562      352E342E 
+ 2562      31203230 
+ 2562      31363036 
+ 2563 009f 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 2563      20726576 
+ 2563      6973696F 
+ 2563      6E203233 
+ 2563      37373135 
+ 2564 00d2 30202D66 		.ascii	"0 -ffunction-sections -ffat-lto-objects\000"
+ 2564      66756E63 
+ 2564      74696F6E 
+ 2564      2D736563 
+ 2564      74696F6E 
+ 2565              	.LASF47:
+ 2566 00fa 67355F73 		.ascii	"g5_sustain_vals\000"
+ 2566      75737461 
+ 2566      696E5F76 
+ 2566      616C7300 
+ 2567              	.LASF54:
+ 2568 010a 66365F73 		.ascii	"f6_sustain_vals\000"
+ 2568      75737461 
+ 2568      696E5F76 
+ 2568      616C7300 
+ 2569              	.LASF62:
+ 2570 011a 76616C75 		.ascii	"value\000"
+ 2570      6500
+ 2571              	.LASF10:
+ 2572 0120 75696E74 		.ascii	"uint16\000"
+ 2572      313600
+ 2573              	.LASF26:
+ 2574 0127 64355F73 		.ascii	"d5_sus\000"
+ 2574      757300
+ 2575              	.LASF15:
+ 2576 012e 696E6465 		.ascii	"index\000"
+ 2576      7800
+ 2577              	.LASF24:
+ 2578 0134 62355F73 		.ascii	"b5_sus\000"
+ 2578      757300
+ 2579              	.LASF9:
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccG75yKH.s 			page 50
+
+
+ 2580 013b 75696E74 		.ascii	"uint8\000"
+ 2580      3800
+ 2581              	.LASF14:
+ 2582 0141 7461626C 		.ascii	"table\000"
+ 2582      6500
+ 2583              	.LASF11:
+ 2584 0147 666C6F61 		.ascii	"float\000"
+ 2584      7400
+ 2585              	.LASF6:
+ 2586 014d 6C6F6E67 		.ascii	"long long int\000"
+ 2586      206C6F6E 
+ 2586      6720696E 
+ 2586      7400
+ 2587              	.LASF22:
+ 2588 015b 67355F73 		.ascii	"g5_sus\000"
+ 2588      757300
+ 2589              	.LASF4:
+ 2590 0162 6C6F6E67 		.ascii	"long int\000"
+ 2590      20696E74 
+ 2590      00
+ 2591              	.LASF18:
+ 2592 016b 63345F73 		.ascii	"c4_sus\000"
+ 2592      757300
+ 2593              	.LASF16:
+ 2594 0172 70657269 		.ascii	"period\000"
+ 2594      6F6400
+ 2595              	.LASF34:
+ 2596 0179 66365F73 		.ascii	"f6_sus\000"
+ 2596      757300
+ 2597              	.LASF35:
+ 2598 0180 63375F73 		.ascii	"c7_sus\000"
+ 2598      757300
+ 2599              	.LASF56:
+ 2600 0187 61365F73 		.ascii	"a6_sustain_vals\000"
+ 2600      75737461 
+ 2600      696E5F76 
+ 2600      616C7300 
+ 2601              	.LASF1:
+ 2602 0197 756E7369 		.ascii	"unsigned char\000"
+ 2602      676E6564 
+ 2602      20636861 
+ 2602      7200
+ 2603              	.LASF49:
+ 2604 01a5 63365F73 		.ascii	"c6_sustain_vals\000"
+ 2604      75737461 
+ 2604      696E5F76 
+ 2604      616C7300 
+ 2605              	.LASF60:
+ 2606 01b5 6765745F 		.ascii	"get_wav_val_and_inc\000"
+ 2606      7761765F 
+ 2606      76616C5F 
+ 2606      616E645F 
+ 2606      696E6300 
+ 2607              	.LASF0:
+ 2608 01c9 7369676E 		.ascii	"signed char\000"
+ 2608      65642063 
+ 2608      68617200 
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccG75yKH.s 			page 51
+
+
+ 2609              	.LASF42:
+ 2610 01d5 62345F73 		.ascii	"b4_sustain_vals\000"
+ 2610      75737461 
+ 2610      696E5F76 
+ 2610      616C7300 
+ 2611              	.LASF7:
+ 2612 01e5 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 2612      206C6F6E 
+ 2612      6720756E 
+ 2612      7369676E 
+ 2612      65642069 
+ 2613              	.LASF8:
+ 2614 01fc 756E7369 		.ascii	"unsigned int\000"
+ 2614      676E6564 
+ 2614      20696E74 
+ 2614      00
+ 2615              	.LASF29:
+ 2616 0209 67365F73 		.ascii	"g6_sus\000"
+ 2616      757300
+ 2617              	.LASF30:
+ 2618 0210 61355F73 		.ascii	"a5_sus\000"
+ 2618      757300
+ 2619              	.LASF20:
+ 2620 0217 65345F73 		.ascii	"e4_sus\000"
+ 2620      757300
+ 2621              	.LASF63:
+ 2622 021e 72657365 		.ascii	"reset_wav_tables_counter\000"
+ 2622      745F7761 
+ 2622      765F7461 
+ 2622      626C6573 
+ 2622      5F636F75 
+ 2623              	.LASF3:
+ 2624 0237 73686F72 		.ascii	"short unsigned int\000"
+ 2624      7420756E 
+ 2624      7369676E 
+ 2624      65642069 
+ 2624      6E7400
+ 2625              	.LASF48:
+ 2626 024a 61355F73 		.ascii	"a5_sustain_vals\000"
+ 2626      75737461 
+ 2626      696E5F76 
+ 2626      616C7300 
+ 2627              	.LASF43:
+ 2628 025a 63355F73 		.ascii	"c5_sustain_vals\000"
+ 2628      75737461 
+ 2628      696E5F76 
+ 2628      616C7300 
+ 2629              	.LASF13:
+ 2630 026a 63686172 		.ascii	"char\000"
+ 2630      00
+ 2631              	.LASF45:
+ 2632 026f 65355F73 		.ascii	"e5_sustain_vals\000"
+ 2632      75737461 
+ 2632      696E5F76 
+ 2632      616C7300 
+ 2633              	.LASF28:
+ 2634 027f 66355F73 		.ascii	"f5_sus\000"
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccG75yKH.s 			page 52
+
+
+ 2634      757300
+ 2635              	.LASF23:
+ 2636 0286 62345F73 		.ascii	"b4_sus\000"
+ 2636      757300
+ 2637              	.LASF27:
+ 2638 028d 65355F73 		.ascii	"e5_sus\000"
+ 2638      757300
+ 2639              	.LASF59:
+ 2640 0294 433A5C55 		.ascii	"C:\\Users\\Matthew\\Dropbox (MIT)\\Sophomore Spring"
+ 2640      73657273 
+ 2640      5C4D6174 
+ 2640      74686577 
+ 2640      5C44726F 
+ 2641 02c3 5C362E31 		.ascii	"\\6.115\\6.115-Labs\\project\\DVDAC_Example01\\DVDA"
+ 2641      31355C36 
+ 2641      2E313135 
+ 2641      2D4C6162 
+ 2641      735C7072 
+ 2642 02f1 435F4578 		.ascii	"C_Example01.cydsn\000"
+ 2642      616D706C 
+ 2642      6530312E 
+ 2642      63796473 
+ 2642      6E00
+ 2643              	.LASF25:
+ 2644 0303 63355F73 		.ascii	"c5_sus\000"
+ 2644      757300
+ 2645              	.LASF52:
+ 2646 030a 64365F73 		.ascii	"d6_sustain_vals\000"
+ 2646      75737461 
+ 2646      696E5F76 
+ 2646      616C7300 
+ 2647              	.LASF5:
+ 2648 031a 6C6F6E67 		.ascii	"long unsigned int\000"
+ 2648      20756E73 
+ 2648      69676E65 
+ 2648      6420696E 
+ 2648      7400
+ 2649              	.LASF12:
+ 2650 032c 646F7562 		.ascii	"double\000"
+ 2650      6C6500
+ 2651              	.LASF38:
+ 2652 0333 63345F73 		.ascii	"c4_sustain_vals\000"
+ 2652      75737461 
+ 2652      696E5F76 
+ 2652      616C7300 
+ 2653              	.LASF40:
+ 2654 0343 65345F73 		.ascii	"e4_sustain_vals\000"
+ 2654      75737461 
+ 2654      696E5F76 
+ 2654      616C7300 
+ 2655              	.LASF61:
+ 2656 0353 7761765F 		.ascii	"wav_table\000"
+ 2656      7461626C 
+ 2656      6500
+ 2657              	.LASF17:
+ 2658 035d 5741565F 		.ascii	"WAV_TABLE\000"
+ 2658      5441424C 
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccG75yKH.s 			page 53
+
+
+ 2658      4500
+ 2659              	.LASF55:
+ 2660 0367 63375F73 		.ascii	"c7_sustain_vals\000"
+ 2660      75737461 
+ 2660      696E5F76 
+ 2660      616C7300 
+ 2661              	.LASF21:
+ 2662 0377 67345F73 		.ascii	"g4_sus\000"
+ 2662      757300
+ 2663              	.LASF50:
+ 2664 037e 62355F73 		.ascii	"b5_sustain_vals\000"
+ 2664      75737461 
+ 2664      696E5F76 
+ 2664      616C7300 
+ 2665              	.LASF19:
+ 2666 038e 64345F73 		.ascii	"d4_sus\000"
+ 2666      757300
+ 2667              	.LASF44:
+ 2668 0395 64355F73 		.ascii	"d5_sustain_vals\000"
+ 2668      75737461 
+ 2668      696E5F76 
+ 2668      616C7300 
+ 2669              	.LASF46:
+ 2670 03a5 66355F73 		.ascii	"f5_sustain_vals\000"
+ 2670      75737461 
+ 2670      696E5F76 
+ 2670      616C7300 
+ 2671              	.LASF51:
+ 2672 03b5 65365F73 		.ascii	"e6_sustain_vals\000"
+ 2672      75737461 
+ 2672      696E5F76 
+ 2672      616C7300 
+ 2673              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

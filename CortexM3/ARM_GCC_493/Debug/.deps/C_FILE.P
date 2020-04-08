@@ -1,0 +1,6 @@
+C:/Users/student/Desktop/6.115/project/DVDAC_Example01/DVDAC_Example01.cydsn/CortexM3/ARM_GCC_493/Debug/wav_tables.o : C:/Users/student/Desktop/6.115/project/DVDAC_Example01/DVDAC_Example01.cydsn/wav_tables.c C:/Users/student/Desktop/6.115/project/DVDAC_Example01/DVDAC_Example01.cydsn/wav_tables.h 
+
+C:/Users/student/Desktop/6.115/project/DVDAC_Example01/DVDAC_Example01.cydsn/wav_tables.c : 
+
+C:/Users/student/Desktop/6.115/project/DVDAC_Example01/DVDAC_Example01.cydsn/wav_tables.h : 
+

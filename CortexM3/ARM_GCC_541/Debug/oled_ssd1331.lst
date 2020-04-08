@@ -1,0 +1,1870 @@
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccXVKO4t.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"oled_ssd1331.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.comm	screen_buffer,255,4
+  20              		.section	.text.send_cmd,"ax",%progbits
+  21              		.align	2
+  22              		.global	send_cmd
+  23              		.thumb
+  24              		.thumb_func
+  25              		.type	send_cmd, %function
+  26              	send_cmd:
+  27              	.LFB0:
+  28              		.file 1 "oled_ssd1331.c"
+   1:oled_ssd1331.c **** /* ========================================
+   2:oled_ssd1331.c ****  *
+   3:oled_ssd1331.c ****  * Copyright YOUR COMPANY, THE YEAR
+   4:oled_ssd1331.c ****  * All Rights Reserved
+   5:oled_ssd1331.c ****  * UNPUBLISHED, LICENSED SOFTWARE.
+   6:oled_ssd1331.c ****  *
+   7:oled_ssd1331.c ****  * CONFIDENTIAL AND PROPRIETARY INFORMATION
+   8:oled_ssd1331.c ****  * WHICH IS THE PROPERTY OF your company.
+   9:oled_ssd1331.c ****  *
+  10:oled_ssd1331.c ****  * ========================================
+  11:oled_ssd1331.c **** */
+  12:oled_ssd1331.c **** #include "oled_ssd1331.h"
+  13:oled_ssd1331.c **** #include "common.h"
+  14:oled_ssd1331.c **** 
+  15:oled_ssd1331.c **** uint8 screen_buffer[255];
+  16:oled_ssd1331.c **** 
+  17:oled_ssd1331.c **** void send_cmd(uint8 cmd) {
+  29              		.loc 1 17 0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 8
+  32              		@ frame_needed = 1, uses_anonymous_args = 0
+  33 0000 80B5     		push	{r7, lr}
+  34              		.cfi_def_cfa_offset 8
+  35              		.cfi_offset 7, -8
+  36              		.cfi_offset 14, -4
+  37 0002 82B0     		sub	sp, sp, #8
+  38              		.cfi_def_cfa_offset 16
+  39 0004 00AF     		add	r7, sp, #0
+  40              		.cfi_def_cfa_register 7
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccXVKO4t.s 			page 2
+
+
+  41 0006 0346     		mov	r3, r0
+  42 0008 FB71     		strb	r3, [r7, #7]
+  18:oled_ssd1331.c ****     OLED_DC_Write(0);
+  43              		.loc 1 18 0
+  44 000a 0020     		movs	r0, #0
+  45 000c FFF7FEFF 		bl	OLED_DC_Write
+  19:oled_ssd1331.c ****     OLED_CS_Write(0);
+  46              		.loc 1 19 0
+  47 0010 0020     		movs	r0, #0
+  48 0012 FFF7FEFF 		bl	OLED_CS_Write
+  20:oled_ssd1331.c ****     SPI_OLED_WriteTxData(cmd);
+  49              		.loc 1 20 0
+  50 0016 FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+  51 0018 1846     		mov	r0, r3
+  52 001a FFF7FEFF 		bl	SPI_OLED_WriteTxData
+  21:oled_ssd1331.c ****     while(spi_done == 0) {
+  53              		.loc 1 21 0
+  54 001e 00BF     		nop
+  55              	.L2:
+  56              		.loc 1 21 0 is_stmt 0 discriminator 1
+  57 0020 054B     		ldr	r3, .L3
+  58 0022 1B68     		ldr	r3, [r3]
+  59 0024 002B     		cmp	r3, #0
+  60 0026 FBD0     		beq	.L2
+  22:oled_ssd1331.c ****     }
+  23:oled_ssd1331.c ****     spi_done = 0;
+  61              		.loc 1 23 0 is_stmt 1
+  62 0028 034B     		ldr	r3, .L3
+  63 002a 0022     		movs	r2, #0
+  64 002c 1A60     		str	r2, [r3]
+  24:oled_ssd1331.c ****     // OLED_CS_Write(1);
+  25:oled_ssd1331.c **** }
+  65              		.loc 1 25 0
+  66 002e 00BF     		nop
+  67 0030 0837     		adds	r7, r7, #8
+  68              		.cfi_def_cfa_offset 8
+  69 0032 BD46     		mov	sp, r7
+  70              		.cfi_def_cfa_register 13
+  71              		@ sp needed
+  72 0034 80BD     		pop	{r7, pc}
+  73              	.L4:
+  74 0036 00BF     		.align	2
+  75              	.L3:
+  76 0038 00000000 		.word	spi_done
+  77              		.cfi_endproc
+  78              	.LFE0:
+  79              		.size	send_cmd, .-send_cmd
+  80              		.section	.text.send_data,"ax",%progbits
+  81              		.align	2
+  82              		.global	send_data
+  83              		.thumb
+  84              		.thumb_func
+  85              		.type	send_data, %function
+  86              	send_data:
+  87              	.LFB1:
+  26:oled_ssd1331.c **** 
+  27:oled_ssd1331.c **** void send_data(uint8 data) {
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccXVKO4t.s 			page 3
+
+
+  88              		.loc 1 27 0
+  89              		.cfi_startproc
+  90              		@ args = 0, pretend = 0, frame = 8
+  91              		@ frame_needed = 1, uses_anonymous_args = 0
+  92 0000 80B5     		push	{r7, lr}
+  93              		.cfi_def_cfa_offset 8
+  94              		.cfi_offset 7, -8
+  95              		.cfi_offset 14, -4
+  96 0002 82B0     		sub	sp, sp, #8
+  97              		.cfi_def_cfa_offset 16
+  98 0004 00AF     		add	r7, sp, #0
+  99              		.cfi_def_cfa_register 7
+ 100 0006 0346     		mov	r3, r0
+ 101 0008 FB71     		strb	r3, [r7, #7]
+  28:oled_ssd1331.c ****     OLED_DC_Write(1);
+ 102              		.loc 1 28 0
+ 103 000a 0120     		movs	r0, #1
+ 104 000c FFF7FEFF 		bl	OLED_DC_Write
+  29:oled_ssd1331.c ****     OLED_CS_Write(0);
+ 105              		.loc 1 29 0
+ 106 0010 0020     		movs	r0, #0
+ 107 0012 FFF7FEFF 		bl	OLED_CS_Write
+  30:oled_ssd1331.c ****     SPI_OLED_WriteTxData(data);
+ 108              		.loc 1 30 0
+ 109 0016 FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 110 0018 1846     		mov	r0, r3
+ 111 001a FFF7FEFF 		bl	SPI_OLED_WriteTxData
+  31:oled_ssd1331.c ****     while(spi_done == 0) {
+ 112              		.loc 1 31 0
+ 113 001e 00BF     		nop
+ 114              	.L6:
+ 115              		.loc 1 31 0 is_stmt 0 discriminator 1
+ 116 0020 054B     		ldr	r3, .L7
+ 117 0022 1B68     		ldr	r3, [r3]
+ 118 0024 002B     		cmp	r3, #0
+ 119 0026 FBD0     		beq	.L6
+  32:oled_ssd1331.c ****     }
+  33:oled_ssd1331.c ****     spi_done = 0;
+ 120              		.loc 1 33 0 is_stmt 1
+ 121 0028 034B     		ldr	r3, .L7
+ 122 002a 0022     		movs	r2, #0
+ 123 002c 1A60     		str	r2, [r3]
+  34:oled_ssd1331.c ****     // OLED_CS_Write(1);
+  35:oled_ssd1331.c **** }
+ 124              		.loc 1 35 0
+ 125 002e 00BF     		nop
+ 126 0030 0837     		adds	r7, r7, #8
+ 127              		.cfi_def_cfa_offset 8
+ 128 0032 BD46     		mov	sp, r7
+ 129              		.cfi_def_cfa_register 13
+ 130              		@ sp needed
+ 131 0034 80BD     		pop	{r7, pc}
+ 132              	.L8:
+ 133 0036 00BF     		.align	2
+ 134              	.L7:
+ 135 0038 00000000 		.word	spi_done
+ 136              		.cfi_endproc
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccXVKO4t.s 			page 4
+
+
+ 137              	.LFE1:
+ 138              		.size	send_data, .-send_data
+ 139              		.section	.text.init_oled,"ax",%progbits
+ 140              		.align	2
+ 141              		.global	init_oled
+ 142              		.thumb
+ 143              		.thumb_func
+ 144              		.type	init_oled, %function
+ 145              	init_oled:
+ 146              	.LFB2:
+  36:oled_ssd1331.c **** 
+  37:oled_ssd1331.c **** void init_oled() {
+ 147              		.loc 1 37 0
+ 148              		.cfi_startproc
+ 149              		@ args = 0, pretend = 0, frame = 8
+ 150              		@ frame_needed = 1, uses_anonymous_args = 0
+ 151 0000 80B5     		push	{r7, lr}
+ 152              		.cfi_def_cfa_offset 8
+ 153              		.cfi_offset 7, -8
+ 154              		.cfi_offset 14, -4
+ 155 0002 82B0     		sub	sp, sp, #8
+ 156              		.cfi_def_cfa_offset 16
+ 157 0004 00AF     		add	r7, sp, #0
+ 158              		.cfi_def_cfa_register 7
+  38:oled_ssd1331.c ****     OLED_CS_Write(0);
+ 159              		.loc 1 38 0
+ 160 0006 0020     		movs	r0, #0
+ 161 0008 FFF7FEFF 		bl	OLED_CS_Write
+  39:oled_ssd1331.c ****     send_cmd(SSD1331_CMD_DISPLAYOFF);  	// 0xAE
+ 162              		.loc 1 39 0
+ 163 000c AE20     		movs	r0, #174
+ 164 000e FFF7FEFF 		bl	send_cmd
+  40:oled_ssd1331.c ****     send_cmd(SSD1331_CMD_SETREMAP); 	// 0xA0
+ 165              		.loc 1 40 0
+ 166 0012 A020     		movs	r0, #160
+ 167 0014 FFF7FEFF 		bl	send_cmd
+  41:oled_ssd1331.c ****     send_cmd(0x72);				// RGB Color
+ 168              		.loc 1 41 0
+ 169 0018 7220     		movs	r0, #114
+ 170 001a FFF7FEFF 		bl	send_cmd
+  42:oled_ssd1331.c ****     send_cmd(SSD1331_CMD_STARTLINE); 	// 0xA1
+ 171              		.loc 1 42 0
+ 172 001e A120     		movs	r0, #161
+ 173 0020 FFF7FEFF 		bl	send_cmd
+  43:oled_ssd1331.c ****     send_cmd(0x0);
+ 174              		.loc 1 43 0
+ 175 0024 0020     		movs	r0, #0
+ 176 0026 FFF7FEFF 		bl	send_cmd
+  44:oled_ssd1331.c ****     send_cmd(SSD1331_CMD_DISPLAYOFFSET); 	// 0xA2
+ 177              		.loc 1 44 0
+ 178 002a A220     		movs	r0, #162
+ 179 002c FFF7FEFF 		bl	send_cmd
+  45:oled_ssd1331.c ****     send_cmd(0x0);
+ 180              		.loc 1 45 0
+ 181 0030 0020     		movs	r0, #0
+ 182 0032 FFF7FEFF 		bl	send_cmd
+  46:oled_ssd1331.c ****     send_cmd(SSD1331_CMD_NORMALDISPLAY);  	// 0xA4
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccXVKO4t.s 			page 5
+
+
+ 183              		.loc 1 46 0
+ 184 0036 A420     		movs	r0, #164
+ 185 0038 FFF7FEFF 		bl	send_cmd
+  47:oled_ssd1331.c ****     send_cmd(SSD1331_CMD_SETMULTIPLEX); 	// 0xA8
+ 186              		.loc 1 47 0
+ 187 003c A820     		movs	r0, #168
+ 188 003e FFF7FEFF 		bl	send_cmd
+  48:oled_ssd1331.c ****     send_cmd(0x3F);  			// 0x3F 1/64 duty
+ 189              		.loc 1 48 0
+ 190 0042 3F20     		movs	r0, #63
+ 191 0044 FFF7FEFF 		bl	send_cmd
+  49:oled_ssd1331.c ****     send_cmd(SSD1331_CMD_SETMASTER);  	// 0xAD
+ 192              		.loc 1 49 0
+ 193 0048 AD20     		movs	r0, #173
+ 194 004a FFF7FEFF 		bl	send_cmd
+  50:oled_ssd1331.c ****     send_cmd(0x8E);
+ 195              		.loc 1 50 0
+ 196 004e 8E20     		movs	r0, #142
+ 197 0050 FFF7FEFF 		bl	send_cmd
+  51:oled_ssd1331.c ****     send_cmd(SSD1331_CMD_POWERMODE);  	// 0xB0
+ 198              		.loc 1 51 0
+ 199 0054 B020     		movs	r0, #176
+ 200 0056 FFF7FEFF 		bl	send_cmd
+  52:oled_ssd1331.c ****     send_cmd(0x0B);
+ 201              		.loc 1 52 0
+ 202 005a 0B20     		movs	r0, #11
+ 203 005c FFF7FEFF 		bl	send_cmd
+  53:oled_ssd1331.c ****     send_cmd(SSD1331_CMD_PHASEPERIOD);  	// 0xB1
+ 204              		.loc 1 53 0
+ 205 0060 B120     		movs	r0, #177
+ 206 0062 FFF7FEFF 		bl	send_cmd
+  54:oled_ssd1331.c ****     send_cmd(0x11);
+ 207              		.loc 1 54 0
+ 208 0066 1120     		movs	r0, #17
+ 209 0068 FFF7FEFF 		bl	send_cmd
+  55:oled_ssd1331.c ****     send_cmd(SSD1331_CMD_CLOCKDIV);  	// 0xB3
+ 210              		.loc 1 55 0
+ 211 006c B320     		movs	r0, #179
+ 212 006e FFF7FEFF 		bl	send_cmd
+  56:oled_ssd1331.c ****     send_cmd(0xF0);  // 7:4 = Oscillator Frequency, 3:0 = CLK Div Ratio (A[3:0]+1 = 1..16)
+ 213              		.loc 1 56 0
+ 214 0072 F020     		movs	r0, #240
+ 215 0074 FFF7FEFF 		bl	send_cmd
+  57:oled_ssd1331.c ****     send_cmd(SSD1331_CMD_PRECHARGEA);  	// 0x8A
+ 216              		.loc 1 57 0
+ 217 0078 8A20     		movs	r0, #138
+ 218 007a FFF7FEFF 		bl	send_cmd
+  58:oled_ssd1331.c ****     send_cmd(0x64);
+ 219              		.loc 1 58 0
+ 220 007e 6420     		movs	r0, #100
+ 221 0080 FFF7FEFF 		bl	send_cmd
+  59:oled_ssd1331.c ****     send_cmd(SSD1331_CMD_PRECHARGEB);  	// 0x8B
+ 222              		.loc 1 59 0
+ 223 0084 8B20     		movs	r0, #139
+ 224 0086 FFF7FEFF 		bl	send_cmd
+  60:oled_ssd1331.c ****     send_cmd(0x78);
+ 225              		.loc 1 60 0
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccXVKO4t.s 			page 6
+
+
+ 226 008a 7820     		movs	r0, #120
+ 227 008c FFF7FEFF 		bl	send_cmd
+  61:oled_ssd1331.c ****     send_cmd(SSD1331_CMD_PRECHARGEC);  	// 0x8C
+ 228              		.loc 1 61 0
+ 229 0090 8C20     		movs	r0, #140
+ 230 0092 FFF7FEFF 		bl	send_cmd
+  62:oled_ssd1331.c ****     send_cmd(0x64);
+ 231              		.loc 1 62 0
+ 232 0096 6420     		movs	r0, #100
+ 233 0098 FFF7FEFF 		bl	send_cmd
+  63:oled_ssd1331.c ****     send_cmd(SSD1331_CMD_PRECHARGELEVEL);  	// 0xBB
+ 234              		.loc 1 63 0
+ 235 009c BB20     		movs	r0, #187
+ 236 009e FFF7FEFF 		bl	send_cmd
+  64:oled_ssd1331.c ****     send_cmd(0x3A);
+ 237              		.loc 1 64 0
+ 238 00a2 3A20     		movs	r0, #58
+ 239 00a4 FFF7FEFF 		bl	send_cmd
+  65:oled_ssd1331.c ****     send_cmd(SSD1331_CMD_VCOMH);  		// 0xBE
+ 240              		.loc 1 65 0
+ 241 00a8 BE20     		movs	r0, #190
+ 242 00aa FFF7FEFF 		bl	send_cmd
+  66:oled_ssd1331.c ****     send_cmd(0x3E);
+ 243              		.loc 1 66 0
+ 244 00ae 3E20     		movs	r0, #62
+ 245 00b0 FFF7FEFF 		bl	send_cmd
+  67:oled_ssd1331.c ****     send_cmd(SSD1331_CMD_MASTERCURRENT);  	// 0x87
+ 246              		.loc 1 67 0
+ 247 00b4 8720     		movs	r0, #135
+ 248 00b6 FFF7FEFF 		bl	send_cmd
+  68:oled_ssd1331.c ****     send_cmd(0x06);
+ 249              		.loc 1 68 0
+ 250 00ba 0620     		movs	r0, #6
+ 251 00bc FFF7FEFF 		bl	send_cmd
+  69:oled_ssd1331.c ****     send_cmd(SSD1331_CMD_CONTRASTA);  	// 0x81
+ 252              		.loc 1 69 0
+ 253 00c0 8120     		movs	r0, #129
+ 254 00c2 FFF7FEFF 		bl	send_cmd
+  70:oled_ssd1331.c ****     send_cmd(0xFF);
+ 255              		.loc 1 70 0
+ 256 00c6 FF20     		movs	r0, #255
+ 257 00c8 FFF7FEFF 		bl	send_cmd
+  71:oled_ssd1331.c ****     send_cmd(SSD1331_CMD_CONTRASTB);  	// 0x82
+ 258              		.loc 1 71 0
+ 259 00cc 8220     		movs	r0, #130
+ 260 00ce FFF7FEFF 		bl	send_cmd
+  72:oled_ssd1331.c ****     send_cmd(0xFF);
+ 261              		.loc 1 72 0
+ 262 00d2 FF20     		movs	r0, #255
+ 263 00d4 FFF7FEFF 		bl	send_cmd
+  73:oled_ssd1331.c ****     send_cmd(SSD1331_CMD_CONTRASTC);  	// 0x83
+ 264              		.loc 1 73 0
+ 265 00d8 8320     		movs	r0, #131
+ 266 00da FFF7FEFF 		bl	send_cmd
+  74:oled_ssd1331.c ****     send_cmd(0xFF);
+ 267              		.loc 1 74 0
+ 268 00de FF20     		movs	r0, #255
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccXVKO4t.s 			page 7
+
+
+ 269 00e0 FFF7FEFF 		bl	send_cmd
+  75:oled_ssd1331.c ****     send_cmd(CMD_DEACTIVE_SCROLLING);
+ 270              		.loc 1 75 0
+ 271 00e4 2E20     		movs	r0, #46
+ 272 00e6 FFF7FEFF 		bl	send_cmd
+  76:oled_ssd1331.c ****     send_cmd(SSD1331_CMD_DISPLAYON);	//--turn on oled panel
+ 273              		.loc 1 76 0
+ 274 00ea AF20     		movs	r0, #175
+ 275 00ec FFF7FEFF 		bl	send_cmd
+  77:oled_ssd1331.c ****     clear_whole_display();
+ 276              		.loc 1 77 0
+ 277 00f0 FFF7FEFF 		bl	clear_whole_display
+ 278              	.LBB2:
+  78:oled_ssd1331.c ****     
+  79:oled_ssd1331.c ****     for(int i = 0; i < 255; i++) {
+ 279              		.loc 1 79 0
+ 280 00f4 0023     		movs	r3, #0
+ 281 00f6 7B60     		str	r3, [r7, #4]
+ 282 00f8 07E0     		b	.L10
+ 283              	.L11:
+  80:oled_ssd1331.c ****         screen_buffer[i] = 0x00;
+ 284              		.loc 1 80 0 discriminator 3
+ 285 00fa 074A     		ldr	r2, .L12
+ 286 00fc 7B68     		ldr	r3, [r7, #4]
+ 287 00fe 1344     		add	r3, r3, r2
+ 288 0100 0022     		movs	r2, #0
+ 289 0102 1A70     		strb	r2, [r3]
+  79:oled_ssd1331.c ****         screen_buffer[i] = 0x00;
+ 290              		.loc 1 79 0 discriminator 3
+ 291 0104 7B68     		ldr	r3, [r7, #4]
+ 292 0106 0133     		adds	r3, r3, #1
+ 293 0108 7B60     		str	r3, [r7, #4]
+ 294              	.L10:
+  79:oled_ssd1331.c ****         screen_buffer[i] = 0x00;
+ 295              		.loc 1 79 0 is_stmt 0 discriminator 1
+ 296 010a 7B68     		ldr	r3, [r7, #4]
+ 297 010c FE2B     		cmp	r3, #254
+ 298 010e F4DD     		ble	.L11
+ 299              	.LBE2:
+  81:oled_ssd1331.c ****     }
+  82:oled_ssd1331.c **** }
+ 300              		.loc 1 82 0 is_stmt 1
+ 301 0110 00BF     		nop
+ 302 0112 0837     		adds	r7, r7, #8
+ 303              		.cfi_def_cfa_offset 8
+ 304 0114 BD46     		mov	sp, r7
+ 305              		.cfi_def_cfa_register 13
+ 306              		@ sp needed
+ 307 0116 80BD     		pop	{r7, pc}
+ 308              	.L13:
+ 309              		.align	2
+ 310              	.L12:
+ 311 0118 00000000 		.word	screen_buffer
+ 312              		.cfi_endproc
+ 313              	.LFE2:
+ 314              		.size	init_oled, .-init_oled
+ 315              		.section	.text.draw_pixel,"ax",%progbits
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccXVKO4t.s 			page 8
+
+
+ 316              		.align	2
+ 317              		.global	draw_pixel
+ 318              		.thumb
+ 319              		.thumb_func
+ 320              		.type	draw_pixel, %function
+ 321              	draw_pixel:
+ 322              	.LFB3:
+  83:oled_ssd1331.c **** 
+  84:oled_ssd1331.c **** void draw_pixel(uint8 x, uint8 y, uint16 color) {
+ 323              		.loc 1 84 0
+ 324              		.cfi_startproc
+ 325              		@ args = 0, pretend = 0, frame = 8
+ 326              		@ frame_needed = 1, uses_anonymous_args = 0
+ 327 0000 80B5     		push	{r7, lr}
+ 328              		.cfi_def_cfa_offset 8
+ 329              		.cfi_offset 7, -8
+ 330              		.cfi_offset 14, -4
+ 331 0002 82B0     		sub	sp, sp, #8
+ 332              		.cfi_def_cfa_offset 16
+ 333 0004 00AF     		add	r7, sp, #0
+ 334              		.cfi_def_cfa_register 7
+ 335 0006 0346     		mov	r3, r0
+ 336 0008 FB71     		strb	r3, [r7, #7]
+ 337 000a 0B46     		mov	r3, r1
+ 338 000c BB71     		strb	r3, [r7, #6]
+ 339 000e 1346     		mov	r3, r2	@ movhi
+ 340 0010 BB80     		strh	r3, [r7, #4]	@ movhi
+  85:oled_ssd1331.c ****     if(x >= RGB_OLED_WIDTH || y >= RGB_OLED_HEIGHT) {
+ 341              		.loc 1 85 0
+ 342 0012 FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 343 0014 5F2B     		cmp	r3, #95
+ 344 0016 26D8     		bhi	.L18
+ 345              		.loc 1 85 0 is_stmt 0 discriminator 1
+ 346 0018 BB79     		ldrb	r3, [r7, #6]	@ zero_extendqisi2
+ 347 001a 3F2B     		cmp	r3, #63
+ 348 001c 23D8     		bhi	.L18
+  86:oled_ssd1331.c ****         return;
+  87:oled_ssd1331.c ****     }
+  88:oled_ssd1331.c ****     OLED_CS_Write(0);
+ 349              		.loc 1 88 0 is_stmt 1
+ 350 001e 0020     		movs	r0, #0
+ 351 0020 FFF7FEFF 		bl	OLED_CS_Write
+  89:oled_ssd1331.c ****     send_cmd(CMD_SET_COLUMN_ADDRESS);
+ 352              		.loc 1 89 0
+ 353 0024 1520     		movs	r0, #21
+ 354 0026 FFF7FEFF 		bl	send_cmd
+  90:oled_ssd1331.c ****     send_cmd(x);
+ 355              		.loc 1 90 0
+ 356 002a FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 357 002c 1846     		mov	r0, r3
+ 358 002e FFF7FEFF 		bl	send_cmd
+  91:oled_ssd1331.c ****     send_cmd(RGB_OLED_WIDTH-1);
+ 359              		.loc 1 91 0
+ 360 0032 5F20     		movs	r0, #95
+ 361 0034 FFF7FEFF 		bl	send_cmd
+  92:oled_ssd1331.c ****     //set row point
+  93:oled_ssd1331.c ****     send_cmd(CMD_SET_ROW_ADDRESS);
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccXVKO4t.s 			page 9
+
+
+ 362              		.loc 1 93 0
+ 363 0038 7520     		movs	r0, #117
+ 364 003a FFF7FEFF 		bl	send_cmd
+  94:oled_ssd1331.c ****     send_cmd(y);
+ 365              		.loc 1 94 0
+ 366 003e BB79     		ldrb	r3, [r7, #6]	@ zero_extendqisi2
+ 367 0040 1846     		mov	r0, r3
+ 368 0042 FFF7FEFF 		bl	send_cmd
+  95:oled_ssd1331.c ****     send_cmd(RGB_OLED_HEIGHT-1);
+ 369              		.loc 1 95 0
+ 370 0046 3F20     		movs	r0, #63
+ 371 0048 FFF7FEFF 		bl	send_cmd
+  96:oled_ssd1331.c ****     send_data(color >> 8);
+ 372              		.loc 1 96 0
+ 373 004c BB88     		ldrh	r3, [r7, #4]
+ 374 004e 1B0A     		lsrs	r3, r3, #8
+ 375 0050 9BB2     		uxth	r3, r3
+ 376 0052 DBB2     		uxtb	r3, r3
+ 377 0054 1846     		mov	r0, r3
+ 378 0056 FFF7FEFF 		bl	send_data
+  97:oled_ssd1331.c ****     send_data(color);
+ 379              		.loc 1 97 0
+ 380 005a BB88     		ldrh	r3, [r7, #4]	@ movhi
+ 381 005c DBB2     		uxtb	r3, r3
+ 382 005e 1846     		mov	r0, r3
+ 383 0060 FFF7FEFF 		bl	send_data
+ 384 0064 00E0     		b	.L14
+ 385              	.L18:
+  86:oled_ssd1331.c ****     }
+ 386              		.loc 1 86 0
+ 387 0066 00BF     		nop
+ 388              	.L14:
+  98:oled_ssd1331.c ****     
+  99:oled_ssd1331.c **** }
+ 389              		.loc 1 99 0
+ 390 0068 0837     		adds	r7, r7, #8
+ 391              		.cfi_def_cfa_offset 8
+ 392 006a BD46     		mov	sp, r7
+ 393              		.cfi_def_cfa_register 13
+ 394              		@ sp needed
+ 395 006c 80BD     		pop	{r7, pc}
+ 396              		.cfi_endproc
+ 397              	.LFE3:
+ 398              		.size	draw_pixel, .-draw_pixel
+ 399 006e 00BF     		.section	.text.draw_line,"ax",%progbits
+ 400              		.align	2
+ 401              		.global	draw_line
+ 402              		.thumb
+ 403              		.thumb_func
+ 404              		.type	draw_line, %function
+ 405              	draw_line:
+ 406              	.LFB4:
+ 100:oled_ssd1331.c **** 
+ 101:oled_ssd1331.c **** void draw_line(uint8 x0, uint8 y0, uint8 x1, uint8 y1, uint16 color) {
+ 407              		.loc 1 101 0
+ 408              		.cfi_startproc
+ 409              		@ args = 4, pretend = 0, frame = 8
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccXVKO4t.s 			page 10
+
+
+ 410              		@ frame_needed = 1, uses_anonymous_args = 0
+ 411 0000 90B5     		push	{r4, r7, lr}
+ 412              		.cfi_def_cfa_offset 12
+ 413              		.cfi_offset 4, -12
+ 414              		.cfi_offset 7, -8
+ 415              		.cfi_offset 14, -4
+ 416 0002 83B0     		sub	sp, sp, #12
+ 417              		.cfi_def_cfa_offset 24
+ 418 0004 00AF     		add	r7, sp, #0
+ 419              		.cfi_def_cfa_register 7
+ 420 0006 0446     		mov	r4, r0
+ 421 0008 0846     		mov	r0, r1
+ 422 000a 1146     		mov	r1, r2
+ 423 000c 1A46     		mov	r2, r3
+ 424 000e 2346     		mov	r3, r4
+ 425 0010 FB71     		strb	r3, [r7, #7]
+ 426 0012 0346     		mov	r3, r0
+ 427 0014 BB71     		strb	r3, [r7, #6]
+ 428 0016 0B46     		mov	r3, r1
+ 429 0018 7B71     		strb	r3, [r7, #5]
+ 430 001a 1346     		mov	r3, r2
+ 431 001c 3B71     		strb	r3, [r7, #4]
+ 102:oled_ssd1331.c ****     if((x0 < 0) || (y0 < 0) || (x1 < 0) || (y1 < 0))
+ 103:oled_ssd1331.c ****         return;
+ 104:oled_ssd1331.c ****     OLED_CS_Write(0);
+ 432              		.loc 1 104 0
+ 433 001e 0020     		movs	r0, #0
+ 434 0020 FFF7FEFF 		bl	OLED_CS_Write
+ 105:oled_ssd1331.c ****     if (x0 >= RGB_OLED_WIDTH)  x0 = RGB_OLED_WIDTH - 1;
+ 435              		.loc 1 105 0
+ 436 0024 FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 437 0026 5F2B     		cmp	r3, #95
+ 438 0028 01D9     		bls	.L20
+ 439              		.loc 1 105 0 is_stmt 0 discriminator 1
+ 440 002a 5F23     		movs	r3, #95
+ 441 002c FB71     		strb	r3, [r7, #7]
+ 442              	.L20:
+ 106:oled_ssd1331.c ****     if (y0 >= RGB_OLED_HEIGHT) y0 = RGB_OLED_HEIGHT - 1;
+ 443              		.loc 1 106 0 is_stmt 1
+ 444 002e BB79     		ldrb	r3, [r7, #6]	@ zero_extendqisi2
+ 445 0030 3F2B     		cmp	r3, #63
+ 446 0032 01D9     		bls	.L21
+ 447              		.loc 1 106 0 is_stmt 0 discriminator 1
+ 448 0034 3F23     		movs	r3, #63
+ 449 0036 BB71     		strb	r3, [r7, #6]
+ 450              	.L21:
+ 107:oled_ssd1331.c ****     if (x1 >= RGB_OLED_WIDTH)  x1 = RGB_OLED_WIDTH - 1;
+ 451              		.loc 1 107 0 is_stmt 1
+ 452 0038 7B79     		ldrb	r3, [r7, #5]	@ zero_extendqisi2
+ 453 003a 5F2B     		cmp	r3, #95
+ 454 003c 01D9     		bls	.L22
+ 455              		.loc 1 107 0 is_stmt 0 discriminator 1
+ 456 003e 5F23     		movs	r3, #95
+ 457 0040 7B71     		strb	r3, [r7, #5]
+ 458              	.L22:
+ 108:oled_ssd1331.c ****     if (y1 >= RGB_OLED_HEIGHT) y1 = RGB_OLED_HEIGHT - 1;
+ 459              		.loc 1 108 0 is_stmt 1
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccXVKO4t.s 			page 11
+
+
+ 460 0042 3B79     		ldrb	r3, [r7, #4]	@ zero_extendqisi2
+ 461 0044 3F2B     		cmp	r3, #63
+ 462 0046 01D9     		bls	.L23
+ 463              		.loc 1 108 0 is_stmt 0 discriminator 1
+ 464 0048 3F23     		movs	r3, #63
+ 465 004a 3B71     		strb	r3, [r7, #4]
+ 466              	.L23:
+ 109:oled_ssd1331.c **** 
+ 110:oled_ssd1331.c ****     send_cmd(CMD_DRAW_LINE);//draw line
+ 467              		.loc 1 110 0 is_stmt 1
+ 468 004c 2120     		movs	r0, #33
+ 469 004e FFF7FEFF 		bl	send_cmd
+ 111:oled_ssd1331.c ****     send_cmd(x0);//start column
+ 470              		.loc 1 111 0
+ 471 0052 FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 472 0054 1846     		mov	r0, r3
+ 473 0056 FFF7FEFF 		bl	send_cmd
+ 112:oled_ssd1331.c ****     send_cmd(y0);//start row
+ 474              		.loc 1 112 0
+ 475 005a BB79     		ldrb	r3, [r7, #6]	@ zero_extendqisi2
+ 476 005c 1846     		mov	r0, r3
+ 477 005e FFF7FEFF 		bl	send_cmd
+ 113:oled_ssd1331.c ****     send_cmd(x1);//end column
+ 478              		.loc 1 113 0
+ 479 0062 7B79     		ldrb	r3, [r7, #5]	@ zero_extendqisi2
+ 480 0064 1846     		mov	r0, r3
+ 481 0066 FFF7FEFF 		bl	send_cmd
+ 114:oled_ssd1331.c ****     send_cmd(y1);//end row
+ 482              		.loc 1 114 0
+ 483 006a 3B79     		ldrb	r3, [r7, #4]	@ zero_extendqisi2
+ 484 006c 1846     		mov	r0, r3
+ 485 006e FFF7FEFF 		bl	send_cmd
+ 115:oled_ssd1331.c ****     send_cmd((uint8_t)((color>>11)&0x1F));//R
+ 486              		.loc 1 115 0
+ 487 0072 3B8B     		ldrh	r3, [r7, #24]
+ 488 0074 DB0A     		lsrs	r3, r3, #11
+ 489 0076 9BB2     		uxth	r3, r3
+ 490 0078 DBB2     		uxtb	r3, r3
+ 491 007a 03F01F03 		and	r3, r3, #31
+ 492 007e DBB2     		uxtb	r3, r3
+ 493 0080 1846     		mov	r0, r3
+ 494 0082 FFF7FEFF 		bl	send_cmd
+ 116:oled_ssd1331.c ****     send_cmd((uint8_t)((color>>5)&0x3F));//G
+ 495              		.loc 1 116 0
+ 496 0086 3B8B     		ldrh	r3, [r7, #24]
+ 497 0088 5B09     		lsrs	r3, r3, #5
+ 498 008a 9BB2     		uxth	r3, r3
+ 499 008c DBB2     		uxtb	r3, r3
+ 500 008e 03F03F03 		and	r3, r3, #63
+ 501 0092 DBB2     		uxtb	r3, r3
+ 502 0094 1846     		mov	r0, r3
+ 503 0096 FFF7FEFF 		bl	send_cmd
+ 117:oled_ssd1331.c ****     send_cmd((uint8_t)(color&0x1F));//B
+ 504              		.loc 1 117 0
+ 505 009a 3B8B     		ldrh	r3, [r7, #24]	@ movhi
+ 506 009c DBB2     		uxtb	r3, r3
+ 507 009e 03F01F03 		and	r3, r3, #31
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccXVKO4t.s 			page 12
+
+
+ 508 00a2 DBB2     		uxtb	r3, r3
+ 509 00a4 1846     		mov	r0, r3
+ 510 00a6 FFF7FEFF 		bl	send_cmd
+ 118:oled_ssd1331.c **** }
+ 511              		.loc 1 118 0
+ 512 00aa 0C37     		adds	r7, r7, #12
+ 513              		.cfi_def_cfa_offset 12
+ 514 00ac BD46     		mov	sp, r7
+ 515              		.cfi_def_cfa_register 13
+ 516              		@ sp needed
+ 517 00ae 90BD     		pop	{r4, r7, pc}
+ 518              		.cfi_endproc
+ 519              	.LFE4:
+ 520              		.size	draw_line, .-draw_line
+ 521              		.section	.text.draw_rect,"ax",%progbits
+ 522              		.align	2
+ 523              		.global	draw_rect
+ 524              		.thumb
+ 525              		.thumb_func
+ 526              		.type	draw_rect, %function
+ 527              	draw_rect:
+ 528              	.LFB5:
+ 119:oled_ssd1331.c **** 
+ 120:oled_ssd1331.c **** void draw_rect(uint8 x0, uint8 y0, uint8 x1, uint8 y1, uint16 out_color, uint16 fill_color) {
+ 529              		.loc 1 120 0
+ 530              		.cfi_startproc
+ 531              		@ args = 8, pretend = 0, frame = 8
+ 532              		@ frame_needed = 1, uses_anonymous_args = 0
+ 533 0000 90B5     		push	{r4, r7, lr}
+ 534              		.cfi_def_cfa_offset 12
+ 535              		.cfi_offset 4, -12
+ 536              		.cfi_offset 7, -8
+ 537              		.cfi_offset 14, -4
+ 538 0002 83B0     		sub	sp, sp, #12
+ 539              		.cfi_def_cfa_offset 24
+ 540 0004 00AF     		add	r7, sp, #0
+ 541              		.cfi_def_cfa_register 7
+ 542 0006 0446     		mov	r4, r0
+ 543 0008 0846     		mov	r0, r1
+ 544 000a 1146     		mov	r1, r2
+ 545 000c 1A46     		mov	r2, r3
+ 546 000e 2346     		mov	r3, r4
+ 547 0010 FB71     		strb	r3, [r7, #7]
+ 548 0012 0346     		mov	r3, r0
+ 549 0014 BB71     		strb	r3, [r7, #6]
+ 550 0016 0B46     		mov	r3, r1
+ 551 0018 7B71     		strb	r3, [r7, #5]
+ 552 001a 1346     		mov	r3, r2
+ 553 001c 3B71     		strb	r3, [r7, #4]
+ 121:oled_ssd1331.c ****     if((x0 < 0) || (y0 < 0) || (x1 < 0) || (y1 < 0))
+ 122:oled_ssd1331.c ****         return;
+ 123:oled_ssd1331.c ****     OLED_CS_Write(0);
+ 554              		.loc 1 123 0
+ 555 001e 0020     		movs	r0, #0
+ 556 0020 FFF7FEFF 		bl	OLED_CS_Write
+ 124:oled_ssd1331.c ****     if (x0 >= RGB_OLED_WIDTH)  x0 = RGB_OLED_WIDTH - 1;
+ 557              		.loc 1 124 0
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccXVKO4t.s 			page 13
+
+
+ 558 0024 FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 559 0026 5F2B     		cmp	r3, #95
+ 560 0028 01D9     		bls	.L26
+ 561              		.loc 1 124 0 is_stmt 0 discriminator 1
+ 562 002a 5F23     		movs	r3, #95
+ 563 002c FB71     		strb	r3, [r7, #7]
+ 564              	.L26:
+ 125:oled_ssd1331.c ****     if (y0 >= RGB_OLED_HEIGHT) y0 = RGB_OLED_HEIGHT - 1;
+ 565              		.loc 1 125 0 is_stmt 1
+ 566 002e BB79     		ldrb	r3, [r7, #6]	@ zero_extendqisi2
+ 567 0030 3F2B     		cmp	r3, #63
+ 568 0032 01D9     		bls	.L27
+ 569              		.loc 1 125 0 is_stmt 0 discriminator 1
+ 570 0034 3F23     		movs	r3, #63
+ 571 0036 BB71     		strb	r3, [r7, #6]
+ 572              	.L27:
+ 126:oled_ssd1331.c ****     if (x1 >= RGB_OLED_WIDTH)  x1 = RGB_OLED_WIDTH - 1;
+ 573              		.loc 1 126 0 is_stmt 1
+ 574 0038 7B79     		ldrb	r3, [r7, #5]	@ zero_extendqisi2
+ 575 003a 5F2B     		cmp	r3, #95
+ 576 003c 01D9     		bls	.L28
+ 577              		.loc 1 126 0 is_stmt 0 discriminator 1
+ 578 003e 5F23     		movs	r3, #95
+ 579 0040 7B71     		strb	r3, [r7, #5]
+ 580              	.L28:
+ 127:oled_ssd1331.c ****     if (y1 >= RGB_OLED_HEIGHT) y1 = RGB_OLED_HEIGHT - 1;
+ 581              		.loc 1 127 0 is_stmt 1
+ 582 0042 3B79     		ldrb	r3, [r7, #4]	@ zero_extendqisi2
+ 583 0044 3F2B     		cmp	r3, #63
+ 584 0046 01D9     		bls	.L29
+ 585              		.loc 1 127 0 is_stmt 0 discriminator 1
+ 586 0048 3F23     		movs	r3, #63
+ 587 004a 3B71     		strb	r3, [r7, #4]
+ 588              	.L29:
+ 128:oled_ssd1331.c **** 
+ 129:oled_ssd1331.c ****     send_cmd(CMD_FILL_WINDOW);//fill window
+ 589              		.loc 1 129 0 is_stmt 1
+ 590 004c 2620     		movs	r0, #38
+ 591 004e FFF7FEFF 		bl	send_cmd
+ 130:oled_ssd1331.c ****     send_cmd(ENABLE_FILL);
+ 592              		.loc 1 130 0
+ 593 0052 0120     		movs	r0, #1
+ 594 0054 FFF7FEFF 		bl	send_cmd
+ 131:oled_ssd1331.c ****     send_cmd(CMD_DRAW_RECTANGLE);//draw rectangle
+ 595              		.loc 1 131 0
+ 596 0058 2220     		movs	r0, #34
+ 597 005a FFF7FEFF 		bl	send_cmd
+ 132:oled_ssd1331.c ****     send_cmd(x0);//start column
+ 598              		.loc 1 132 0
+ 599 005e FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 600 0060 1846     		mov	r0, r3
+ 601 0062 FFF7FEFF 		bl	send_cmd
+ 133:oled_ssd1331.c ****     send_cmd(y0);//start row
+ 602              		.loc 1 133 0
+ 603 0066 BB79     		ldrb	r3, [r7, #6]	@ zero_extendqisi2
+ 604 0068 1846     		mov	r0, r3
+ 605 006a FFF7FEFF 		bl	send_cmd
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccXVKO4t.s 			page 14
+
+
+ 134:oled_ssd1331.c ****     send_cmd(x1);//end column
+ 606              		.loc 1 134 0
+ 607 006e 7B79     		ldrb	r3, [r7, #5]	@ zero_extendqisi2
+ 608 0070 1846     		mov	r0, r3
+ 609 0072 FFF7FEFF 		bl	send_cmd
+ 135:oled_ssd1331.c ****     send_cmd(y1);//end row
+ 610              		.loc 1 135 0
+ 611 0076 3B79     		ldrb	r3, [r7, #4]	@ zero_extendqisi2
+ 612 0078 1846     		mov	r0, r3
+ 613 007a FFF7FEFF 		bl	send_cmd
+ 136:oled_ssd1331.c ****     send_cmd((uint8_t)((out_color>>11)&0x1F));//R
+ 614              		.loc 1 136 0
+ 615 007e 3B8B     		ldrh	r3, [r7, #24]
+ 616 0080 DB0A     		lsrs	r3, r3, #11
+ 617 0082 9BB2     		uxth	r3, r3
+ 618 0084 DBB2     		uxtb	r3, r3
+ 619 0086 03F01F03 		and	r3, r3, #31
+ 620 008a DBB2     		uxtb	r3, r3
+ 621 008c 1846     		mov	r0, r3
+ 622 008e FFF7FEFF 		bl	send_cmd
+ 137:oled_ssd1331.c ****     send_cmd((uint8_t)((out_color>>5)&0x3F));//G
+ 623              		.loc 1 137 0
+ 624 0092 3B8B     		ldrh	r3, [r7, #24]
+ 625 0094 5B09     		lsrs	r3, r3, #5
+ 626 0096 9BB2     		uxth	r3, r3
+ 627 0098 DBB2     		uxtb	r3, r3
+ 628 009a 03F03F03 		and	r3, r3, #63
+ 629 009e DBB2     		uxtb	r3, r3
+ 630 00a0 1846     		mov	r0, r3
+ 631 00a2 FFF7FEFF 		bl	send_cmd
+ 138:oled_ssd1331.c ****     send_cmd((uint8_t)(out_color&0x1F));//B
+ 632              		.loc 1 138 0
+ 633 00a6 3B8B     		ldrh	r3, [r7, #24]	@ movhi
+ 634 00a8 DBB2     		uxtb	r3, r3
+ 635 00aa 03F01F03 		and	r3, r3, #31
+ 636 00ae DBB2     		uxtb	r3, r3
+ 637 00b0 1846     		mov	r0, r3
+ 638 00b2 FFF7FEFF 		bl	send_cmd
+ 139:oled_ssd1331.c ****     send_cmd((uint8_t)((fill_color>>11)&0x1F));//R
+ 639              		.loc 1 139 0
+ 640 00b6 BB8B     		ldrh	r3, [r7, #28]
+ 641 00b8 DB0A     		lsrs	r3, r3, #11
+ 642 00ba 9BB2     		uxth	r3, r3
+ 643 00bc DBB2     		uxtb	r3, r3
+ 644 00be 03F01F03 		and	r3, r3, #31
+ 645 00c2 DBB2     		uxtb	r3, r3
+ 646 00c4 1846     		mov	r0, r3
+ 647 00c6 FFF7FEFF 		bl	send_cmd
+ 140:oled_ssd1331.c ****     send_cmd((uint8_t)((fill_color>>5)&0x3F));//G
+ 648              		.loc 1 140 0
+ 649 00ca BB8B     		ldrh	r3, [r7, #28]
+ 650 00cc 5B09     		lsrs	r3, r3, #5
+ 651 00ce 9BB2     		uxth	r3, r3
+ 652 00d0 DBB2     		uxtb	r3, r3
+ 653 00d2 03F03F03 		and	r3, r3, #63
+ 654 00d6 DBB2     		uxtb	r3, r3
+ 655 00d8 1846     		mov	r0, r3
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccXVKO4t.s 			page 15
+
+
+ 656 00da FFF7FEFF 		bl	send_cmd
+ 141:oled_ssd1331.c ****     send_cmd((uint8_t)(fill_color&0x1F));//B
+ 657              		.loc 1 141 0
+ 658 00de BB8B     		ldrh	r3, [r7, #28]	@ movhi
+ 659 00e0 DBB2     		uxtb	r3, r3
+ 660 00e2 03F01F03 		and	r3, r3, #31
+ 661 00e6 DBB2     		uxtb	r3, r3
+ 662 00e8 1846     		mov	r0, r3
+ 663 00ea FFF7FEFF 		bl	send_cmd
+ 142:oled_ssd1331.c **** }
+ 664              		.loc 1 142 0
+ 665 00ee 0C37     		adds	r7, r7, #12
+ 666              		.cfi_def_cfa_offset 12
+ 667 00f0 BD46     		mov	sp, r7
+ 668              		.cfi_def_cfa_register 13
+ 669              		@ sp needed
+ 670 00f2 90BD     		pop	{r4, r7, pc}
+ 671              		.cfi_endproc
+ 672              	.LFE5:
+ 673              		.size	draw_rect, .-draw_rect
+ 674              		.section	.text.clear_whole_display,"ax",%progbits
+ 675              		.align	2
+ 676              		.global	clear_whole_display
+ 677              		.thumb
+ 678              		.thumb_func
+ 679              		.type	clear_whole_display, %function
+ 680              	clear_whole_display:
+ 681              	.LFB6:
+ 143:oled_ssd1331.c **** 
+ 144:oled_ssd1331.c **** void clear_whole_display() {
+ 682              		.loc 1 144 0
+ 683              		.cfi_startproc
+ 684              		@ args = 0, pretend = 0, frame = 0
+ 685              		@ frame_needed = 1, uses_anonymous_args = 0
+ 686 0000 80B5     		push	{r7, lr}
+ 687              		.cfi_def_cfa_offset 8
+ 688              		.cfi_offset 7, -8
+ 689              		.cfi_offset 14, -4
+ 690 0002 82B0     		sub	sp, sp, #8
+ 691              		.cfi_def_cfa_offset 16
+ 692 0004 02AF     		add	r7, sp, #8
+ 693              		.cfi_def_cfa 7, 8
+ 145:oled_ssd1331.c ****     OLED_CS_Write(0);
+ 694              		.loc 1 145 0
+ 695 0006 0020     		movs	r0, #0
+ 696 0008 FFF7FEFF 		bl	OLED_CS_Write
+ 146:oled_ssd1331.c ****     draw_rect(0,0,RGB_OLED_WIDTH, RGB_OLED_HEIGHT, 0x0000, 0x0000);
+ 697              		.loc 1 146 0
+ 698 000c 0023     		movs	r3, #0
+ 699 000e 0193     		str	r3, [sp, #4]
+ 700 0010 0023     		movs	r3, #0
+ 701 0012 0093     		str	r3, [sp]
+ 702 0014 4023     		movs	r3, #64
+ 703 0016 6022     		movs	r2, #96
+ 704 0018 0021     		movs	r1, #0
+ 705 001a 0020     		movs	r0, #0
+ 706 001c FFF7FEFF 		bl	draw_rect
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccXVKO4t.s 			page 16
+
+
+ 147:oled_ssd1331.c **** }
+ 707              		.loc 1 147 0
+ 708 0020 00BF     		nop
+ 709 0022 BD46     		mov	sp, r7
+ 710              		.cfi_def_cfa_register 13
+ 711              		@ sp needed
+ 712 0024 80BD     		pop	{r7, pc}
+ 713              		.cfi_endproc
+ 714              	.LFE6:
+ 715              		.size	clear_whole_display, .-clear_whole_display
+ 716 0026 00BF     		.section	.text.clear_whole_display_by_pixel,"ax",%progbits
+ 717              		.align	2
+ 718              		.global	clear_whole_display_by_pixel
+ 719              		.thumb
+ 720              		.thumb_func
+ 721              		.type	clear_whole_display_by_pixel, %function
+ 722              	clear_whole_display_by_pixel:
+ 723              	.LFB7:
+ 148:oled_ssd1331.c **** 
+ 149:oled_ssd1331.c **** void clear_whole_display_by_pixel() {
+ 724              		.loc 1 149 0
+ 725              		.cfi_startproc
+ 726              		@ args = 0, pretend = 0, frame = 8
+ 727              		@ frame_needed = 1, uses_anonymous_args = 0
+ 728 0000 80B5     		push	{r7, lr}
+ 729              		.cfi_def_cfa_offset 8
+ 730              		.cfi_offset 7, -8
+ 731              		.cfi_offset 14, -4
+ 732 0002 82B0     		sub	sp, sp, #8
+ 733              		.cfi_def_cfa_offset 16
+ 734 0004 00AF     		add	r7, sp, #0
+ 735              		.cfi_def_cfa_register 7
+ 150:oled_ssd1331.c ****     
+ 151:oled_ssd1331.c ****     send_cmd(CMD_SET_COLUMN_ADDRESS);
+ 736              		.loc 1 151 0
+ 737 0006 1520     		movs	r0, #21
+ 738 0008 FFF7FEFF 		bl	send_cmd
+ 152:oled_ssd1331.c ****     send_cmd(0);
+ 739              		.loc 1 152 0
+ 740 000c 0020     		movs	r0, #0
+ 741 000e FFF7FEFF 		bl	send_cmd
+ 153:oled_ssd1331.c ****     send_cmd(RGB_OLED_WIDTH-1);
+ 742              		.loc 1 153 0
+ 743 0012 5F20     		movs	r0, #95
+ 744 0014 FFF7FEFF 		bl	send_cmd
+ 154:oled_ssd1331.c ****     //set row point
+ 155:oled_ssd1331.c ****     send_cmd(CMD_SET_ROW_ADDRESS);
+ 745              		.loc 1 155 0
+ 746 0018 7520     		movs	r0, #117
+ 747 001a FFF7FEFF 		bl	send_cmd
+ 156:oled_ssd1331.c ****     send_cmd(0);
+ 748              		.loc 1 156 0
+ 749 001e 0020     		movs	r0, #0
+ 750 0020 FFF7FEFF 		bl	send_cmd
+ 751              	.LBB3:
+ 157:oled_ssd1331.c ****     
+ 158:oled_ssd1331.c ****     for(int i = 0; i < 49; i++) {
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccXVKO4t.s 			page 17
+
+
+ 752              		.loc 1 158 0
+ 753 0024 0023     		movs	r3, #0
+ 754 0026 7B60     		str	r3, [r7, #4]
+ 755 0028 06E0     		b	.L33
+ 756              	.L34:
+ 159:oled_ssd1331.c ****         SPI_OLED_PutArray(screen_buffer, 255);
+ 757              		.loc 1 159 0 discriminator 3
+ 758 002a FF21     		movs	r1, #255
+ 759 002c 0648     		ldr	r0, .L35
+ 760 002e FFF7FEFF 		bl	SPI_OLED_PutArray
+ 158:oled_ssd1331.c ****         SPI_OLED_PutArray(screen_buffer, 255);
+ 761              		.loc 1 158 0 discriminator 3
+ 762 0032 7B68     		ldr	r3, [r7, #4]
+ 763 0034 0133     		adds	r3, r3, #1
+ 764 0036 7B60     		str	r3, [r7, #4]
+ 765              	.L33:
+ 158:oled_ssd1331.c ****         SPI_OLED_PutArray(screen_buffer, 255);
+ 766              		.loc 1 158 0 is_stmt 0 discriminator 1
+ 767 0038 7B68     		ldr	r3, [r7, #4]
+ 768 003a 302B     		cmp	r3, #48
+ 769 003c F5DD     		ble	.L34
+ 770              	.LBE3:
+ 160:oled_ssd1331.c ****     }
+ 161:oled_ssd1331.c **** }
+ 771              		.loc 1 161 0 is_stmt 1
+ 772 003e 00BF     		nop
+ 773 0040 0837     		adds	r7, r7, #8
+ 774              		.cfi_def_cfa_offset 8
+ 775 0042 BD46     		mov	sp, r7
+ 776              		.cfi_def_cfa_register 13
+ 777              		@ sp needed
+ 778 0044 80BD     		pop	{r7, pc}
+ 779              	.L36:
+ 780 0046 00BF     		.align	2
+ 781              	.L35:
+ 782 0048 00000000 		.word	screen_buffer
+ 783              		.cfi_endproc
+ 784              	.LFE7:
+ 785              		.size	clear_whole_display_by_pixel, .-clear_whole_display_by_pixel
+ 786              		.text
+ 787              	.Letext0:
+ 788              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.2\\psoc creator\\import\\gnu\\arm\\5.4.
+ 789              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.2\\psoc creator\\import\\gnu\\arm\\5.4.
+ 790              		.file 4 "Generated_Source\\PSoC5/cytypes.h"
+ 791              		.file 5 "common.h"
+ 792              		.section	.debug_info,"",%progbits
+ 793              	.Ldebug_info0:
+ 794 0000 90020000 		.4byte	0x290
+ 795 0004 0400     		.2byte	0x4
+ 796 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 797 000a 04       		.byte	0x4
+ 798 000b 01       		.uleb128 0x1
+ 799 000c 18000000 		.4byte	.LASF30
+ 800 0010 0C       		.byte	0xc
+ 801 0011 6B020000 		.4byte	.LASF31
+ 802 0015 6A010000 		.4byte	.LASF32
+ 803 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccXVKO4t.s 			page 18
+
+
+ 804 001d 00000000 		.4byte	0
+ 805 0021 00000000 		.4byte	.Ldebug_line0
+ 806 0025 02       		.uleb128 0x2
+ 807 0026 01       		.byte	0x1
+ 808 0027 06       		.byte	0x6
+ 809 0028 42020000 		.4byte	.LASF0
+ 810 002c 03       		.uleb128 0x3
+ 811 002d 0E000000 		.4byte	.LASF9
+ 812 0031 02       		.byte	0x2
+ 813 0032 1D       		.byte	0x1d
+ 814 0033 37000000 		.4byte	0x37
+ 815 0037 02       		.uleb128 0x2
+ 816 0038 01       		.byte	0x1
+ 817 0039 08       		.byte	0x8
+ 818 003a F5000000 		.4byte	.LASF1
+ 819 003e 02       		.uleb128 0x2
+ 820 003f 02       		.byte	0x2
+ 821 0040 05       		.byte	0x5
+ 822 0041 1D020000 		.4byte	.LASF2
+ 823 0045 02       		.uleb128 0x2
+ 824 0046 02       		.byte	0x2
+ 825 0047 07       		.byte	0x7
+ 826 0048 B0000000 		.4byte	.LASF3
+ 827 004c 02       		.uleb128 0x2
+ 828 004d 04       		.byte	0x4
+ 829 004e 05       		.byte	0x5
+ 830 004f 2D020000 		.4byte	.LASF4
+ 831 0053 02       		.uleb128 0x2
+ 832 0054 04       		.byte	0x4
+ 833 0055 07       		.byte	0x7
+ 834 0056 03010000 		.4byte	.LASF5
+ 835 005a 02       		.uleb128 0x2
+ 836 005b 08       		.byte	0x8
+ 837 005c 05       		.byte	0x5
+ 838 005d 00000000 		.4byte	.LASF6
+ 839 0061 02       		.uleb128 0x2
+ 840 0062 08       		.byte	0x8
+ 841 0063 07       		.byte	0x7
+ 842 0064 53010000 		.4byte	.LASF7
+ 843 0068 04       		.uleb128 0x4
+ 844 0069 04       		.byte	0x4
+ 845 006a 05       		.byte	0x5
+ 846 006b 696E7400 		.ascii	"int\000"
+ 847 006f 02       		.uleb128 0x2
+ 848 0070 04       		.byte	0x4
+ 849 0071 07       		.byte	0x7
+ 850 0072 3D010000 		.4byte	.LASF8
+ 851 0076 03       		.uleb128 0x3
+ 852 0077 C3000000 		.4byte	.LASF10
+ 853 007b 03       		.byte	0x3
+ 854 007c 18       		.byte	0x18
+ 855 007d 2C000000 		.4byte	0x2c
+ 856 0081 05       		.uleb128 0x5
+ 857 0082 27020000 		.4byte	.LASF11
+ 858 0086 04       		.byte	0x4
+ 859 0087 9201     		.2byte	0x192
+ 860 0089 37000000 		.4byte	0x37
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccXVKO4t.s 			page 19
+
+
+ 861 008d 05       		.uleb128 0x5
+ 862 008e 2C010000 		.4byte	.LASF12
+ 863 0092 04       		.byte	0x4
+ 864 0093 9301     		.2byte	0x193
+ 865 0095 45000000 		.4byte	0x45
+ 866 0099 02       		.uleb128 0x2
+ 867 009a 04       		.byte	0x4
+ 868 009b 04       		.byte	0x4
+ 869 009c CB000000 		.4byte	.LASF13
+ 870 00a0 02       		.uleb128 0x2
+ 871 00a1 08       		.byte	0x8
+ 872 00a2 04       		.byte	0x4
+ 873 00a3 15010000 		.4byte	.LASF14
+ 874 00a7 02       		.uleb128 0x2
+ 875 00a8 01       		.byte	0x1
+ 876 00a9 08       		.byte	0x8
+ 877 00aa 00020000 		.4byte	.LASF15
+ 878 00ae 02       		.uleb128 0x2
+ 879 00af 08       		.byte	0x8
+ 880 00b0 04       		.byte	0x4
+ 881 00b1 36020000 		.4byte	.LASF16
+ 882 00b5 02       		.uleb128 0x2
+ 883 00b6 04       		.byte	0x4
+ 884 00b7 07       		.byte	0x7
+ 885 00b8 E2010000 		.4byte	.LASF17
+ 886 00bc 06       		.uleb128 0x6
+ 887 00bd D9010000 		.4byte	.LASF18
+ 888 00c1 01       		.byte	0x1
+ 889 00c2 11       		.byte	0x11
+ 890 00c3 00000000 		.4byte	.LFB0
+ 891 00c7 3C000000 		.4byte	.LFE0-.LFB0
+ 892 00cb 01       		.uleb128 0x1
+ 893 00cc 9C       		.byte	0x9c
+ 894 00cd E0000000 		.4byte	0xe0
+ 895 00d1 07       		.uleb128 0x7
+ 896 00d2 636D6400 		.ascii	"cmd\000"
+ 897 00d6 01       		.byte	0x1
+ 898 00d7 11       		.byte	0x11
+ 899 00d8 81000000 		.4byte	0x81
+ 900 00dc 02       		.uleb128 0x2
+ 901 00dd 91       		.byte	0x91
+ 902 00de 77       		.sleb128 -9
+ 903 00df 00       		.byte	0
+ 904 00e0 06       		.uleb128 0x6
+ 905 00e1 1C010000 		.4byte	.LASF19
+ 906 00e5 01       		.byte	0x1
+ 907 00e6 1B       		.byte	0x1b
+ 908 00e7 00000000 		.4byte	.LFB1
+ 909 00eb 3C000000 		.4byte	.LFE1-.LFB1
+ 910 00ef 01       		.uleb128 0x1
+ 911 00f0 9C       		.byte	0x9c
+ 912 00f1 04010000 		.4byte	0x104
+ 913 00f5 08       		.uleb128 0x8
+ 914 00f6 D1000000 		.4byte	.LASF20
+ 915 00fa 01       		.byte	0x1
+ 916 00fb 1B       		.byte	0x1b
+ 917 00fc 81000000 		.4byte	0x81
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccXVKO4t.s 			page 20
+
+
+ 918 0100 02       		.uleb128 0x2
+ 919 0101 91       		.byte	0x91
+ 920 0102 77       		.sleb128 -9
+ 921 0103 00       		.byte	0
+ 922 0104 06       		.uleb128 0x6
+ 923 0105 05020000 		.4byte	.LASF21
+ 924 0109 01       		.byte	0x1
+ 925 010a 25       		.byte	0x25
+ 926 010b 00000000 		.4byte	.LFB2
+ 927 010f 1C010000 		.4byte	.LFE2-.LFB2
+ 928 0113 01       		.uleb128 0x1
+ 929 0114 9C       		.byte	0x9c
+ 930 0115 30010000 		.4byte	0x130
+ 931 0119 09       		.uleb128 0x9
+ 932 011a F4000000 		.4byte	.LBB2
+ 933 011e 1C000000 		.4byte	.LBE2-.LBB2
+ 934 0122 0A       		.uleb128 0xa
+ 935 0123 6900     		.ascii	"i\000"
+ 936 0125 01       		.byte	0x1
+ 937 0126 4F       		.byte	0x4f
+ 938 0127 68000000 		.4byte	0x68
+ 939 012b 02       		.uleb128 0x2
+ 940 012c 91       		.byte	0x91
+ 941 012d 74       		.sleb128 -12
+ 942 012e 00       		.byte	0
+ 943 012f 00       		.byte	0
+ 944 0130 06       		.uleb128 0x6
+ 945 0131 D6000000 		.4byte	.LASF22
+ 946 0135 01       		.byte	0x1
+ 947 0136 54       		.byte	0x54
+ 948 0137 00000000 		.4byte	.LFB3
+ 949 013b 6E000000 		.4byte	.LFE3-.LFB3
+ 950 013f 01       		.uleb128 0x1
+ 951 0140 9C       		.byte	0x9c
+ 952 0141 6C010000 		.4byte	0x16c
+ 953 0145 07       		.uleb128 0x7
+ 954 0146 7800     		.ascii	"x\000"
+ 955 0148 01       		.byte	0x1
+ 956 0149 54       		.byte	0x54
+ 957 014a 81000000 		.4byte	0x81
+ 958 014e 02       		.uleb128 0x2
+ 959 014f 91       		.byte	0x91
+ 960 0150 77       		.sleb128 -9
+ 961 0151 07       		.uleb128 0x7
+ 962 0152 7900     		.ascii	"y\000"
+ 963 0154 01       		.byte	0x1
+ 964 0155 54       		.byte	0x54
+ 965 0156 81000000 		.4byte	0x81
+ 966 015a 02       		.uleb128 0x2
+ 967 015b 91       		.byte	0x91
+ 968 015c 76       		.sleb128 -10
+ 969 015d 08       		.uleb128 0x8
+ 970 015e 26010000 		.4byte	.LASF23
+ 971 0162 01       		.byte	0x1
+ 972 0163 54       		.byte	0x54
+ 973 0164 8D000000 		.4byte	0x8d
+ 974 0168 02       		.uleb128 0x2
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccXVKO4t.s 			page 21
+
+
+ 975 0169 91       		.byte	0x91
+ 976 016a 74       		.sleb128 -12
+ 977 016b 00       		.byte	0
+ 978 016c 06       		.uleb128 0x6
+ 979 016d 33010000 		.4byte	.LASF24
+ 980 0171 01       		.byte	0x1
+ 981 0172 65       		.byte	0x65
+ 982 0173 00000000 		.4byte	.LFB4
+ 983 0177 B0000000 		.4byte	.LFE4-.LFB4
+ 984 017b 01       		.uleb128 0x1
+ 985 017c 9C       		.byte	0x9c
+ 986 017d C4010000 		.4byte	0x1c4
+ 987 0181 07       		.uleb128 0x7
+ 988 0182 783000   		.ascii	"x0\000"
+ 989 0185 01       		.byte	0x1
+ 990 0186 65       		.byte	0x65
+ 991 0187 81000000 		.4byte	0x81
+ 992 018b 02       		.uleb128 0x2
+ 993 018c 91       		.byte	0x91
+ 994 018d 6F       		.sleb128 -17
+ 995 018e 07       		.uleb128 0x7
+ 996 018f 793000   		.ascii	"y0\000"
+ 997 0192 01       		.byte	0x1
+ 998 0193 65       		.byte	0x65
+ 999 0194 81000000 		.4byte	0x81
+ 1000 0198 02       		.uleb128 0x2
+ 1001 0199 91       		.byte	0x91
+ 1002 019a 6E       		.sleb128 -18
+ 1003 019b 07       		.uleb128 0x7
+ 1004 019c 783100   		.ascii	"x1\000"
+ 1005 019f 01       		.byte	0x1
+ 1006 01a0 65       		.byte	0x65
+ 1007 01a1 81000000 		.4byte	0x81
+ 1008 01a5 02       		.uleb128 0x2
+ 1009 01a6 91       		.byte	0x91
+ 1010 01a7 6D       		.sleb128 -19
+ 1011 01a8 07       		.uleb128 0x7
+ 1012 01a9 793100   		.ascii	"y1\000"
+ 1013 01ac 01       		.byte	0x1
+ 1014 01ad 65       		.byte	0x65
+ 1015 01ae 81000000 		.4byte	0x81
+ 1016 01b2 02       		.uleb128 0x2
+ 1017 01b3 91       		.byte	0x91
+ 1018 01b4 6C       		.sleb128 -20
+ 1019 01b5 08       		.uleb128 0x8
+ 1020 01b6 26010000 		.4byte	.LASF23
+ 1021 01ba 01       		.byte	0x1
+ 1022 01bb 65       		.byte	0x65
+ 1023 01bc 8D000000 		.4byte	0x8d
+ 1024 01c0 02       		.uleb128 0x2
+ 1025 01c1 91       		.byte	0x91
+ 1026 01c2 00       		.sleb128 0
+ 1027 01c3 00       		.byte	0
+ 1028 01c4 06       		.uleb128 0x6
+ 1029 01c5 F6010000 		.4byte	.LASF25
+ 1030 01c9 01       		.byte	0x1
+ 1031 01ca 78       		.byte	0x78
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccXVKO4t.s 			page 22
+
+
+ 1032 01cb 00000000 		.4byte	.LFB5
+ 1033 01cf F4000000 		.4byte	.LFE5-.LFB5
+ 1034 01d3 01       		.uleb128 0x1
+ 1035 01d4 9C       		.byte	0x9c
+ 1036 01d5 2A020000 		.4byte	0x22a
+ 1037 01d9 07       		.uleb128 0x7
+ 1038 01da 783000   		.ascii	"x0\000"
+ 1039 01dd 01       		.byte	0x1
+ 1040 01de 78       		.byte	0x78
+ 1041 01df 81000000 		.4byte	0x81
+ 1042 01e3 02       		.uleb128 0x2
+ 1043 01e4 91       		.byte	0x91
+ 1044 01e5 6F       		.sleb128 -17
+ 1045 01e6 07       		.uleb128 0x7
+ 1046 01e7 793000   		.ascii	"y0\000"
+ 1047 01ea 01       		.byte	0x1
+ 1048 01eb 78       		.byte	0x78
+ 1049 01ec 81000000 		.4byte	0x81
+ 1050 01f0 02       		.uleb128 0x2
+ 1051 01f1 91       		.byte	0x91
+ 1052 01f2 6E       		.sleb128 -18
+ 1053 01f3 07       		.uleb128 0x7
+ 1054 01f4 783100   		.ascii	"x1\000"
+ 1055 01f7 01       		.byte	0x1
+ 1056 01f8 78       		.byte	0x78
+ 1057 01f9 81000000 		.4byte	0x81
+ 1058 01fd 02       		.uleb128 0x2
+ 1059 01fe 91       		.byte	0x91
+ 1060 01ff 6D       		.sleb128 -19
+ 1061 0200 07       		.uleb128 0x7
+ 1062 0201 793100   		.ascii	"y1\000"
+ 1063 0204 01       		.byte	0x1
+ 1064 0205 78       		.byte	0x78
+ 1065 0206 81000000 		.4byte	0x81
+ 1066 020a 02       		.uleb128 0x2
+ 1067 020b 91       		.byte	0x91
+ 1068 020c 6C       		.sleb128 -20
+ 1069 020d 08       		.uleb128 0x8
+ 1070 020e A6000000 		.4byte	.LASF26
+ 1071 0212 01       		.byte	0x1
+ 1072 0213 78       		.byte	0x78
+ 1073 0214 8D000000 		.4byte	0x8d
+ 1074 0218 02       		.uleb128 0x2
+ 1075 0219 91       		.byte	0x91
+ 1076 021a 00       		.sleb128 0
+ 1077 021b 08       		.uleb128 0x8
+ 1078 021c EB010000 		.4byte	.LASF27
+ 1079 0220 01       		.byte	0x1
+ 1080 0221 78       		.byte	0x78
+ 1081 0222 8D000000 		.4byte	0x8d
+ 1082 0226 02       		.uleb128 0x2
+ 1083 0227 91       		.byte	0x91
+ 1084 0228 04       		.sleb128 4
+ 1085 0229 00       		.byte	0
+ 1086 022a 0B       		.uleb128 0xb
+ 1087 022b E1000000 		.4byte	.LASF33
+ 1088 022f 01       		.byte	0x1
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccXVKO4t.s 			page 23
+
+
+ 1089 0230 90       		.byte	0x90
+ 1090 0231 00000000 		.4byte	.LFB6
+ 1091 0235 26000000 		.4byte	.LFE6-.LFB6
+ 1092 0239 01       		.uleb128 0x1
+ 1093 023a 9C       		.byte	0x9c
+ 1094 023b 0C       		.uleb128 0xc
+ 1095 023c 4E020000 		.4byte	.LASF34
+ 1096 0240 01       		.byte	0x1
+ 1097 0241 95       		.byte	0x95
+ 1098 0242 00000000 		.4byte	.LFB7
+ 1099 0246 4C000000 		.4byte	.LFE7-.LFB7
+ 1100 024a 01       		.uleb128 0x1
+ 1101 024b 9C       		.byte	0x9c
+ 1102 024c 67020000 		.4byte	0x267
+ 1103 0250 09       		.uleb128 0x9
+ 1104 0251 24000000 		.4byte	.LBB3
+ 1105 0255 1A000000 		.4byte	.LBE3-.LBB3
+ 1106 0259 0A       		.uleb128 0xa
+ 1107 025a 6900     		.ascii	"i\000"
+ 1108 025c 01       		.byte	0x1
+ 1109 025d 9E       		.byte	0x9e
+ 1110 025e 68000000 		.4byte	0x68
+ 1111 0262 02       		.uleb128 0x2
+ 1112 0263 91       		.byte	0x91
+ 1113 0264 74       		.sleb128 -12
+ 1114 0265 00       		.byte	0
+ 1115 0266 00       		.byte	0
+ 1116 0267 0D       		.uleb128 0xd
+ 1117 0268 4A010000 		.4byte	.LASF28
+ 1118 026c 05       		.byte	0x5
+ 1119 026d 0F       		.byte	0xf
+ 1120 026e 68000000 		.4byte	0x68
+ 1121 0272 0E       		.uleb128 0xe
+ 1122 0273 81000000 		.4byte	0x81
+ 1123 0277 82020000 		.4byte	0x282
+ 1124 027b 0F       		.uleb128 0xf
+ 1125 027c B5000000 		.4byte	0xb5
+ 1126 0280 FE       		.byte	0xfe
+ 1127 0281 00       		.byte	0
+ 1128 0282 10       		.uleb128 0x10
+ 1129 0283 0F020000 		.4byte	.LASF29
+ 1130 0287 01       		.byte	0x1
+ 1131 0288 0F       		.byte	0xf
+ 1132 0289 72020000 		.4byte	0x272
+ 1133 028d 05       		.uleb128 0x5
+ 1134 028e 03       		.byte	0x3
+ 1135 028f 00000000 		.4byte	screen_buffer
+ 1136 0293 00       		.byte	0
+ 1137              		.section	.debug_abbrev,"",%progbits
+ 1138              	.Ldebug_abbrev0:
+ 1139 0000 01       		.uleb128 0x1
+ 1140 0001 11       		.uleb128 0x11
+ 1141 0002 01       		.byte	0x1
+ 1142 0003 25       		.uleb128 0x25
+ 1143 0004 0E       		.uleb128 0xe
+ 1144 0005 13       		.uleb128 0x13
+ 1145 0006 0B       		.uleb128 0xb
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccXVKO4t.s 			page 24
+
+
+ 1146 0007 03       		.uleb128 0x3
+ 1147 0008 0E       		.uleb128 0xe
+ 1148 0009 1B       		.uleb128 0x1b
+ 1149 000a 0E       		.uleb128 0xe
+ 1150 000b 55       		.uleb128 0x55
+ 1151 000c 17       		.uleb128 0x17
+ 1152 000d 11       		.uleb128 0x11
+ 1153 000e 01       		.uleb128 0x1
+ 1154 000f 10       		.uleb128 0x10
+ 1155 0010 17       		.uleb128 0x17
+ 1156 0011 00       		.byte	0
+ 1157 0012 00       		.byte	0
+ 1158 0013 02       		.uleb128 0x2
+ 1159 0014 24       		.uleb128 0x24
+ 1160 0015 00       		.byte	0
+ 1161 0016 0B       		.uleb128 0xb
+ 1162 0017 0B       		.uleb128 0xb
+ 1163 0018 3E       		.uleb128 0x3e
+ 1164 0019 0B       		.uleb128 0xb
+ 1165 001a 03       		.uleb128 0x3
+ 1166 001b 0E       		.uleb128 0xe
+ 1167 001c 00       		.byte	0
+ 1168 001d 00       		.byte	0
+ 1169 001e 03       		.uleb128 0x3
+ 1170 001f 16       		.uleb128 0x16
+ 1171 0020 00       		.byte	0
+ 1172 0021 03       		.uleb128 0x3
+ 1173 0022 0E       		.uleb128 0xe
+ 1174 0023 3A       		.uleb128 0x3a
+ 1175 0024 0B       		.uleb128 0xb
+ 1176 0025 3B       		.uleb128 0x3b
+ 1177 0026 0B       		.uleb128 0xb
+ 1178 0027 49       		.uleb128 0x49
+ 1179 0028 13       		.uleb128 0x13
+ 1180 0029 00       		.byte	0
+ 1181 002a 00       		.byte	0
+ 1182 002b 04       		.uleb128 0x4
+ 1183 002c 24       		.uleb128 0x24
+ 1184 002d 00       		.byte	0
+ 1185 002e 0B       		.uleb128 0xb
+ 1186 002f 0B       		.uleb128 0xb
+ 1187 0030 3E       		.uleb128 0x3e
+ 1188 0031 0B       		.uleb128 0xb
+ 1189 0032 03       		.uleb128 0x3
+ 1190 0033 08       		.uleb128 0x8
+ 1191 0034 00       		.byte	0
+ 1192 0035 00       		.byte	0
+ 1193 0036 05       		.uleb128 0x5
+ 1194 0037 16       		.uleb128 0x16
+ 1195 0038 00       		.byte	0
+ 1196 0039 03       		.uleb128 0x3
+ 1197 003a 0E       		.uleb128 0xe
+ 1198 003b 3A       		.uleb128 0x3a
+ 1199 003c 0B       		.uleb128 0xb
+ 1200 003d 3B       		.uleb128 0x3b
+ 1201 003e 05       		.uleb128 0x5
+ 1202 003f 49       		.uleb128 0x49
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccXVKO4t.s 			page 25
+
+
+ 1203 0040 13       		.uleb128 0x13
+ 1204 0041 00       		.byte	0
+ 1205 0042 00       		.byte	0
+ 1206 0043 06       		.uleb128 0x6
+ 1207 0044 2E       		.uleb128 0x2e
+ 1208 0045 01       		.byte	0x1
+ 1209 0046 3F       		.uleb128 0x3f
+ 1210 0047 19       		.uleb128 0x19
+ 1211 0048 03       		.uleb128 0x3
+ 1212 0049 0E       		.uleb128 0xe
+ 1213 004a 3A       		.uleb128 0x3a
+ 1214 004b 0B       		.uleb128 0xb
+ 1215 004c 3B       		.uleb128 0x3b
+ 1216 004d 0B       		.uleb128 0xb
+ 1217 004e 27       		.uleb128 0x27
+ 1218 004f 19       		.uleb128 0x19
+ 1219 0050 11       		.uleb128 0x11
+ 1220 0051 01       		.uleb128 0x1
+ 1221 0052 12       		.uleb128 0x12
+ 1222 0053 06       		.uleb128 0x6
+ 1223 0054 40       		.uleb128 0x40
+ 1224 0055 18       		.uleb128 0x18
+ 1225 0056 9642     		.uleb128 0x2116
+ 1226 0058 19       		.uleb128 0x19
+ 1227 0059 01       		.uleb128 0x1
+ 1228 005a 13       		.uleb128 0x13
+ 1229 005b 00       		.byte	0
+ 1230 005c 00       		.byte	0
+ 1231 005d 07       		.uleb128 0x7
+ 1232 005e 05       		.uleb128 0x5
+ 1233 005f 00       		.byte	0
+ 1234 0060 03       		.uleb128 0x3
+ 1235 0061 08       		.uleb128 0x8
+ 1236 0062 3A       		.uleb128 0x3a
+ 1237 0063 0B       		.uleb128 0xb
+ 1238 0064 3B       		.uleb128 0x3b
+ 1239 0065 0B       		.uleb128 0xb
+ 1240 0066 49       		.uleb128 0x49
+ 1241 0067 13       		.uleb128 0x13
+ 1242 0068 02       		.uleb128 0x2
+ 1243 0069 18       		.uleb128 0x18
+ 1244 006a 00       		.byte	0
+ 1245 006b 00       		.byte	0
+ 1246 006c 08       		.uleb128 0x8
+ 1247 006d 05       		.uleb128 0x5
+ 1248 006e 00       		.byte	0
+ 1249 006f 03       		.uleb128 0x3
+ 1250 0070 0E       		.uleb128 0xe
+ 1251 0071 3A       		.uleb128 0x3a
+ 1252 0072 0B       		.uleb128 0xb
+ 1253 0073 3B       		.uleb128 0x3b
+ 1254 0074 0B       		.uleb128 0xb
+ 1255 0075 49       		.uleb128 0x49
+ 1256 0076 13       		.uleb128 0x13
+ 1257 0077 02       		.uleb128 0x2
+ 1258 0078 18       		.uleb128 0x18
+ 1259 0079 00       		.byte	0
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccXVKO4t.s 			page 26
+
+
+ 1260 007a 00       		.byte	0
+ 1261 007b 09       		.uleb128 0x9
+ 1262 007c 0B       		.uleb128 0xb
+ 1263 007d 01       		.byte	0x1
+ 1264 007e 11       		.uleb128 0x11
+ 1265 007f 01       		.uleb128 0x1
+ 1266 0080 12       		.uleb128 0x12
+ 1267 0081 06       		.uleb128 0x6
+ 1268 0082 00       		.byte	0
+ 1269 0083 00       		.byte	0
+ 1270 0084 0A       		.uleb128 0xa
+ 1271 0085 34       		.uleb128 0x34
+ 1272 0086 00       		.byte	0
+ 1273 0087 03       		.uleb128 0x3
+ 1274 0088 08       		.uleb128 0x8
+ 1275 0089 3A       		.uleb128 0x3a
+ 1276 008a 0B       		.uleb128 0xb
+ 1277 008b 3B       		.uleb128 0x3b
+ 1278 008c 0B       		.uleb128 0xb
+ 1279 008d 49       		.uleb128 0x49
+ 1280 008e 13       		.uleb128 0x13
+ 1281 008f 02       		.uleb128 0x2
+ 1282 0090 18       		.uleb128 0x18
+ 1283 0091 00       		.byte	0
+ 1284 0092 00       		.byte	0
+ 1285 0093 0B       		.uleb128 0xb
+ 1286 0094 2E       		.uleb128 0x2e
+ 1287 0095 00       		.byte	0
+ 1288 0096 3F       		.uleb128 0x3f
+ 1289 0097 19       		.uleb128 0x19
+ 1290 0098 03       		.uleb128 0x3
+ 1291 0099 0E       		.uleb128 0xe
+ 1292 009a 3A       		.uleb128 0x3a
+ 1293 009b 0B       		.uleb128 0xb
+ 1294 009c 3B       		.uleb128 0x3b
+ 1295 009d 0B       		.uleb128 0xb
+ 1296 009e 27       		.uleb128 0x27
+ 1297 009f 19       		.uleb128 0x19
+ 1298 00a0 11       		.uleb128 0x11
+ 1299 00a1 01       		.uleb128 0x1
+ 1300 00a2 12       		.uleb128 0x12
+ 1301 00a3 06       		.uleb128 0x6
+ 1302 00a4 40       		.uleb128 0x40
+ 1303 00a5 18       		.uleb128 0x18
+ 1304 00a6 9642     		.uleb128 0x2116
+ 1305 00a8 19       		.uleb128 0x19
+ 1306 00a9 00       		.byte	0
+ 1307 00aa 00       		.byte	0
+ 1308 00ab 0C       		.uleb128 0xc
+ 1309 00ac 2E       		.uleb128 0x2e
+ 1310 00ad 01       		.byte	0x1
+ 1311 00ae 3F       		.uleb128 0x3f
+ 1312 00af 19       		.uleb128 0x19
+ 1313 00b0 03       		.uleb128 0x3
+ 1314 00b1 0E       		.uleb128 0xe
+ 1315 00b2 3A       		.uleb128 0x3a
+ 1316 00b3 0B       		.uleb128 0xb
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccXVKO4t.s 			page 27
+
+
+ 1317 00b4 3B       		.uleb128 0x3b
+ 1318 00b5 0B       		.uleb128 0xb
+ 1319 00b6 11       		.uleb128 0x11
+ 1320 00b7 01       		.uleb128 0x1
+ 1321 00b8 12       		.uleb128 0x12
+ 1322 00b9 06       		.uleb128 0x6
+ 1323 00ba 40       		.uleb128 0x40
+ 1324 00bb 18       		.uleb128 0x18
+ 1325 00bc 9642     		.uleb128 0x2116
+ 1326 00be 19       		.uleb128 0x19
+ 1327 00bf 01       		.uleb128 0x1
+ 1328 00c0 13       		.uleb128 0x13
+ 1329 00c1 00       		.byte	0
+ 1330 00c2 00       		.byte	0
+ 1331 00c3 0D       		.uleb128 0xd
+ 1332 00c4 34       		.uleb128 0x34
+ 1333 00c5 00       		.byte	0
+ 1334 00c6 03       		.uleb128 0x3
+ 1335 00c7 0E       		.uleb128 0xe
+ 1336 00c8 3A       		.uleb128 0x3a
+ 1337 00c9 0B       		.uleb128 0xb
+ 1338 00ca 3B       		.uleb128 0x3b
+ 1339 00cb 0B       		.uleb128 0xb
+ 1340 00cc 49       		.uleb128 0x49
+ 1341 00cd 13       		.uleb128 0x13
+ 1342 00ce 3F       		.uleb128 0x3f
+ 1343 00cf 19       		.uleb128 0x19
+ 1344 00d0 3C       		.uleb128 0x3c
+ 1345 00d1 19       		.uleb128 0x19
+ 1346 00d2 00       		.byte	0
+ 1347 00d3 00       		.byte	0
+ 1348 00d4 0E       		.uleb128 0xe
+ 1349 00d5 01       		.uleb128 0x1
+ 1350 00d6 01       		.byte	0x1
+ 1351 00d7 49       		.uleb128 0x49
+ 1352 00d8 13       		.uleb128 0x13
+ 1353 00d9 01       		.uleb128 0x1
+ 1354 00da 13       		.uleb128 0x13
+ 1355 00db 00       		.byte	0
+ 1356 00dc 00       		.byte	0
+ 1357 00dd 0F       		.uleb128 0xf
+ 1358 00de 21       		.uleb128 0x21
+ 1359 00df 00       		.byte	0
+ 1360 00e0 49       		.uleb128 0x49
+ 1361 00e1 13       		.uleb128 0x13
+ 1362 00e2 2F       		.uleb128 0x2f
+ 1363 00e3 0B       		.uleb128 0xb
+ 1364 00e4 00       		.byte	0
+ 1365 00e5 00       		.byte	0
+ 1366 00e6 10       		.uleb128 0x10
+ 1367 00e7 34       		.uleb128 0x34
+ 1368 00e8 00       		.byte	0
+ 1369 00e9 03       		.uleb128 0x3
+ 1370 00ea 0E       		.uleb128 0xe
+ 1371 00eb 3A       		.uleb128 0x3a
+ 1372 00ec 0B       		.uleb128 0xb
+ 1373 00ed 3B       		.uleb128 0x3b
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccXVKO4t.s 			page 28
+
+
+ 1374 00ee 0B       		.uleb128 0xb
+ 1375 00ef 49       		.uleb128 0x49
+ 1376 00f0 13       		.uleb128 0x13
+ 1377 00f1 3F       		.uleb128 0x3f
+ 1378 00f2 19       		.uleb128 0x19
+ 1379 00f3 02       		.uleb128 0x2
+ 1380 00f4 18       		.uleb128 0x18
+ 1381 00f5 00       		.byte	0
+ 1382 00f6 00       		.byte	0
+ 1383 00f7 00       		.byte	0
+ 1384              		.section	.debug_aranges,"",%progbits
+ 1385 0000 54000000 		.4byte	0x54
+ 1386 0004 0200     		.2byte	0x2
+ 1387 0006 00000000 		.4byte	.Ldebug_info0
+ 1388 000a 04       		.byte	0x4
+ 1389 000b 00       		.byte	0
+ 1390 000c 0000     		.2byte	0
+ 1391 000e 0000     		.2byte	0
+ 1392 0010 00000000 		.4byte	.LFB0
+ 1393 0014 3C000000 		.4byte	.LFE0-.LFB0
+ 1394 0018 00000000 		.4byte	.LFB1
+ 1395 001c 3C000000 		.4byte	.LFE1-.LFB1
+ 1396 0020 00000000 		.4byte	.LFB2
+ 1397 0024 1C010000 		.4byte	.LFE2-.LFB2
+ 1398 0028 00000000 		.4byte	.LFB3
+ 1399 002c 6E000000 		.4byte	.LFE3-.LFB3
+ 1400 0030 00000000 		.4byte	.LFB4
+ 1401 0034 B0000000 		.4byte	.LFE4-.LFB4
+ 1402 0038 00000000 		.4byte	.LFB5
+ 1403 003c F4000000 		.4byte	.LFE5-.LFB5
+ 1404 0040 00000000 		.4byte	.LFB6
+ 1405 0044 26000000 		.4byte	.LFE6-.LFB6
+ 1406 0048 00000000 		.4byte	.LFB7
+ 1407 004c 4C000000 		.4byte	.LFE7-.LFB7
+ 1408 0050 00000000 		.4byte	0
+ 1409 0054 00000000 		.4byte	0
+ 1410              		.section	.debug_ranges,"",%progbits
+ 1411              	.Ldebug_ranges0:
+ 1412 0000 00000000 		.4byte	.LFB0
+ 1413 0004 3C000000 		.4byte	.LFE0
+ 1414 0008 00000000 		.4byte	.LFB1
+ 1415 000c 3C000000 		.4byte	.LFE1
+ 1416 0010 00000000 		.4byte	.LFB2
+ 1417 0014 1C010000 		.4byte	.LFE2
+ 1418 0018 00000000 		.4byte	.LFB3
+ 1419 001c 6E000000 		.4byte	.LFE3
+ 1420 0020 00000000 		.4byte	.LFB4
+ 1421 0024 B0000000 		.4byte	.LFE4
+ 1422 0028 00000000 		.4byte	.LFB5
+ 1423 002c F4000000 		.4byte	.LFE5
+ 1424 0030 00000000 		.4byte	.LFB6
+ 1425 0034 26000000 		.4byte	.LFE6
+ 1426 0038 00000000 		.4byte	.LFB7
+ 1427 003c 4C000000 		.4byte	.LFE7
+ 1428 0040 00000000 		.4byte	0
+ 1429 0044 00000000 		.4byte	0
+ 1430              		.section	.debug_line,"",%progbits
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccXVKO4t.s 			page 29
+
+
+ 1431              	.Ldebug_line0:
+ 1432 0000 B5020000 		.section	.debug_str,"MS",%progbits,1
+ 1432      02005201 
+ 1432      00000201 
+ 1432      FB0E0D00 
+ 1432      01010101 
+ 1433              	.LASF6:
+ 1434 0000 6C6F6E67 		.ascii	"long long int\000"
+ 1434      206C6F6E 
+ 1434      6720696E 
+ 1434      7400
+ 1435              	.LASF9:
+ 1436 000e 5F5F7569 		.ascii	"__uint8_t\000"
+ 1436      6E74385F 
+ 1436      7400
+ 1437              	.LASF30:
+ 1438 0018 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 1438      43313120 
+ 1438      352E342E 
+ 1438      31203230 
+ 1438      31363036 
+ 1439 004b 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 1439      20726576 
+ 1439      6973696F 
+ 1439      6E203233 
+ 1439      37373135 
+ 1440 007e 30202D66 		.ascii	"0 -ffunction-sections -ffat-lto-objects\000"
+ 1440      66756E63 
+ 1440      74696F6E 
+ 1440      2D736563 
+ 1440      74696F6E 
+ 1441              	.LASF26:
+ 1442 00a6 6F75745F 		.ascii	"out_color\000"
+ 1442      636F6C6F 
+ 1442      7200
+ 1443              	.LASF3:
+ 1444 00b0 73686F72 		.ascii	"short unsigned int\000"
+ 1444      7420756E 
+ 1444      7369676E 
+ 1444      65642069 
+ 1444      6E7400
+ 1445              	.LASF10:
+ 1446 00c3 75696E74 		.ascii	"uint8_t\000"
+ 1446      385F7400 
+ 1447              	.LASF13:
+ 1448 00cb 666C6F61 		.ascii	"float\000"
+ 1448      7400
+ 1449              	.LASF20:
+ 1450 00d1 64617461 		.ascii	"data\000"
+ 1450      00
+ 1451              	.LASF22:
+ 1452 00d6 64726177 		.ascii	"draw_pixel\000"
+ 1452      5F706978 
+ 1452      656C00
+ 1453              	.LASF33:
+ 1454 00e1 636C6561 		.ascii	"clear_whole_display\000"
+ 1454      725F7768 
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccXVKO4t.s 			page 30
+
+
+ 1454      6F6C655F 
+ 1454      64697370 
+ 1454      6C617900 
+ 1455              	.LASF1:
+ 1456 00f5 756E7369 		.ascii	"unsigned char\000"
+ 1456      676E6564 
+ 1456      20636861 
+ 1456      7200
+ 1457              	.LASF5:
+ 1458 0103 6C6F6E67 		.ascii	"long unsigned int\000"
+ 1458      20756E73 
+ 1458      69676E65 
+ 1458      6420696E 
+ 1458      7400
+ 1459              	.LASF14:
+ 1460 0115 646F7562 		.ascii	"double\000"
+ 1460      6C6500
+ 1461              	.LASF19:
+ 1462 011c 73656E64 		.ascii	"send_data\000"
+ 1462      5F646174 
+ 1462      6100
+ 1463              	.LASF23:
+ 1464 0126 636F6C6F 		.ascii	"color\000"
+ 1464      7200
+ 1465              	.LASF12:
+ 1466 012c 75696E74 		.ascii	"uint16\000"
+ 1466      313600
+ 1467              	.LASF24:
+ 1468 0133 64726177 		.ascii	"draw_line\000"
+ 1468      5F6C696E 
+ 1468      6500
+ 1469              	.LASF8:
+ 1470 013d 756E7369 		.ascii	"unsigned int\000"
+ 1470      676E6564 
+ 1470      20696E74 
+ 1470      00
+ 1471              	.LASF28:
+ 1472 014a 7370695F 		.ascii	"spi_done\000"
+ 1472      646F6E65 
+ 1472      00
+ 1473              	.LASF7:
+ 1474 0153 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 1474      206C6F6E 
+ 1474      6720756E 
+ 1474      7369676E 
+ 1474      65642069 
+ 1475              	.LASF32:
+ 1476 016a 433A5C55 		.ascii	"C:\\Users\\Matthew\\Dropbox (MIT)\\Sophomore Spring"
+ 1476      73657273 
+ 1476      5C4D6174 
+ 1476      74686577 
+ 1476      5C44726F 
+ 1477 0199 5C362E31 		.ascii	"\\6.115\\6.115-Labs\\project\\DVDAC_Example01\\DVDA"
+ 1477      31355C36 
+ 1477      2E313135 
+ 1477      2D4C6162 
+ 1477      735C7072 
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccXVKO4t.s 			page 31
+
+
+ 1478 01c7 435F4578 		.ascii	"C_Example01.cydsn\000"
+ 1478      616D706C 
+ 1478      6530312E 
+ 1478      63796473 
+ 1478      6E00
+ 1479              	.LASF18:
+ 1480 01d9 73656E64 		.ascii	"send_cmd\000"
+ 1480      5F636D64 
+ 1480      00
+ 1481              	.LASF17:
+ 1482 01e2 73697A65 		.ascii	"sizetype\000"
+ 1482      74797065 
+ 1482      00
+ 1483              	.LASF27:
+ 1484 01eb 66696C6C 		.ascii	"fill_color\000"
+ 1484      5F636F6C 
+ 1484      6F7200
+ 1485              	.LASF25:
+ 1486 01f6 64726177 		.ascii	"draw_rect\000"
+ 1486      5F726563 
+ 1486      7400
+ 1487              	.LASF15:
+ 1488 0200 63686172 		.ascii	"char\000"
+ 1488      00
+ 1489              	.LASF21:
+ 1490 0205 696E6974 		.ascii	"init_oled\000"
+ 1490      5F6F6C65 
+ 1490      6400
+ 1491              	.LASF29:
+ 1492 020f 73637265 		.ascii	"screen_buffer\000"
+ 1492      656E5F62 
+ 1492      75666665 
+ 1492      7200
+ 1493              	.LASF2:
+ 1494 021d 73686F72 		.ascii	"short int\000"
+ 1494      7420696E 
+ 1494      7400
+ 1495              	.LASF11:
+ 1496 0227 75696E74 		.ascii	"uint8\000"
+ 1496      3800
+ 1497              	.LASF4:
+ 1498 022d 6C6F6E67 		.ascii	"long int\000"
+ 1498      20696E74 
+ 1498      00
+ 1499              	.LASF16:
+ 1500 0236 6C6F6E67 		.ascii	"long double\000"
+ 1500      20646F75 
+ 1500      626C6500 
+ 1501              	.LASF0:
+ 1502 0242 7369676E 		.ascii	"signed char\000"
+ 1502      65642063 
+ 1502      68617200 
+ 1503              	.LASF34:
+ 1504 024e 636C6561 		.ascii	"clear_whole_display_by_pixel\000"
+ 1504      725F7768 
+ 1504      6F6C655F 
+ 1504      64697370 
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccXVKO4t.s 			page 32
+
+
+ 1504      6C61795F 
+ 1505              	.LASF31:
+ 1506 026b 6F6C6564 		.ascii	"oled_ssd1331.c\000"
+ 1506      5F737364 
+ 1506      31333331 
+ 1506      2E6300
+ 1507              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

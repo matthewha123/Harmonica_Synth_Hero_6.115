@@ -1,0 +1,732 @@
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccQKdTfJ.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"led_mux.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.led_read_mux,"ax",%progbits
+  20              		.align	2
+  21              		.global	led_read_mux
+  22              		.thumb
+  23              		.thumb_func
+  24              		.type	led_read_mux, %function
+  25              	led_read_mux:
+  26              	.LFB0:
+  27              		.file 1 "led_mux.c"
+   1:led_mux.c     **** /* ========================================
+   2:led_mux.c     ****  *
+   3:led_mux.c     ****  * Copyright YOUR COMPANY, THE YEAR
+   4:led_mux.c     ****  * All Rights Reserved
+   5:led_mux.c     ****  * UNPUBLISHED, LICENSED SOFTWARE.
+   6:led_mux.c     ****  *
+   7:led_mux.c     ****  * CONFIDENTIAL AND PROPRIETARY INFORMATION
+   8:led_mux.c     ****  * WHICH IS THE PROPERTY OF your company.
+   9:led_mux.c     ****  *
+  10:led_mux.c     ****  * ========================================
+  11:led_mux.c     **** */
+  12:led_mux.c     **** #include "led_mux.h"
+  13:led_mux.c     **** 
+  14:led_mux.c     **** int16 led_read_mux(int8 channel) {
+  28              		.loc 1 14 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 8
+  31              		@ frame_needed = 1, uses_anonymous_args = 0
+  32 0000 80B5     		push	{r7, lr}
+  33              		.cfi_def_cfa_offset 8
+  34              		.cfi_offset 7, -8
+  35              		.cfi_offset 14, -4
+  36 0002 82B0     		sub	sp, sp, #8
+  37              		.cfi_def_cfa_offset 16
+  38 0004 00AF     		add	r7, sp, #0
+  39              		.cfi_def_cfa_register 7
+  40 0006 0346     		mov	r3, r0
+  41 0008 FB71     		strb	r3, [r7, #7]
+  15:led_mux.c     ****     led_enable_mux(channel);
+  42              		.loc 1 15 0
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccQKdTfJ.s 			page 2
+
+
+  43 000a 97F90730 		ldrsb	r3, [r7, #7]
+  44 000e 1846     		mov	r0, r3
+  45 0010 FFF7FEFF 		bl	led_enable_mux
+  16:led_mux.c     ****     inhibit_output(0);
+  46              		.loc 1 16 0
+  47 0014 0020     		movs	r0, #0
+  48 0016 FFF7FEFF 		bl	inhibit_output
+  17:led_mux.c     ****     CyDelayCycles(10);
+  49              		.loc 1 17 0
+  50 001a 0A20     		movs	r0, #10
+  51 001c FFF7FEFF 		bl	CyDelayCycles
+  18:led_mux.c     ****     
+  19:led_mux.c     ****     
+  20:led_mux.c     **** }
+  52              		.loc 1 20 0
+  53 0020 00BF     		nop
+  54 0022 1846     		mov	r0, r3
+  55 0024 0837     		adds	r7, r7, #8
+  56              		.cfi_def_cfa_offset 8
+  57 0026 BD46     		mov	sp, r7
+  58              		.cfi_def_cfa_register 13
+  59              		@ sp needed
+  60 0028 80BD     		pop	{r7, pc}
+  61              		.cfi_endproc
+  62              	.LFE0:
+  63              		.size	led_read_mux, .-led_read_mux
+  64 002a 00BF     		.section	.text.led_enable_mux,"ax",%progbits
+  65              		.align	2
+  66              		.global	led_enable_mux
+  67              		.thumb
+  68              		.thumb_func
+  69              		.type	led_enable_mux, %function
+  70              	led_enable_mux:
+  71              	.LFB1:
+  21:led_mux.c     **** 
+  22:led_mux.c     **** void led_enable_mux(int8 channel) {    
+  72              		.loc 1 22 0
+  73              		.cfi_startproc
+  74              		@ args = 0, pretend = 0, frame = 16
+  75              		@ frame_needed = 1, uses_anonymous_args = 0
+  76 0000 80B5     		push	{r7, lr}
+  77              		.cfi_def_cfa_offset 8
+  78              		.cfi_offset 7, -8
+  79              		.cfi_offset 14, -4
+  80 0002 84B0     		sub	sp, sp, #16
+  81              		.cfi_def_cfa_offset 24
+  82 0004 00AF     		add	r7, sp, #0
+  83              		.cfi_def_cfa_register 7
+  84 0006 0346     		mov	r3, r0
+  85 0008 FB71     		strb	r3, [r7, #7]
+  23:led_mux.c     ****     int8 channel_masked = channel & (0x0F);
+  86              		.loc 1 23 0
+  87 000a FB79     		ldrb	r3, [r7, #7]
+  88 000c 03F00F03 		and	r3, r3, #15
+  89 0010 FB73     		strb	r3, [r7, #15]
+  24:led_mux.c     ****     MUX_A_Write((channel_masked >> 0)&0x01);
+  90              		.loc 1 24 0
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccQKdTfJ.s 			page 3
+
+
+  91 0012 FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+  92 0014 03F00103 		and	r3, r3, #1
+  93 0018 DBB2     		uxtb	r3, r3
+  94 001a 1846     		mov	r0, r3
+  95 001c FFF7FEFF 		bl	MUX_A_Write
+  25:led_mux.c     ****     MUX_B_Write((channel_masked >> 1) & 0x01);
+  96              		.loc 1 25 0
+  97 0020 97F90F30 		ldrsb	r3, [r7, #15]
+  98 0024 5B10     		asrs	r3, r3, #1
+  99 0026 5BB2     		sxtb	r3, r3
+ 100 0028 DBB2     		uxtb	r3, r3
+ 101 002a 03F00103 		and	r3, r3, #1
+ 102 002e DBB2     		uxtb	r3, r3
+ 103 0030 1846     		mov	r0, r3
+ 104 0032 FFF7FEFF 		bl	MUX_B_Write
+  26:led_mux.c     ****     MUX_C_Write((channel_masked >> 2) & 0x01);
+ 105              		.loc 1 26 0
+ 106 0036 97F90F30 		ldrsb	r3, [r7, #15]
+ 107 003a 9B10     		asrs	r3, r3, #2
+ 108 003c 5BB2     		sxtb	r3, r3
+ 109 003e DBB2     		uxtb	r3, r3
+ 110 0040 03F00103 		and	r3, r3, #1
+ 111 0044 DBB2     		uxtb	r3, r3
+ 112 0046 1846     		mov	r0, r3
+ 113 0048 FFF7FEFF 		bl	MUX_C_Write
+  27:led_mux.c     ****     MUX_D_Write((channel_masked >> 3) & 0x01);
+ 114              		.loc 1 27 0
+ 115 004c 97F90F30 		ldrsb	r3, [r7, #15]
+ 116 0050 DB10     		asrs	r3, r3, #3
+ 117 0052 5BB2     		sxtb	r3, r3
+ 118 0054 DBB2     		uxtb	r3, r3
+ 119 0056 03F00103 		and	r3, r3, #1
+ 120 005a DBB2     		uxtb	r3, r3
+ 121 005c 1846     		mov	r0, r3
+ 122 005e FFF7FEFF 		bl	MUX_D_Write
+  28:led_mux.c     **** }
+ 123              		.loc 1 28 0
+ 124 0062 00BF     		nop
+ 125 0064 1037     		adds	r7, r7, #16
+ 126              		.cfi_def_cfa_offset 8
+ 127 0066 BD46     		mov	sp, r7
+ 128              		.cfi_def_cfa_register 13
+ 129              		@ sp needed
+ 130 0068 80BD     		pop	{r7, pc}
+ 131              		.cfi_endproc
+ 132              	.LFE1:
+ 133              		.size	led_enable_mux, .-led_enable_mux
+ 134 006a 00BF     		.section	.text.inhibit_output,"ax",%progbits
+ 135              		.align	2
+ 136              		.global	inhibit_output
+ 137              		.thumb
+ 138              		.thumb_func
+ 139              		.type	inhibit_output, %function
+ 140              	inhibit_output:
+ 141              	.LFB2:
+  29:led_mux.c     **** 
+  30:led_mux.c     **** void inhibit_output(int8 inhibit) {
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccQKdTfJ.s 			page 4
+
+
+ 142              		.loc 1 30 0
+ 143              		.cfi_startproc
+ 144              		@ args = 0, pretend = 0, frame = 8
+ 145              		@ frame_needed = 1, uses_anonymous_args = 0
+ 146 0000 80B5     		push	{r7, lr}
+ 147              		.cfi_def_cfa_offset 8
+ 148              		.cfi_offset 7, -8
+ 149              		.cfi_offset 14, -4
+ 150 0002 82B0     		sub	sp, sp, #8
+ 151              		.cfi_def_cfa_offset 16
+ 152 0004 00AF     		add	r7, sp, #0
+ 153              		.cfi_def_cfa_register 7
+ 154 0006 0346     		mov	r3, r0
+ 155 0008 FB71     		strb	r3, [r7, #7]
+  31:led_mux.c     ****     if(inhibit == 0) {
+ 156              		.loc 1 31 0
+ 157 000a 97F90730 		ldrsb	r3, [r7, #7]
+ 158 000e 002B     		cmp	r3, #0
+ 159 0010 03D1     		bne	.L4
+  32:led_mux.c     ****         MUX_INHIBIT_Write(0);
+ 160              		.loc 1 32 0
+ 161 0012 0020     		movs	r0, #0
+ 162 0014 FFF7FEFF 		bl	MUX_INHIBIT_Write
+  33:led_mux.c     ****     } else {
+  34:led_mux.c     ****         MUX_INHIBIT_Write(1);
+  35:led_mux.c     ****     }
+  36:led_mux.c     **** }
+ 163              		.loc 1 36 0
+ 164 0018 02E0     		b	.L6
+ 165              	.L4:
+  34:led_mux.c     ****     }
+ 166              		.loc 1 34 0
+ 167 001a 0120     		movs	r0, #1
+ 168 001c FFF7FEFF 		bl	MUX_INHIBIT_Write
+ 169              	.L6:
+ 170              		.loc 1 36 0
+ 171 0020 00BF     		nop
+ 172 0022 0837     		adds	r7, r7, #8
+ 173              		.cfi_def_cfa_offset 8
+ 174 0024 BD46     		mov	sp, r7
+ 175              		.cfi_def_cfa_register 13
+ 176              		@ sp needed
+ 177 0026 80BD     		pop	{r7, pc}
+ 178              		.cfi_endproc
+ 179              	.LFE2:
+ 180              		.size	inhibit_output, .-inhibit_output
+ 181              		.text
+ 182              	.Letext0:
+ 183              		.file 2 "Generated_Source\\PSoC5/cytypes.h"
+ 184              		.section	.debug_info,"",%progbits
+ 185              	.Ldebug_info0:
+ 186 0000 1D010000 		.4byte	0x11d
+ 187 0004 0400     		.2byte	0x4
+ 188 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 189 000a 04       		.byte	0x4
+ 190 000b 01       		.uleb128 0x1
+ 191 000c DC000000 		.4byte	.LASF18
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccQKdTfJ.s 			page 5
+
+
+ 192 0010 0C       		.byte	0xc
+ 193 0011 1B000000 		.4byte	.LASF19
+ 194 0015 4B000000 		.4byte	.LASF20
+ 195 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 196 001d 00000000 		.4byte	0
+ 197 0021 00000000 		.4byte	.Ldebug_line0
+ 198 0025 02       		.uleb128 0x2
+ 199 0026 01       		.byte	0x1
+ 200 0027 06       		.byte	0x6
+ 201 0028 C7010000 		.4byte	.LASF0
+ 202 002c 02       		.uleb128 0x2
+ 203 002d 01       		.byte	0x1
+ 204 002e 08       		.byte	0x8
+ 205 002f 6A010000 		.4byte	.LASF1
+ 206 0033 02       		.uleb128 0x2
+ 207 0034 02       		.byte	0x2
+ 208 0035 05       		.byte	0x5
+ 209 0036 F4010000 		.4byte	.LASF2
+ 210 003a 02       		.uleb128 0x2
+ 211 003b 02       		.byte	0x2
+ 212 003c 07       		.byte	0x7
+ 213 003d B4010000 		.4byte	.LASF3
+ 214 0041 02       		.uleb128 0x2
+ 215 0042 04       		.byte	0x4
+ 216 0043 05       		.byte	0x5
+ 217 0044 8F010000 		.4byte	.LASF4
+ 218 0048 02       		.uleb128 0x2
+ 219 0049 04       		.byte	0x4
+ 220 004a 07       		.byte	0x7
+ 221 004b 39000000 		.4byte	.LASF5
+ 222 004f 02       		.uleb128 0x2
+ 223 0050 08       		.byte	0x8
+ 224 0051 05       		.byte	0x5
+ 225 0052 00000000 		.4byte	.LASF6
+ 226 0056 02       		.uleb128 0x2
+ 227 0057 08       		.byte	0x8
+ 228 0058 07       		.byte	0x7
+ 229 0059 BA000000 		.4byte	.LASF7
+ 230 005d 03       		.uleb128 0x3
+ 231 005e 04       		.byte	0x4
+ 232 005f 05       		.byte	0x5
+ 233 0060 696E7400 		.ascii	"int\000"
+ 234 0064 02       		.uleb128 0x2
+ 235 0065 04       		.byte	0x4
+ 236 0066 07       		.byte	0x7
+ 237 0067 0E000000 		.4byte	.LASF8
+ 238 006b 04       		.uleb128 0x4
+ 239 006c 25000000 		.4byte	.LASF9
+ 240 0070 02       		.byte	0x2
+ 241 0071 9501     		.2byte	0x195
+ 242 0073 25000000 		.4byte	0x25
+ 243 0077 04       		.uleb128 0x4
+ 244 0078 EE010000 		.4byte	.LASF10
+ 245 007c 02       		.byte	0x2
+ 246 007d 9601     		.2byte	0x196
+ 247 007f 33000000 		.4byte	0x33
+ 248 0083 02       		.uleb128 0x2
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccQKdTfJ.s 			page 6
+
+
+ 249 0084 04       		.byte	0x4
+ 250 0085 04       		.byte	0x4
+ 251 0086 D1000000 		.4byte	.LASF11
+ 252 008a 02       		.uleb128 0x2
+ 253 008b 08       		.byte	0x8
+ 254 008c 04       		.byte	0x4
+ 255 008d 98010000 		.4byte	.LASF12
+ 256 0091 02       		.uleb128 0x2
+ 257 0092 01       		.byte	0x1
+ 258 0093 08       		.byte	0x8
+ 259 0094 D7000000 		.4byte	.LASF13
+ 260 0098 02       		.uleb128 0x2
+ 261 0099 08       		.byte	0x8
+ 262 009a 04       		.byte	0x4
+ 263 009b E2010000 		.4byte	.LASF14
+ 264 009f 02       		.uleb128 0x2
+ 265 00a0 04       		.byte	0x4
+ 266 00a1 07       		.byte	0x7
+ 267 00a2 FE010000 		.4byte	.LASF15
+ 268 00a6 05       		.uleb128 0x5
+ 269 00a7 A7010000 		.4byte	.LASF21
+ 270 00ab 01       		.byte	0x1
+ 271 00ac 0E       		.byte	0xe
+ 272 00ad 77000000 		.4byte	0x77
+ 273 00b1 00000000 		.4byte	.LFB0
+ 274 00b5 2A000000 		.4byte	.LFE0-.LFB0
+ 275 00b9 01       		.uleb128 0x1
+ 276 00ba 9C       		.byte	0x9c
+ 277 00bb CE000000 		.4byte	0xce
+ 278 00bf 06       		.uleb128 0x6
+ 279 00c0 9F010000 		.4byte	.LASF16
+ 280 00c4 01       		.byte	0x1
+ 281 00c5 0E       		.byte	0xe
+ 282 00c6 6B000000 		.4byte	0x6b
+ 283 00ca 02       		.uleb128 0x2
+ 284 00cb 91       		.byte	0x91
+ 285 00cc 77       		.sleb128 -9
+ 286 00cd 00       		.byte	0
+ 287 00ce 07       		.uleb128 0x7
+ 288 00cf 80010000 		.4byte	.LASF22
+ 289 00d3 01       		.byte	0x1
+ 290 00d4 16       		.byte	0x16
+ 291 00d5 00000000 		.4byte	.LFB1
+ 292 00d9 6A000000 		.4byte	.LFE1-.LFB1
+ 293 00dd 01       		.uleb128 0x1
+ 294 00de 9C       		.byte	0x9c
+ 295 00df 00010000 		.4byte	0x100
+ 296 00e3 06       		.uleb128 0x6
+ 297 00e4 9F010000 		.4byte	.LASF16
+ 298 00e8 01       		.byte	0x1
+ 299 00e9 16       		.byte	0x16
+ 300 00ea 6B000000 		.4byte	0x6b
+ 301 00ee 02       		.uleb128 0x2
+ 302 00ef 91       		.byte	0x91
+ 303 00f0 6F       		.sleb128 -17
+ 304 00f1 08       		.uleb128 0x8
+ 305 00f2 D3010000 		.4byte	.LASF23
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccQKdTfJ.s 			page 7
+
+
+ 306 00f6 01       		.byte	0x1
+ 307 00f7 17       		.byte	0x17
+ 308 00f8 6B000000 		.4byte	0x6b
+ 309 00fc 02       		.uleb128 0x2
+ 310 00fd 91       		.byte	0x91
+ 311 00fe 77       		.sleb128 -9
+ 312 00ff 00       		.byte	0
+ 313 0100 09       		.uleb128 0x9
+ 314 0101 2A000000 		.4byte	.LASF24
+ 315 0105 01       		.byte	0x1
+ 316 0106 1E       		.byte	0x1e
+ 317 0107 00000000 		.4byte	.LFB2
+ 318 010b 28000000 		.4byte	.LFE2-.LFB2
+ 319 010f 01       		.uleb128 0x1
+ 320 0110 9C       		.byte	0x9c
+ 321 0111 06       		.uleb128 0x6
+ 322 0112 78010000 		.4byte	.LASF17
+ 323 0116 01       		.byte	0x1
+ 324 0117 1E       		.byte	0x1e
+ 325 0118 6B000000 		.4byte	0x6b
+ 326 011c 02       		.uleb128 0x2
+ 327 011d 91       		.byte	0x91
+ 328 011e 77       		.sleb128 -9
+ 329 011f 00       		.byte	0
+ 330 0120 00       		.byte	0
+ 331              		.section	.debug_abbrev,"",%progbits
+ 332              	.Ldebug_abbrev0:
+ 333 0000 01       		.uleb128 0x1
+ 334 0001 11       		.uleb128 0x11
+ 335 0002 01       		.byte	0x1
+ 336 0003 25       		.uleb128 0x25
+ 337 0004 0E       		.uleb128 0xe
+ 338 0005 13       		.uleb128 0x13
+ 339 0006 0B       		.uleb128 0xb
+ 340 0007 03       		.uleb128 0x3
+ 341 0008 0E       		.uleb128 0xe
+ 342 0009 1B       		.uleb128 0x1b
+ 343 000a 0E       		.uleb128 0xe
+ 344 000b 55       		.uleb128 0x55
+ 345 000c 17       		.uleb128 0x17
+ 346 000d 11       		.uleb128 0x11
+ 347 000e 01       		.uleb128 0x1
+ 348 000f 10       		.uleb128 0x10
+ 349 0010 17       		.uleb128 0x17
+ 350 0011 00       		.byte	0
+ 351 0012 00       		.byte	0
+ 352 0013 02       		.uleb128 0x2
+ 353 0014 24       		.uleb128 0x24
+ 354 0015 00       		.byte	0
+ 355 0016 0B       		.uleb128 0xb
+ 356 0017 0B       		.uleb128 0xb
+ 357 0018 3E       		.uleb128 0x3e
+ 358 0019 0B       		.uleb128 0xb
+ 359 001a 03       		.uleb128 0x3
+ 360 001b 0E       		.uleb128 0xe
+ 361 001c 00       		.byte	0
+ 362 001d 00       		.byte	0
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccQKdTfJ.s 			page 8
+
+
+ 363 001e 03       		.uleb128 0x3
+ 364 001f 24       		.uleb128 0x24
+ 365 0020 00       		.byte	0
+ 366 0021 0B       		.uleb128 0xb
+ 367 0022 0B       		.uleb128 0xb
+ 368 0023 3E       		.uleb128 0x3e
+ 369 0024 0B       		.uleb128 0xb
+ 370 0025 03       		.uleb128 0x3
+ 371 0026 08       		.uleb128 0x8
+ 372 0027 00       		.byte	0
+ 373 0028 00       		.byte	0
+ 374 0029 04       		.uleb128 0x4
+ 375 002a 16       		.uleb128 0x16
+ 376 002b 00       		.byte	0
+ 377 002c 03       		.uleb128 0x3
+ 378 002d 0E       		.uleb128 0xe
+ 379 002e 3A       		.uleb128 0x3a
+ 380 002f 0B       		.uleb128 0xb
+ 381 0030 3B       		.uleb128 0x3b
+ 382 0031 05       		.uleb128 0x5
+ 383 0032 49       		.uleb128 0x49
+ 384 0033 13       		.uleb128 0x13
+ 385 0034 00       		.byte	0
+ 386 0035 00       		.byte	0
+ 387 0036 05       		.uleb128 0x5
+ 388 0037 2E       		.uleb128 0x2e
+ 389 0038 01       		.byte	0x1
+ 390 0039 3F       		.uleb128 0x3f
+ 391 003a 19       		.uleb128 0x19
+ 392 003b 03       		.uleb128 0x3
+ 393 003c 0E       		.uleb128 0xe
+ 394 003d 3A       		.uleb128 0x3a
+ 395 003e 0B       		.uleb128 0xb
+ 396 003f 3B       		.uleb128 0x3b
+ 397 0040 0B       		.uleb128 0xb
+ 398 0041 27       		.uleb128 0x27
+ 399 0042 19       		.uleb128 0x19
+ 400 0043 49       		.uleb128 0x49
+ 401 0044 13       		.uleb128 0x13
+ 402 0045 11       		.uleb128 0x11
+ 403 0046 01       		.uleb128 0x1
+ 404 0047 12       		.uleb128 0x12
+ 405 0048 06       		.uleb128 0x6
+ 406 0049 40       		.uleb128 0x40
+ 407 004a 18       		.uleb128 0x18
+ 408 004b 9642     		.uleb128 0x2116
+ 409 004d 19       		.uleb128 0x19
+ 410 004e 01       		.uleb128 0x1
+ 411 004f 13       		.uleb128 0x13
+ 412 0050 00       		.byte	0
+ 413 0051 00       		.byte	0
+ 414 0052 06       		.uleb128 0x6
+ 415 0053 05       		.uleb128 0x5
+ 416 0054 00       		.byte	0
+ 417 0055 03       		.uleb128 0x3
+ 418 0056 0E       		.uleb128 0xe
+ 419 0057 3A       		.uleb128 0x3a
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccQKdTfJ.s 			page 9
+
+
+ 420 0058 0B       		.uleb128 0xb
+ 421 0059 3B       		.uleb128 0x3b
+ 422 005a 0B       		.uleb128 0xb
+ 423 005b 49       		.uleb128 0x49
+ 424 005c 13       		.uleb128 0x13
+ 425 005d 02       		.uleb128 0x2
+ 426 005e 18       		.uleb128 0x18
+ 427 005f 00       		.byte	0
+ 428 0060 00       		.byte	0
+ 429 0061 07       		.uleb128 0x7
+ 430 0062 2E       		.uleb128 0x2e
+ 431 0063 01       		.byte	0x1
+ 432 0064 3F       		.uleb128 0x3f
+ 433 0065 19       		.uleb128 0x19
+ 434 0066 03       		.uleb128 0x3
+ 435 0067 0E       		.uleb128 0xe
+ 436 0068 3A       		.uleb128 0x3a
+ 437 0069 0B       		.uleb128 0xb
+ 438 006a 3B       		.uleb128 0x3b
+ 439 006b 0B       		.uleb128 0xb
+ 440 006c 27       		.uleb128 0x27
+ 441 006d 19       		.uleb128 0x19
+ 442 006e 11       		.uleb128 0x11
+ 443 006f 01       		.uleb128 0x1
+ 444 0070 12       		.uleb128 0x12
+ 445 0071 06       		.uleb128 0x6
+ 446 0072 40       		.uleb128 0x40
+ 447 0073 18       		.uleb128 0x18
+ 448 0074 9642     		.uleb128 0x2116
+ 449 0076 19       		.uleb128 0x19
+ 450 0077 01       		.uleb128 0x1
+ 451 0078 13       		.uleb128 0x13
+ 452 0079 00       		.byte	0
+ 453 007a 00       		.byte	0
+ 454 007b 08       		.uleb128 0x8
+ 455 007c 34       		.uleb128 0x34
+ 456 007d 00       		.byte	0
+ 457 007e 03       		.uleb128 0x3
+ 458 007f 0E       		.uleb128 0xe
+ 459 0080 3A       		.uleb128 0x3a
+ 460 0081 0B       		.uleb128 0xb
+ 461 0082 3B       		.uleb128 0x3b
+ 462 0083 0B       		.uleb128 0xb
+ 463 0084 49       		.uleb128 0x49
+ 464 0085 13       		.uleb128 0x13
+ 465 0086 02       		.uleb128 0x2
+ 466 0087 18       		.uleb128 0x18
+ 467 0088 00       		.byte	0
+ 468 0089 00       		.byte	0
+ 469 008a 09       		.uleb128 0x9
+ 470 008b 2E       		.uleb128 0x2e
+ 471 008c 01       		.byte	0x1
+ 472 008d 3F       		.uleb128 0x3f
+ 473 008e 19       		.uleb128 0x19
+ 474 008f 03       		.uleb128 0x3
+ 475 0090 0E       		.uleb128 0xe
+ 476 0091 3A       		.uleb128 0x3a
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccQKdTfJ.s 			page 10
+
+
+ 477 0092 0B       		.uleb128 0xb
+ 478 0093 3B       		.uleb128 0x3b
+ 479 0094 0B       		.uleb128 0xb
+ 480 0095 27       		.uleb128 0x27
+ 481 0096 19       		.uleb128 0x19
+ 482 0097 11       		.uleb128 0x11
+ 483 0098 01       		.uleb128 0x1
+ 484 0099 12       		.uleb128 0x12
+ 485 009a 06       		.uleb128 0x6
+ 486 009b 40       		.uleb128 0x40
+ 487 009c 18       		.uleb128 0x18
+ 488 009d 9642     		.uleb128 0x2116
+ 489 009f 19       		.uleb128 0x19
+ 490 00a0 00       		.byte	0
+ 491 00a1 00       		.byte	0
+ 492 00a2 00       		.byte	0
+ 493              		.section	.debug_aranges,"",%progbits
+ 494 0000 2C000000 		.4byte	0x2c
+ 495 0004 0200     		.2byte	0x2
+ 496 0006 00000000 		.4byte	.Ldebug_info0
+ 497 000a 04       		.byte	0x4
+ 498 000b 00       		.byte	0
+ 499 000c 0000     		.2byte	0
+ 500 000e 0000     		.2byte	0
+ 501 0010 00000000 		.4byte	.LFB0
+ 502 0014 2A000000 		.4byte	.LFE0-.LFB0
+ 503 0018 00000000 		.4byte	.LFB1
+ 504 001c 6A000000 		.4byte	.LFE1-.LFB1
+ 505 0020 00000000 		.4byte	.LFB2
+ 506 0024 28000000 		.4byte	.LFE2-.LFB2
+ 507 0028 00000000 		.4byte	0
+ 508 002c 00000000 		.4byte	0
+ 509              		.section	.debug_ranges,"",%progbits
+ 510              	.Ldebug_ranges0:
+ 511 0000 00000000 		.4byte	.LFB0
+ 512 0004 2A000000 		.4byte	.LFE0
+ 513 0008 00000000 		.4byte	.LFB1
+ 514 000c 6A000000 		.4byte	.LFE1
+ 515 0010 00000000 		.4byte	.LFB2
+ 516 0014 28000000 		.4byte	.LFE2
+ 517 0018 00000000 		.4byte	0
+ 518 001c 00000000 		.4byte	0
+ 519              		.section	.debug_line,"",%progbits
+ 520              	.Ldebug_line0:
+ 521 0000 86000000 		.section	.debug_str,"MS",%progbits,1
+ 521      02004400 
+ 521      00000201 
+ 521      FB0E0D00 
+ 521      01010101 
+ 522              	.LASF6:
+ 523 0000 6C6F6E67 		.ascii	"long long int\000"
+ 523      206C6F6E 
+ 523      6720696E 
+ 523      7400
+ 524              	.LASF8:
+ 525 000e 756E7369 		.ascii	"unsigned int\000"
+ 525      676E6564 
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccQKdTfJ.s 			page 11
+
+
+ 525      20696E74 
+ 525      00
+ 526              	.LASF19:
+ 527 001b 6C65645F 		.ascii	"led_mux.c\000"
+ 527      6D75782E 
+ 527      6300
+ 528              	.LASF9:
+ 529 0025 696E7438 		.ascii	"int8\000"
+ 529      00
+ 530              	.LASF24:
+ 531 002a 696E6869 		.ascii	"inhibit_output\000"
+ 531      6269745F 
+ 531      6F757470 
+ 531      757400
+ 532              	.LASF5:
+ 533 0039 6C6F6E67 		.ascii	"long unsigned int\000"
+ 533      20756E73 
+ 533      69676E65 
+ 533      6420696E 
+ 533      7400
+ 534              	.LASF20:
+ 535 004b 433A5C55 		.ascii	"C:\\Users\\Matthew\\Dropbox (MIT)\\Sophomore Spring"
+ 535      73657273 
+ 535      5C4D6174 
+ 535      74686577 
+ 535      5C44726F 
+ 536 007a 5C362E31 		.ascii	"\\6.115\\6.115-Labs\\project\\DVDAC_Example01\\DVDA"
+ 536      31355C36 
+ 536      2E313135 
+ 536      2D4C6162 
+ 536      735C7072 
+ 537 00a8 435F4578 		.ascii	"C_Example01.cydsn\000"
+ 537      616D706C 
+ 537      6530312E 
+ 537      63796473 
+ 537      6E00
+ 538              	.LASF7:
+ 539 00ba 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 539      206C6F6E 
+ 539      6720756E 
+ 539      7369676E 
+ 539      65642069 
+ 540              	.LASF11:
+ 541 00d1 666C6F61 		.ascii	"float\000"
+ 541      7400
+ 542              	.LASF13:
+ 543 00d7 63686172 		.ascii	"char\000"
+ 543      00
+ 544              	.LASF18:
+ 545 00dc 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 545      43313120 
+ 545      352E342E 
+ 545      31203230 
+ 545      31363036 
+ 546 010f 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 546      20726576 
+ 546      6973696F 
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccQKdTfJ.s 			page 12
+
+
+ 546      6E203233 
+ 546      37373135 
+ 547 0142 30202D66 		.ascii	"0 -ffunction-sections -ffat-lto-objects\000"
+ 547      66756E63 
+ 547      74696F6E 
+ 547      2D736563 
+ 547      74696F6E 
+ 548              	.LASF1:
+ 549 016a 756E7369 		.ascii	"unsigned char\000"
+ 549      676E6564 
+ 549      20636861 
+ 549      7200
+ 550              	.LASF17:
+ 551 0178 696E6869 		.ascii	"inhibit\000"
+ 551      62697400 
+ 552              	.LASF22:
+ 553 0180 6C65645F 		.ascii	"led_enable_mux\000"
+ 553      656E6162 
+ 553      6C655F6D 
+ 553      757800
+ 554              	.LASF4:
+ 555 018f 6C6F6E67 		.ascii	"long int\000"
+ 555      20696E74 
+ 555      00
+ 556              	.LASF12:
+ 557 0198 646F7562 		.ascii	"double\000"
+ 557      6C6500
+ 558              	.LASF16:
+ 559 019f 6368616E 		.ascii	"channel\000"
+ 559      6E656C00 
+ 560              	.LASF21:
+ 561 01a7 6C65645F 		.ascii	"led_read_mux\000"
+ 561      72656164 
+ 561      5F6D7578 
+ 561      00
+ 562              	.LASF3:
+ 563 01b4 73686F72 		.ascii	"short unsigned int\000"
+ 563      7420756E 
+ 563      7369676E 
+ 563      65642069 
+ 563      6E7400
+ 564              	.LASF0:
+ 565 01c7 7369676E 		.ascii	"signed char\000"
+ 565      65642063 
+ 565      68617200 
+ 566              	.LASF23:
+ 567 01d3 6368616E 		.ascii	"channel_masked\000"
+ 567      6E656C5F 
+ 567      6D61736B 
+ 567      656400
+ 568              	.LASF14:
+ 569 01e2 6C6F6E67 		.ascii	"long double\000"
+ 569      20646F75 
+ 569      626C6500 
+ 570              	.LASF10:
+ 571 01ee 696E7431 		.ascii	"int16\000"
+ 571      3600
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccQKdTfJ.s 			page 13
+
+
+ 572              	.LASF2:
+ 573 01f4 73686F72 		.ascii	"short int\000"
+ 573      7420696E 
+ 573      7400
+ 574              	.LASF15:
+ 575 01fe 73697A65 		.ascii	"sizetype\000"
+ 575      74797065 
+ 575      00
+ 576              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

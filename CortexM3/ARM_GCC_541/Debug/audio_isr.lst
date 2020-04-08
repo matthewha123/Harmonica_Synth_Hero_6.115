@@ -1,0 +1,2982 @@
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccIwewKZ.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"audio_isr.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.global	high
+  20              		.bss
+  21              		.align	2
+  22              		.type	high, %object
+  23              		.size	high, 4
+  24              	high:
+  25 0000 00000000 		.space	4
+  26              		.global	c4_table_idx
+  27              		.align	2
+  28              		.type	c4_table_idx, %object
+  29              		.size	c4_table_idx, 4
+  30              	c4_table_idx:
+  31 0004 00000000 		.space	4
+  32              		.section	.text.audio_isr_Start,"ax",%progbits
+  33              		.align	2
+  34              		.global	audio_isr_Start
+  35              		.thumb
+  36              		.thumb_func
+  37              		.type	audio_isr_Start, %function
+  38              	audio_isr_Start:
+  39              	.LFB0:
+  40              		.file 1 "Generated_Source\\PSoC5\\audio_isr.c"
+   1:Generated_Source\PSoC5/audio_isr.c **** /*******************************************************************************
+   2:Generated_Source\PSoC5/audio_isr.c **** * File Name: audio_isr.c  
+   3:Generated_Source\PSoC5/audio_isr.c **** * Version 1.70
+   4:Generated_Source\PSoC5/audio_isr.c **** *
+   5:Generated_Source\PSoC5/audio_isr.c **** *  Description:
+   6:Generated_Source\PSoC5/audio_isr.c **** *   API for controlling the state of an interrupt.
+   7:Generated_Source\PSoC5/audio_isr.c **** *
+   8:Generated_Source\PSoC5/audio_isr.c **** *
+   9:Generated_Source\PSoC5/audio_isr.c **** *  Note:
+  10:Generated_Source\PSoC5/audio_isr.c **** *
+  11:Generated_Source\PSoC5/audio_isr.c **** ********************************************************************************
+  12:Generated_Source\PSoC5/audio_isr.c **** * Copyright 2008-2015, Cypress Semiconductor Corporation.  All rights reserved.
+  13:Generated_Source\PSoC5/audio_isr.c **** * You may use this file only in accordance with the license, terms, conditions, 
+  14:Generated_Source\PSoC5/audio_isr.c **** * disclaimers, and limitations in the end user license agreement accompanying 
+  15:Generated_Source\PSoC5/audio_isr.c **** * the software package with which this file was provided.
+  16:Generated_Source\PSoC5/audio_isr.c **** *******************************************************************************/
+  17:Generated_Source\PSoC5/audio_isr.c **** 
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccIwewKZ.s 			page 2
+
+
+  18:Generated_Source\PSoC5/audio_isr.c **** 
+  19:Generated_Source\PSoC5/audio_isr.c **** #include <cydevice_trm.h>
+  20:Generated_Source\PSoC5/audio_isr.c **** #include <CyLib.h>
+  21:Generated_Source\PSoC5/audio_isr.c **** #include <audio_isr.h>
+  22:Generated_Source\PSoC5/audio_isr.c **** #include "cyapicallbacks.h"
+  23:Generated_Source\PSoC5/audio_isr.c **** 
+  24:Generated_Source\PSoC5/audio_isr.c **** #if !defined(audio_isr__REMOVED) /* Check for removal by optimization */
+  25:Generated_Source\PSoC5/audio_isr.c **** 
+  26:Generated_Source\PSoC5/audio_isr.c **** /*******************************************************************************
+  27:Generated_Source\PSoC5/audio_isr.c **** *  Place your includes, defines and code here 
+  28:Generated_Source\PSoC5/audio_isr.c **** ********************************************************************************/
+  29:Generated_Source\PSoC5/audio_isr.c **** /* `#START audio_isr_intc` */
+  30:Generated_Source\PSoC5/audio_isr.c **** #include "Timer_1.h"
+  31:Generated_Source\PSoC5/audio_isr.c **** #include "TIMER_1_ISR_PIN.h"
+  32:Generated_Source\PSoC5/audio_isr.c **** #include "VDAC8_1.h"
+  33:Generated_Source\PSoC5/audio_isr.c **** #include "wav_tables.h"
+  34:Generated_Source\PSoC5/audio_isr.c **** #include "common.h"
+  35:Generated_Source\PSoC5/audio_isr.c **** int high = 0;
+  36:Generated_Source\PSoC5/audio_isr.c **** int c4_table_idx = 0;
+  37:Generated_Source\PSoC5/audio_isr.c **** /* `#END` */
+  38:Generated_Source\PSoC5/audio_isr.c **** 
+  39:Generated_Source\PSoC5/audio_isr.c **** #ifndef CYINT_IRQ_BASE
+  40:Generated_Source\PSoC5/audio_isr.c **** #define CYINT_IRQ_BASE      16
+  41:Generated_Source\PSoC5/audio_isr.c **** #endif /* CYINT_IRQ_BASE */
+  42:Generated_Source\PSoC5/audio_isr.c **** #ifndef CYINT_VECT_TABLE
+  43:Generated_Source\PSoC5/audio_isr.c **** #define CYINT_VECT_TABLE    ((cyisraddress **) CYREG_NVIC_VECT_OFFSET)
+  44:Generated_Source\PSoC5/audio_isr.c **** #endif /* CYINT_VECT_TABLE */
+  45:Generated_Source\PSoC5/audio_isr.c **** 
+  46:Generated_Source\PSoC5/audio_isr.c **** /* Declared in startup, used to set unused interrupts to. */
+  47:Generated_Source\PSoC5/audio_isr.c **** CY_ISR_PROTO(IntDefaultHandler);
+  48:Generated_Source\PSoC5/audio_isr.c **** 
+  49:Generated_Source\PSoC5/audio_isr.c **** 
+  50:Generated_Source\PSoC5/audio_isr.c **** /*******************************************************************************
+  51:Generated_Source\PSoC5/audio_isr.c **** * Function Name: audio_isr_Start
+  52:Generated_Source\PSoC5/audio_isr.c **** ********************************************************************************
+  53:Generated_Source\PSoC5/audio_isr.c **** *
+  54:Generated_Source\PSoC5/audio_isr.c **** * Summary:
+  55:Generated_Source\PSoC5/audio_isr.c **** *  Set up the interrupt and enable it. This function disables the interrupt, 
+  56:Generated_Source\PSoC5/audio_isr.c **** *  sets the default interrupt vector, sets the priority from the value in the
+  57:Generated_Source\PSoC5/audio_isr.c **** *  Design Wide Resources Interrupt Editor, then enables the interrupt to the 
+  58:Generated_Source\PSoC5/audio_isr.c **** *  interrupt controller.
+  59:Generated_Source\PSoC5/audio_isr.c **** *
+  60:Generated_Source\PSoC5/audio_isr.c **** * Parameters:  
+  61:Generated_Source\PSoC5/audio_isr.c **** *   None
+  62:Generated_Source\PSoC5/audio_isr.c **** *
+  63:Generated_Source\PSoC5/audio_isr.c **** * Return:
+  64:Generated_Source\PSoC5/audio_isr.c **** *   None
+  65:Generated_Source\PSoC5/audio_isr.c **** *
+  66:Generated_Source\PSoC5/audio_isr.c **** *******************************************************************************/
+  67:Generated_Source\PSoC5/audio_isr.c **** void audio_isr_Start(void)
+  68:Generated_Source\PSoC5/audio_isr.c **** {
+  41              		.loc 1 68 0
+  42              		.cfi_startproc
+  43              		@ args = 0, pretend = 0, frame = 0
+  44              		@ frame_needed = 1, uses_anonymous_args = 0
+  45 0000 80B5     		push	{r7, lr}
+  46              		.cfi_def_cfa_offset 8
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccIwewKZ.s 			page 3
+
+
+  47              		.cfi_offset 7, -8
+  48              		.cfi_offset 14, -4
+  49 0002 00AF     		add	r7, sp, #0
+  50              		.cfi_def_cfa_register 7
+  69:Generated_Source\PSoC5/audio_isr.c ****     /* For all we know the interrupt is active. */
+  70:Generated_Source\PSoC5/audio_isr.c ****     audio_isr_Disable();
+  51              		.loc 1 70 0
+  52 0004 FFF7FEFF 		bl	audio_isr_Disable
+  71:Generated_Source\PSoC5/audio_isr.c **** 
+  72:Generated_Source\PSoC5/audio_isr.c ****     /* Set the ISR to point to the audio_isr Interrupt. */
+  73:Generated_Source\PSoC5/audio_isr.c ****     audio_isr_SetVector(&audio_isr_Interrupt);
+  53              		.loc 1 73 0
+  54 0008 0448     		ldr	r0, .L2
+  55 000a FFF7FEFF 		bl	audio_isr_SetVector
+  74:Generated_Source\PSoC5/audio_isr.c **** 
+  75:Generated_Source\PSoC5/audio_isr.c ****     /* Set the priority. */
+  76:Generated_Source\PSoC5/audio_isr.c ****     audio_isr_SetPriority((uint8)audio_isr_INTC_PRIOR_NUMBER);
+  56              		.loc 1 76 0
+  57 000e 0720     		movs	r0, #7
+  58 0010 FFF7FEFF 		bl	audio_isr_SetPriority
+  77:Generated_Source\PSoC5/audio_isr.c **** 
+  78:Generated_Source\PSoC5/audio_isr.c ****     /* Enable it. */
+  79:Generated_Source\PSoC5/audio_isr.c ****     audio_isr_Enable();
+  59              		.loc 1 79 0
+  60 0014 FFF7FEFF 		bl	audio_isr_Enable
+  80:Generated_Source\PSoC5/audio_isr.c **** }
+  61              		.loc 1 80 0
+  62 0018 00BF     		nop
+  63 001a 80BD     		pop	{r7, pc}
+  64              	.L3:
+  65              		.align	2
+  66              	.L2:
+  67 001c 00000000 		.word	audio_isr_Interrupt
+  68              		.cfi_endproc
+  69              	.LFE0:
+  70              		.size	audio_isr_Start, .-audio_isr_Start
+  71              		.section	.text.audio_isr_StartEx,"ax",%progbits
+  72              		.align	2
+  73              		.global	audio_isr_StartEx
+  74              		.thumb
+  75              		.thumb_func
+  76              		.type	audio_isr_StartEx, %function
+  77              	audio_isr_StartEx:
+  78              	.LFB1:
+  81:Generated_Source\PSoC5/audio_isr.c **** 
+  82:Generated_Source\PSoC5/audio_isr.c **** 
+  83:Generated_Source\PSoC5/audio_isr.c **** /*******************************************************************************
+  84:Generated_Source\PSoC5/audio_isr.c **** * Function Name: audio_isr_StartEx
+  85:Generated_Source\PSoC5/audio_isr.c **** ********************************************************************************
+  86:Generated_Source\PSoC5/audio_isr.c **** *
+  87:Generated_Source\PSoC5/audio_isr.c **** * Summary:
+  88:Generated_Source\PSoC5/audio_isr.c **** *  Sets up the interrupt and enables it. This function disables the interrupt,
+  89:Generated_Source\PSoC5/audio_isr.c **** *  sets the interrupt vector based on the address passed in, sets the priority 
+  90:Generated_Source\PSoC5/audio_isr.c **** *  from the value in the Design Wide Resources Interrupt Editor, then enables 
+  91:Generated_Source\PSoC5/audio_isr.c **** *  the interrupt to the interrupt controller.
+  92:Generated_Source\PSoC5/audio_isr.c **** *  
+  93:Generated_Source\PSoC5/audio_isr.c **** *  When defining ISR functions, the CY_ISR and CY_ISR_PROTO macros should be 
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccIwewKZ.s 			page 4
+
+
+  94:Generated_Source\PSoC5/audio_isr.c **** *  used to provide consistent definition across compilers:
+  95:Generated_Source\PSoC5/audio_isr.c **** *  
+  96:Generated_Source\PSoC5/audio_isr.c **** *  Function definition example:
+  97:Generated_Source\PSoC5/audio_isr.c **** *   CY_ISR(MyISR)
+  98:Generated_Source\PSoC5/audio_isr.c **** *   {
+  99:Generated_Source\PSoC5/audio_isr.c **** *   }
+ 100:Generated_Source\PSoC5/audio_isr.c **** *   Function prototype example:
+ 101:Generated_Source\PSoC5/audio_isr.c **** *   CY_ISR_PROTO(MyISR);
+ 102:Generated_Source\PSoC5/audio_isr.c **** *
+ 103:Generated_Source\PSoC5/audio_isr.c **** * Parameters:  
+ 104:Generated_Source\PSoC5/audio_isr.c **** *   address: Address of the ISR to set in the interrupt vector table.
+ 105:Generated_Source\PSoC5/audio_isr.c **** *
+ 106:Generated_Source\PSoC5/audio_isr.c **** * Return:
+ 107:Generated_Source\PSoC5/audio_isr.c **** *   None
+ 108:Generated_Source\PSoC5/audio_isr.c **** *
+ 109:Generated_Source\PSoC5/audio_isr.c **** *******************************************************************************/
+ 110:Generated_Source\PSoC5/audio_isr.c **** void audio_isr_StartEx(cyisraddress address)
+ 111:Generated_Source\PSoC5/audio_isr.c **** {
+  79              		.loc 1 111 0
+  80              		.cfi_startproc
+  81              		@ args = 0, pretend = 0, frame = 8
+  82              		@ frame_needed = 1, uses_anonymous_args = 0
+  83 0000 80B5     		push	{r7, lr}
+  84              		.cfi_def_cfa_offset 8
+  85              		.cfi_offset 7, -8
+  86              		.cfi_offset 14, -4
+  87 0002 82B0     		sub	sp, sp, #8
+  88              		.cfi_def_cfa_offset 16
+  89 0004 00AF     		add	r7, sp, #0
+  90              		.cfi_def_cfa_register 7
+  91 0006 7860     		str	r0, [r7, #4]
+ 112:Generated_Source\PSoC5/audio_isr.c ****     /* For all we know the interrupt is active. */
+ 113:Generated_Source\PSoC5/audio_isr.c ****     audio_isr_Disable();
+  92              		.loc 1 113 0
+  93 0008 FFF7FEFF 		bl	audio_isr_Disable
+ 114:Generated_Source\PSoC5/audio_isr.c **** 
+ 115:Generated_Source\PSoC5/audio_isr.c ****     /* Set the ISR to point to the audio_isr Interrupt. */
+ 116:Generated_Source\PSoC5/audio_isr.c ****     audio_isr_SetVector(address);
+  94              		.loc 1 116 0
+  95 000c 7868     		ldr	r0, [r7, #4]
+  96 000e FFF7FEFF 		bl	audio_isr_SetVector
+ 117:Generated_Source\PSoC5/audio_isr.c **** 
+ 118:Generated_Source\PSoC5/audio_isr.c ****     /* Set the priority. */
+ 119:Generated_Source\PSoC5/audio_isr.c ****     audio_isr_SetPriority((uint8)audio_isr_INTC_PRIOR_NUMBER);
+  97              		.loc 1 119 0
+  98 0012 0720     		movs	r0, #7
+  99 0014 FFF7FEFF 		bl	audio_isr_SetPriority
+ 120:Generated_Source\PSoC5/audio_isr.c **** 
+ 121:Generated_Source\PSoC5/audio_isr.c ****     /* Enable it. */
+ 122:Generated_Source\PSoC5/audio_isr.c ****     audio_isr_Enable();
+ 100              		.loc 1 122 0
+ 101 0018 FFF7FEFF 		bl	audio_isr_Enable
+ 123:Generated_Source\PSoC5/audio_isr.c **** }
+ 102              		.loc 1 123 0
+ 103 001c 00BF     		nop
+ 104 001e 0837     		adds	r7, r7, #8
+ 105              		.cfi_def_cfa_offset 8
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccIwewKZ.s 			page 5
+
+
+ 106 0020 BD46     		mov	sp, r7
+ 107              		.cfi_def_cfa_register 13
+ 108              		@ sp needed
+ 109 0022 80BD     		pop	{r7, pc}
+ 110              		.cfi_endproc
+ 111              	.LFE1:
+ 112              		.size	audio_isr_StartEx, .-audio_isr_StartEx
+ 113              		.section	.text.audio_isr_Stop,"ax",%progbits
+ 114              		.align	2
+ 115              		.global	audio_isr_Stop
+ 116              		.thumb
+ 117              		.thumb_func
+ 118              		.type	audio_isr_Stop, %function
+ 119              	audio_isr_Stop:
+ 120              	.LFB2:
+ 124:Generated_Source\PSoC5/audio_isr.c **** 
+ 125:Generated_Source\PSoC5/audio_isr.c **** 
+ 126:Generated_Source\PSoC5/audio_isr.c **** /*******************************************************************************
+ 127:Generated_Source\PSoC5/audio_isr.c **** * Function Name: audio_isr_Stop
+ 128:Generated_Source\PSoC5/audio_isr.c **** ********************************************************************************
+ 129:Generated_Source\PSoC5/audio_isr.c **** *
+ 130:Generated_Source\PSoC5/audio_isr.c **** * Summary:
+ 131:Generated_Source\PSoC5/audio_isr.c **** *   Disables and removes the interrupt.
+ 132:Generated_Source\PSoC5/audio_isr.c **** *
+ 133:Generated_Source\PSoC5/audio_isr.c **** * Parameters:  
+ 134:Generated_Source\PSoC5/audio_isr.c **** *   None
+ 135:Generated_Source\PSoC5/audio_isr.c **** *
+ 136:Generated_Source\PSoC5/audio_isr.c **** * Return:
+ 137:Generated_Source\PSoC5/audio_isr.c **** *   None
+ 138:Generated_Source\PSoC5/audio_isr.c **** *
+ 139:Generated_Source\PSoC5/audio_isr.c **** *******************************************************************************/
+ 140:Generated_Source\PSoC5/audio_isr.c **** void audio_isr_Stop(void)
+ 141:Generated_Source\PSoC5/audio_isr.c **** {
+ 121              		.loc 1 141 0
+ 122              		.cfi_startproc
+ 123              		@ args = 0, pretend = 0, frame = 0
+ 124              		@ frame_needed = 1, uses_anonymous_args = 0
+ 125 0000 80B5     		push	{r7, lr}
+ 126              		.cfi_def_cfa_offset 8
+ 127              		.cfi_offset 7, -8
+ 128              		.cfi_offset 14, -4
+ 129 0002 00AF     		add	r7, sp, #0
+ 130              		.cfi_def_cfa_register 7
+ 142:Generated_Source\PSoC5/audio_isr.c ****     /* Disable this interrupt. */
+ 143:Generated_Source\PSoC5/audio_isr.c ****     audio_isr_Disable();
+ 131              		.loc 1 143 0
+ 132 0004 FFF7FEFF 		bl	audio_isr_Disable
+ 144:Generated_Source\PSoC5/audio_isr.c **** 
+ 145:Generated_Source\PSoC5/audio_isr.c ****     /* Set the ISR to point to the passive one. */
+ 146:Generated_Source\PSoC5/audio_isr.c ****     audio_isr_SetVector(&IntDefaultHandler);
+ 133              		.loc 1 146 0
+ 134 0008 0248     		ldr	r0, .L6
+ 135 000a FFF7FEFF 		bl	audio_isr_SetVector
+ 147:Generated_Source\PSoC5/audio_isr.c **** }
+ 136              		.loc 1 147 0
+ 137 000e 00BF     		nop
+ 138 0010 80BD     		pop	{r7, pc}
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccIwewKZ.s 			page 6
+
+
+ 139              	.L7:
+ 140 0012 00BF     		.align	2
+ 141              	.L6:
+ 142 0014 00000000 		.word	IntDefaultHandler
+ 143              		.cfi_endproc
+ 144              	.LFE2:
+ 145              		.size	audio_isr_Stop, .-audio_isr_Stop
+ 146              		.global	__aeabi_i2f
+ 147              		.global	__aeabi_fmul
+ 148              		.global	__aeabi_f2iz
+ 149              		.section	.text.audio_isr_Interrupt,"ax",%progbits
+ 150              		.align	2
+ 151              		.global	audio_isr_Interrupt
+ 152              		.thumb
+ 153              		.thumb_func
+ 154              		.type	audio_isr_Interrupt, %function
+ 155              	audio_isr_Interrupt:
+ 156              	.LFB3:
+ 148:Generated_Source\PSoC5/audio_isr.c **** 
+ 149:Generated_Source\PSoC5/audio_isr.c **** 
+ 150:Generated_Source\PSoC5/audio_isr.c **** /*******************************************************************************
+ 151:Generated_Source\PSoC5/audio_isr.c **** * Function Name: audio_isr_Interrupt
+ 152:Generated_Source\PSoC5/audio_isr.c **** ********************************************************************************
+ 153:Generated_Source\PSoC5/audio_isr.c **** *
+ 154:Generated_Source\PSoC5/audio_isr.c **** * Summary:
+ 155:Generated_Source\PSoC5/audio_isr.c **** *   The default Interrupt Service Routine for audio_isr.
+ 156:Generated_Source\PSoC5/audio_isr.c **** *
+ 157:Generated_Source\PSoC5/audio_isr.c **** *   Add custom code between the coments to keep the next version of this file
+ 158:Generated_Source\PSoC5/audio_isr.c **** *   from over writting your code.
+ 159:Generated_Source\PSoC5/audio_isr.c **** *
+ 160:Generated_Source\PSoC5/audio_isr.c **** * Parameters:  
+ 161:Generated_Source\PSoC5/audio_isr.c **** *
+ 162:Generated_Source\PSoC5/audio_isr.c **** * Return:
+ 163:Generated_Source\PSoC5/audio_isr.c **** *   None
+ 164:Generated_Source\PSoC5/audio_isr.c **** *
+ 165:Generated_Source\PSoC5/audio_isr.c **** *******************************************************************************/
+ 166:Generated_Source\PSoC5/audio_isr.c **** CY_ISR(audio_isr_Interrupt)
+ 167:Generated_Source\PSoC5/audio_isr.c **** {
+ 157              		.loc 1 167 0
+ 158              		.cfi_startproc
+ 159              		@ args = 0, pretend = 0, frame = 8
+ 160              		@ frame_needed = 1, uses_anonymous_args = 0
+ 161 0000 90B5     		push	{r4, r7, lr}
+ 162              		.cfi_def_cfa_offset 12
+ 163              		.cfi_offset 4, -12
+ 164              		.cfi_offset 7, -8
+ 165              		.cfi_offset 14, -4
+ 166 0002 83B0     		sub	sp, sp, #12
+ 167              		.cfi_def_cfa_offset 24
+ 168 0004 00AF     		add	r7, sp, #0
+ 169              		.cfi_def_cfa_register 7
+ 168:Generated_Source\PSoC5/audio_isr.c ****     #ifdef audio_isr_INTERRUPT_INTERRUPT_CALLBACK
+ 169:Generated_Source\PSoC5/audio_isr.c ****         audio_isr_Interrupt_InterruptCallback();
+ 170:Generated_Source\PSoC5/audio_isr.c ****     #endif /* audio_isr_INTERRUPT_INTERRUPT_CALLBACK */ 
+ 171:Generated_Source\PSoC5/audio_isr.c **** 
+ 172:Generated_Source\PSoC5/audio_isr.c ****     /*  Place your Interrupt code here. */
+ 173:Generated_Source\PSoC5/audio_isr.c ****     /* `#START audio_isr_Interrupt` */
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccIwewKZ.s 			page 7
+
+
+ 174:Generated_Source\PSoC5/audio_isr.c ****     Timer_1_ReadStatusRegister();
+ 170              		.loc 1 174 0
+ 171 0006 FFF7FEFF 		bl	Timer_1_ReadStatusRegister
+ 175:Generated_Source\PSoC5/audio_isr.c ****     
+ 176:Generated_Source\PSoC5/audio_isr.c ****     int val = (int) (harmonica.volume_multiplier * (float) get_sound_output(&harmonica));
+ 172              		.loc 1 176 0
+ 173 000a 0E4B     		ldr	r3, .L9
+ 174 000c 1C69     		ldr	r4, [r3, #16]	@ float
+ 175 000e 0D48     		ldr	r0, .L9
+ 176 0010 FFF7FEFF 		bl	get_sound_output
+ 177 0014 0346     		mov	r3, r0
+ 178 0016 1846     		mov	r0, r3
+ 179 0018 FFF7FEFF 		bl	__aeabi_i2f
+ 180 001c 0346     		mov	r3, r0
+ 181 001e 1946     		mov	r1, r3
+ 182 0020 2046     		mov	r0, r4
+ 183 0022 FFF7FEFF 		bl	__aeabi_fmul
+ 184 0026 0346     		mov	r3, r0
+ 185 0028 1846     		mov	r0, r3
+ 186 002a FFF7FEFF 		bl	__aeabi_f2iz
+ 187 002e 0346     		mov	r3, r0
+ 188 0030 7B60     		str	r3, [r7, #4]
+ 177:Generated_Source\PSoC5/audio_isr.c ****     VDAC8_1_SetValue(val);
+ 189              		.loc 1 177 0
+ 190 0032 7B68     		ldr	r3, [r7, #4]
+ 191 0034 DBB2     		uxtb	r3, r3
+ 192 0036 1846     		mov	r0, r3
+ 193 0038 FFF7FEFF 		bl	VDAC8_1_SetValue
+ 178:Generated_Source\PSoC5/audio_isr.c ****     
+ 179:Generated_Source\PSoC5/audio_isr.c **** 
+ 180:Generated_Source\PSoC5/audio_isr.c ****     
+ 181:Generated_Source\PSoC5/audio_isr.c ****     /* `#END` */
+ 182:Generated_Source\PSoC5/audio_isr.c **** }
+ 194              		.loc 1 182 0
+ 195 003c 00BF     		nop
+ 196 003e 0C37     		adds	r7, r7, #12
+ 197              		.cfi_def_cfa_offset 12
+ 198 0040 BD46     		mov	sp, r7
+ 199              		.cfi_def_cfa_register 13
+ 200              		@ sp needed
+ 201 0042 90BD     		pop	{r4, r7, pc}
+ 202              	.L10:
+ 203              		.align	2
+ 204              	.L9:
+ 205 0044 00000000 		.word	harmonica
+ 206              		.cfi_endproc
+ 207              	.LFE3:
+ 208              		.size	audio_isr_Interrupt, .-audio_isr_Interrupt
+ 209              		.section	.text.audio_isr_SetVector,"ax",%progbits
+ 210              		.align	2
+ 211              		.global	audio_isr_SetVector
+ 212              		.thumb
+ 213              		.thumb_func
+ 214              		.type	audio_isr_SetVector, %function
+ 215              	audio_isr_SetVector:
+ 216              	.LFB4:
+ 183:Generated_Source\PSoC5/audio_isr.c **** 
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccIwewKZ.s 			page 8
+
+
+ 184:Generated_Source\PSoC5/audio_isr.c **** 
+ 185:Generated_Source\PSoC5/audio_isr.c **** /*******************************************************************************
+ 186:Generated_Source\PSoC5/audio_isr.c **** * Function Name: audio_isr_SetVector
+ 187:Generated_Source\PSoC5/audio_isr.c **** ********************************************************************************
+ 188:Generated_Source\PSoC5/audio_isr.c **** *
+ 189:Generated_Source\PSoC5/audio_isr.c **** * Summary:
+ 190:Generated_Source\PSoC5/audio_isr.c **** *   Change the ISR vector for the Interrupt. Note calling audio_isr_Start
+ 191:Generated_Source\PSoC5/audio_isr.c **** *   will override any effect this method would have had. To set the vector 
+ 192:Generated_Source\PSoC5/audio_isr.c **** *   before the component has been started use audio_isr_StartEx instead.
+ 193:Generated_Source\PSoC5/audio_isr.c **** * 
+ 194:Generated_Source\PSoC5/audio_isr.c **** *   When defining ISR functions, the CY_ISR and CY_ISR_PROTO macros should be 
+ 195:Generated_Source\PSoC5/audio_isr.c **** *   used to provide consistent definition across compilers:
+ 196:Generated_Source\PSoC5/audio_isr.c **** *
+ 197:Generated_Source\PSoC5/audio_isr.c **** *   Function definition example:
+ 198:Generated_Source\PSoC5/audio_isr.c **** *   CY_ISR(MyISR)
+ 199:Generated_Source\PSoC5/audio_isr.c **** *   {
+ 200:Generated_Source\PSoC5/audio_isr.c **** *   }
+ 201:Generated_Source\PSoC5/audio_isr.c **** *
+ 202:Generated_Source\PSoC5/audio_isr.c **** *   Function prototype example:
+ 203:Generated_Source\PSoC5/audio_isr.c **** *     CY_ISR_PROTO(MyISR);
+ 204:Generated_Source\PSoC5/audio_isr.c **** *
+ 205:Generated_Source\PSoC5/audio_isr.c **** * Parameters:
+ 206:Generated_Source\PSoC5/audio_isr.c **** *   address: Address of the ISR to set in the interrupt vector table.
+ 207:Generated_Source\PSoC5/audio_isr.c **** *
+ 208:Generated_Source\PSoC5/audio_isr.c **** * Return:
+ 209:Generated_Source\PSoC5/audio_isr.c **** *   None
+ 210:Generated_Source\PSoC5/audio_isr.c **** *
+ 211:Generated_Source\PSoC5/audio_isr.c **** *******************************************************************************/
+ 212:Generated_Source\PSoC5/audio_isr.c **** void audio_isr_SetVector(cyisraddress address)
+ 213:Generated_Source\PSoC5/audio_isr.c **** {
+ 217              		.loc 1 213 0
+ 218              		.cfi_startproc
+ 219              		@ args = 0, pretend = 0, frame = 16
+ 220              		@ frame_needed = 1, uses_anonymous_args = 0
+ 221              		@ link register save eliminated.
+ 222 0000 80B4     		push	{r7}
+ 223              		.cfi_def_cfa_offset 4
+ 224              		.cfi_offset 7, -4
+ 225 0002 85B0     		sub	sp, sp, #20
+ 226              		.cfi_def_cfa_offset 24
+ 227 0004 00AF     		add	r7, sp, #0
+ 228              		.cfi_def_cfa_register 7
+ 229 0006 7860     		str	r0, [r7, #4]
+ 214:Generated_Source\PSoC5/audio_isr.c ****     cyisraddress * ramVectorTable;
+ 215:Generated_Source\PSoC5/audio_isr.c **** 
+ 216:Generated_Source\PSoC5/audio_isr.c ****     ramVectorTable = (cyisraddress *) *CYINT_VECT_TABLE;
+ 230              		.loc 1 216 0
+ 231 0008 054B     		ldr	r3, .L12
+ 232 000a 1B68     		ldr	r3, [r3]
+ 233 000c FB60     		str	r3, [r7, #12]
+ 217:Generated_Source\PSoC5/audio_isr.c **** 
+ 218:Generated_Source\PSoC5/audio_isr.c ****     ramVectorTable[CYINT_IRQ_BASE + (uint32)audio_isr__INTC_NUMBER] = address;
+ 234              		.loc 1 218 0
+ 235 000e FB68     		ldr	r3, [r7, #12]
+ 236 0010 4433     		adds	r3, r3, #68
+ 237 0012 7A68     		ldr	r2, [r7, #4]
+ 238 0014 1A60     		str	r2, [r3]
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccIwewKZ.s 			page 9
+
+
+ 219:Generated_Source\PSoC5/audio_isr.c **** }
+ 239              		.loc 1 219 0
+ 240 0016 00BF     		nop
+ 241 0018 1437     		adds	r7, r7, #20
+ 242              		.cfi_def_cfa_offset 4
+ 243 001a BD46     		mov	sp, r7
+ 244              		.cfi_def_cfa_register 13
+ 245              		@ sp needed
+ 246 001c 80BC     		pop	{r7}
+ 247              		.cfi_restore 7
+ 248              		.cfi_def_cfa_offset 0
+ 249 001e 7047     		bx	lr
+ 250              	.L13:
+ 251              		.align	2
+ 252              	.L12:
+ 253 0020 08ED00E0 		.word	-536810232
+ 254              		.cfi_endproc
+ 255              	.LFE4:
+ 256              		.size	audio_isr_SetVector, .-audio_isr_SetVector
+ 257              		.section	.text.audio_isr_GetVector,"ax",%progbits
+ 258              		.align	2
+ 259              		.global	audio_isr_GetVector
+ 260              		.thumb
+ 261              		.thumb_func
+ 262              		.type	audio_isr_GetVector, %function
+ 263              	audio_isr_GetVector:
+ 264              	.LFB5:
+ 220:Generated_Source\PSoC5/audio_isr.c **** 
+ 221:Generated_Source\PSoC5/audio_isr.c **** 
+ 222:Generated_Source\PSoC5/audio_isr.c **** /*******************************************************************************
+ 223:Generated_Source\PSoC5/audio_isr.c **** * Function Name: audio_isr_GetVector
+ 224:Generated_Source\PSoC5/audio_isr.c **** ********************************************************************************
+ 225:Generated_Source\PSoC5/audio_isr.c **** *
+ 226:Generated_Source\PSoC5/audio_isr.c **** * Summary:
+ 227:Generated_Source\PSoC5/audio_isr.c **** *   Gets the "address" of the current ISR vector for the Interrupt.
+ 228:Generated_Source\PSoC5/audio_isr.c **** *
+ 229:Generated_Source\PSoC5/audio_isr.c **** * Parameters:
+ 230:Generated_Source\PSoC5/audio_isr.c **** *   None
+ 231:Generated_Source\PSoC5/audio_isr.c **** *
+ 232:Generated_Source\PSoC5/audio_isr.c **** * Return:
+ 233:Generated_Source\PSoC5/audio_isr.c **** *   Address of the ISR in the interrupt vector table.
+ 234:Generated_Source\PSoC5/audio_isr.c **** *
+ 235:Generated_Source\PSoC5/audio_isr.c **** *******************************************************************************/
+ 236:Generated_Source\PSoC5/audio_isr.c **** cyisraddress audio_isr_GetVector(void)
+ 237:Generated_Source\PSoC5/audio_isr.c **** {
+ 265              		.loc 1 237 0
+ 266              		.cfi_startproc
+ 267              		@ args = 0, pretend = 0, frame = 8
+ 268              		@ frame_needed = 1, uses_anonymous_args = 0
+ 269              		@ link register save eliminated.
+ 270 0000 80B4     		push	{r7}
+ 271              		.cfi_def_cfa_offset 4
+ 272              		.cfi_offset 7, -4
+ 273 0002 83B0     		sub	sp, sp, #12
+ 274              		.cfi_def_cfa_offset 16
+ 275 0004 00AF     		add	r7, sp, #0
+ 276              		.cfi_def_cfa_register 7
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccIwewKZ.s 			page 10
+
+
+ 238:Generated_Source\PSoC5/audio_isr.c ****     cyisraddress * ramVectorTable;
+ 239:Generated_Source\PSoC5/audio_isr.c **** 
+ 240:Generated_Source\PSoC5/audio_isr.c ****     ramVectorTable = (cyisraddress *) *CYINT_VECT_TABLE;
+ 277              		.loc 1 240 0
+ 278 0006 054B     		ldr	r3, .L16
+ 279 0008 1B68     		ldr	r3, [r3]
+ 280 000a 7B60     		str	r3, [r7, #4]
+ 241:Generated_Source\PSoC5/audio_isr.c **** 
+ 242:Generated_Source\PSoC5/audio_isr.c ****     return ramVectorTable[CYINT_IRQ_BASE + (uint32)audio_isr__INTC_NUMBER];
+ 281              		.loc 1 242 0
+ 282 000c 7B68     		ldr	r3, [r7, #4]
+ 283 000e 5B6C     		ldr	r3, [r3, #68]
+ 243:Generated_Source\PSoC5/audio_isr.c **** }
+ 284              		.loc 1 243 0
+ 285 0010 1846     		mov	r0, r3
+ 286 0012 0C37     		adds	r7, r7, #12
+ 287              		.cfi_def_cfa_offset 4
+ 288 0014 BD46     		mov	sp, r7
+ 289              		.cfi_def_cfa_register 13
+ 290              		@ sp needed
+ 291 0016 80BC     		pop	{r7}
+ 292              		.cfi_restore 7
+ 293              		.cfi_def_cfa_offset 0
+ 294 0018 7047     		bx	lr
+ 295              	.L17:
+ 296 001a 00BF     		.align	2
+ 297              	.L16:
+ 298 001c 08ED00E0 		.word	-536810232
+ 299              		.cfi_endproc
+ 300              	.LFE5:
+ 301              		.size	audio_isr_GetVector, .-audio_isr_GetVector
+ 302              		.section	.text.audio_isr_SetPriority,"ax",%progbits
+ 303              		.align	2
+ 304              		.global	audio_isr_SetPriority
+ 305              		.thumb
+ 306              		.thumb_func
+ 307              		.type	audio_isr_SetPriority, %function
+ 308              	audio_isr_SetPriority:
+ 309              	.LFB6:
+ 244:Generated_Source\PSoC5/audio_isr.c **** 
+ 245:Generated_Source\PSoC5/audio_isr.c **** 
+ 246:Generated_Source\PSoC5/audio_isr.c **** /*******************************************************************************
+ 247:Generated_Source\PSoC5/audio_isr.c **** * Function Name: audio_isr_SetPriority
+ 248:Generated_Source\PSoC5/audio_isr.c **** ********************************************************************************
+ 249:Generated_Source\PSoC5/audio_isr.c **** *
+ 250:Generated_Source\PSoC5/audio_isr.c **** * Summary:
+ 251:Generated_Source\PSoC5/audio_isr.c **** *   Sets the Priority of the Interrupt. 
+ 252:Generated_Source\PSoC5/audio_isr.c **** *
+ 253:Generated_Source\PSoC5/audio_isr.c **** *   Note calling audio_isr_Start or audio_isr_StartEx will 
+ 254:Generated_Source\PSoC5/audio_isr.c **** *   override any effect this API would have had. This API should only be called
+ 255:Generated_Source\PSoC5/audio_isr.c **** *   after audio_isr_Start or audio_isr_StartEx has been called. 
+ 256:Generated_Source\PSoC5/audio_isr.c **** *   To set the initial priority for the component, use the Design-Wide Resources
+ 257:Generated_Source\PSoC5/audio_isr.c **** *   Interrupt Editor.
+ 258:Generated_Source\PSoC5/audio_isr.c **** *
+ 259:Generated_Source\PSoC5/audio_isr.c **** *   Note This API has no effect on Non-maskable interrupt NMI).
+ 260:Generated_Source\PSoC5/audio_isr.c **** *
+ 261:Generated_Source\PSoC5/audio_isr.c **** * Parameters:
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccIwewKZ.s 			page 11
+
+
+ 262:Generated_Source\PSoC5/audio_isr.c **** *   priority: Priority of the interrupt, 0 being the highest priority
+ 263:Generated_Source\PSoC5/audio_isr.c **** *             PSoC 3 and PSoC 5LP: Priority is from 0 to 7.
+ 264:Generated_Source\PSoC5/audio_isr.c **** *             PSoC 4: Priority is from 0 to 3.
+ 265:Generated_Source\PSoC5/audio_isr.c **** *
+ 266:Generated_Source\PSoC5/audio_isr.c **** * Return:
+ 267:Generated_Source\PSoC5/audio_isr.c **** *   None
+ 268:Generated_Source\PSoC5/audio_isr.c **** *
+ 269:Generated_Source\PSoC5/audio_isr.c **** *******************************************************************************/
+ 270:Generated_Source\PSoC5/audio_isr.c **** void audio_isr_SetPriority(uint8 priority)
+ 271:Generated_Source\PSoC5/audio_isr.c **** {
+ 310              		.loc 1 271 0
+ 311              		.cfi_startproc
+ 312              		@ args = 0, pretend = 0, frame = 8
+ 313              		@ frame_needed = 1, uses_anonymous_args = 0
+ 314              		@ link register save eliminated.
+ 315 0000 80B4     		push	{r7}
+ 316              		.cfi_def_cfa_offset 4
+ 317              		.cfi_offset 7, -4
+ 318 0002 83B0     		sub	sp, sp, #12
+ 319              		.cfi_def_cfa_offset 16
+ 320 0004 00AF     		add	r7, sp, #0
+ 321              		.cfi_def_cfa_register 7
+ 322 0006 0346     		mov	r3, r0
+ 323 0008 FB71     		strb	r3, [r7, #7]
+ 272:Generated_Source\PSoC5/audio_isr.c ****     *audio_isr_INTC_PRIOR = priority << 5;
+ 324              		.loc 1 272 0
+ 325 000a 054A     		ldr	r2, .L19
+ 326 000c FB79     		ldrb	r3, [r7, #7]
+ 327 000e 5B01     		lsls	r3, r3, #5
+ 328 0010 DBB2     		uxtb	r3, r3
+ 329 0012 1370     		strb	r3, [r2]
+ 273:Generated_Source\PSoC5/audio_isr.c **** }
+ 330              		.loc 1 273 0
+ 331 0014 00BF     		nop
+ 332 0016 0C37     		adds	r7, r7, #12
+ 333              		.cfi_def_cfa_offset 4
+ 334 0018 BD46     		mov	sp, r7
+ 335              		.cfi_def_cfa_register 13
+ 336              		@ sp needed
+ 337 001a 80BC     		pop	{r7}
+ 338              		.cfi_restore 7
+ 339              		.cfi_def_cfa_offset 0
+ 340 001c 7047     		bx	lr
+ 341              	.L20:
+ 342 001e 00BF     		.align	2
+ 343              	.L19:
+ 344 0020 01E400E0 		.word	-536812543
+ 345              		.cfi_endproc
+ 346              	.LFE6:
+ 347              		.size	audio_isr_SetPriority, .-audio_isr_SetPriority
+ 348              		.section	.text.audio_isr_GetPriority,"ax",%progbits
+ 349              		.align	2
+ 350              		.global	audio_isr_GetPriority
+ 351              		.thumb
+ 352              		.thumb_func
+ 353              		.type	audio_isr_GetPriority, %function
+ 354              	audio_isr_GetPriority:
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccIwewKZ.s 			page 12
+
+
+ 355              	.LFB7:
+ 274:Generated_Source\PSoC5/audio_isr.c **** 
+ 275:Generated_Source\PSoC5/audio_isr.c **** 
+ 276:Generated_Source\PSoC5/audio_isr.c **** /*******************************************************************************
+ 277:Generated_Source\PSoC5/audio_isr.c **** * Function Name: audio_isr_GetPriority
+ 278:Generated_Source\PSoC5/audio_isr.c **** ********************************************************************************
+ 279:Generated_Source\PSoC5/audio_isr.c **** *
+ 280:Generated_Source\PSoC5/audio_isr.c **** * Summary:
+ 281:Generated_Source\PSoC5/audio_isr.c **** *   Gets the Priority of the Interrupt.
+ 282:Generated_Source\PSoC5/audio_isr.c **** *
+ 283:Generated_Source\PSoC5/audio_isr.c **** * Parameters:
+ 284:Generated_Source\PSoC5/audio_isr.c **** *   None
+ 285:Generated_Source\PSoC5/audio_isr.c **** *
+ 286:Generated_Source\PSoC5/audio_isr.c **** * Return:
+ 287:Generated_Source\PSoC5/audio_isr.c **** *   Priority of the interrupt, 0 being the highest priority
+ 288:Generated_Source\PSoC5/audio_isr.c **** *    PSoC 3 and PSoC 5LP: Priority is from 0 to 7.
+ 289:Generated_Source\PSoC5/audio_isr.c **** *    PSoC 4: Priority is from 0 to 3.
+ 290:Generated_Source\PSoC5/audio_isr.c **** *
+ 291:Generated_Source\PSoC5/audio_isr.c **** *******************************************************************************/
+ 292:Generated_Source\PSoC5/audio_isr.c **** uint8 audio_isr_GetPriority(void)
+ 293:Generated_Source\PSoC5/audio_isr.c **** {
+ 356              		.loc 1 293 0
+ 357              		.cfi_startproc
+ 358              		@ args = 0, pretend = 0, frame = 8
+ 359              		@ frame_needed = 1, uses_anonymous_args = 0
+ 360              		@ link register save eliminated.
+ 361 0000 80B4     		push	{r7}
+ 362              		.cfi_def_cfa_offset 4
+ 363              		.cfi_offset 7, -4
+ 364 0002 83B0     		sub	sp, sp, #12
+ 365              		.cfi_def_cfa_offset 16
+ 366 0004 00AF     		add	r7, sp, #0
+ 367              		.cfi_def_cfa_register 7
+ 294:Generated_Source\PSoC5/audio_isr.c ****     uint8 priority;
+ 295:Generated_Source\PSoC5/audio_isr.c **** 
+ 296:Generated_Source\PSoC5/audio_isr.c **** 
+ 297:Generated_Source\PSoC5/audio_isr.c ****     priority = *audio_isr_INTC_PRIOR >> 5;
+ 368              		.loc 1 297 0
+ 369 0006 054B     		ldr	r3, .L23
+ 370 0008 1B78     		ldrb	r3, [r3]
+ 371 000a DBB2     		uxtb	r3, r3
+ 372 000c 5B09     		lsrs	r3, r3, #5
+ 373 000e FB71     		strb	r3, [r7, #7]
+ 298:Generated_Source\PSoC5/audio_isr.c **** 
+ 299:Generated_Source\PSoC5/audio_isr.c ****     return priority;
+ 374              		.loc 1 299 0
+ 375 0010 FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 300:Generated_Source\PSoC5/audio_isr.c **** }
+ 376              		.loc 1 300 0
+ 377 0012 1846     		mov	r0, r3
+ 378 0014 0C37     		adds	r7, r7, #12
+ 379              		.cfi_def_cfa_offset 4
+ 380 0016 BD46     		mov	sp, r7
+ 381              		.cfi_def_cfa_register 13
+ 382              		@ sp needed
+ 383 0018 80BC     		pop	{r7}
+ 384              		.cfi_restore 7
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccIwewKZ.s 			page 13
+
+
+ 385              		.cfi_def_cfa_offset 0
+ 386 001a 7047     		bx	lr
+ 387              	.L24:
+ 388              		.align	2
+ 389              	.L23:
+ 390 001c 01E400E0 		.word	-536812543
+ 391              		.cfi_endproc
+ 392              	.LFE7:
+ 393              		.size	audio_isr_GetPriority, .-audio_isr_GetPriority
+ 394              		.section	.text.audio_isr_Enable,"ax",%progbits
+ 395              		.align	2
+ 396              		.global	audio_isr_Enable
+ 397              		.thumb
+ 398              		.thumb_func
+ 399              		.type	audio_isr_Enable, %function
+ 400              	audio_isr_Enable:
+ 401              	.LFB8:
+ 301:Generated_Source\PSoC5/audio_isr.c **** 
+ 302:Generated_Source\PSoC5/audio_isr.c **** 
+ 303:Generated_Source\PSoC5/audio_isr.c **** /*******************************************************************************
+ 304:Generated_Source\PSoC5/audio_isr.c **** * Function Name: audio_isr_Enable
+ 305:Generated_Source\PSoC5/audio_isr.c **** ********************************************************************************
+ 306:Generated_Source\PSoC5/audio_isr.c **** *
+ 307:Generated_Source\PSoC5/audio_isr.c **** * Summary:
+ 308:Generated_Source\PSoC5/audio_isr.c **** *   Enables the interrupt to the interrupt controller. Do not call this function
+ 309:Generated_Source\PSoC5/audio_isr.c **** *   unless ISR_Start() has been called or the functionality of the ISR_Start() 
+ 310:Generated_Source\PSoC5/audio_isr.c **** *   function, which sets the vector and the priority, has been called.
+ 311:Generated_Source\PSoC5/audio_isr.c **** *
+ 312:Generated_Source\PSoC5/audio_isr.c **** * Parameters:
+ 313:Generated_Source\PSoC5/audio_isr.c **** *   None
+ 314:Generated_Source\PSoC5/audio_isr.c **** *
+ 315:Generated_Source\PSoC5/audio_isr.c **** * Return:
+ 316:Generated_Source\PSoC5/audio_isr.c **** *   None
+ 317:Generated_Source\PSoC5/audio_isr.c **** *
+ 318:Generated_Source\PSoC5/audio_isr.c **** *******************************************************************************/
+ 319:Generated_Source\PSoC5/audio_isr.c **** void audio_isr_Enable(void)
+ 320:Generated_Source\PSoC5/audio_isr.c **** {
+ 402              		.loc 1 320 0
+ 403              		.cfi_startproc
+ 404              		@ args = 0, pretend = 0, frame = 0
+ 405              		@ frame_needed = 1, uses_anonymous_args = 0
+ 406              		@ link register save eliminated.
+ 407 0000 80B4     		push	{r7}
+ 408              		.cfi_def_cfa_offset 4
+ 409              		.cfi_offset 7, -4
+ 410 0002 00AF     		add	r7, sp, #0
+ 411              		.cfi_def_cfa_register 7
+ 321:Generated_Source\PSoC5/audio_isr.c ****     /* Enable the general interrupt. */
+ 322:Generated_Source\PSoC5/audio_isr.c ****     *audio_isr_INTC_SET_EN = audio_isr__INTC_MASK;
+ 412              		.loc 1 322 0
+ 413 0004 034B     		ldr	r3, .L26
+ 414 0006 0222     		movs	r2, #2
+ 415 0008 1A60     		str	r2, [r3]
+ 323:Generated_Source\PSoC5/audio_isr.c **** }
+ 416              		.loc 1 323 0
+ 417 000a 00BF     		nop
+ 418 000c BD46     		mov	sp, r7
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccIwewKZ.s 			page 14
+
+
+ 419              		.cfi_def_cfa_register 13
+ 420              		@ sp needed
+ 421 000e 80BC     		pop	{r7}
+ 422              		.cfi_restore 7
+ 423              		.cfi_def_cfa_offset 0
+ 424 0010 7047     		bx	lr
+ 425              	.L27:
+ 426 0012 00BF     		.align	2
+ 427              	.L26:
+ 428 0014 00E100E0 		.word	-536813312
+ 429              		.cfi_endproc
+ 430              	.LFE8:
+ 431              		.size	audio_isr_Enable, .-audio_isr_Enable
+ 432              		.section	.text.audio_isr_GetState,"ax",%progbits
+ 433              		.align	2
+ 434              		.global	audio_isr_GetState
+ 435              		.thumb
+ 436              		.thumb_func
+ 437              		.type	audio_isr_GetState, %function
+ 438              	audio_isr_GetState:
+ 439              	.LFB9:
+ 324:Generated_Source\PSoC5/audio_isr.c **** 
+ 325:Generated_Source\PSoC5/audio_isr.c **** 
+ 326:Generated_Source\PSoC5/audio_isr.c **** /*******************************************************************************
+ 327:Generated_Source\PSoC5/audio_isr.c **** * Function Name: audio_isr_GetState
+ 328:Generated_Source\PSoC5/audio_isr.c **** ********************************************************************************
+ 329:Generated_Source\PSoC5/audio_isr.c **** *
+ 330:Generated_Source\PSoC5/audio_isr.c **** * Summary:
+ 331:Generated_Source\PSoC5/audio_isr.c **** *   Gets the state (enabled, disabled) of the Interrupt.
+ 332:Generated_Source\PSoC5/audio_isr.c **** *
+ 333:Generated_Source\PSoC5/audio_isr.c **** * Parameters:
+ 334:Generated_Source\PSoC5/audio_isr.c **** *   None
+ 335:Generated_Source\PSoC5/audio_isr.c **** *
+ 336:Generated_Source\PSoC5/audio_isr.c **** * Return:
+ 337:Generated_Source\PSoC5/audio_isr.c **** *   1 if enabled, 0 if disabled.
+ 338:Generated_Source\PSoC5/audio_isr.c **** *
+ 339:Generated_Source\PSoC5/audio_isr.c **** *******************************************************************************/
+ 340:Generated_Source\PSoC5/audio_isr.c **** uint8 audio_isr_GetState(void)
+ 341:Generated_Source\PSoC5/audio_isr.c **** {
+ 440              		.loc 1 341 0
+ 441              		.cfi_startproc
+ 442              		@ args = 0, pretend = 0, frame = 0
+ 443              		@ frame_needed = 1, uses_anonymous_args = 0
+ 444              		@ link register save eliminated.
+ 445 0000 80B4     		push	{r7}
+ 446              		.cfi_def_cfa_offset 4
+ 447              		.cfi_offset 7, -4
+ 448 0002 00AF     		add	r7, sp, #0
+ 449              		.cfi_def_cfa_register 7
+ 342:Generated_Source\PSoC5/audio_isr.c ****     /* Get the state of the general interrupt. */
+ 343:Generated_Source\PSoC5/audio_isr.c ****     return ((*audio_isr_INTC_SET_EN & (uint32)audio_isr__INTC_MASK) != 0u) ? 1u:0u;
+ 450              		.loc 1 343 0
+ 451 0004 064B     		ldr	r3, .L32
+ 452 0006 1B68     		ldr	r3, [r3]
+ 453 0008 03F00203 		and	r3, r3, #2
+ 454 000c 002B     		cmp	r3, #0
+ 455 000e 01D0     		beq	.L29
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccIwewKZ.s 			page 15
+
+
+ 456              		.loc 1 343 0 is_stmt 0 discriminator 1
+ 457 0010 0123     		movs	r3, #1
+ 458 0012 00E0     		b	.L30
+ 459              	.L29:
+ 460              		.loc 1 343 0 discriminator 2
+ 461 0014 0023     		movs	r3, #0
+ 462              	.L30:
+ 344:Generated_Source\PSoC5/audio_isr.c **** }
+ 463              		.loc 1 344 0 is_stmt 1 discriminator 4
+ 464 0016 1846     		mov	r0, r3
+ 465 0018 BD46     		mov	sp, r7
+ 466              		.cfi_def_cfa_register 13
+ 467              		@ sp needed
+ 468 001a 80BC     		pop	{r7}
+ 469              		.cfi_restore 7
+ 470              		.cfi_def_cfa_offset 0
+ 471 001c 7047     		bx	lr
+ 472              	.L33:
+ 473 001e 00BF     		.align	2
+ 474              	.L32:
+ 475 0020 00E100E0 		.word	-536813312
+ 476              		.cfi_endproc
+ 477              	.LFE9:
+ 478              		.size	audio_isr_GetState, .-audio_isr_GetState
+ 479              		.section	.text.audio_isr_Disable,"ax",%progbits
+ 480              		.align	2
+ 481              		.global	audio_isr_Disable
+ 482              		.thumb
+ 483              		.thumb_func
+ 484              		.type	audio_isr_Disable, %function
+ 485              	audio_isr_Disable:
+ 486              	.LFB10:
+ 345:Generated_Source\PSoC5/audio_isr.c **** 
+ 346:Generated_Source\PSoC5/audio_isr.c **** 
+ 347:Generated_Source\PSoC5/audio_isr.c **** /*******************************************************************************
+ 348:Generated_Source\PSoC5/audio_isr.c **** * Function Name: audio_isr_Disable
+ 349:Generated_Source\PSoC5/audio_isr.c **** ********************************************************************************
+ 350:Generated_Source\PSoC5/audio_isr.c **** *
+ 351:Generated_Source\PSoC5/audio_isr.c **** * Summary:
+ 352:Generated_Source\PSoC5/audio_isr.c **** *   Disables the Interrupt in the interrupt controller.
+ 353:Generated_Source\PSoC5/audio_isr.c **** *
+ 354:Generated_Source\PSoC5/audio_isr.c **** * Parameters:
+ 355:Generated_Source\PSoC5/audio_isr.c **** *   None
+ 356:Generated_Source\PSoC5/audio_isr.c **** *
+ 357:Generated_Source\PSoC5/audio_isr.c **** * Return:
+ 358:Generated_Source\PSoC5/audio_isr.c **** *   None
+ 359:Generated_Source\PSoC5/audio_isr.c **** *
+ 360:Generated_Source\PSoC5/audio_isr.c **** *******************************************************************************/
+ 361:Generated_Source\PSoC5/audio_isr.c **** void audio_isr_Disable(void)
+ 362:Generated_Source\PSoC5/audio_isr.c **** {
+ 487              		.loc 1 362 0
+ 488              		.cfi_startproc
+ 489              		@ args = 0, pretend = 0, frame = 0
+ 490              		@ frame_needed = 1, uses_anonymous_args = 0
+ 491              		@ link register save eliminated.
+ 492 0000 80B4     		push	{r7}
+ 493              		.cfi_def_cfa_offset 4
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccIwewKZ.s 			page 16
+
+
+ 494              		.cfi_offset 7, -4
+ 495 0002 00AF     		add	r7, sp, #0
+ 496              		.cfi_def_cfa_register 7
+ 363:Generated_Source\PSoC5/audio_isr.c ****     /* Disable the general interrupt. */
+ 364:Generated_Source\PSoC5/audio_isr.c ****     *audio_isr_INTC_CLR_EN = audio_isr__INTC_MASK;
+ 497              		.loc 1 364 0
+ 498 0004 034B     		ldr	r3, .L35
+ 499 0006 0222     		movs	r2, #2
+ 500 0008 1A60     		str	r2, [r3]
+ 365:Generated_Source\PSoC5/audio_isr.c **** }
+ 501              		.loc 1 365 0
+ 502 000a 00BF     		nop
+ 503 000c BD46     		mov	sp, r7
+ 504              		.cfi_def_cfa_register 13
+ 505              		@ sp needed
+ 506 000e 80BC     		pop	{r7}
+ 507              		.cfi_restore 7
+ 508              		.cfi_def_cfa_offset 0
+ 509 0010 7047     		bx	lr
+ 510              	.L36:
+ 511 0012 00BF     		.align	2
+ 512              	.L35:
+ 513 0014 80E100E0 		.word	-536813184
+ 514              		.cfi_endproc
+ 515              	.LFE10:
+ 516              		.size	audio_isr_Disable, .-audio_isr_Disable
+ 517              		.section	.text.audio_isr_SetPending,"ax",%progbits
+ 518              		.align	2
+ 519              		.global	audio_isr_SetPending
+ 520              		.thumb
+ 521              		.thumb_func
+ 522              		.type	audio_isr_SetPending, %function
+ 523              	audio_isr_SetPending:
+ 524              	.LFB11:
+ 366:Generated_Source\PSoC5/audio_isr.c **** 
+ 367:Generated_Source\PSoC5/audio_isr.c **** 
+ 368:Generated_Source\PSoC5/audio_isr.c **** /*******************************************************************************
+ 369:Generated_Source\PSoC5/audio_isr.c **** * Function Name: audio_isr_SetPending
+ 370:Generated_Source\PSoC5/audio_isr.c **** ********************************************************************************
+ 371:Generated_Source\PSoC5/audio_isr.c **** *
+ 372:Generated_Source\PSoC5/audio_isr.c **** * Summary:
+ 373:Generated_Source\PSoC5/audio_isr.c **** *   Causes the Interrupt to enter the pending state, a software method of
+ 374:Generated_Source\PSoC5/audio_isr.c **** *   generating the interrupt.
+ 375:Generated_Source\PSoC5/audio_isr.c **** *
+ 376:Generated_Source\PSoC5/audio_isr.c **** * Parameters:
+ 377:Generated_Source\PSoC5/audio_isr.c **** *   None
+ 378:Generated_Source\PSoC5/audio_isr.c **** *
+ 379:Generated_Source\PSoC5/audio_isr.c **** * Return:
+ 380:Generated_Source\PSoC5/audio_isr.c **** *   None
+ 381:Generated_Source\PSoC5/audio_isr.c **** *
+ 382:Generated_Source\PSoC5/audio_isr.c **** * Side Effects:
+ 383:Generated_Source\PSoC5/audio_isr.c **** *   If interrupts are enabled and the interrupt is set up properly, the ISR is
+ 384:Generated_Source\PSoC5/audio_isr.c **** *   entered (depending on the priority of this interrupt and other pending 
+ 385:Generated_Source\PSoC5/audio_isr.c **** *   interrupts).
+ 386:Generated_Source\PSoC5/audio_isr.c **** *
+ 387:Generated_Source\PSoC5/audio_isr.c **** *******************************************************************************/
+ 388:Generated_Source\PSoC5/audio_isr.c **** void audio_isr_SetPending(void)
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccIwewKZ.s 			page 17
+
+
+ 389:Generated_Source\PSoC5/audio_isr.c **** {
+ 525              		.loc 1 389 0
+ 526              		.cfi_startproc
+ 527              		@ args = 0, pretend = 0, frame = 0
+ 528              		@ frame_needed = 1, uses_anonymous_args = 0
+ 529              		@ link register save eliminated.
+ 530 0000 80B4     		push	{r7}
+ 531              		.cfi_def_cfa_offset 4
+ 532              		.cfi_offset 7, -4
+ 533 0002 00AF     		add	r7, sp, #0
+ 534              		.cfi_def_cfa_register 7
+ 390:Generated_Source\PSoC5/audio_isr.c ****     *audio_isr_INTC_SET_PD = audio_isr__INTC_MASK;
+ 535              		.loc 1 390 0
+ 536 0004 034B     		ldr	r3, .L38
+ 537 0006 0222     		movs	r2, #2
+ 538 0008 1A60     		str	r2, [r3]
+ 391:Generated_Source\PSoC5/audio_isr.c **** }
+ 539              		.loc 1 391 0
+ 540 000a 00BF     		nop
+ 541 000c BD46     		mov	sp, r7
+ 542              		.cfi_def_cfa_register 13
+ 543              		@ sp needed
+ 544 000e 80BC     		pop	{r7}
+ 545              		.cfi_restore 7
+ 546              		.cfi_def_cfa_offset 0
+ 547 0010 7047     		bx	lr
+ 548              	.L39:
+ 549 0012 00BF     		.align	2
+ 550              	.L38:
+ 551 0014 00E200E0 		.word	-536813056
+ 552              		.cfi_endproc
+ 553              	.LFE11:
+ 554              		.size	audio_isr_SetPending, .-audio_isr_SetPending
+ 555              		.section	.text.audio_isr_ClearPending,"ax",%progbits
+ 556              		.align	2
+ 557              		.global	audio_isr_ClearPending
+ 558              		.thumb
+ 559              		.thumb_func
+ 560              		.type	audio_isr_ClearPending, %function
+ 561              	audio_isr_ClearPending:
+ 562              	.LFB12:
+ 392:Generated_Source\PSoC5/audio_isr.c **** 
+ 393:Generated_Source\PSoC5/audio_isr.c **** 
+ 394:Generated_Source\PSoC5/audio_isr.c **** /*******************************************************************************
+ 395:Generated_Source\PSoC5/audio_isr.c **** * Function Name: audio_isr_ClearPending
+ 396:Generated_Source\PSoC5/audio_isr.c **** ********************************************************************************
+ 397:Generated_Source\PSoC5/audio_isr.c **** *
+ 398:Generated_Source\PSoC5/audio_isr.c **** * Summary:
+ 399:Generated_Source\PSoC5/audio_isr.c **** *   Clears a pending interrupt in the interrupt controller.
+ 400:Generated_Source\PSoC5/audio_isr.c **** *
+ 401:Generated_Source\PSoC5/audio_isr.c **** *   Note Some interrupt sources are clear-on-read and require the block 
+ 402:Generated_Source\PSoC5/audio_isr.c **** *   interrupt/status register to be read/cleared with the appropriate block API 
+ 403:Generated_Source\PSoC5/audio_isr.c **** *   (GPIO, UART, and so on). Otherwise the ISR will continue to remain in 
+ 404:Generated_Source\PSoC5/audio_isr.c **** *   pending state even though the interrupt itself is cleared using this API.
+ 405:Generated_Source\PSoC5/audio_isr.c **** *
+ 406:Generated_Source\PSoC5/audio_isr.c **** * Parameters:
+ 407:Generated_Source\PSoC5/audio_isr.c **** *   None
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccIwewKZ.s 			page 18
+
+
+ 408:Generated_Source\PSoC5/audio_isr.c **** *
+ 409:Generated_Source\PSoC5/audio_isr.c **** * Return:
+ 410:Generated_Source\PSoC5/audio_isr.c **** *   None
+ 411:Generated_Source\PSoC5/audio_isr.c **** *
+ 412:Generated_Source\PSoC5/audio_isr.c **** *******************************************************************************/
+ 413:Generated_Source\PSoC5/audio_isr.c **** void audio_isr_ClearPending(void)
+ 414:Generated_Source\PSoC5/audio_isr.c **** {
+ 563              		.loc 1 414 0
+ 564              		.cfi_startproc
+ 565              		@ args = 0, pretend = 0, frame = 0
+ 566              		@ frame_needed = 1, uses_anonymous_args = 0
+ 567              		@ link register save eliminated.
+ 568 0000 80B4     		push	{r7}
+ 569              		.cfi_def_cfa_offset 4
+ 570              		.cfi_offset 7, -4
+ 571 0002 00AF     		add	r7, sp, #0
+ 572              		.cfi_def_cfa_register 7
+ 415:Generated_Source\PSoC5/audio_isr.c ****     *audio_isr_INTC_CLR_PD = audio_isr__INTC_MASK;
+ 573              		.loc 1 415 0
+ 574 0004 034B     		ldr	r3, .L41
+ 575 0006 0222     		movs	r2, #2
+ 576 0008 1A60     		str	r2, [r3]
+ 416:Generated_Source\PSoC5/audio_isr.c **** }
+ 577              		.loc 1 416 0
+ 578 000a 00BF     		nop
+ 579 000c BD46     		mov	sp, r7
+ 580              		.cfi_def_cfa_register 13
+ 581              		@ sp needed
+ 582 000e 80BC     		pop	{r7}
+ 583              		.cfi_restore 7
+ 584              		.cfi_def_cfa_offset 0
+ 585 0010 7047     		bx	lr
+ 586              	.L42:
+ 587 0012 00BF     		.align	2
+ 588              	.L41:
+ 589 0014 80E200E0 		.word	-536812928
+ 590              		.cfi_endproc
+ 591              	.LFE12:
+ 592              		.size	audio_isr_ClearPending, .-audio_isr_ClearPending
+ 593              		.text
+ 594              	.Letext0:
+ 595              		.file 2 "Generated_Source\\PSoC5/cytypes.h"
+ 596              		.file 3 "./harmonica_control.h"
+ 597              		.section	.debug_info,"",%progbits
+ 598              	.Ldebug_info0:
+ 599 0000 DF050000 		.4byte	0x5df
+ 600 0004 0400     		.2byte	0x4
+ 601 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 602 000a 04       		.byte	0x4
+ 603 000b 01       		.uleb128 0x1
+ 604 000c 8C000000 		.4byte	.LASF94
+ 605 0010 0C       		.byte	0xc
+ 606 0011 B6010000 		.4byte	.LASF95
+ 607 0015 79040000 		.4byte	.LASF96
+ 608 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 609 001d 00000000 		.4byte	0
+ 610 0021 00000000 		.4byte	.Ldebug_line0
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccIwewKZ.s 			page 19
+
+
+ 611 0025 02       		.uleb128 0x2
+ 612 0026 04       		.byte	0x4
+ 613 0027 05       		.byte	0x5
+ 614 0028 696E7400 		.ascii	"int\000"
+ 615 002c 03       		.uleb128 0x3
+ 616 002d 04       		.byte	0x4
+ 617 002e 07       		.byte	0x7
+ 618 002f 64030000 		.4byte	.LASF0
+ 619 0033 03       		.uleb128 0x3
+ 620 0034 08       		.byte	0x8
+ 621 0035 05       		.byte	0x5
+ 622 0036 FD010000 		.4byte	.LASF1
+ 623 003a 03       		.uleb128 0x3
+ 624 003b 08       		.byte	0x8
+ 625 003c 04       		.byte	0x4
+ 626 003d D2020000 		.4byte	.LASF2
+ 627 0041 03       		.uleb128 0x3
+ 628 0042 01       		.byte	0x1
+ 629 0043 06       		.byte	0x6
+ 630 0044 21030000 		.4byte	.LASF3
+ 631 0048 03       		.uleb128 0x3
+ 632 0049 01       		.byte	0x1
+ 633 004a 08       		.byte	0x8
+ 634 004b 95020000 		.4byte	.LASF4
+ 635 004f 03       		.uleb128 0x3
+ 636 0050 02       		.byte	0x2
+ 637 0051 05       		.byte	0x5
+ 638 0052 51000000 		.4byte	.LASF5
+ 639 0056 03       		.uleb128 0x3
+ 640 0057 02       		.byte	0x2
+ 641 0058 07       		.byte	0x7
+ 642 0059 D0030000 		.4byte	.LASF6
+ 643 005d 03       		.uleb128 0x3
+ 644 005e 04       		.byte	0x4
+ 645 005f 05       		.byte	0x5
+ 646 0060 D4050000 		.4byte	.LASF7
+ 647 0064 03       		.uleb128 0x3
+ 648 0065 04       		.byte	0x4
+ 649 0066 07       		.byte	0x7
+ 650 0067 0D050000 		.4byte	.LASF8
+ 651 006b 03       		.uleb128 0x3
+ 652 006c 08       		.byte	0x8
+ 653 006d 07       		.byte	0x7
+ 654 006e 3F030000 		.4byte	.LASF9
+ 655 0072 03       		.uleb128 0x3
+ 656 0073 04       		.byte	0x4
+ 657 0074 07       		.byte	0x7
+ 658 0075 5B000000 		.4byte	.LASF10
+ 659 0079 03       		.uleb128 0x3
+ 660 007a 01       		.byte	0x1
+ 661 007b 08       		.byte	0x8
+ 662 007c EE030000 		.4byte	.LASF11
+ 663 0080 04       		.uleb128 0x4
+ 664 0081 04       		.byte	0x4
+ 665 0082 86000000 		.4byte	0x86
+ 666 0086 05       		.uleb128 0x5
+ 667 0087 06       		.uleb128 0x6
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccIwewKZ.s 			page 20
+
+
+ 668 0088 A4010000 		.4byte	.LASF12
+ 669 008c 02       		.byte	0x2
+ 670 008d 9201     		.2byte	0x192
+ 671 008f 48000000 		.4byte	0x48
+ 672 0093 06       		.uleb128 0x6
+ 673 0094 F7040000 		.4byte	.LASF13
+ 674 0098 02       		.byte	0x2
+ 675 0099 9401     		.2byte	0x194
+ 676 009b 64000000 		.4byte	0x64
+ 677 009f 06       		.uleb128 0x6
+ 678 00a0 0B020000 		.4byte	.LASF14
+ 679 00a4 02       		.byte	0x2
+ 680 00a5 9501     		.2byte	0x195
+ 681 00a7 41000000 		.4byte	0x41
+ 682 00ab 03       		.uleb128 0x3
+ 683 00ac 04       		.byte	0x4
+ 684 00ad 04       		.byte	0x4
+ 685 00ae EE010000 		.4byte	.LASF15
+ 686 00b2 03       		.uleb128 0x3
+ 687 00b3 08       		.byte	0x8
+ 688 00b4 04       		.byte	0x4
+ 689 00b5 BE050000 		.4byte	.LASF16
+ 690 00b9 06       		.uleb128 0x6
+ 691 00ba 08050000 		.4byte	.LASF17
+ 692 00be 02       		.byte	0x2
+ 693 00bf 3C02     		.2byte	0x23c
+ 694 00c1 C5000000 		.4byte	0xc5
+ 695 00c5 07       		.uleb128 0x7
+ 696 00c6 87000000 		.4byte	0x87
+ 697 00ca 06       		.uleb128 0x6
+ 698 00cb 1D020000 		.4byte	.LASF18
+ 699 00cf 02       		.byte	0x2
+ 700 00d0 3E02     		.2byte	0x23e
+ 701 00d2 D6000000 		.4byte	0xd6
+ 702 00d6 07       		.uleb128 0x7
+ 703 00d7 93000000 		.4byte	0x93
+ 704 00db 06       		.uleb128 0x6
+ 705 00dc FE020000 		.4byte	.LASF19
+ 706 00e0 02       		.byte	0x2
+ 707 00e1 4E02     		.2byte	0x24e
+ 708 00e3 80000000 		.4byte	0x80
+ 709 00e7 08       		.uleb128 0x8
+ 710 00e8 01       		.byte	0x1
+ 711 00e9 48000000 		.4byte	0x48
+ 712 00ed 03       		.byte	0x3
+ 713 00ee 22       		.byte	0x22
+ 714 00ef 00010000 		.4byte	0x100
+ 715 00f3 09       		.uleb128 0x9
+ 716 00f4 46000000 		.4byte	.LASF20
+ 717 00f8 00       		.byte	0
+ 718 00f9 09       		.uleb128 0x9
+ 719 00fa C5050000 		.4byte	.LASF21
+ 720 00fe 01       		.byte	0x1
+ 721 00ff 00       		.byte	0
+ 722 0100 0A       		.uleb128 0xa
+ 723 0101 7D030000 		.4byte	.LASF22
+ 724 0105 03       		.byte	0x3
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccIwewKZ.s 			page 21
+
+
+ 725 0106 25       		.byte	0x25
+ 726 0107 E7000000 		.4byte	0xe7
+ 727 010b 08       		.uleb128 0x8
+ 728 010c 01       		.byte	0x1
+ 729 010d 48000000 		.4byte	0x48
+ 730 0111 03       		.byte	0x3
+ 731 0112 26       		.byte	0x26
+ 732 0113 2A010000 		.4byte	0x12a
+ 733 0117 09       		.uleb128 0x9
+ 734 0118 71030000 		.4byte	.LASF23
+ 735 011c 00       		.byte	0
+ 736 011d 09       		.uleb128 0x9
+ 737 011e 10020000 		.4byte	.LASF24
+ 738 0122 01       		.byte	0x1
+ 739 0123 09       		.uleb128 0x9
+ 740 0124 5B030000 		.4byte	.LASF25
+ 741 0128 02       		.byte	0x2
+ 742 0129 00       		.byte	0
+ 743 012a 0A       		.uleb128 0xa
+ 744 012b 15040000 		.4byte	.LASF26
+ 745 012f 03       		.byte	0x3
+ 746 0130 2A       		.byte	0x2a
+ 747 0131 0B010000 		.4byte	0x10b
+ 748 0135 08       		.uleb128 0x8
+ 749 0136 01       		.byte	0x1
+ 750 0137 48000000 		.4byte	0x48
+ 751 013b 03       		.byte	0x3
+ 752 013c 2C       		.byte	0x2c
+ 753 013d 5A010000 		.4byte	0x15a
+ 754 0141 09       		.uleb128 0x9
+ 755 0142 3F000000 		.4byte	.LASF27
+ 756 0146 00       		.byte	0
+ 757 0147 09       		.uleb128 0x9
+ 758 0148 DD050000 		.4byte	.LASF28
+ 759 014c 01       		.byte	0x1
+ 760 014d 09       		.uleb128 0x9
+ 761 014e 64000000 		.4byte	.LASF29
+ 762 0152 02       		.byte	0x2
+ 763 0153 09       		.uleb128 0x9
+ 764 0154 A3020000 		.4byte	.LASF30
+ 765 0158 03       		.byte	0x3
+ 766 0159 00       		.byte	0
+ 767 015a 0A       		.uleb128 0xa
+ 768 015b AA010000 		.4byte	.LASF31
+ 769 015f 03       		.byte	0x3
+ 770 0160 31       		.byte	0x31
+ 771 0161 35010000 		.4byte	0x135
+ 772 0165 08       		.uleb128 0x8
+ 773 0166 01       		.byte	0x1
+ 774 0167 48000000 		.4byte	0x48
+ 775 016b 03       		.byte	0x3
+ 776 016c 33       		.byte	0x33
+ 777 016d B4010000 		.4byte	0x1b4
+ 778 0171 09       		.uleb128 0x9
+ 779 0172 4F010000 		.4byte	.LASF32
+ 780 0176 00       		.byte	0
+ 781 0177 0B       		.uleb128 0xb
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccIwewKZ.s 			page 22
+
+
+ 782 0178 4F4E4500 		.ascii	"ONE\000"
+ 783 017c 01       		.byte	0x1
+ 784 017d 0B       		.uleb128 0xb
+ 785 017e 54574F00 		.ascii	"TWO\000"
+ 786 0182 02       		.byte	0x2
+ 787 0183 09       		.uleb128 0x9
+ 788 0184 38020000 		.4byte	.LASF33
+ 789 0188 03       		.byte	0x3
+ 790 0189 09       		.uleb128 0x9
+ 791 018a 25040000 		.4byte	.LASF34
+ 792 018e 04       		.byte	0x4
+ 793 018f 09       		.uleb128 0x9
+ 794 0190 A3030000 		.4byte	.LASF35
+ 795 0194 05       		.byte	0x5
+ 796 0195 0B       		.uleb128 0xb
+ 797 0196 53495800 		.ascii	"SIX\000"
+ 798 019a 06       		.byte	0x6
+ 799 019b 09       		.uleb128 0x9
+ 800 019c 5E050000 		.4byte	.LASF36
+ 801 01a0 07       		.byte	0x7
+ 802 01a1 09       		.uleb128 0x9
+ 803 01a2 0B030000 		.4byte	.LASF37
+ 804 01a6 08       		.byte	0x8
+ 805 01a7 09       		.uleb128 0x9
+ 806 01a8 56030000 		.4byte	.LASF38
+ 807 01ac 09       		.byte	0x9
+ 808 01ad 09       		.uleb128 0x9
+ 809 01ae 2A040000 		.4byte	.LASF39
+ 810 01b2 0A       		.byte	0xa
+ 811 01b3 00       		.byte	0
+ 812 01b4 0A       		.uleb128 0xa
+ 813 01b5 4C000000 		.4byte	.LASF40
+ 814 01b9 03       		.byte	0x3
+ 815 01ba 3F       		.byte	0x3f
+ 816 01bb 65010000 		.4byte	0x165
+ 817 01bf 08       		.uleb128 0x8
+ 818 01c0 01       		.byte	0x1
+ 819 01c1 48000000 		.4byte	0x48
+ 820 01c5 03       		.byte	0x3
+ 821 01c6 41       		.byte	0x41
+ 822 01c7 31020000 		.4byte	0x231
+ 823 01cb 0B       		.uleb128 0xb
+ 824 01cc 433400   		.ascii	"C4\000"
+ 825 01cf 00       		.byte	0
+ 826 01d0 0B       		.uleb128 0xb
+ 827 01d1 443400   		.ascii	"D4\000"
+ 828 01d4 01       		.byte	0x1
+ 829 01d5 0B       		.uleb128 0xb
+ 830 01d6 453400   		.ascii	"E4\000"
+ 831 01d9 02       		.byte	0x2
+ 832 01da 0B       		.uleb128 0xb
+ 833 01db 473400   		.ascii	"G4\000"
+ 834 01de 03       		.byte	0x3
+ 835 01df 0B       		.uleb128 0xb
+ 836 01e0 473500   		.ascii	"G5\000"
+ 837 01e3 04       		.byte	0x4
+ 838 01e4 0B       		.uleb128 0xb
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccIwewKZ.s 			page 23
+
+
+ 839 01e5 423400   		.ascii	"B4\000"
+ 840 01e8 05       		.byte	0x5
+ 841 01e9 0B       		.uleb128 0xb
+ 842 01ea 433500   		.ascii	"C5\000"
+ 843 01ed 06       		.byte	0x6
+ 844 01ee 0B       		.uleb128 0xb
+ 845 01ef 443500   		.ascii	"D5\000"
+ 846 01f2 07       		.byte	0x7
+ 847 01f3 0B       		.uleb128 0xb
+ 848 01f4 453500   		.ascii	"E5\000"
+ 849 01f7 08       		.byte	0x8
+ 850 01f8 0B       		.uleb128 0xb
+ 851 01f9 463500   		.ascii	"F5\000"
+ 852 01fc 09       		.byte	0x9
+ 853 01fd 0B       		.uleb128 0xb
+ 854 01fe 473600   		.ascii	"G6\000"
+ 855 0201 0A       		.byte	0xa
+ 856 0202 0B       		.uleb128 0xb
+ 857 0203 413500   		.ascii	"A5\000"
+ 858 0206 0B       		.byte	0xb
+ 859 0207 0B       		.uleb128 0xb
+ 860 0208 433600   		.ascii	"C6\000"
+ 861 020b 0C       		.byte	0xc
+ 862 020c 0B       		.uleb128 0xb
+ 863 020d 423500   		.ascii	"B5\000"
+ 864 0210 0D       		.byte	0xd
+ 865 0211 0B       		.uleb128 0xb
+ 866 0212 453600   		.ascii	"E6\000"
+ 867 0215 0E       		.byte	0xe
+ 868 0216 0B       		.uleb128 0xb
+ 869 0217 443600   		.ascii	"D6\000"
+ 870 021a 0F       		.byte	0xf
+ 871 021b 0B       		.uleb128 0xb
+ 872 021c 463600   		.ascii	"F6\000"
+ 873 021f 10       		.byte	0x10
+ 874 0220 0B       		.uleb128 0xb
+ 875 0221 433700   		.ascii	"C7\000"
+ 876 0224 11       		.byte	0x11
+ 877 0225 0B       		.uleb128 0xb
+ 878 0226 413600   		.ascii	"A6\000"
+ 879 0229 12       		.byte	0x12
+ 880 022a 09       		.uleb128 0x9
+ 881 022b 90020000 		.4byte	.LASF41
+ 882 022f 13       		.byte	0x13
+ 883 0230 00       		.byte	0
+ 884 0231 0A       		.uleb128 0xa
+ 885 0232 AC020000 		.4byte	.LASF42
+ 886 0236 03       		.byte	0x3
+ 887 0237 56       		.byte	0x56
+ 888 0238 BF010000 		.4byte	0x1bf
+ 889 023c 0C       		.uleb128 0xc
+ 890 023d 0B       		.byte	0xb
+ 891 023e 03       		.byte	0x3
+ 892 023f 59       		.byte	0x59
+ 893 0240 5D020000 		.4byte	0x25d
+ 894 0244 0D       		.uleb128 0xd
+ 895 0245 1F040000 		.4byte	.LASF43
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccIwewKZ.s 			page 24
+
+
+ 896 0249 03       		.byte	0x3
+ 897 024a 5A       		.byte	0x5a
+ 898 024b 5D020000 		.4byte	0x25d
+ 899 024f 00       		.byte	0
+ 900 0250 0D       		.uleb128 0xd
+ 901 0251 04040000 		.4byte	.LASF44
+ 902 0255 03       		.byte	0x3
+ 903 0256 5B       		.byte	0x5b
+ 904 0257 9F000000 		.4byte	0x9f
+ 905 025b 0A       		.byte	0xa
+ 906 025c 00       		.byte	0
+ 907 025d 0E       		.uleb128 0xe
+ 908 025e 31020000 		.4byte	0x231
+ 909 0262 6D020000 		.4byte	0x26d
+ 910 0266 0F       		.uleb128 0xf
+ 911 0267 72000000 		.4byte	0x72
+ 912 026b 09       		.byte	0x9
+ 913 026c 00       		.byte	0
+ 914 026d 0A       		.uleb128 0xa
+ 915 026e 76050000 		.4byte	.LASF45
+ 916 0272 03       		.byte	0x3
+ 917 0273 5C       		.byte	0x5c
+ 918 0274 3C020000 		.4byte	0x23c
+ 919 0278 0C       		.uleb128 0xc
+ 920 0279 14       		.byte	0x14
+ 921 027a 03       		.byte	0x3
+ 922 027b 5E       		.byte	0x5e
+ 923 027c B1020000 		.4byte	0x2b1
+ 924 0280 0D       		.uleb128 0xd
+ 925 0281 1F040000 		.4byte	.LASF43
+ 926 0285 03       		.byte	0x3
+ 927 0286 5F       		.byte	0x5f
+ 928 0287 5D020000 		.4byte	0x25d
+ 929 028b 00       		.byte	0
+ 930 028c 0D       		.uleb128 0xd
+ 931 028d 04040000 		.4byte	.LASF44
+ 932 0291 03       		.byte	0x3
+ 933 0292 60       		.byte	0x60
+ 934 0293 9F000000 		.4byte	0x9f
+ 935 0297 0A       		.byte	0xa
+ 936 0298 0D       		.uleb128 0xd
+ 937 0299 F4010000 		.4byte	.LASF46
+ 938 029d 03       		.byte	0x3
+ 939 029e 61       		.byte	0x61
+ 940 029f 93000000 		.4byte	0x93
+ 941 02a3 0C       		.byte	0xc
+ 942 02a4 0D       		.uleb128 0xd
+ 943 02a5 32040000 		.4byte	.LASF47
+ 944 02a9 03       		.byte	0x3
+ 945 02aa 62       		.byte	0x62
+ 946 02ab 93000000 		.4byte	0x93
+ 947 02af 10       		.byte	0x10
+ 948 02b0 00       		.byte	0
+ 949 02b1 0A       		.uleb128 0xa
+ 950 02b2 3D040000 		.4byte	.LASF48
+ 951 02b6 03       		.byte	0x3
+ 952 02b7 63       		.byte	0x63
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccIwewKZ.s 			page 25
+
+
+ 953 02b8 78020000 		.4byte	0x278
+ 954 02bc 10       		.uleb128 0x10
+ 955 02bd 9C01     		.2byte	0x19c
+ 956 02bf 03       		.byte	0x3
+ 957 02c0 65       		.byte	0x65
+ 958 02c1 13030000 		.4byte	0x313
+ 959 02c5 0D       		.uleb128 0xd
+ 960 02c6 E3030000 		.4byte	.LASF49
+ 961 02ca 03       		.byte	0x3
+ 962 02cb 66       		.byte	0x66
+ 963 02cc 13030000 		.4byte	0x313
+ 964 02d0 00       		.byte	0
+ 965 02d1 11       		.uleb128 0x11
+ 966 02d2 00000000 		.4byte	.LASF50
+ 967 02d6 03       		.byte	0x3
+ 968 02d7 67       		.byte	0x67
+ 969 02d8 87000000 		.4byte	0x87
+ 970 02dc 9001     		.2byte	0x190
+ 971 02de 11       		.uleb128 0x11
+ 972 02df 27000000 		.4byte	.LASF51
+ 973 02e3 03       		.byte	0x3
+ 974 02e4 68       		.byte	0x68
+ 975 02e5 93000000 		.4byte	0x93
+ 976 02e9 9401     		.2byte	0x194
+ 977 02eb 11       		.uleb128 0x11
+ 978 02ec 5C040000 		.4byte	.LASF52
+ 979 02f0 03       		.byte	0x3
+ 980 02f1 69       		.byte	0x69
+ 981 02f2 00010000 		.4byte	0x100
+ 982 02f6 9801     		.2byte	0x198
+ 983 02f8 11       		.uleb128 0x11
+ 984 02f9 34010000 		.4byte	.LASF53
+ 985 02fd 03       		.byte	0x3
+ 986 02fe 6A       		.byte	0x6a
+ 987 02ff 00010000 		.4byte	0x100
+ 988 0303 9901     		.2byte	0x199
+ 989 0305 11       		.uleb128 0x11
+ 990 0306 6A010000 		.4byte	.LASF54
+ 991 030a 03       		.byte	0x3
+ 992 030b 6B       		.byte	0x6b
+ 993 030c 87000000 		.4byte	0x87
+ 994 0310 9A01     		.2byte	0x19a
+ 995 0312 00       		.byte	0
+ 996 0313 0E       		.uleb128 0xe
+ 997 0314 B1020000 		.4byte	0x2b1
+ 998 0318 23030000 		.4byte	0x323
+ 999 031c 0F       		.uleb128 0xf
+ 1000 031d 72000000 		.4byte	0x72
+ 1001 0321 13       		.byte	0x13
+ 1002 0322 00       		.byte	0
+ 1003 0323 0A       		.uleb128 0xa
+ 1004 0324 7D000000 		.4byte	.LASF55
+ 1005 0328 03       		.byte	0x3
+ 1006 0329 6C       		.byte	0x6c
+ 1007 032a BC020000 		.4byte	0x2bc
+ 1008 032e 0C       		.uleb128 0xc
+ 1009 032f 2C       		.byte	0x2c
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccIwewKZ.s 			page 26
+
+
+ 1010 0330 03       		.byte	0x3
+ 1011 0331 6E       		.byte	0x6e
+ 1012 0332 A3030000 		.4byte	0x3a3
+ 1013 0336 0D       		.uleb128 0xd
+ 1014 0337 BF030000 		.4byte	.LASF56
+ 1015 033b 03       		.byte	0x3
+ 1016 033c 6F       		.byte	0x6f
+ 1017 033d B1020000 		.4byte	0x2b1
+ 1018 0341 00       		.byte	0
+ 1019 0342 0D       		.uleb128 0xd
+ 1020 0343 0F000000 		.4byte	.LASF57
+ 1021 0347 03       		.byte	0x3
+ 1022 0348 70       		.byte	0x70
+ 1023 0349 00010000 		.4byte	0x100
+ 1024 034d 14       		.byte	0x14
+ 1025 034e 0D       		.uleb128 0xd
+ 1026 034f 1F050000 		.4byte	.LASF58
+ 1027 0353 03       		.byte	0x3
+ 1028 0354 71       		.byte	0x71
+ 1029 0355 00010000 		.4byte	0x100
+ 1030 0359 15       		.byte	0x15
+ 1031 035a 0D       		.uleb128 0xd
+ 1032 035b 79010000 		.4byte	.LASF59
+ 1033 035f 03       		.byte	0x3
+ 1034 0360 72       		.byte	0x72
+ 1035 0361 AB000000 		.4byte	0xab
+ 1036 0365 18       		.byte	0x18
+ 1037 0366 0D       		.uleb128 0xd
+ 1038 0367 1A010000 		.4byte	.LASF60
+ 1039 036b 03       		.byte	0x3
+ 1040 036c 73       		.byte	0x73
+ 1041 036d 93000000 		.4byte	0x93
+ 1042 0371 1C       		.byte	0x1c
+ 1043 0372 0D       		.uleb128 0xd
+ 1044 0373 E3010000 		.4byte	.LASF61
+ 1045 0377 03       		.byte	0x3
+ 1046 0378 74       		.byte	0x74
+ 1047 0379 93000000 		.4byte	0x93
+ 1048 037d 20       		.byte	0x20
+ 1049 037e 0D       		.uleb128 0xd
+ 1050 037f F0020000 		.4byte	.LASF62
+ 1051 0383 03       		.byte	0x3
+ 1052 0384 75       		.byte	0x75
+ 1053 0385 93000000 		.4byte	0x93
+ 1054 0389 24       		.byte	0x24
+ 1055 038a 0D       		.uleb128 0xd
+ 1056 038b D9010000 		.4byte	.LASF63
+ 1057 038f 03       		.byte	0x3
+ 1058 0390 76       		.byte	0x76
+ 1059 0391 00010000 		.4byte	0x100
+ 1060 0395 28       		.byte	0x28
+ 1061 0396 0D       		.uleb128 0xd
+ 1062 0397 F3030000 		.4byte	.LASF64
+ 1063 039b 03       		.byte	0x3
+ 1064 039c 77       		.byte	0x77
+ 1065 039d 87000000 		.4byte	0x87
+ 1066 03a1 29       		.byte	0x29
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccIwewKZ.s 			page 27
+
+
+ 1067 03a2 00       		.byte	0
+ 1068 03a3 0A       		.uleb128 0xa
+ 1069 03a4 FE040000 		.4byte	.LASF65
+ 1070 03a8 03       		.byte	0x3
+ 1071 03a9 78       		.byte	0x78
+ 1072 03aa 2E030000 		.4byte	0x32e
+ 1073 03ae 10       		.uleb128 0x10
+ 1074 03af E001     		.2byte	0x1e0
+ 1075 03b1 03       		.byte	0x3
+ 1076 03b2 7A       		.byte	0x7a
+ 1077 03b3 25040000 		.4byte	0x425
+ 1078 03b7 0D       		.uleb128 0xd
+ 1079 03b8 9B050000 		.4byte	.LASF66
+ 1080 03bc 03       		.byte	0x3
+ 1081 03bd 7B       		.byte	0x7b
+ 1082 03be 2A010000 		.4byte	0x12a
+ 1083 03c2 00       		.byte	0
+ 1084 03c3 0D       		.uleb128 0xd
+ 1085 03c4 98010000 		.4byte	.LASF67
+ 1086 03c8 03       		.byte	0x3
+ 1087 03c9 7C       		.byte	0x7c
+ 1088 03ca B4010000 		.4byte	0x1b4
+ 1089 03ce 01       		.byte	0x1
+ 1090 03cf 0D       		.uleb128 0xd
+ 1091 03d0 29010000 		.4byte	.LASF68
+ 1092 03d4 03       		.byte	0x3
+ 1093 03d5 7D       		.byte	0x7d
+ 1094 03d6 9F000000 		.4byte	0x9f
+ 1095 03da 02       		.byte	0x2
+ 1096 03db 0D       		.uleb128 0xd
+ 1097 03dc 23020000 		.4byte	.LASF69
+ 1098 03e0 03       		.byte	0x3
+ 1099 03e1 7E       		.byte	0x7e
+ 1100 03e2 6D020000 		.4byte	0x26d
+ 1101 03e6 03       		.byte	0x3
+ 1102 03e7 0D       		.uleb128 0xd
+ 1103 03e8 C4020000 		.4byte	.LASF70
+ 1104 03ec 03       		.byte	0x3
+ 1105 03ed 7F       		.byte	0x7f
+ 1106 03ee 00010000 		.4byte	0x100
+ 1107 03f2 0E       		.byte	0xe
+ 1108 03f3 0D       		.uleb128 0xd
+ 1109 03f4 2D030000 		.4byte	.LASF71
+ 1110 03f8 03       		.byte	0x3
+ 1111 03f9 80       		.byte	0x80
+ 1112 03fa AB000000 		.4byte	0xab
+ 1113 03fe 10       		.byte	0x10
+ 1114 03ff 0D       		.uleb128 0xd
+ 1115 0400 83030000 		.4byte	.LASF72
+ 1116 0404 03       		.byte	0x3
+ 1117 0405 81       		.byte	0x81
+ 1118 0406 5A010000 		.4byte	0x15a
+ 1119 040a 14       		.byte	0x14
+ 1120 040b 0D       		.uleb128 0xd
+ 1121 040c E8040000 		.4byte	.LASF73
+ 1122 0410 03       		.byte	0x3
+ 1123 0411 82       		.byte	0x82
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccIwewKZ.s 			page 28
+
+
+ 1124 0412 23030000 		.4byte	0x323
+ 1125 0416 18       		.byte	0x18
+ 1126 0417 11       		.uleb128 0x11
+ 1127 0418 54020000 		.4byte	.LASF74
+ 1128 041c 03       		.byte	0x3
+ 1129 041d 83       		.byte	0x83
+ 1130 041e A3030000 		.4byte	0x3a3
+ 1131 0422 B401     		.2byte	0x1b4
+ 1132 0424 00       		.byte	0
+ 1133 0425 0A       		.uleb128 0xa
+ 1134 0426 CA050000 		.4byte	.LASF75
+ 1135 042a 03       		.byte	0x3
+ 1136 042b 84       		.byte	0x84
+ 1137 042c AE030000 		.4byte	0x3ae
+ 1138 0430 12       		.uleb128 0x12
+ 1139 0431 11030000 		.4byte	.LASF76
+ 1140 0435 01       		.byte	0x1
+ 1141 0436 43       		.byte	0x43
+ 1142 0437 00000000 		.4byte	.LFB0
+ 1143 043b 20000000 		.4byte	.LFE0-.LFB0
+ 1144 043f 01       		.uleb128 0x1
+ 1145 0440 9C       		.byte	0x9c
+ 1146 0441 13       		.uleb128 0x13
+ 1147 0442 DE020000 		.4byte	.LASF78
+ 1148 0446 01       		.byte	0x1
+ 1149 0447 6E       		.byte	0x6e
+ 1150 0448 00000000 		.4byte	.LFB1
+ 1151 044c 24000000 		.4byte	.LFE1-.LFB1
+ 1152 0450 01       		.uleb128 0x1
+ 1153 0451 9C       		.byte	0x9c
+ 1154 0452 65040000 		.4byte	0x465
+ 1155 0456 14       		.uleb128 0x14
+ 1156 0457 90010000 		.4byte	.LASF81
+ 1157 045b 01       		.byte	0x1
+ 1158 045c 6E       		.byte	0x6e
+ 1159 045d DB000000 		.4byte	0xdb
+ 1160 0461 02       		.uleb128 0x2
+ 1161 0462 91       		.byte	0x91
+ 1162 0463 74       		.sleb128 -12
+ 1163 0464 00       		.byte	0
+ 1164 0465 12       		.uleb128 0x12
+ 1165 0466 6E000000 		.4byte	.LASF77
+ 1166 046a 01       		.byte	0x1
+ 1167 046b 8C       		.byte	0x8c
+ 1168 046c 00000000 		.4byte	.LFB2
+ 1169 0470 18000000 		.4byte	.LFE2-.LFB2
+ 1170 0474 01       		.uleb128 0x1
+ 1171 0475 9C       		.byte	0x9c
+ 1172 0476 13       		.uleb128 0x13
+ 1173 0477 8F030000 		.4byte	.LASF79
+ 1174 047b 01       		.byte	0x1
+ 1175 047c A6       		.byte	0xa6
+ 1176 047d 00000000 		.4byte	.LFB3
+ 1177 0481 48000000 		.4byte	.LFE3-.LFB3
+ 1178 0485 01       		.uleb128 0x1
+ 1179 0486 9C       		.byte	0x9c
+ 1180 0487 A7040000 		.4byte	0x4a7
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccIwewKZ.s 			page 29
+
+
+ 1181 048b 15       		.uleb128 0x15
+ 1182 048c 76616C00 		.ascii	"val\000"
+ 1183 0490 01       		.byte	0x1
+ 1184 0491 B0       		.byte	0xb0
+ 1185 0492 25000000 		.4byte	0x25
+ 1186 0496 02       		.uleb128 0x2
+ 1187 0497 91       		.byte	0x91
+ 1188 0498 6C       		.sleb128 -20
+ 1189 0499 16       		.uleb128 0x16
+ 1190 049a 4B040000 		.4byte	.LASF97
+ 1191 049e 01       		.byte	0x1
+ 1192 049f B0       		.byte	0xb0
+ 1193 04a0 25000000 		.4byte	0x25
+ 1194 04a4 17       		.uleb128 0x17
+ 1195 04a5 00       		.byte	0
+ 1196 04a6 00       		.byte	0
+ 1197 04a7 18       		.uleb128 0x18
+ 1198 04a8 87050000 		.4byte	.LASF80
+ 1199 04ac 01       		.byte	0x1
+ 1200 04ad D4       		.byte	0xd4
+ 1201 04ae 00000000 		.4byte	.LFB4
+ 1202 04b2 24000000 		.4byte	.LFE4-.LFB4
+ 1203 04b6 01       		.uleb128 0x1
+ 1204 04b7 9C       		.byte	0x9c
+ 1205 04b8 D9040000 		.4byte	0x4d9
+ 1206 04bc 14       		.uleb128 0x14
+ 1207 04bd 90010000 		.4byte	.LASF81
+ 1208 04c1 01       		.byte	0x1
+ 1209 04c2 D4       		.byte	0xd4
+ 1210 04c3 DB000000 		.4byte	0xdb
+ 1211 04c7 02       		.uleb128 0x2
+ 1212 04c8 91       		.byte	0x91
+ 1213 04c9 6C       		.sleb128 -20
+ 1214 04ca 19       		.uleb128 0x19
+ 1215 04cb 6D020000 		.4byte	.LASF82
+ 1216 04cf 01       		.byte	0x1
+ 1217 04d0 D6       		.byte	0xd6
+ 1218 04d1 D9040000 		.4byte	0x4d9
+ 1219 04d5 02       		.uleb128 0x2
+ 1220 04d6 91       		.byte	0x91
+ 1221 04d7 74       		.sleb128 -12
+ 1222 04d8 00       		.byte	0
+ 1223 04d9 04       		.uleb128 0x4
+ 1224 04da 04       		.byte	0x4
+ 1225 04db DB000000 		.4byte	0xdb
+ 1226 04df 1A       		.uleb128 0x1a
+ 1227 04e0 7C020000 		.4byte	.LASF85
+ 1228 04e4 01       		.byte	0x1
+ 1229 04e5 EC       		.byte	0xec
+ 1230 04e6 DB000000 		.4byte	0xdb
+ 1231 04ea 00000000 		.4byte	.LFB5
+ 1232 04ee 20000000 		.4byte	.LFE5-.LFB5
+ 1233 04f2 01       		.uleb128 0x1
+ 1234 04f3 9C       		.byte	0x9c
+ 1235 04f4 07050000 		.4byte	0x507
+ 1236 04f8 19       		.uleb128 0x19
+ 1237 04f9 6D020000 		.4byte	.LASF82
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccIwewKZ.s 			page 30
+
+
+ 1238 04fd 01       		.byte	0x1
+ 1239 04fe EE       		.byte	0xee
+ 1240 04ff D9040000 		.4byte	0x4d9
+ 1241 0503 02       		.uleb128 0x2
+ 1242 0504 91       		.byte	0x91
+ 1243 0505 74       		.sleb128 -12
+ 1244 0506 00       		.byte	0
+ 1245 0507 1B       		.uleb128 0x1b
+ 1246 0508 54010000 		.4byte	.LASF83
+ 1247 050c 01       		.byte	0x1
+ 1248 050d 0E01     		.2byte	0x10e
+ 1249 050f 00000000 		.4byte	.LFB6
+ 1250 0513 24000000 		.4byte	.LFE6-.LFB6
+ 1251 0517 01       		.uleb128 0x1
+ 1252 0518 9C       		.byte	0x9c
+ 1253 0519 2D050000 		.4byte	0x52d
+ 1254 051d 1C       		.uleb128 0x1c
+ 1255 051e 36000000 		.4byte	.LASF84
+ 1256 0522 01       		.byte	0x1
+ 1257 0523 0E01     		.2byte	0x10e
+ 1258 0525 87000000 		.4byte	0x87
+ 1259 0529 02       		.uleb128 0x2
+ 1260 052a 91       		.byte	0x91
+ 1261 052b 77       		.sleb128 -9
+ 1262 052c 00       		.byte	0
+ 1263 052d 1D       		.uleb128 0x1d
+ 1264 052e 3E020000 		.4byte	.LASF86
+ 1265 0532 01       		.byte	0x1
+ 1266 0533 2401     		.2byte	0x124
+ 1267 0535 87000000 		.4byte	0x87
+ 1268 0539 00000000 		.4byte	.LFB7
+ 1269 053d 20000000 		.4byte	.LFE7-.LFB7
+ 1270 0541 01       		.uleb128 0x1
+ 1271 0542 9C       		.byte	0x9c
+ 1272 0543 57050000 		.4byte	0x557
+ 1273 0547 1E       		.uleb128 0x1e
+ 1274 0548 36000000 		.4byte	.LASF84
+ 1275 054c 01       		.byte	0x1
+ 1276 054d 2601     		.2byte	0x126
+ 1277 054f 87000000 		.4byte	0x87
+ 1278 0553 02       		.uleb128 0x2
+ 1279 0554 91       		.byte	0x91
+ 1280 0555 77       		.sleb128 -9
+ 1281 0556 00       		.byte	0
+ 1282 0557 1F       		.uleb128 0x1f
+ 1283 0558 AD050000 		.4byte	.LASF87
+ 1284 055c 01       		.byte	0x1
+ 1285 055d 3F01     		.2byte	0x13f
+ 1286 055f 00000000 		.4byte	.LFB8
+ 1287 0563 18000000 		.4byte	.LFE8-.LFB8
+ 1288 0567 01       		.uleb128 0x1
+ 1289 0568 9C       		.byte	0x9c
+ 1290 0569 20       		.uleb128 0x20
+ 1291 056a B1020000 		.4byte	.LASF98
+ 1292 056e 01       		.byte	0x1
+ 1293 056f 5401     		.2byte	0x154
+ 1294 0571 87000000 		.4byte	0x87
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccIwewKZ.s 			page 31
+
+
+ 1295 0575 00000000 		.4byte	.LFB9
+ 1296 0579 24000000 		.4byte	.LFE9-.LFB9
+ 1297 057d 01       		.uleb128 0x1
+ 1298 057e 9C       		.byte	0x9c
+ 1299 057f 1F       		.uleb128 0x1f
+ 1300 0580 64050000 		.4byte	.LASF88
+ 1301 0584 01       		.byte	0x1
+ 1302 0585 6901     		.2byte	0x169
+ 1303 0587 00000000 		.4byte	.LFB10
+ 1304 058b 18000000 		.4byte	.LFE10-.LFB10
+ 1305 058f 01       		.uleb128 0x1
+ 1306 0590 9C       		.byte	0x9c
+ 1307 0591 1F       		.uleb128 0x1f
+ 1308 0592 49050000 		.4byte	.LASF89
+ 1309 0596 01       		.byte	0x1
+ 1310 0597 8401     		.2byte	0x184
+ 1311 0599 00000000 		.4byte	.LFB11
+ 1312 059d 18000000 		.4byte	.LFE11-.LFB11
+ 1313 05a1 01       		.uleb128 0x1
+ 1314 05a2 9C       		.byte	0x9c
+ 1315 05a3 1F       		.uleb128 0x1f
+ 1316 05a4 A8030000 		.4byte	.LASF90
+ 1317 05a8 01       		.byte	0x1
+ 1318 05a9 9D01     		.2byte	0x19d
+ 1319 05ab 00000000 		.4byte	.LFB12
+ 1320 05af 18000000 		.4byte	.LFE12-.LFB12
+ 1321 05b3 01       		.uleb128 0x1
+ 1322 05b4 9C       		.byte	0x9c
+ 1323 05b5 21       		.uleb128 0x21
+ 1324 05b6 63020000 		.4byte	.LASF91
+ 1325 05ba 03       		.byte	0x3
+ 1326 05bb 86       		.byte	0x86
+ 1327 05bc 25040000 		.4byte	0x425
+ 1328 05c0 22       		.uleb128 0x22
+ 1329 05c1 5E020000 		.4byte	.LASF92
+ 1330 05c5 01       		.byte	0x1
+ 1331 05c6 23       		.byte	0x23
+ 1332 05c7 25000000 		.4byte	0x25
+ 1333 05cb 05       		.uleb128 0x5
+ 1334 05cc 03       		.byte	0x3
+ 1335 05cd 00000000 		.4byte	high
+ 1336 05d1 22       		.uleb128 0x22
+ 1337 05d2 3C050000 		.4byte	.LASF93
+ 1338 05d6 01       		.byte	0x1
+ 1339 05d7 24       		.byte	0x24
+ 1340 05d8 25000000 		.4byte	0x25
+ 1341 05dc 05       		.uleb128 0x5
+ 1342 05dd 03       		.byte	0x3
+ 1343 05de 00000000 		.4byte	c4_table_idx
+ 1344 05e2 00       		.byte	0
+ 1345              		.section	.debug_abbrev,"",%progbits
+ 1346              	.Ldebug_abbrev0:
+ 1347 0000 01       		.uleb128 0x1
+ 1348 0001 11       		.uleb128 0x11
+ 1349 0002 01       		.byte	0x1
+ 1350 0003 25       		.uleb128 0x25
+ 1351 0004 0E       		.uleb128 0xe
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccIwewKZ.s 			page 32
+
+
+ 1352 0005 13       		.uleb128 0x13
+ 1353 0006 0B       		.uleb128 0xb
+ 1354 0007 03       		.uleb128 0x3
+ 1355 0008 0E       		.uleb128 0xe
+ 1356 0009 1B       		.uleb128 0x1b
+ 1357 000a 0E       		.uleb128 0xe
+ 1358 000b 55       		.uleb128 0x55
+ 1359 000c 17       		.uleb128 0x17
+ 1360 000d 11       		.uleb128 0x11
+ 1361 000e 01       		.uleb128 0x1
+ 1362 000f 10       		.uleb128 0x10
+ 1363 0010 17       		.uleb128 0x17
+ 1364 0011 00       		.byte	0
+ 1365 0012 00       		.byte	0
+ 1366 0013 02       		.uleb128 0x2
+ 1367 0014 24       		.uleb128 0x24
+ 1368 0015 00       		.byte	0
+ 1369 0016 0B       		.uleb128 0xb
+ 1370 0017 0B       		.uleb128 0xb
+ 1371 0018 3E       		.uleb128 0x3e
+ 1372 0019 0B       		.uleb128 0xb
+ 1373 001a 03       		.uleb128 0x3
+ 1374 001b 08       		.uleb128 0x8
+ 1375 001c 00       		.byte	0
+ 1376 001d 00       		.byte	0
+ 1377 001e 03       		.uleb128 0x3
+ 1378 001f 24       		.uleb128 0x24
+ 1379 0020 00       		.byte	0
+ 1380 0021 0B       		.uleb128 0xb
+ 1381 0022 0B       		.uleb128 0xb
+ 1382 0023 3E       		.uleb128 0x3e
+ 1383 0024 0B       		.uleb128 0xb
+ 1384 0025 03       		.uleb128 0x3
+ 1385 0026 0E       		.uleb128 0xe
+ 1386 0027 00       		.byte	0
+ 1387 0028 00       		.byte	0
+ 1388 0029 04       		.uleb128 0x4
+ 1389 002a 0F       		.uleb128 0xf
+ 1390 002b 00       		.byte	0
+ 1391 002c 0B       		.uleb128 0xb
+ 1392 002d 0B       		.uleb128 0xb
+ 1393 002e 49       		.uleb128 0x49
+ 1394 002f 13       		.uleb128 0x13
+ 1395 0030 00       		.byte	0
+ 1396 0031 00       		.byte	0
+ 1397 0032 05       		.uleb128 0x5
+ 1398 0033 15       		.uleb128 0x15
+ 1399 0034 00       		.byte	0
+ 1400 0035 27       		.uleb128 0x27
+ 1401 0036 19       		.uleb128 0x19
+ 1402 0037 00       		.byte	0
+ 1403 0038 00       		.byte	0
+ 1404 0039 06       		.uleb128 0x6
+ 1405 003a 16       		.uleb128 0x16
+ 1406 003b 00       		.byte	0
+ 1407 003c 03       		.uleb128 0x3
+ 1408 003d 0E       		.uleb128 0xe
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccIwewKZ.s 			page 33
+
+
+ 1409 003e 3A       		.uleb128 0x3a
+ 1410 003f 0B       		.uleb128 0xb
+ 1411 0040 3B       		.uleb128 0x3b
+ 1412 0041 05       		.uleb128 0x5
+ 1413 0042 49       		.uleb128 0x49
+ 1414 0043 13       		.uleb128 0x13
+ 1415 0044 00       		.byte	0
+ 1416 0045 00       		.byte	0
+ 1417 0046 07       		.uleb128 0x7
+ 1418 0047 35       		.uleb128 0x35
+ 1419 0048 00       		.byte	0
+ 1420 0049 49       		.uleb128 0x49
+ 1421 004a 13       		.uleb128 0x13
+ 1422 004b 00       		.byte	0
+ 1423 004c 00       		.byte	0
+ 1424 004d 08       		.uleb128 0x8
+ 1425 004e 04       		.uleb128 0x4
+ 1426 004f 01       		.byte	0x1
+ 1427 0050 0B       		.uleb128 0xb
+ 1428 0051 0B       		.uleb128 0xb
+ 1429 0052 49       		.uleb128 0x49
+ 1430 0053 13       		.uleb128 0x13
+ 1431 0054 3A       		.uleb128 0x3a
+ 1432 0055 0B       		.uleb128 0xb
+ 1433 0056 3B       		.uleb128 0x3b
+ 1434 0057 0B       		.uleb128 0xb
+ 1435 0058 01       		.uleb128 0x1
+ 1436 0059 13       		.uleb128 0x13
+ 1437 005a 00       		.byte	0
+ 1438 005b 00       		.byte	0
+ 1439 005c 09       		.uleb128 0x9
+ 1440 005d 28       		.uleb128 0x28
+ 1441 005e 00       		.byte	0
+ 1442 005f 03       		.uleb128 0x3
+ 1443 0060 0E       		.uleb128 0xe
+ 1444 0061 1C       		.uleb128 0x1c
+ 1445 0062 0B       		.uleb128 0xb
+ 1446 0063 00       		.byte	0
+ 1447 0064 00       		.byte	0
+ 1448 0065 0A       		.uleb128 0xa
+ 1449 0066 16       		.uleb128 0x16
+ 1450 0067 00       		.byte	0
+ 1451 0068 03       		.uleb128 0x3
+ 1452 0069 0E       		.uleb128 0xe
+ 1453 006a 3A       		.uleb128 0x3a
+ 1454 006b 0B       		.uleb128 0xb
+ 1455 006c 3B       		.uleb128 0x3b
+ 1456 006d 0B       		.uleb128 0xb
+ 1457 006e 49       		.uleb128 0x49
+ 1458 006f 13       		.uleb128 0x13
+ 1459 0070 00       		.byte	0
+ 1460 0071 00       		.byte	0
+ 1461 0072 0B       		.uleb128 0xb
+ 1462 0073 28       		.uleb128 0x28
+ 1463 0074 00       		.byte	0
+ 1464 0075 03       		.uleb128 0x3
+ 1465 0076 08       		.uleb128 0x8
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccIwewKZ.s 			page 34
+
+
+ 1466 0077 1C       		.uleb128 0x1c
+ 1467 0078 0B       		.uleb128 0xb
+ 1468 0079 00       		.byte	0
+ 1469 007a 00       		.byte	0
+ 1470 007b 0C       		.uleb128 0xc
+ 1471 007c 13       		.uleb128 0x13
+ 1472 007d 01       		.byte	0x1
+ 1473 007e 0B       		.uleb128 0xb
+ 1474 007f 0B       		.uleb128 0xb
+ 1475 0080 3A       		.uleb128 0x3a
+ 1476 0081 0B       		.uleb128 0xb
+ 1477 0082 3B       		.uleb128 0x3b
+ 1478 0083 0B       		.uleb128 0xb
+ 1479 0084 01       		.uleb128 0x1
+ 1480 0085 13       		.uleb128 0x13
+ 1481 0086 00       		.byte	0
+ 1482 0087 00       		.byte	0
+ 1483 0088 0D       		.uleb128 0xd
+ 1484 0089 0D       		.uleb128 0xd
+ 1485 008a 00       		.byte	0
+ 1486 008b 03       		.uleb128 0x3
+ 1487 008c 0E       		.uleb128 0xe
+ 1488 008d 3A       		.uleb128 0x3a
+ 1489 008e 0B       		.uleb128 0xb
+ 1490 008f 3B       		.uleb128 0x3b
+ 1491 0090 0B       		.uleb128 0xb
+ 1492 0091 49       		.uleb128 0x49
+ 1493 0092 13       		.uleb128 0x13
+ 1494 0093 38       		.uleb128 0x38
+ 1495 0094 0B       		.uleb128 0xb
+ 1496 0095 00       		.byte	0
+ 1497 0096 00       		.byte	0
+ 1498 0097 0E       		.uleb128 0xe
+ 1499 0098 01       		.uleb128 0x1
+ 1500 0099 01       		.byte	0x1
+ 1501 009a 49       		.uleb128 0x49
+ 1502 009b 13       		.uleb128 0x13
+ 1503 009c 01       		.uleb128 0x1
+ 1504 009d 13       		.uleb128 0x13
+ 1505 009e 00       		.byte	0
+ 1506 009f 00       		.byte	0
+ 1507 00a0 0F       		.uleb128 0xf
+ 1508 00a1 21       		.uleb128 0x21
+ 1509 00a2 00       		.byte	0
+ 1510 00a3 49       		.uleb128 0x49
+ 1511 00a4 13       		.uleb128 0x13
+ 1512 00a5 2F       		.uleb128 0x2f
+ 1513 00a6 0B       		.uleb128 0xb
+ 1514 00a7 00       		.byte	0
+ 1515 00a8 00       		.byte	0
+ 1516 00a9 10       		.uleb128 0x10
+ 1517 00aa 13       		.uleb128 0x13
+ 1518 00ab 01       		.byte	0x1
+ 1519 00ac 0B       		.uleb128 0xb
+ 1520 00ad 05       		.uleb128 0x5
+ 1521 00ae 3A       		.uleb128 0x3a
+ 1522 00af 0B       		.uleb128 0xb
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccIwewKZ.s 			page 35
+
+
+ 1523 00b0 3B       		.uleb128 0x3b
+ 1524 00b1 0B       		.uleb128 0xb
+ 1525 00b2 01       		.uleb128 0x1
+ 1526 00b3 13       		.uleb128 0x13
+ 1527 00b4 00       		.byte	0
+ 1528 00b5 00       		.byte	0
+ 1529 00b6 11       		.uleb128 0x11
+ 1530 00b7 0D       		.uleb128 0xd
+ 1531 00b8 00       		.byte	0
+ 1532 00b9 03       		.uleb128 0x3
+ 1533 00ba 0E       		.uleb128 0xe
+ 1534 00bb 3A       		.uleb128 0x3a
+ 1535 00bc 0B       		.uleb128 0xb
+ 1536 00bd 3B       		.uleb128 0x3b
+ 1537 00be 0B       		.uleb128 0xb
+ 1538 00bf 49       		.uleb128 0x49
+ 1539 00c0 13       		.uleb128 0x13
+ 1540 00c1 38       		.uleb128 0x38
+ 1541 00c2 05       		.uleb128 0x5
+ 1542 00c3 00       		.byte	0
+ 1543 00c4 00       		.byte	0
+ 1544 00c5 12       		.uleb128 0x12
+ 1545 00c6 2E       		.uleb128 0x2e
+ 1546 00c7 00       		.byte	0
+ 1547 00c8 3F       		.uleb128 0x3f
+ 1548 00c9 19       		.uleb128 0x19
+ 1549 00ca 03       		.uleb128 0x3
+ 1550 00cb 0E       		.uleb128 0xe
+ 1551 00cc 3A       		.uleb128 0x3a
+ 1552 00cd 0B       		.uleb128 0xb
+ 1553 00ce 3B       		.uleb128 0x3b
+ 1554 00cf 0B       		.uleb128 0xb
+ 1555 00d0 27       		.uleb128 0x27
+ 1556 00d1 19       		.uleb128 0x19
+ 1557 00d2 11       		.uleb128 0x11
+ 1558 00d3 01       		.uleb128 0x1
+ 1559 00d4 12       		.uleb128 0x12
+ 1560 00d5 06       		.uleb128 0x6
+ 1561 00d6 40       		.uleb128 0x40
+ 1562 00d7 18       		.uleb128 0x18
+ 1563 00d8 9642     		.uleb128 0x2116
+ 1564 00da 19       		.uleb128 0x19
+ 1565 00db 00       		.byte	0
+ 1566 00dc 00       		.byte	0
+ 1567 00dd 13       		.uleb128 0x13
+ 1568 00de 2E       		.uleb128 0x2e
+ 1569 00df 01       		.byte	0x1
+ 1570 00e0 3F       		.uleb128 0x3f
+ 1571 00e1 19       		.uleb128 0x19
+ 1572 00e2 03       		.uleb128 0x3
+ 1573 00e3 0E       		.uleb128 0xe
+ 1574 00e4 3A       		.uleb128 0x3a
+ 1575 00e5 0B       		.uleb128 0xb
+ 1576 00e6 3B       		.uleb128 0x3b
+ 1577 00e7 0B       		.uleb128 0xb
+ 1578 00e8 27       		.uleb128 0x27
+ 1579 00e9 19       		.uleb128 0x19
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccIwewKZ.s 			page 36
+
+
+ 1580 00ea 11       		.uleb128 0x11
+ 1581 00eb 01       		.uleb128 0x1
+ 1582 00ec 12       		.uleb128 0x12
+ 1583 00ed 06       		.uleb128 0x6
+ 1584 00ee 40       		.uleb128 0x40
+ 1585 00ef 18       		.uleb128 0x18
+ 1586 00f0 9642     		.uleb128 0x2116
+ 1587 00f2 19       		.uleb128 0x19
+ 1588 00f3 01       		.uleb128 0x1
+ 1589 00f4 13       		.uleb128 0x13
+ 1590 00f5 00       		.byte	0
+ 1591 00f6 00       		.byte	0
+ 1592 00f7 14       		.uleb128 0x14
+ 1593 00f8 05       		.uleb128 0x5
+ 1594 00f9 00       		.byte	0
+ 1595 00fa 03       		.uleb128 0x3
+ 1596 00fb 0E       		.uleb128 0xe
+ 1597 00fc 3A       		.uleb128 0x3a
+ 1598 00fd 0B       		.uleb128 0xb
+ 1599 00fe 3B       		.uleb128 0x3b
+ 1600 00ff 0B       		.uleb128 0xb
+ 1601 0100 49       		.uleb128 0x49
+ 1602 0101 13       		.uleb128 0x13
+ 1603 0102 02       		.uleb128 0x2
+ 1604 0103 18       		.uleb128 0x18
+ 1605 0104 00       		.byte	0
+ 1606 0105 00       		.byte	0
+ 1607 0106 15       		.uleb128 0x15
+ 1608 0107 34       		.uleb128 0x34
+ 1609 0108 00       		.byte	0
+ 1610 0109 03       		.uleb128 0x3
+ 1611 010a 08       		.uleb128 0x8
+ 1612 010b 3A       		.uleb128 0x3a
+ 1613 010c 0B       		.uleb128 0xb
+ 1614 010d 3B       		.uleb128 0x3b
+ 1615 010e 0B       		.uleb128 0xb
+ 1616 010f 49       		.uleb128 0x49
+ 1617 0110 13       		.uleb128 0x13
+ 1618 0111 02       		.uleb128 0x2
+ 1619 0112 18       		.uleb128 0x18
+ 1620 0113 00       		.byte	0
+ 1621 0114 00       		.byte	0
+ 1622 0115 16       		.uleb128 0x16
+ 1623 0116 2E       		.uleb128 0x2e
+ 1624 0117 01       		.byte	0x1
+ 1625 0118 3F       		.uleb128 0x3f
+ 1626 0119 19       		.uleb128 0x19
+ 1627 011a 03       		.uleb128 0x3
+ 1628 011b 0E       		.uleb128 0xe
+ 1629 011c 3A       		.uleb128 0x3a
+ 1630 011d 0B       		.uleb128 0xb
+ 1631 011e 3B       		.uleb128 0x3b
+ 1632 011f 0B       		.uleb128 0xb
+ 1633 0120 49       		.uleb128 0x49
+ 1634 0121 13       		.uleb128 0x13
+ 1635 0122 3C       		.uleb128 0x3c
+ 1636 0123 19       		.uleb128 0x19
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccIwewKZ.s 			page 37
+
+
+ 1637 0124 00       		.byte	0
+ 1638 0125 00       		.byte	0
+ 1639 0126 17       		.uleb128 0x17
+ 1640 0127 18       		.uleb128 0x18
+ 1641 0128 00       		.byte	0
+ 1642 0129 00       		.byte	0
+ 1643 012a 00       		.byte	0
+ 1644 012b 18       		.uleb128 0x18
+ 1645 012c 2E       		.uleb128 0x2e
+ 1646 012d 01       		.byte	0x1
+ 1647 012e 3F       		.uleb128 0x3f
+ 1648 012f 19       		.uleb128 0x19
+ 1649 0130 03       		.uleb128 0x3
+ 1650 0131 0E       		.uleb128 0xe
+ 1651 0132 3A       		.uleb128 0x3a
+ 1652 0133 0B       		.uleb128 0xb
+ 1653 0134 3B       		.uleb128 0x3b
+ 1654 0135 0B       		.uleb128 0xb
+ 1655 0136 27       		.uleb128 0x27
+ 1656 0137 19       		.uleb128 0x19
+ 1657 0138 11       		.uleb128 0x11
+ 1658 0139 01       		.uleb128 0x1
+ 1659 013a 12       		.uleb128 0x12
+ 1660 013b 06       		.uleb128 0x6
+ 1661 013c 40       		.uleb128 0x40
+ 1662 013d 18       		.uleb128 0x18
+ 1663 013e 9742     		.uleb128 0x2117
+ 1664 0140 19       		.uleb128 0x19
+ 1665 0141 01       		.uleb128 0x1
+ 1666 0142 13       		.uleb128 0x13
+ 1667 0143 00       		.byte	0
+ 1668 0144 00       		.byte	0
+ 1669 0145 19       		.uleb128 0x19
+ 1670 0146 34       		.uleb128 0x34
+ 1671 0147 00       		.byte	0
+ 1672 0148 03       		.uleb128 0x3
+ 1673 0149 0E       		.uleb128 0xe
+ 1674 014a 3A       		.uleb128 0x3a
+ 1675 014b 0B       		.uleb128 0xb
+ 1676 014c 3B       		.uleb128 0x3b
+ 1677 014d 0B       		.uleb128 0xb
+ 1678 014e 49       		.uleb128 0x49
+ 1679 014f 13       		.uleb128 0x13
+ 1680 0150 02       		.uleb128 0x2
+ 1681 0151 18       		.uleb128 0x18
+ 1682 0152 00       		.byte	0
+ 1683 0153 00       		.byte	0
+ 1684 0154 1A       		.uleb128 0x1a
+ 1685 0155 2E       		.uleb128 0x2e
+ 1686 0156 01       		.byte	0x1
+ 1687 0157 3F       		.uleb128 0x3f
+ 1688 0158 19       		.uleb128 0x19
+ 1689 0159 03       		.uleb128 0x3
+ 1690 015a 0E       		.uleb128 0xe
+ 1691 015b 3A       		.uleb128 0x3a
+ 1692 015c 0B       		.uleb128 0xb
+ 1693 015d 3B       		.uleb128 0x3b
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccIwewKZ.s 			page 38
+
+
+ 1694 015e 0B       		.uleb128 0xb
+ 1695 015f 27       		.uleb128 0x27
+ 1696 0160 19       		.uleb128 0x19
+ 1697 0161 49       		.uleb128 0x49
+ 1698 0162 13       		.uleb128 0x13
+ 1699 0163 11       		.uleb128 0x11
+ 1700 0164 01       		.uleb128 0x1
+ 1701 0165 12       		.uleb128 0x12
+ 1702 0166 06       		.uleb128 0x6
+ 1703 0167 40       		.uleb128 0x40
+ 1704 0168 18       		.uleb128 0x18
+ 1705 0169 9742     		.uleb128 0x2117
+ 1706 016b 19       		.uleb128 0x19
+ 1707 016c 01       		.uleb128 0x1
+ 1708 016d 13       		.uleb128 0x13
+ 1709 016e 00       		.byte	0
+ 1710 016f 00       		.byte	0
+ 1711 0170 1B       		.uleb128 0x1b
+ 1712 0171 2E       		.uleb128 0x2e
+ 1713 0172 01       		.byte	0x1
+ 1714 0173 3F       		.uleb128 0x3f
+ 1715 0174 19       		.uleb128 0x19
+ 1716 0175 03       		.uleb128 0x3
+ 1717 0176 0E       		.uleb128 0xe
+ 1718 0177 3A       		.uleb128 0x3a
+ 1719 0178 0B       		.uleb128 0xb
+ 1720 0179 3B       		.uleb128 0x3b
+ 1721 017a 05       		.uleb128 0x5
+ 1722 017b 27       		.uleb128 0x27
+ 1723 017c 19       		.uleb128 0x19
+ 1724 017d 11       		.uleb128 0x11
+ 1725 017e 01       		.uleb128 0x1
+ 1726 017f 12       		.uleb128 0x12
+ 1727 0180 06       		.uleb128 0x6
+ 1728 0181 40       		.uleb128 0x40
+ 1729 0182 18       		.uleb128 0x18
+ 1730 0183 9742     		.uleb128 0x2117
+ 1731 0185 19       		.uleb128 0x19
+ 1732 0186 01       		.uleb128 0x1
+ 1733 0187 13       		.uleb128 0x13
+ 1734 0188 00       		.byte	0
+ 1735 0189 00       		.byte	0
+ 1736 018a 1C       		.uleb128 0x1c
+ 1737 018b 05       		.uleb128 0x5
+ 1738 018c 00       		.byte	0
+ 1739 018d 03       		.uleb128 0x3
+ 1740 018e 0E       		.uleb128 0xe
+ 1741 018f 3A       		.uleb128 0x3a
+ 1742 0190 0B       		.uleb128 0xb
+ 1743 0191 3B       		.uleb128 0x3b
+ 1744 0192 05       		.uleb128 0x5
+ 1745 0193 49       		.uleb128 0x49
+ 1746 0194 13       		.uleb128 0x13
+ 1747 0195 02       		.uleb128 0x2
+ 1748 0196 18       		.uleb128 0x18
+ 1749 0197 00       		.byte	0
+ 1750 0198 00       		.byte	0
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccIwewKZ.s 			page 39
+
+
+ 1751 0199 1D       		.uleb128 0x1d
+ 1752 019a 2E       		.uleb128 0x2e
+ 1753 019b 01       		.byte	0x1
+ 1754 019c 3F       		.uleb128 0x3f
+ 1755 019d 19       		.uleb128 0x19
+ 1756 019e 03       		.uleb128 0x3
+ 1757 019f 0E       		.uleb128 0xe
+ 1758 01a0 3A       		.uleb128 0x3a
+ 1759 01a1 0B       		.uleb128 0xb
+ 1760 01a2 3B       		.uleb128 0x3b
+ 1761 01a3 05       		.uleb128 0x5
+ 1762 01a4 27       		.uleb128 0x27
+ 1763 01a5 19       		.uleb128 0x19
+ 1764 01a6 49       		.uleb128 0x49
+ 1765 01a7 13       		.uleb128 0x13
+ 1766 01a8 11       		.uleb128 0x11
+ 1767 01a9 01       		.uleb128 0x1
+ 1768 01aa 12       		.uleb128 0x12
+ 1769 01ab 06       		.uleb128 0x6
+ 1770 01ac 40       		.uleb128 0x40
+ 1771 01ad 18       		.uleb128 0x18
+ 1772 01ae 9742     		.uleb128 0x2117
+ 1773 01b0 19       		.uleb128 0x19
+ 1774 01b1 01       		.uleb128 0x1
+ 1775 01b2 13       		.uleb128 0x13
+ 1776 01b3 00       		.byte	0
+ 1777 01b4 00       		.byte	0
+ 1778 01b5 1E       		.uleb128 0x1e
+ 1779 01b6 34       		.uleb128 0x34
+ 1780 01b7 00       		.byte	0
+ 1781 01b8 03       		.uleb128 0x3
+ 1782 01b9 0E       		.uleb128 0xe
+ 1783 01ba 3A       		.uleb128 0x3a
+ 1784 01bb 0B       		.uleb128 0xb
+ 1785 01bc 3B       		.uleb128 0x3b
+ 1786 01bd 05       		.uleb128 0x5
+ 1787 01be 49       		.uleb128 0x49
+ 1788 01bf 13       		.uleb128 0x13
+ 1789 01c0 02       		.uleb128 0x2
+ 1790 01c1 18       		.uleb128 0x18
+ 1791 01c2 00       		.byte	0
+ 1792 01c3 00       		.byte	0
+ 1793 01c4 1F       		.uleb128 0x1f
+ 1794 01c5 2E       		.uleb128 0x2e
+ 1795 01c6 00       		.byte	0
+ 1796 01c7 3F       		.uleb128 0x3f
+ 1797 01c8 19       		.uleb128 0x19
+ 1798 01c9 03       		.uleb128 0x3
+ 1799 01ca 0E       		.uleb128 0xe
+ 1800 01cb 3A       		.uleb128 0x3a
+ 1801 01cc 0B       		.uleb128 0xb
+ 1802 01cd 3B       		.uleb128 0x3b
+ 1803 01ce 05       		.uleb128 0x5
+ 1804 01cf 27       		.uleb128 0x27
+ 1805 01d0 19       		.uleb128 0x19
+ 1806 01d1 11       		.uleb128 0x11
+ 1807 01d2 01       		.uleb128 0x1
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccIwewKZ.s 			page 40
+
+
+ 1808 01d3 12       		.uleb128 0x12
+ 1809 01d4 06       		.uleb128 0x6
+ 1810 01d5 40       		.uleb128 0x40
+ 1811 01d6 18       		.uleb128 0x18
+ 1812 01d7 9742     		.uleb128 0x2117
+ 1813 01d9 19       		.uleb128 0x19
+ 1814 01da 00       		.byte	0
+ 1815 01db 00       		.byte	0
+ 1816 01dc 20       		.uleb128 0x20
+ 1817 01dd 2E       		.uleb128 0x2e
+ 1818 01de 00       		.byte	0
+ 1819 01df 3F       		.uleb128 0x3f
+ 1820 01e0 19       		.uleb128 0x19
+ 1821 01e1 03       		.uleb128 0x3
+ 1822 01e2 0E       		.uleb128 0xe
+ 1823 01e3 3A       		.uleb128 0x3a
+ 1824 01e4 0B       		.uleb128 0xb
+ 1825 01e5 3B       		.uleb128 0x3b
+ 1826 01e6 05       		.uleb128 0x5
+ 1827 01e7 27       		.uleb128 0x27
+ 1828 01e8 19       		.uleb128 0x19
+ 1829 01e9 49       		.uleb128 0x49
+ 1830 01ea 13       		.uleb128 0x13
+ 1831 01eb 11       		.uleb128 0x11
+ 1832 01ec 01       		.uleb128 0x1
+ 1833 01ed 12       		.uleb128 0x12
+ 1834 01ee 06       		.uleb128 0x6
+ 1835 01ef 40       		.uleb128 0x40
+ 1836 01f0 18       		.uleb128 0x18
+ 1837 01f1 9742     		.uleb128 0x2117
+ 1838 01f3 19       		.uleb128 0x19
+ 1839 01f4 00       		.byte	0
+ 1840 01f5 00       		.byte	0
+ 1841 01f6 21       		.uleb128 0x21
+ 1842 01f7 34       		.uleb128 0x34
+ 1843 01f8 00       		.byte	0
+ 1844 01f9 03       		.uleb128 0x3
+ 1845 01fa 0E       		.uleb128 0xe
+ 1846 01fb 3A       		.uleb128 0x3a
+ 1847 01fc 0B       		.uleb128 0xb
+ 1848 01fd 3B       		.uleb128 0x3b
+ 1849 01fe 0B       		.uleb128 0xb
+ 1850 01ff 49       		.uleb128 0x49
+ 1851 0200 13       		.uleb128 0x13
+ 1852 0201 3F       		.uleb128 0x3f
+ 1853 0202 19       		.uleb128 0x19
+ 1854 0203 3C       		.uleb128 0x3c
+ 1855 0204 19       		.uleb128 0x19
+ 1856 0205 00       		.byte	0
+ 1857 0206 00       		.byte	0
+ 1858 0207 22       		.uleb128 0x22
+ 1859 0208 34       		.uleb128 0x34
+ 1860 0209 00       		.byte	0
+ 1861 020a 03       		.uleb128 0x3
+ 1862 020b 0E       		.uleb128 0xe
+ 1863 020c 3A       		.uleb128 0x3a
+ 1864 020d 0B       		.uleb128 0xb
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccIwewKZ.s 			page 41
+
+
+ 1865 020e 3B       		.uleb128 0x3b
+ 1866 020f 0B       		.uleb128 0xb
+ 1867 0210 49       		.uleb128 0x49
+ 1868 0211 13       		.uleb128 0x13
+ 1869 0212 3F       		.uleb128 0x3f
+ 1870 0213 19       		.uleb128 0x19
+ 1871 0214 02       		.uleb128 0x2
+ 1872 0215 18       		.uleb128 0x18
+ 1873 0216 00       		.byte	0
+ 1874 0217 00       		.byte	0
+ 1875 0218 00       		.byte	0
+ 1876              		.section	.debug_aranges,"",%progbits
+ 1877 0000 7C000000 		.4byte	0x7c
+ 1878 0004 0200     		.2byte	0x2
+ 1879 0006 00000000 		.4byte	.Ldebug_info0
+ 1880 000a 04       		.byte	0x4
+ 1881 000b 00       		.byte	0
+ 1882 000c 0000     		.2byte	0
+ 1883 000e 0000     		.2byte	0
+ 1884 0010 00000000 		.4byte	.LFB0
+ 1885 0014 20000000 		.4byte	.LFE0-.LFB0
+ 1886 0018 00000000 		.4byte	.LFB1
+ 1887 001c 24000000 		.4byte	.LFE1-.LFB1
+ 1888 0020 00000000 		.4byte	.LFB2
+ 1889 0024 18000000 		.4byte	.LFE2-.LFB2
+ 1890 0028 00000000 		.4byte	.LFB3
+ 1891 002c 48000000 		.4byte	.LFE3-.LFB3
+ 1892 0030 00000000 		.4byte	.LFB4
+ 1893 0034 24000000 		.4byte	.LFE4-.LFB4
+ 1894 0038 00000000 		.4byte	.LFB5
+ 1895 003c 20000000 		.4byte	.LFE5-.LFB5
+ 1896 0040 00000000 		.4byte	.LFB6
+ 1897 0044 24000000 		.4byte	.LFE6-.LFB6
+ 1898 0048 00000000 		.4byte	.LFB7
+ 1899 004c 20000000 		.4byte	.LFE7-.LFB7
+ 1900 0050 00000000 		.4byte	.LFB8
+ 1901 0054 18000000 		.4byte	.LFE8-.LFB8
+ 1902 0058 00000000 		.4byte	.LFB9
+ 1903 005c 24000000 		.4byte	.LFE9-.LFB9
+ 1904 0060 00000000 		.4byte	.LFB10
+ 1905 0064 18000000 		.4byte	.LFE10-.LFB10
+ 1906 0068 00000000 		.4byte	.LFB11
+ 1907 006c 18000000 		.4byte	.LFE11-.LFB11
+ 1908 0070 00000000 		.4byte	.LFB12
+ 1909 0074 18000000 		.4byte	.LFE12-.LFB12
+ 1910 0078 00000000 		.4byte	0
+ 1911 007c 00000000 		.4byte	0
+ 1912              		.section	.debug_ranges,"",%progbits
+ 1913              	.Ldebug_ranges0:
+ 1914 0000 00000000 		.4byte	.LFB0
+ 1915 0004 20000000 		.4byte	.LFE0
+ 1916 0008 00000000 		.4byte	.LFB1
+ 1917 000c 24000000 		.4byte	.LFE1
+ 1918 0010 00000000 		.4byte	.LFB2
+ 1919 0014 18000000 		.4byte	.LFE2
+ 1920 0018 00000000 		.4byte	.LFB3
+ 1921 001c 48000000 		.4byte	.LFE3
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccIwewKZ.s 			page 42
+
+
+ 1922 0020 00000000 		.4byte	.LFB4
+ 1923 0024 24000000 		.4byte	.LFE4
+ 1924 0028 00000000 		.4byte	.LFB5
+ 1925 002c 20000000 		.4byte	.LFE5
+ 1926 0030 00000000 		.4byte	.LFB6
+ 1927 0034 24000000 		.4byte	.LFE6
+ 1928 0038 00000000 		.4byte	.LFB7
+ 1929 003c 20000000 		.4byte	.LFE7
+ 1930 0040 00000000 		.4byte	.LFB8
+ 1931 0044 18000000 		.4byte	.LFE8
+ 1932 0048 00000000 		.4byte	.LFB9
+ 1933 004c 24000000 		.4byte	.LFE9
+ 1934 0050 00000000 		.4byte	.LFB10
+ 1935 0054 18000000 		.4byte	.LFE10
+ 1936 0058 00000000 		.4byte	.LFB11
+ 1937 005c 18000000 		.4byte	.LFE11
+ 1938 0060 00000000 		.4byte	.LFB12
+ 1939 0064 18000000 		.4byte	.LFE12
+ 1940 0068 00000000 		.4byte	0
+ 1941 006c 00000000 		.4byte	0
+ 1942              		.section	.debug_line,"",%progbits
+ 1943              	.Ldebug_line0:
+ 1944 0000 6C010000 		.section	.debug_str,"MS",%progbits,1
+ 1944      02005F00 
+ 1944      00000201 
+ 1944      FB0E0D00 
+ 1944      01010101 
+ 1945              	.LASF50:
+ 1946 0000 7265636F 		.ascii	"recordings_idx\000"
+ 1946      7264696E 
+ 1946      67735F69 
+ 1946      647800
+ 1947              	.LASF57:
+ 1948 000f 77616974 		.ascii	"waiting_for_note_finish\000"
+ 1948      696E675F 
+ 1948      666F725F 
+ 1948      6E6F7465 
+ 1948      5F66696E 
+ 1949              	.LASF51:
+ 1950 0027 6C617374 		.ascii	"last_note_time\000"
+ 1950      5F6E6F74 
+ 1950      655F7469 
+ 1950      6D6500
+ 1951              	.LASF84:
+ 1952 0036 7072696F 		.ascii	"priority\000"
+ 1952      72697479 
+ 1952      00
+ 1953              	.LASF27:
+ 1954 003f 4E4F524D 		.ascii	"NORMAL\000"
+ 1954      414C00
+ 1955              	.LASF20:
+ 1956 0046 46414C53 		.ascii	"FALSE\000"
+ 1956      4500
+ 1957              	.LASF40:
+ 1958 004c 484F4C45 		.ascii	"HOLE\000"
+ 1958      00
+ 1959              	.LASF5:
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccIwewKZ.s 			page 43
+
+
+ 1960 0051 73686F72 		.ascii	"short int\000"
+ 1960      7420696E 
+ 1960      7400
+ 1961              	.LASF10:
+ 1962 005b 73697A65 		.ascii	"sizetype\000"
+ 1962      74797065 
+ 1962      00
+ 1963              	.LASF29:
+ 1964 0064 5245434F 		.ascii	"RECORDING\000"
+ 1964      5244494E 
+ 1964      4700
+ 1965              	.LASF77:
+ 1966 006e 61756469 		.ascii	"audio_isr_Stop\000"
+ 1966      6F5F6973 
+ 1966      725F5374 
+ 1966      6F7000
+ 1967              	.LASF55:
+ 1968 007d 504C4159 		.ascii	"PLAYBACK_NOTES\000"
+ 1968      4241434B 
+ 1968      5F4E4F54 
+ 1968      455300
+ 1969              	.LASF94:
+ 1970 008c 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 1970      43313120 
+ 1970      352E342E 
+ 1970      31203230 
+ 1970      31363036 
+ 1971 00bf 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 1971      20726576 
+ 1971      6973696F 
+ 1971      6E203233 
+ 1971      37373135 
+ 1972 00f2 30202D66 		.ascii	"0 -ffunction-sections -ffat-lto-objects\000"
+ 1972      66756E63 
+ 1972      74696F6E 
+ 1972      2D736563 
+ 1972      74696F6E 
+ 1973              	.LASF60:
+ 1974 011a 6C617374 		.ascii	"last_echo_time\000"
+ 1974      5F656368 
+ 1974      6F5F7469 
+ 1974      6D6500
+ 1975              	.LASF68:
+ 1976 0129 69735F70 		.ascii	"is_playing\000"
+ 1976      6C617969 
+ 1976      6E6700
+ 1977              	.LASF53:
+ 1978 0134 73746172 		.ascii	"started_playing_first_note\000"
+ 1978      7465645F 
+ 1978      706C6179 
+ 1978      696E675F 
+ 1978      66697273 
+ 1979              	.LASF32:
+ 1980 014f 5A45524F 		.ascii	"ZERO\000"
+ 1980      00
+ 1981              	.LASF83:
+ 1982 0154 61756469 		.ascii	"audio_isr_SetPriority\000"
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccIwewKZ.s 			page 44
+
+
+ 1982      6F5F6973 
+ 1982      725F5365 
+ 1982      74507269 
+ 1982      6F726974 
+ 1983              	.LASF54:
+ 1984 016a 6E756D5F 		.ascii	"num_recordings\000"
+ 1984      7265636F 
+ 1984      7264696E 
+ 1984      677300
+ 1985              	.LASF59:
+ 1986 0179 6563686F 		.ascii	"echo_volume_multiplier\000"
+ 1986      5F766F6C 
+ 1986      756D655F 
+ 1986      6D756C74 
+ 1986      69706C69 
+ 1987              	.LASF81:
+ 1988 0190 61646472 		.ascii	"address\000"
+ 1988      65737300 
+ 1989              	.LASF67:
+ 1990 0198 61637469 		.ascii	"active_hole\000"
+ 1990      76655F68 
+ 1990      6F6C6500 
+ 1991              	.LASF12:
+ 1992 01a4 75696E74 		.ascii	"uint8\000"
+ 1992      3800
+ 1993              	.LASF31:
+ 1994 01aa 4F555450 		.ascii	"OUTPUT_MODE\000"
+ 1994      55545F4D 
+ 1994      4F444500 
+ 1995              	.LASF95:
+ 1996 01b6 47656E65 		.ascii	"Generated_Source\\PSoC5\\audio_isr.c\000"
+ 1996      72617465 
+ 1996      645F536F 
+ 1996      75726365 
+ 1996      5C50536F 
+ 1997              	.LASF63:
+ 1998 01d9 706C6179 		.ascii	"play_echo\000"
+ 1998      5F656368 
+ 1998      6F00
+ 1999              	.LASF61:
+ 2000 01e3 6563686F 		.ascii	"echo_delay\000"
+ 2000      5F64656C 
+ 2000      617900
+ 2001              	.LASF15:
+ 2002 01ee 666C6F61 		.ascii	"float\000"
+ 2002      7400
+ 2003              	.LASF46:
+ 2004 01f4 64757261 		.ascii	"duration\000"
+ 2004      74696F6E 
+ 2004      00
+ 2005              	.LASF1:
+ 2006 01fd 6C6F6E67 		.ascii	"long long int\000"
+ 2006      206C6F6E 
+ 2006      6720696E 
+ 2006      7400
+ 2007              	.LASF14:
+ 2008 020b 696E7438 		.ascii	"int8\000"
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccIwewKZ.s 			page 45
+
+
+ 2008      00
+ 2009              	.LASF24:
+ 2010 0210 5355434B 		.ascii	"SUCKED_NOTES\000"
+ 2010      45445F4E 
+ 2010      4F544553 
+ 2010      00
+ 2011              	.LASF18:
+ 2012 021d 72656733 		.ascii	"reg32\000"
+ 2012      3200
+ 2013              	.LASF69:
+ 2014 0223 7261775F 		.ascii	"raw_harmonica_output\000"
+ 2014      6861726D 
+ 2014      6F6E6963 
+ 2014      615F6F75 
+ 2014      74707574 
+ 2015              	.LASF33:
+ 2016 0238 54485245 		.ascii	"THREE\000"
+ 2016      4500
+ 2017              	.LASF86:
+ 2018 023e 61756469 		.ascii	"audio_isr_GetPriority\000"
+ 2018      6F5F6973 
+ 2018      725F4765 
+ 2018      74507269 
+ 2018      6F726974 
+ 2019              	.LASF74:
+ 2020 0254 6563686F 		.ascii	"echo_data\000"
+ 2020      5F646174 
+ 2020      6100
+ 2021              	.LASF92:
+ 2022 025e 68696768 		.ascii	"high\000"
+ 2022      00
+ 2023              	.LASF91:
+ 2024 0263 6861726D 		.ascii	"harmonica\000"
+ 2024      6F6E6963 
+ 2024      6100
+ 2025              	.LASF82:
+ 2026 026d 72616D56 		.ascii	"ramVectorTable\000"
+ 2026      6563746F 
+ 2026      72546162 
+ 2026      6C6500
+ 2027              	.LASF85:
+ 2028 027c 61756469 		.ascii	"audio_isr_GetVector\000"
+ 2028      6F5F6973 
+ 2028      725F4765 
+ 2028      74566563 
+ 2028      746F7200 
+ 2029              	.LASF41:
+ 2030 0290 52455354 		.ascii	"REST\000"
+ 2030      00
+ 2031              	.LASF4:
+ 2032 0295 756E7369 		.ascii	"unsigned char\000"
+ 2032      676E6564 
+ 2032      20636861 
+ 2032      7200
+ 2033              	.LASF30:
+ 2034 02a3 504C4159 		.ascii	"PLAYBACK\000"
+ 2034      4241434B 
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccIwewKZ.s 			page 46
+
+
+ 2034      00
+ 2035              	.LASF42:
+ 2036 02ac 4E4F5445 		.ascii	"NOTE\000"
+ 2036      00
+ 2037              	.LASF98:
+ 2038 02b1 61756469 		.ascii	"audio_isr_GetState\000"
+ 2038      6F5F6973 
+ 2038      725F4765 
+ 2038      74537461 
+ 2038      746500
+ 2039              	.LASF70:
+ 2040 02c4 72656365 		.ascii	"recent_change\000"
+ 2040      6E745F63 
+ 2040      68616E67 
+ 2040      6500
+ 2041              	.LASF2:
+ 2042 02d2 6C6F6E67 		.ascii	"long double\000"
+ 2042      20646F75 
+ 2042      626C6500 
+ 2043              	.LASF78:
+ 2044 02de 61756469 		.ascii	"audio_isr_StartEx\000"
+ 2044      6F5F6973 
+ 2044      725F5374 
+ 2044      61727445 
+ 2044      7800
+ 2045              	.LASF62:
+ 2046 02f0 6563686F 		.ascii	"echo_duration\000"
+ 2046      5F647572 
+ 2046      6174696F 
+ 2046      6E00
+ 2047              	.LASF19:
+ 2048 02fe 63796973 		.ascii	"cyisraddress\000"
+ 2048      72616464 
+ 2048      72657373 
+ 2048      00
+ 2049              	.LASF37:
+ 2050 030b 45494748 		.ascii	"EIGHT\000"
+ 2050      5400
+ 2051              	.LASF76:
+ 2052 0311 61756469 		.ascii	"audio_isr_Start\000"
+ 2052      6F5F6973 
+ 2052      725F5374 
+ 2052      61727400 
+ 2053              	.LASF3:
+ 2054 0321 7369676E 		.ascii	"signed char\000"
+ 2054      65642063 
+ 2054      68617200 
+ 2055              	.LASF71:
+ 2056 032d 766F6C75 		.ascii	"volume_multiplier\000"
+ 2056      6D655F6D 
+ 2056      756C7469 
+ 2056      706C6965 
+ 2056      7200
+ 2057              	.LASF9:
+ 2058 033f 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 2058      206C6F6E 
+ 2058      6720756E 
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccIwewKZ.s 			page 47
+
+
+ 2058      7369676E 
+ 2058      65642069 
+ 2059              	.LASF38:
+ 2060 0356 4E494E45 		.ascii	"NINE\000"
+ 2060      00
+ 2061              	.LASF25:
+ 2062 035b 4E4F5F4E 		.ascii	"NO_NOTES\000"
+ 2062      4F544553 
+ 2062      00
+ 2063              	.LASF0:
+ 2064 0364 756E7369 		.ascii	"unsigned int\000"
+ 2064      676E6564 
+ 2064      20696E74 
+ 2064      00
+ 2065              	.LASF23:
+ 2066 0371 424C4F57 		.ascii	"BLOWN_NOTES\000"
+ 2066      4E5F4E4F 
+ 2066      54455300 
+ 2067              	.LASF22:
+ 2068 037d 68426F6F 		.ascii	"hBool\000"
+ 2068      6C00
+ 2069              	.LASF72:
+ 2070 0383 6F757470 		.ascii	"output_mode\000"
+ 2070      75745F6D 
+ 2070      6F646500 
+ 2071              	.LASF79:
+ 2072 038f 61756469 		.ascii	"audio_isr_Interrupt\000"
+ 2072      6F5F6973 
+ 2072      725F496E 
+ 2072      74657272 
+ 2072      75707400 
+ 2073              	.LASF35:
+ 2074 03a3 46495645 		.ascii	"FIVE\000"
+ 2074      00
+ 2075              	.LASF90:
+ 2076 03a8 61756469 		.ascii	"audio_isr_ClearPending\000"
+ 2076      6F5F6973 
+ 2076      725F436C 
+ 2076      65617250 
+ 2076      656E6469 
+ 2077              	.LASF56:
+ 2078 03bf 6C617374 		.ascii	"last_played_note\000"
+ 2078      5F706C61 
+ 2078      7965645F 
+ 2078      6E6F7465 
+ 2078      00
+ 2079              	.LASF6:
+ 2080 03d0 73686F72 		.ascii	"short unsigned int\000"
+ 2080      7420756E 
+ 2080      7369676E 
+ 2080      65642069 
+ 2080      6E7400
+ 2081              	.LASF49:
+ 2082 03e3 7265636F 		.ascii	"recordings\000"
+ 2082      7264696E 
+ 2082      677300
+ 2083              	.LASF11:
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccIwewKZ.s 			page 48
+
+
+ 2084 03ee 63686172 		.ascii	"char\000"
+ 2084      00
+ 2085              	.LASF64:
+ 2086 03f3 6E756D5F 		.ascii	"num_echos_played\000"
+ 2086      6563686F 
+ 2086      735F706C 
+ 2086      61796564 
+ 2086      00
+ 2087              	.LASF44:
+ 2088 0404 6E756D5F 		.ascii	"num_notes_played\000"
+ 2088      6E6F7465 
+ 2088      735F706C 
+ 2088      61796564 
+ 2088      00
+ 2089              	.LASF26:
+ 2090 0415 4E4F5445 		.ascii	"NOTE_MODE\000"
+ 2090      5F4D4F44 
+ 2090      4500
+ 2091              	.LASF43:
+ 2092 041f 6E6F7465 		.ascii	"notes\000"
+ 2092      7300
+ 2093              	.LASF34:
+ 2094 0425 464F5552 		.ascii	"FOUR\000"
+ 2094      00
+ 2095              	.LASF39:
+ 2096 042a 4E4F5F48 		.ascii	"NO_HOLE\000"
+ 2096      4F4C4500 
+ 2097              	.LASF47:
+ 2098 0432 73746172 		.ascii	"start_time\000"
+ 2098      745F7469 
+ 2098      6D6500
+ 2099              	.LASF48:
+ 2100 043d 504C4159 		.ascii	"PLAYBACK_NOTE\000"
+ 2100      4241434B 
+ 2100      5F4E4F54 
+ 2100      4500
+ 2101              	.LASF97:
+ 2102 044b 6765745F 		.ascii	"get_sound_output\000"
+ 2102      736F756E 
+ 2102      645F6F75 
+ 2102      74707574 
+ 2102      00
+ 2103              	.LASF52:
+ 2104 045c 73746172 		.ascii	"started_recording_first_note\000"
+ 2104      7465645F 
+ 2104      7265636F 
+ 2104      7264696E 
+ 2104      675F6669 
+ 2105              	.LASF96:
+ 2106 0479 433A5C55 		.ascii	"C:\\Users\\Matthew\\Dropbox (MIT)\\Sophomore Spring"
+ 2106      73657273 
+ 2106      5C4D6174 
+ 2106      74686577 
+ 2106      5C44726F 
+ 2107 04a8 5C362E31 		.ascii	"\\6.115\\6.115-Labs\\project\\DVDAC_Example01\\DVDA"
+ 2107      31355C36 
+ 2107      2E313135 
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccIwewKZ.s 			page 49
+
+
+ 2107      2D4C6162 
+ 2107      735C7072 
+ 2108 04d6 435F4578 		.ascii	"C_Example01.cydsn\000"
+ 2108      616D706C 
+ 2108      6530312E 
+ 2108      63796473 
+ 2108      6E00
+ 2109              	.LASF73:
+ 2110 04e8 706C6179 		.ascii	"playback_notes\000"
+ 2110      6261636B 
+ 2110      5F6E6F74 
+ 2110      657300
+ 2111              	.LASF13:
+ 2112 04f7 75696E74 		.ascii	"uint32\000"
+ 2112      333200
+ 2113              	.LASF65:
+ 2114 04fe 4543484F 		.ascii	"ECHO_DATA\000"
+ 2114      5F444154 
+ 2114      4100
+ 2115              	.LASF17:
+ 2116 0508 72656738 		.ascii	"reg8\000"
+ 2116      00
+ 2117              	.LASF8:
+ 2118 050d 6C6F6E67 		.ascii	"long unsigned int\000"
+ 2118      20756E73 
+ 2118      69676E65 
+ 2118      6420696E 
+ 2118      7400
+ 2119              	.LASF58:
+ 2120 051f 6C617374 		.ascii	"last_played_note_initialized\000"
+ 2120      5F706C61 
+ 2120      7965645F 
+ 2120      6E6F7465 
+ 2120      5F696E69 
+ 2121              	.LASF93:
+ 2122 053c 63345F74 		.ascii	"c4_table_idx\000"
+ 2122      61626C65 
+ 2122      5F696478 
+ 2122      00
+ 2123              	.LASF89:
+ 2124 0549 61756469 		.ascii	"audio_isr_SetPending\000"
+ 2124      6F5F6973 
+ 2124      725F5365 
+ 2124      7450656E 
+ 2124      64696E67 
+ 2125              	.LASF36:
+ 2126 055e 53455645 		.ascii	"SEVEN\000"
+ 2126      4E00
+ 2127              	.LASF88:
+ 2128 0564 61756469 		.ascii	"audio_isr_Disable\000"
+ 2128      6F5F6973 
+ 2128      725F4469 
+ 2128      7361626C 
+ 2128      6500
+ 2129              	.LASF45:
+ 2130 0576 4841524D 		.ascii	"HARMONICA_OUTPUT\000"
+ 2130      4F4E4943 
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccIwewKZ.s 			page 50
+
+
+ 2130      415F4F55 
+ 2130      54505554 
+ 2130      00
+ 2131              	.LASF80:
+ 2132 0587 61756469 		.ascii	"audio_isr_SetVector\000"
+ 2132      6F5F6973 
+ 2132      725F5365 
+ 2132      74566563 
+ 2132      746F7200 
+ 2133              	.LASF66:
+ 2134 059b 63757272 		.ascii	"current_note_mode\000"
+ 2134      656E745F 
+ 2134      6E6F7465 
+ 2134      5F6D6F64 
+ 2134      6500
+ 2135              	.LASF87:
+ 2136 05ad 61756469 		.ascii	"audio_isr_Enable\000"
+ 2136      6F5F6973 
+ 2136      725F456E 
+ 2136      61626C65 
+ 2136      00
+ 2137              	.LASF16:
+ 2138 05be 646F7562 		.ascii	"double\000"
+ 2138      6C6500
+ 2139              	.LASF21:
+ 2140 05c5 54525545 		.ascii	"TRUE\000"
+ 2140      00
+ 2141              	.LASF75:
+ 2142 05ca 4861726D 		.ascii	"Harmonica\000"
+ 2142      6F6E6963 
+ 2142      6100
+ 2143              	.LASF7:
+ 2144 05d4 6C6F6E67 		.ascii	"long int\000"
+ 2144      20696E74 
+ 2144      00
+ 2145              	.LASF28:
+ 2146 05dd 4543484F 		.ascii	"ECHO\000"
+ 2146      00
+ 2147              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

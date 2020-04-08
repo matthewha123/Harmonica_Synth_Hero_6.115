@@ -1,0 +1,1779 @@
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccZ48awh.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"main.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.rodata
+  20              		.align	2
+  21              	.LC0:
+  22 0000 426C6F77 		.ascii	"Blow\000"
+  22      00
+  23 0005 000000   		.align	2
+  24              	.LC1:
+  25 0008 5375636B 		.ascii	"Suck\000"
+  25      00
+  26 000d 000000   		.align	2
+  27              	.LC2:
+  28 0010 4E6F6E65 		.ascii	"None\000"
+  28      00
+  29 0015 000000   		.align	2
+  30              	.LC3:
+  31 0018 256400   		.ascii	"%d\000"
+  32 001b 00       		.align	2
+  33              	.LC4:
+  34 001c 52656320 		.ascii	"Rec %d/20\000"
+  34      25642F32 
+  34      3000
+  35 0026 0000     		.align	2
+  36              	.LC5:
+  37 0028 4543484F 		.ascii	"ECHO\000"
+  37      00
+  38              		.section	.text.main,"ax",%progbits
+  39              		.align	2
+  40              		.global	main
+  41              		.thumb
+  42              		.thumb_func
+  43              		.type	main, %function
+  44              	main:
+  45              	.LFB64:
+  46              		.file 1 "main.c"
+   1:main.c        **** /*******************************************************************************
+   2:main.c        **** * File Name: main.c
+   3:main.c        **** *
+   4:main.c        **** * Version: 1.0
+   5:main.c        **** *
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccZ48awh.s 			page 2
+
+
+   6:main.c        **** * Description:
+   7:main.c        **** * This example project demonstrates the basic functionality of the DVDAC
+   8:main.c        **** * component. The Delta Sigma ADC component is used to measure the output
+   9:main.c        **** * voltage.
+  10:main.c        **** *
+  11:main.c        **** ********************************************************************************
+  12:main.c        **** * Copyright 2013-2014, Cypress Semiconductor Corporation. All rights reserved.
+  13:main.c        **** * You may use this file only in accordance with the license, terms, conditions,
+  14:main.c        **** * disclaimers, and limitations in the end user license agreement accompanying
+  15:main.c        **** * the software package with which this file was provided.
+  16:main.c        **** *******************************************************************************/
+  17:main.c        **** 
+  18:main.c        **** #include <device.h>
+  19:main.c        **** #include <stdio.h>
+  20:main.c        **** #include "photo_mux.h"
+  21:main.c        **** #include "harmonica_control.h"
+  22:main.c        **** #include "common.h"
+  23:main.c        **** #include "Num_Notes_Selector_ADC.h"
+  24:main.c        **** #include "oled_ssd1331.h"
+  25:main.c        **** #include "game.h"
+  26:main.c        **** 
+  27:main.c        **** int16 ADC_DelSig_ReadInt16(void);
+  28:main.c        **** 
+  29:main.c        **** 
+  30:main.c        **** int main()
+  31:main.c        **** {
+  47              		.loc 1 31 0
+  48              		.cfi_startproc
+  49              		@ args = 0, pretend = 0, frame = 56
+  50              		@ frame_needed = 1, uses_anonymous_args = 0
+  51 0000 80B5     		push	{r7, lr}
+  52              		.cfi_def_cfa_offset 8
+  53              		.cfi_offset 7, -8
+  54              		.cfi_offset 14, -4
+  55 0002 8EB0     		sub	sp, sp, #56
+  56              		.cfi_def_cfa_offset 64
+  57 0004 00AF     		add	r7, sp, #0
+  58              		.cfi_def_cfa_register 7
+  32:main.c        ****     char   muxline[16u];
+  33:main.c        ****     char   labelline[16u];
+  34:main.c        ****     
+  35:main.c        ****     /* Start components */
+  36:main.c        ****     VDAC8_1_Start();
+  59              		.loc 1 36 0
+  60 0006 FFF7FEFF 		bl	VDAC8_1_Start
+  37:main.c        ****     ADC_DelSig_Start();
+  61              		.loc 1 37 0
+  62 000a FFF7FEFF 		bl	ADC_DelSig_Start
+  38:main.c        ****     LCD_Start();
+  63              		.loc 1 38 0
+  64 000e FFF7FEFF 		bl	LCD_Start
+  39:main.c        ****     Timer_1_Start();
+  65              		.loc 1 39 0
+  66 0012 FFF7FEFF 		bl	Timer_1_Start
+  40:main.c        ****     Clock_1_Start();
+  67              		.loc 1 40 0
+  68 0016 FFF7FEFF 		bl	Clock_1_Start
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccZ48awh.s 			page 3
+
+
+  41:main.c        ****     Clock_2_Start();
+  69              		.loc 1 41 0
+  70 001a FFF7FEFF 		bl	Clock_2_Start
+  42:main.c        ****     Clock_3_Start();
+  71              		.loc 1 42 0
+  72 001e FFF7FEFF 		bl	Clock_3_Start
+  43:main.c        ****     Timer_2_Start();
+  73              		.loc 1 43 0
+  74 0022 FFF7FEFF 		bl	Timer_2_Start
+  44:main.c        ****     ms_counter_Start();
+  75              		.loc 1 44 0
+  76 0026 FFF7FEFF 		bl	ms_counter_Start
+  45:main.c        ****     game_random_mode_generator_Start();
+  77              		.loc 1 45 0
+  78 002a FFF7FEFF 		bl	game_random_mode_generator_Start
+  46:main.c        ****     init_harmonica(&harmonica);
+  79              		.loc 1 46 0
+  80 002e 4748     		ldr	r0, .L9
+  81 0030 FFF7FEFF 		bl	init_harmonica
+  47:main.c        ****     init_harmonica_control();
+  82              		.loc 1 47 0
+  83 0034 FFF7FEFF 		bl	init_harmonica_control
+  48:main.c        ****     
+  49:main.c        ****     audio_isr_Start();  // this interrupt plays c4 currently
+  84              		.loc 1 49 0
+  85 0038 FFF7FEFF 		bl	audio_isr_Start
+  50:main.c        ****     //harmonica_isr_Start();
+  51:main.c        ****     CySysTickStart();
+  86              		.loc 1 51 0
+  87 003c FFF7FEFF 		bl	CySysTickStart
+  52:main.c        ****     CyGlobalIntEnable; /* enable Global interrupts */ 
+  88              		.loc 1 52 0
+  89              		.syntax unified
+  90              	@ 52 "main.c" 1
+  91 0040 62B6     		CPSIE   i
+  92              	@ 0 "" 2
+  53:main.c        **** 
+  54:main.c        ****     Num_Notes_Selector_ADC_Start();
+  93              		.loc 1 54 0
+  94              		.thumb
+  95              		.syntax unified
+  96 0042 FFF7FEFF 		bl	Num_Notes_Selector_ADC_Start
+  55:main.c        ****     spi_done_Start();
+  97              		.loc 1 55 0
+  98 0046 FFF7FEFF 		bl	spi_done_Start
+  56:main.c        ****     SPI_OLED_Start();
+  99              		.loc 1 56 0
+ 100 004a FFF7FEFF 		bl	SPI_OLED_Start
+  57:main.c        ****     SPI_OLED_TxEnable();
+ 101              		.loc 1 57 0
+ 102 004e FFF7FEFF 		bl	SPI_OLED_TxEnable
+  58:main.c        ****     init_oled();
+ 103              		.loc 1 58 0
+ 104 0052 FFF7FEFF 		bl	init_oled
+  59:main.c        ****     clear_whole_display();
+ 105              		.loc 1 59 0
+ 106 0056 FFF7FEFF 		bl	clear_whole_display
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccZ48awh.s 			page 4
+
+
+  60:main.c        ****     
+  61:main.c        ****     game_init();
+ 107              		.loc 1 61 0
+ 108 005a FFF7FEFF 		bl	game_init
+ 109              	.L8:
+  62:main.c        ****     
+  63:main.c        ****     for(;;)
+  64:main.c        ****     {
+  65:main.c        ****         
+  66:main.c        ****         // send_cmd(0xAE);
+  67:main.c        ****         // 4, 5, 6, 7, 8 channels don't work
+  68:main.c        ****         // 0100, 0101, 0110, 0111, 1000
+  69:main.c        **** //        for(int channel = 0; channel < 10; channel++) {
+  70:main.c        **** //            sprintf(
+  71:main.c        **** //            muxline, "%d",
+  72:main.c        **** //            (int16) photo_read_mux(channel)
+  73:main.c        **** //            );
+  74:main.c        **** //            sprintf(
+  75:main.c        **** //                labelline, "Photo #%d",
+  76:main.c        **** //                channel);
+  77:main.c        **** //            
+  78:main.c        **** //            LCD_ClearDisplay();
+  79:main.c        **** //            LCD_Position(0u, 0u);
+  80:main.c        **** //            LCD_PrintString(labelline);
+  81:main.c        **** //            LCD_Position(1u, 0u);
+  82:main.c        **** //            LCD_PrintString(muxline);
+  83:main.c        **** //
+  84:main.c        **** //            CyDelay(1000u);
+  85:main.c        **** //        }
+  86:main.c        **** //            uint8 channel = 4;
+  87:main.c        **** //            photo_enable_mux(channel);
+  88:main.c        **** //            inhibit_output(0);
+  89:main.c        **** //            CyDelayCycles(10);
+  90:main.c        **** //            int16 result = read_mux();
+  91:main.c        **** //            sprintf(
+  92:main.c        **** //            muxline, "%d",
+  93:main.c        **** //            (int16) photo_read_mux(channel)
+  94:main.c        **** //            );
+  95:main.c        **** //            sprintf(
+  96:main.c        **** //                labelline, "Photo #%d",
+  97:main.c        **** //                channel);
+  98:main.c        **** //            
+  99:main.c        **** //            LCD_ClearDisplay();
+ 100:main.c        **** //            LCD_Position(0u, 0u);
+ 101:main.c        **** //            LCD_PrintString(labelline);
+ 102:main.c        **** //            LCD_Position(1u, 0u);
+ 103:main.c        **** //            LCD_PrintString(muxline);
+ 104:main.c        **** //            CyDelay(1000u);
+ 105:main.c        ****         
+ 106:main.c        ****         
+ 107:main.c        **** //            OLED_CS_Write(1);
+ 108:main.c        **** //            OLED_DC_Write(1);
+ 109:main.c        **** //            OLED_SDA_Write(1);
+ 110:main.c        **** //            OLED_SCK_Write(1);
+ 111:main.c        ****              
+ 112:main.c        ****             game_tick(&harmonica);
+ 110              		.loc 1 112 0
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccZ48awh.s 			page 5
+
+
+ 111 005e 3B48     		ldr	r0, .L9
+ 112 0060 FFF7FEFF 		bl	game_tick
+ 113:main.c        ****             
+ 114:main.c        ****             harmonica_tick(&harmonica);
+ 113              		.loc 1 114 0
+ 114 0064 3948     		ldr	r0, .L9
+ 115 0066 FFF7FEFF 		bl	harmonica_tick
+ 115:main.c        ****             if(harmonica.recent_change == TRUE) {
+ 116              		.loc 1 115 0
+ 117 006a 384B     		ldr	r3, .L9
+ 118 006c 9B7B     		ldrb	r3, [r3, #14]	@ zero_extendqisi2
+ 119 006e 012B     		cmp	r3, #1
+ 120 0070 F5D1     		bne	.L8
+ 116:main.c        ****                 LCD_ClearDisplay();
+ 121              		.loc 1 116 0
+ 122 0072 0120     		movs	r0, #1
+ 123 0074 FFF7FEFF 		bl	LCD_WriteControl
+ 117:main.c        ****                 switch(harmonica.current_note_mode) {
+ 124              		.loc 1 117 0
+ 125 0078 344B     		ldr	r3, .L9
+ 126 007a 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 127 007c 012B     		cmp	r3, #1
+ 128 007e 0BD0     		beq	.L4
+ 129 0080 022B     		cmp	r3, #2
+ 130 0082 11D0     		beq	.L5
+ 131 0084 002B     		cmp	r3, #0
+ 132 0086 17D1     		bne	.L3
+ 118:main.c        ****                     case BLOWN_NOTES:
+ 119:main.c        ****                         LCD_Position(0u,0u);
+ 133              		.loc 1 119 0
+ 134 0088 0021     		movs	r1, #0
+ 135 008a 0020     		movs	r0, #0
+ 136 008c FFF7FEFF 		bl	LCD_Position
+ 120:main.c        ****                         LCD_PrintString("Blow");
+ 137              		.loc 1 120 0
+ 138 0090 2F48     		ldr	r0, .L9+4
+ 139 0092 FFF7FEFF 		bl	LCD_PrintString
+ 121:main.c        ****                     break;
+ 140              		.loc 1 121 0
+ 141 0096 0FE0     		b	.L3
+ 142              	.L4:
+ 122:main.c        ****                     case SUCKED_NOTES:
+ 123:main.c        ****                         LCD_Position(0u,0u);
+ 143              		.loc 1 123 0
+ 144 0098 0021     		movs	r1, #0
+ 145 009a 0020     		movs	r0, #0
+ 146 009c FFF7FEFF 		bl	LCD_Position
+ 124:main.c        ****                         LCD_PrintString("Suck");
+ 147              		.loc 1 124 0
+ 148 00a0 2C48     		ldr	r0, .L9+8
+ 149 00a2 FFF7FEFF 		bl	LCD_PrintString
+ 125:main.c        ****                     break;
+ 150              		.loc 1 125 0
+ 151 00a6 07E0     		b	.L3
+ 152              	.L5:
+ 126:main.c        ****                     case NO_NOTES:
+ 127:main.c        ****                         LCD_Position(0u,0u);
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccZ48awh.s 			page 6
+
+
+ 153              		.loc 1 127 0
+ 154 00a8 0021     		movs	r1, #0
+ 155 00aa 0020     		movs	r0, #0
+ 156 00ac FFF7FEFF 		bl	LCD_Position
+ 128:main.c        ****                         LCD_PrintString("None");
+ 157              		.loc 1 128 0
+ 158 00b0 2948     		ldr	r0, .L9+12
+ 159 00b2 FFF7FEFF 		bl	LCD_PrintString
+ 129:main.c        ****                     break;
+ 160              		.loc 1 129 0
+ 161 00b6 00BF     		nop
+ 162              	.L3:
+ 130:main.c        ****                 }
+ 131:main.c        ****                 
+ 132:main.c        ****                     LCD_Position(1u,0u);
+ 163              		.loc 1 132 0
+ 164 00b8 0021     		movs	r1, #0
+ 165 00ba 0120     		movs	r0, #1
+ 166 00bc FFF7FEFF 		bl	LCD_Position
+ 133:main.c        ****                     sprintf(muxline, "%d", harmonica.active_hole);
+ 167              		.loc 1 133 0
+ 168 00c0 224B     		ldr	r3, .L9
+ 169 00c2 5B78     		ldrb	r3, [r3, #1]	@ zero_extendqisi2
+ 170 00c4 1A46     		mov	r2, r3
+ 171 00c6 07F12403 		add	r3, r7, #36
+ 172 00ca 2449     		ldr	r1, .L9+16
+ 173 00cc 1846     		mov	r0, r3
+ 174 00ce FFF7FEFF 		bl	sprintf
+ 134:main.c        ****                     LCD_PrintString(muxline);
+ 175              		.loc 1 134 0
+ 176 00d2 07F12403 		add	r3, r7, #36
+ 177 00d6 1846     		mov	r0, r3
+ 178 00d8 FFF7FEFF 		bl	LCD_PrintString
+ 135:main.c        ****                     
+ 136:main.c        ****                     sprintf(muxline, "%d", harmonica.raw_harmonica_output.num_notes_played);
+ 179              		.loc 1 136 0
+ 180 00dc 1B4B     		ldr	r3, .L9
+ 181 00de 93F90D30 		ldrsb	r3, [r3, #13]
+ 182 00e2 1A46     		mov	r2, r3
+ 183 00e4 07F12403 		add	r3, r7, #36
+ 184 00e8 1C49     		ldr	r1, .L9+16
+ 185 00ea 1846     		mov	r0, r3
+ 186 00ec FFF7FEFF 		bl	sprintf
+ 137:main.c        ****                     LCD_Position(1u,15u);
+ 187              		.loc 1 137 0
+ 188 00f0 0F21     		movs	r1, #15
+ 189 00f2 0120     		movs	r0, #1
+ 190 00f4 FFF7FEFF 		bl	LCD_Position
+ 138:main.c        ****                     LCD_PrintString(muxline);
+ 191              		.loc 1 138 0
+ 192 00f8 07F12403 		add	r3, r7, #36
+ 193 00fc 1846     		mov	r0, r3
+ 194 00fe FFF7FEFF 		bl	LCD_PrintString
+ 139:main.c        ****                     
+ 140:main.c        ****                 if(harmonica.output_mode == RECORDING) {
+ 195              		.loc 1 140 0
+ 196 0102 124B     		ldr	r3, .L9
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccZ48awh.s 			page 7
+
+
+ 197 0104 1B7D     		ldrb	r3, [r3, #20]	@ zero_extendqisi2
+ 198 0106 022B     		cmp	r3, #2
+ 199 0108 13D1     		bne	.L7
+ 200              	.LBB2:
+ 141:main.c        **** 
+ 142:main.c        ****                     uint8 recordings_idx = harmonica.playback_notes.recordings_idx;
+ 201              		.loc 1 142 0
+ 202 010a 104B     		ldr	r3, .L9
+ 203 010c 93F8A831 		ldrb	r3, [r3, #424]
+ 204 0110 87F83730 		strb	r3, [r7, #55]
+ 143:main.c        ****                     LCD_Position(0u, 5u);
+ 205              		.loc 1 143 0
+ 206 0114 0521     		movs	r1, #5
+ 207 0116 0020     		movs	r0, #0
+ 208 0118 FFF7FEFF 		bl	LCD_Position
+ 144:main.c        ****                     char rec_string_buffer[20];
+ 145:main.c        ****                     sprintf(rec_string_buffer, "Rec %d/20", recordings_idx);
+ 209              		.loc 1 145 0
+ 210 011c 97F83720 		ldrb	r2, [r7, #55]	@ zero_extendqisi2
+ 211 0120 3B46     		mov	r3, r7
+ 212 0122 0F49     		ldr	r1, .L9+20
+ 213 0124 1846     		mov	r0, r3
+ 214 0126 FFF7FEFF 		bl	sprintf
+ 146:main.c        ****                     LCD_PrintString(rec_string_buffer);
+ 215              		.loc 1 146 0
+ 216 012a 3B46     		mov	r3, r7
+ 217 012c 1846     		mov	r0, r3
+ 218 012e FFF7FEFF 		bl	LCD_PrintString
+ 219              	.L7:
+ 220              	.LBE2:
+ 147:main.c        ****                 }
+ 148:main.c        ****                 
+ 149:main.c        ****                 if(harmonica.output_mode == ECHO) {
+ 221              		.loc 1 149 0
+ 222 0132 064B     		ldr	r3, .L9
+ 223 0134 1B7D     		ldrb	r3, [r3, #20]	@ zero_extendqisi2
+ 224 0136 012B     		cmp	r3, #1
+ 225 0138 91D1     		bne	.L8
+ 150:main.c        ****                     LCD_Position(0u, 5u);
+ 226              		.loc 1 150 0
+ 227 013a 0521     		movs	r1, #5
+ 228 013c 0020     		movs	r0, #0
+ 229 013e FFF7FEFF 		bl	LCD_Position
+ 151:main.c        ****                     LCD_PrintString("ECHO");
+ 230              		.loc 1 151 0
+ 231 0142 0848     		ldr	r0, .L9+24
+ 232 0144 FFF7FEFF 		bl	LCD_PrintString
+ 152:main.c        ****                 }
+ 153:main.c        ****             }
+ 154:main.c        ****             
+ 155:main.c        ****     }
+ 233              		.loc 1 155 0
+ 234 0148 89E7     		b	.L8
+ 235              	.L10:
+ 236 014a 00BF     		.align	2
+ 237              	.L9:
+ 238 014c 00000000 		.word	harmonica
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccZ48awh.s 			page 8
+
+
+ 239 0150 00000000 		.word	.LC0
+ 240 0154 08000000 		.word	.LC1
+ 241 0158 10000000 		.word	.LC2
+ 242 015c 18000000 		.word	.LC3
+ 243 0160 1C000000 		.word	.LC4
+ 244 0164 28000000 		.word	.LC5
+ 245              		.cfi_endproc
+ 246              	.LFE64:
+ 247              		.size	main, .-main
+ 248              		.text
+ 249              	.Letext0:
+ 250              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.2\\psoc creator\\import\\gnu\\arm\\5.4.
+ 251              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.2\\psoc creator\\import\\gnu\\arm\\5.4.
+ 252              		.file 4 "Generated_Source\\PSoC5/cytypes.h"
+ 253              		.file 5 "harmonica_control.h"
+ 254              		.file 6 "Generated_Source\\PSoC5/core_cm3.h"
+ 255              		.section	.debug_info,"",%progbits
+ 256              	.Ldebug_info0:
+ 257 0000 A6040000 		.4byte	0x4a6
+ 258 0004 0400     		.2byte	0x4
+ 259 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 260 000a 04       		.byte	0x4
+ 261 000b 01       		.uleb128 0x1
+ 262 000c 6F000000 		.4byte	.LASF80
+ 263 0010 0C       		.byte	0xc
+ 264 0011 0F040000 		.4byte	.LASF81
+ 265 0015 8A030000 		.4byte	.LASF82
+ 266 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 267 001d 00000000 		.4byte	0
+ 268 0021 00000000 		.4byte	.Ldebug_line0
+ 269 0025 02       		.uleb128 0x2
+ 270 0026 01       		.byte	0x1
+ 271 0027 06       		.byte	0x6
+ 272 0028 5E020000 		.4byte	.LASF0
+ 273 002c 02       		.uleb128 0x2
+ 274 002d 01       		.byte	0x1
+ 275 002e 08       		.byte	0x8
+ 276 002f 4A020000 		.4byte	.LASF1
+ 277 0033 02       		.uleb128 0x2
+ 278 0034 02       		.byte	0x2
+ 279 0035 05       		.byte	0x5
+ 280 0036 43000000 		.4byte	.LASF2
+ 281 003a 02       		.uleb128 0x2
+ 282 003b 02       		.byte	0x2
+ 283 003c 07       		.byte	0x7
+ 284 003d EA020000 		.4byte	.LASF3
+ 285 0041 03       		.uleb128 0x3
+ 286 0042 5A040000 		.4byte	.LASF9
+ 287 0046 02       		.byte	0x2
+ 288 0047 3F       		.byte	0x3f
+ 289 0048 4C000000 		.4byte	0x4c
+ 290 004c 02       		.uleb128 0x2
+ 291 004d 04       		.byte	0x4
+ 292 004e 05       		.byte	0x5
+ 293 004f 9D040000 		.4byte	.LASF4
+ 294 0053 02       		.uleb128 0x2
+ 295 0054 04       		.byte	0x4
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccZ48awh.s 			page 9
+
+
+ 296 0055 07       		.byte	0x7
+ 297 0056 1B040000 		.4byte	.LASF5
+ 298 005a 02       		.uleb128 0x2
+ 299 005b 08       		.byte	0x8
+ 300 005c 05       		.byte	0x5
+ 301 005d BA010000 		.4byte	.LASF6
+ 302 0061 02       		.uleb128 0x2
+ 303 0062 08       		.byte	0x8
+ 304 0063 07       		.byte	0x7
+ 305 0064 7C020000 		.4byte	.LASF7
+ 306 0068 04       		.uleb128 0x4
+ 307 0069 04       		.byte	0x4
+ 308 006a 05       		.byte	0x5
+ 309 006b 696E7400 		.ascii	"int\000"
+ 310 006f 02       		.uleb128 0x2
+ 311 0070 04       		.byte	0x4
+ 312 0071 07       		.byte	0x7
+ 313 0072 A9020000 		.4byte	.LASF8
+ 314 0076 03       		.uleb128 0x3
+ 315 0077 2F030000 		.4byte	.LASF10
+ 316 007b 03       		.byte	0x3
+ 317 007c 2C       		.byte	0x2c
+ 318 007d 41000000 		.4byte	0x41
+ 319 0081 05       		.uleb128 0x5
+ 320 0082 41030000 		.4byte	.LASF11
+ 321 0086 04       		.byte	0x4
+ 322 0087 9201     		.2byte	0x192
+ 323 0089 2C000000 		.4byte	0x2c
+ 324 008d 05       		.uleb128 0x5
+ 325 008e 08040000 		.4byte	.LASF12
+ 326 0092 04       		.byte	0x4
+ 327 0093 9401     		.2byte	0x194
+ 328 0095 53000000 		.4byte	0x53
+ 329 0099 05       		.uleb128 0x5
+ 330 009a C8010000 		.4byte	.LASF13
+ 331 009e 04       		.byte	0x4
+ 332 009f 9501     		.2byte	0x195
+ 333 00a1 25000000 		.4byte	0x25
+ 334 00a5 02       		.uleb128 0x2
+ 335 00a6 04       		.byte	0x4
+ 336 00a7 04       		.byte	0x4
+ 337 00a8 AB010000 		.4byte	.LASF14
+ 338 00ac 02       		.uleb128 0x2
+ 339 00ad 08       		.byte	0x8
+ 340 00ae 04       		.byte	0x4
+ 341 00af 87040000 		.4byte	.LASF15
+ 342 00b3 02       		.uleb128 0x2
+ 343 00b4 01       		.byte	0x1
+ 344 00b5 08       		.byte	0x8
+ 345 00b6 08030000 		.4byte	.LASF16
+ 346 00ba 02       		.uleb128 0x2
+ 347 00bb 08       		.byte	0x8
+ 348 00bc 04       		.byte	0x4
+ 349 00bd 30020000 		.4byte	.LASF17
+ 350 00c1 02       		.uleb128 0x2
+ 351 00c2 04       		.byte	0x4
+ 352 00c3 07       		.byte	0x7
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccZ48awh.s 			page 10
+
+
+ 353 00c4 4D000000 		.4byte	.LASF18
+ 354 00c8 06       		.uleb128 0x6
+ 355 00c9 01       		.byte	0x1
+ 356 00ca 2C000000 		.4byte	0x2c
+ 357 00ce 05       		.byte	0x5
+ 358 00cf 22       		.byte	0x22
+ 359 00d0 E1000000 		.4byte	0xe1
+ 360 00d4 07       		.uleb128 0x7
+ 361 00d5 3D000000 		.4byte	.LASF19
+ 362 00d9 00       		.byte	0
+ 363 00da 07       		.uleb128 0x7
+ 364 00db 8E040000 		.4byte	.LASF20
+ 365 00df 01       		.byte	0x1
+ 366 00e0 00       		.byte	0
+ 367 00e1 03       		.uleb128 0x3
+ 368 00e2 C2020000 		.4byte	.LASF21
+ 369 00e6 05       		.byte	0x5
+ 370 00e7 25       		.byte	0x25
+ 371 00e8 C8000000 		.4byte	0xc8
+ 372 00ec 06       		.uleb128 0x6
+ 373 00ed 01       		.byte	0x1
+ 374 00ee 2C000000 		.4byte	0x2c
+ 375 00f2 05       		.byte	0x5
+ 376 00f3 26       		.byte	0x26
+ 377 00f4 0B010000 		.4byte	0x10b
+ 378 00f8 07       		.uleb128 0x7
+ 379 00f9 B6020000 		.4byte	.LASF22
+ 380 00fd 00       		.byte	0
+ 381 00fe 07       		.uleb128 0x7
+ 382 00ff CD010000 		.4byte	.LASF23
+ 383 0103 01       		.byte	0x1
+ 384 0104 07       		.uleb128 0x7
+ 385 0105 A0020000 		.4byte	.LASF24
+ 386 0109 02       		.byte	0x2
+ 387 010a 00       		.byte	0
+ 388 010b 03       		.uleb128 0x3
+ 389 010c 37030000 		.4byte	.LASF25
+ 390 0110 05       		.byte	0x5
+ 391 0111 2A       		.byte	0x2a
+ 392 0112 EC000000 		.4byte	0xec
+ 393 0116 06       		.uleb128 0x6
+ 394 0117 01       		.byte	0x1
+ 395 0118 2C000000 		.4byte	0x2c
+ 396 011c 05       		.byte	0x5
+ 397 011d 2C       		.byte	0x2c
+ 398 011e 3B010000 		.4byte	0x13b
+ 399 0122 07       		.uleb128 0x7
+ 400 0123 36000000 		.4byte	.LASF26
+ 401 0127 00       		.byte	0
+ 402 0128 07       		.uleb128 0x7
+ 403 0129 B3040000 		.4byte	.LASF27
+ 404 012d 01       		.byte	0x1
+ 405 012e 07       		.uleb128 0x7
+ 406 012f 56000000 		.4byte	.LASF28
+ 407 0133 02       		.byte	0x2
+ 408 0134 07       		.uleb128 0x7
+ 409 0135 14020000 		.4byte	.LASF29
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccZ48awh.s 			page 11
+
+
+ 410 0139 03       		.byte	0x3
+ 411 013a 00       		.byte	0
+ 412 013b 03       		.uleb128 0x3
+ 413 013c 8A010000 		.4byte	.LASF30
+ 414 0140 05       		.byte	0x5
+ 415 0141 31       		.byte	0x31
+ 416 0142 16010000 		.4byte	0x116
+ 417 0146 06       		.uleb128 0x6
+ 418 0147 01       		.byte	0x1
+ 419 0148 2C000000 		.4byte	0x2c
+ 420 014c 05       		.byte	0x5
+ 421 014d 33       		.byte	0x33
+ 422 014e 95010000 		.4byte	0x195
+ 423 0152 07       		.uleb128 0x7
+ 424 0153 37010000 		.4byte	.LASF31
+ 425 0157 00       		.byte	0
+ 426 0158 08       		.uleb128 0x8
+ 427 0159 4F4E4500 		.ascii	"ONE\000"
+ 428 015d 01       		.byte	0x1
+ 429 015e 08       		.uleb128 0x8
+ 430 015f 54574F00 		.ascii	"TWO\000"
+ 431 0163 02       		.byte	0x2
+ 432 0164 07       		.uleb128 0x7
+ 433 0165 EF010000 		.4byte	.LASF32
+ 434 0169 03       		.byte	0x3
+ 435 016a 07       		.uleb128 0x7
+ 436 016b 47030000 		.4byte	.LASF33
+ 437 016f 04       		.byte	0x4
+ 438 0170 07       		.uleb128 0x7
+ 439 0171 D4020000 		.4byte	.LASF34
+ 440 0175 05       		.byte	0x5
+ 441 0176 08       		.uleb128 0x8
+ 442 0177 53495800 		.ascii	"SIX\000"
+ 443 017b 06       		.byte	0x6
+ 444 017c 07       		.uleb128 0x7
+ 445 017d 54040000 		.4byte	.LASF35
+ 446 0181 07       		.byte	0x7
+ 447 0182 07       		.uleb128 0x7
+ 448 0183 58020000 		.4byte	.LASF36
+ 449 0187 08       		.byte	0x8
+ 450 0188 07       		.uleb128 0x7
+ 451 0189 93020000 		.4byte	.LASF37
+ 452 018d 09       		.byte	0x9
+ 453 018e 07       		.uleb128 0x7
+ 454 018f 4C030000 		.4byte	.LASF38
+ 455 0193 0A       		.byte	0xa
+ 456 0194 00       		.byte	0
+ 457 0195 03       		.uleb128 0x3
+ 458 0196 16040000 		.4byte	.LASF39
+ 459 019a 05       		.byte	0x5
+ 460 019b 3F       		.byte	0x3f
+ 461 019c 46010000 		.4byte	0x146
+ 462 01a0 06       		.uleb128 0x6
+ 463 01a1 01       		.byte	0x1
+ 464 01a2 2C000000 		.4byte	0x2c
+ 465 01a6 05       		.byte	0x5
+ 466 01a7 41       		.byte	0x41
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccZ48awh.s 			page 12
+
+
+ 467 01a8 12020000 		.4byte	0x212
+ 468 01ac 08       		.uleb128 0x8
+ 469 01ad 433400   		.ascii	"C4\000"
+ 470 01b0 00       		.byte	0
+ 471 01b1 08       		.uleb128 0x8
+ 472 01b2 443400   		.ascii	"D4\000"
+ 473 01b5 01       		.byte	0x1
+ 474 01b6 08       		.uleb128 0x8
+ 475 01b7 453400   		.ascii	"E4\000"
+ 476 01ba 02       		.byte	0x2
+ 477 01bb 08       		.uleb128 0x8
+ 478 01bc 473400   		.ascii	"G4\000"
+ 479 01bf 03       		.byte	0x3
+ 480 01c0 08       		.uleb128 0x8
+ 481 01c1 473500   		.ascii	"G5\000"
+ 482 01c4 04       		.byte	0x4
+ 483 01c5 08       		.uleb128 0x8
+ 484 01c6 423400   		.ascii	"B4\000"
+ 485 01c9 05       		.byte	0x5
+ 486 01ca 08       		.uleb128 0x8
+ 487 01cb 433500   		.ascii	"C5\000"
+ 488 01ce 06       		.byte	0x6
+ 489 01cf 08       		.uleb128 0x8
+ 490 01d0 443500   		.ascii	"D5\000"
+ 491 01d3 07       		.byte	0x7
+ 492 01d4 08       		.uleb128 0x8
+ 493 01d5 453500   		.ascii	"E5\000"
+ 494 01d8 08       		.byte	0x8
+ 495 01d9 08       		.uleb128 0x8
+ 496 01da 463500   		.ascii	"F5\000"
+ 497 01dd 09       		.byte	0x9
+ 498 01de 08       		.uleb128 0x8
+ 499 01df 473600   		.ascii	"G6\000"
+ 500 01e2 0A       		.byte	0xa
+ 501 01e3 08       		.uleb128 0x8
+ 502 01e4 413500   		.ascii	"A5\000"
+ 503 01e7 0B       		.byte	0xb
+ 504 01e8 08       		.uleb128 0x8
+ 505 01e9 433600   		.ascii	"C6\000"
+ 506 01ec 0C       		.byte	0xc
+ 507 01ed 08       		.uleb128 0x8
+ 508 01ee 423500   		.ascii	"B5\000"
+ 509 01f1 0D       		.byte	0xd
+ 510 01f2 08       		.uleb128 0x8
+ 511 01f3 453600   		.ascii	"E6\000"
+ 512 01f6 0E       		.byte	0xe
+ 513 01f7 08       		.uleb128 0x8
+ 514 01f8 443600   		.ascii	"D6\000"
+ 515 01fb 0F       		.byte	0xf
+ 516 01fc 08       		.uleb128 0x8
+ 517 01fd 463600   		.ascii	"F6\000"
+ 518 0200 10       		.byte	0x10
+ 519 0201 08       		.uleb128 0x8
+ 520 0202 433700   		.ascii	"C7\000"
+ 521 0205 11       		.byte	0x11
+ 522 0206 08       		.uleb128 0x8
+ 523 0207 413600   		.ascii	"A6\000"
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccZ48awh.s 			page 13
+
+
+ 524 020a 12       		.byte	0x12
+ 525 020b 07       		.uleb128 0x7
+ 526 020c 0F020000 		.4byte	.LASF40
+ 527 0210 13       		.byte	0x13
+ 528 0211 00       		.byte	0
+ 529 0212 03       		.uleb128 0x3
+ 530 0213 1D020000 		.4byte	.LASF41
+ 531 0217 05       		.byte	0x5
+ 532 0218 56       		.byte	0x56
+ 533 0219 A0010000 		.4byte	0x1a0
+ 534 021d 09       		.uleb128 0x9
+ 535 021e 0B       		.byte	0xb
+ 536 021f 05       		.byte	0x5
+ 537 0220 59       		.byte	0x59
+ 538 0221 3E020000 		.4byte	0x23e
+ 539 0225 0A       		.uleb128 0xa
+ 540 0226 FF010000 		.4byte	.LASF42
+ 541 022a 05       		.byte	0x5
+ 542 022b 5A       		.byte	0x5a
+ 543 022c 3E020000 		.4byte	0x23e
+ 544 0230 00       		.byte	0
+ 545 0231 0A       		.uleb128 0xa
+ 546 0232 1E030000 		.4byte	.LASF43
+ 547 0236 05       		.byte	0x5
+ 548 0237 5B       		.byte	0x5b
+ 549 0238 99000000 		.4byte	0x99
+ 550 023c 0A       		.byte	0xa
+ 551 023d 00       		.byte	0
+ 552 023e 0B       		.uleb128 0xb
+ 553 023f 12020000 		.4byte	0x212
+ 554 0243 4E020000 		.4byte	0x24e
+ 555 0247 0C       		.uleb128 0xc
+ 556 0248 C1000000 		.4byte	0xc1
+ 557 024c 09       		.byte	0x9
+ 558 024d 00       		.byte	0
+ 559 024e 03       		.uleb128 0x3
+ 560 024f 64040000 		.4byte	.LASF44
+ 561 0253 05       		.byte	0x5
+ 562 0254 5C       		.byte	0x5c
+ 563 0255 1D020000 		.4byte	0x21d
+ 564 0259 09       		.uleb128 0x9
+ 565 025a 14       		.byte	0x14
+ 566 025b 05       		.byte	0x5
+ 567 025c 5E       		.byte	0x5e
+ 568 025d 92020000 		.4byte	0x292
+ 569 0261 0A       		.uleb128 0xa
+ 570 0262 FF010000 		.4byte	.LASF42
+ 571 0266 05       		.byte	0x5
+ 572 0267 5F       		.byte	0x5f
+ 573 0268 3E020000 		.4byte	0x23e
+ 574 026c 00       		.byte	0
+ 575 026d 0A       		.uleb128 0xa
+ 576 026e 1E030000 		.4byte	.LASF43
+ 577 0272 05       		.byte	0x5
+ 578 0273 60       		.byte	0x60
+ 579 0274 99000000 		.4byte	0x99
+ 580 0278 0A       		.byte	0xa
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccZ48awh.s 			page 14
+
+
+ 581 0279 0A       		.uleb128 0xa
+ 582 027a B1010000 		.4byte	.LASF45
+ 583 027e 05       		.byte	0x5
+ 584 027f 61       		.byte	0x61
+ 585 0280 8D000000 		.4byte	0x8d
+ 586 0284 0C       		.byte	0xc
+ 587 0285 0A       		.uleb128 0xa
+ 588 0286 54030000 		.4byte	.LASF46
+ 589 028a 05       		.byte	0x5
+ 590 028b 62       		.byte	0x62
+ 591 028c 8D000000 		.4byte	0x8d
+ 592 0290 10       		.byte	0x10
+ 593 0291 00       		.byte	0
+ 594 0292 03       		.uleb128 0x3
+ 595 0293 5F030000 		.4byte	.LASF47
+ 596 0297 05       		.byte	0x5
+ 597 0298 63       		.byte	0x63
+ 598 0299 59020000 		.4byte	0x259
+ 599 029d 0D       		.uleb128 0xd
+ 600 029e 9C01     		.2byte	0x19c
+ 601 02a0 05       		.byte	0x5
+ 602 02a1 65       		.byte	0x65
+ 603 02a2 F4020000 		.4byte	0x2f4
+ 604 02a6 0A       		.uleb128 0xa
+ 605 02a7 FD020000 		.4byte	.LASF48
+ 606 02ab 05       		.byte	0x5
+ 607 02ac 66       		.byte	0x66
+ 608 02ad F4020000 		.4byte	0x2f4
+ 609 02b1 00       		.byte	0
+ 610 02b2 0E       		.uleb128 0xe
+ 611 02b3 00000000 		.4byte	.LASF49
+ 612 02b7 05       		.byte	0x5
+ 613 02b8 67       		.byte	0x67
+ 614 02b9 81000000 		.4byte	0x81
+ 615 02bd 9001     		.2byte	0x190
+ 616 02bf 0E       		.uleb128 0xe
+ 617 02c0 27000000 		.4byte	.LASF50
+ 618 02c4 05       		.byte	0x5
+ 619 02c5 68       		.byte	0x68
+ 620 02c6 8D000000 		.4byte	0x8d
+ 621 02ca 9401     		.2byte	0x194
+ 622 02cc 0E       		.uleb128 0xe
+ 623 02cd 6D030000 		.4byte	.LASF51
+ 624 02d1 05       		.byte	0x5
+ 625 02d2 69       		.byte	0x69
+ 626 02d3 E1000000 		.4byte	0xe1
+ 627 02d7 9801     		.2byte	0x198
+ 628 02d9 0E       		.uleb128 0xe
+ 629 02da 1C010000 		.4byte	.LASF52
+ 630 02de 05       		.byte	0x5
+ 631 02df 6A       		.byte	0x6a
+ 632 02e0 E1000000 		.4byte	0xe1
+ 633 02e4 9901     		.2byte	0x199
+ 634 02e6 0E       		.uleb128 0xe
+ 635 02e7 3C010000 		.4byte	.LASF53
+ 636 02eb 05       		.byte	0x5
+ 637 02ec 6B       		.byte	0x6b
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccZ48awh.s 			page 15
+
+
+ 638 02ed 81000000 		.4byte	0x81
+ 639 02f1 9A01     		.2byte	0x19a
+ 640 02f3 00       		.byte	0
+ 641 02f4 0B       		.uleb128 0xb
+ 642 02f5 92020000 		.4byte	0x292
+ 643 02f9 04030000 		.4byte	0x304
+ 644 02fd 0C       		.uleb128 0xc
+ 645 02fe C1000000 		.4byte	0xc1
+ 646 0302 13       		.byte	0x13
+ 647 0303 00       		.byte	0
+ 648 0304 03       		.uleb128 0x3
+ 649 0305 60000000 		.4byte	.LASF54
+ 650 0309 05       		.byte	0x5
+ 651 030a 6C       		.byte	0x6c
+ 652 030b 9D020000 		.4byte	0x29d
+ 653 030f 09       		.uleb128 0x9
+ 654 0310 2C       		.byte	0x2c
+ 655 0311 05       		.byte	0x5
+ 656 0312 6E       		.byte	0x6e
+ 657 0313 84030000 		.4byte	0x384
+ 658 0317 0A       		.uleb128 0xa
+ 659 0318 D9020000 		.4byte	.LASF55
+ 660 031c 05       		.byte	0x5
+ 661 031d 6F       		.byte	0x6f
+ 662 031e 92020000 		.4byte	0x292
+ 663 0322 00       		.byte	0
+ 664 0323 0A       		.uleb128 0xa
+ 665 0324 0F000000 		.4byte	.LASF56
+ 666 0328 05       		.byte	0x5
+ 667 0329 70       		.byte	0x70
+ 668 032a E1000000 		.4byte	0xe1
+ 669 032e 14       		.byte	0x14
+ 670 032f 0A       		.uleb128 0xa
+ 671 0330 2D040000 		.4byte	.LASF57
+ 672 0334 05       		.byte	0x5
+ 673 0335 71       		.byte	0x71
+ 674 0336 E1000000 		.4byte	0xe1
+ 675 033a 15       		.byte	0x15
+ 676 033b 0A       		.uleb128 0xa
+ 677 033c 4B010000 		.4byte	.LASF58
+ 678 0340 05       		.byte	0x5
+ 679 0341 72       		.byte	0x72
+ 680 0342 A5000000 		.4byte	0xa5
+ 681 0346 18       		.byte	0x18
+ 682 0347 0A       		.uleb128 0xa
+ 683 0348 02010000 		.4byte	.LASF59
+ 684 034c 05       		.byte	0x5
+ 685 034d 73       		.byte	0x73
+ 686 034e 8D000000 		.4byte	0x8d
+ 687 0352 1C       		.byte	0x1c
+ 688 0353 0A       		.uleb128 0xa
+ 689 0354 A0010000 		.4byte	.LASF60
+ 690 0358 05       		.byte	0x5
+ 691 0359 74       		.byte	0x74
+ 692 035a 8D000000 		.4byte	0x8d
+ 693 035e 20       		.byte	0x20
+ 694 035f 0A       		.uleb128 0xa
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccZ48awh.s 			page 16
+
+
+ 695 0360 3C020000 		.4byte	.LASF61
+ 696 0364 05       		.byte	0x5
+ 697 0365 75       		.byte	0x75
+ 698 0366 8D000000 		.4byte	0x8d
+ 699 036a 24       		.byte	0x24
+ 700 036b 0A       		.uleb128 0xa
+ 701 036c 96010000 		.4byte	.LASF62
+ 702 0370 05       		.byte	0x5
+ 703 0371 76       		.byte	0x76
+ 704 0372 E1000000 		.4byte	0xe1
+ 705 0376 28       		.byte	0x28
+ 706 0377 0A       		.uleb128 0xa
+ 707 0378 0D030000 		.4byte	.LASF63
+ 708 037c 05       		.byte	0x5
+ 709 037d 77       		.byte	0x77
+ 710 037e 81000000 		.4byte	0x81
+ 711 0382 29       		.byte	0x29
+ 712 0383 00       		.byte	0
+ 713 0384 03       		.uleb128 0x3
+ 714 0385 62010000 		.4byte	.LASF64
+ 715 0389 05       		.byte	0x5
+ 716 038a 78       		.byte	0x78
+ 717 038b 0F030000 		.4byte	0x30f
+ 718 038f 0D       		.uleb128 0xd
+ 719 0390 E001     		.2byte	0x1e0
+ 720 0392 05       		.byte	0x5
+ 721 0393 7A       		.byte	0x7a
+ 722 0394 06040000 		.4byte	0x406
+ 723 0398 0A       		.uleb128 0xa
+ 724 0399 75040000 		.4byte	.LASF65
+ 725 039d 05       		.byte	0x5
+ 726 039e 7B       		.byte	0x7b
+ 727 039f 0B010000 		.4byte	0x10b
+ 728 03a3 00       		.byte	0
+ 729 03a4 0A       		.uleb128 0xa
+ 730 03a5 6C010000 		.4byte	.LASF66
+ 731 03a9 05       		.byte	0x5
+ 732 03aa 7C       		.byte	0x7c
+ 733 03ab 95010000 		.4byte	0x195
+ 734 03af 01       		.byte	0x1
+ 735 03b0 0A       		.uleb128 0xa
+ 736 03b1 11010000 		.4byte	.LASF67
+ 737 03b5 05       		.byte	0x5
+ 738 03b6 7D       		.byte	0x7d
+ 739 03b7 99000000 		.4byte	0x99
+ 740 03bb 02       		.byte	0x2
+ 741 03bc 0A       		.uleb128 0xa
+ 742 03bd DA010000 		.4byte	.LASF68
+ 743 03c1 05       		.byte	0x5
+ 744 03c2 7E       		.byte	0x7e
+ 745 03c3 4E020000 		.4byte	0x24e
+ 746 03c7 03       		.byte	0x3
+ 747 03c8 0A       		.uleb128 0xa
+ 748 03c9 22020000 		.4byte	.LASF69
+ 749 03cd 05       		.byte	0x5
+ 750 03ce 7F       		.byte	0x7f
+ 751 03cf E1000000 		.4byte	0xe1
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccZ48awh.s 			page 17
+
+
+ 752 03d3 0E       		.byte	0xe
+ 753 03d4 0A       		.uleb128 0xa
+ 754 03d5 6A020000 		.4byte	.LASF70
+ 755 03d9 05       		.byte	0x5
+ 756 03da 80       		.byte	0x80
+ 757 03db A5000000 		.4byte	0xa5
+ 758 03df 10       		.byte	0x10
+ 759 03e0 0A       		.uleb128 0xa
+ 760 03e1 C8020000 		.4byte	.LASF71
+ 761 03e5 05       		.byte	0x5
+ 762 03e6 81       		.byte	0x81
+ 763 03e7 3B010000 		.4byte	0x13b
+ 764 03eb 14       		.byte	0x14
+ 765 03ec 0A       		.uleb128 0xa
+ 766 03ed F9030000 		.4byte	.LASF72
+ 767 03f1 05       		.byte	0x5
+ 768 03f2 82       		.byte	0x82
+ 769 03f3 04030000 		.4byte	0x304
+ 770 03f7 18       		.byte	0x18
+ 771 03f8 0E       		.uleb128 0xe
+ 772 03f9 F5010000 		.4byte	.LASF73
+ 773 03fd 05       		.byte	0x5
+ 774 03fe 83       		.byte	0x83
+ 775 03ff 84030000 		.4byte	0x384
+ 776 0403 B401     		.2byte	0x1b4
+ 777 0405 00       		.byte	0
+ 778 0406 03       		.uleb128 0x3
+ 779 0407 93040000 		.4byte	.LASF74
+ 780 040b 05       		.byte	0x5
+ 781 040c 84       		.byte	0x84
+ 782 040d 8F030000 		.4byte	0x38f
+ 783 0411 0F       		.uleb128 0xf
+ 784 0412 FD000000 		.4byte	.LASF83
+ 785 0416 01       		.byte	0x1
+ 786 0417 1E       		.byte	0x1e
+ 787 0418 68000000 		.4byte	0x68
+ 788 041c 00000000 		.4byte	.LFB64
+ 789 0420 68010000 		.4byte	.LFE64-.LFB64
+ 790 0424 01       		.uleb128 0x1
+ 791 0425 9C       		.byte	0x9c
+ 792 0426 6D040000 		.4byte	0x46d
+ 793 042a 10       		.uleb128 0x10
+ 794 042b 98020000 		.4byte	.LASF75
+ 795 042f 01       		.byte	0x1
+ 796 0430 20       		.byte	0x20
+ 797 0431 6D040000 		.4byte	0x46d
+ 798 0435 02       		.uleb128 0x2
+ 799 0436 91       		.byte	0x91
+ 800 0437 64       		.sleb128 -28
+ 801 0438 10       		.uleb128 0x10
+ 802 0439 4A040000 		.4byte	.LASF76
+ 803 043d 01       		.byte	0x1
+ 804 043e 21       		.byte	0x21
+ 805 043f 6D040000 		.4byte	0x46d
+ 806 0443 02       		.uleb128 0x2
+ 807 0444 91       		.byte	0x91
+ 808 0445 54       		.sleb128 -44
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccZ48awh.s 			page 18
+
+
+ 809 0446 11       		.uleb128 0x11
+ 810 0447 0A010000 		.4byte	.LBB2
+ 811 044b 28000000 		.4byte	.LBE2-.LBB2
+ 812 044f 10       		.uleb128 0x10
+ 813 0450 00000000 		.4byte	.LASF49
+ 814 0454 01       		.byte	0x1
+ 815 0455 8E       		.byte	0x8e
+ 816 0456 81000000 		.4byte	0x81
+ 817 045a 02       		.uleb128 0x2
+ 818 045b 91       		.byte	0x91
+ 819 045c 77       		.sleb128 -9
+ 820 045d 10       		.uleb128 0x10
+ 821 045e 78010000 		.4byte	.LASF77
+ 822 0462 01       		.byte	0x1
+ 823 0463 90       		.byte	0x90
+ 824 0464 7D040000 		.4byte	0x47d
+ 825 0468 02       		.uleb128 0x2
+ 826 0469 91       		.byte	0x91
+ 827 046a 40       		.sleb128 -64
+ 828 046b 00       		.byte	0
+ 829 046c 00       		.byte	0
+ 830 046d 0B       		.uleb128 0xb
+ 831 046e B3000000 		.4byte	0xb3
+ 832 0472 7D040000 		.4byte	0x47d
+ 833 0476 0C       		.uleb128 0xc
+ 834 0477 C1000000 		.4byte	0xc1
+ 835 047b 0F       		.byte	0xf
+ 836 047c 00       		.byte	0
+ 837 047d 0B       		.uleb128 0xb
+ 838 047e B3000000 		.4byte	0xb3
+ 839 0482 8D040000 		.4byte	0x48d
+ 840 0486 0C       		.uleb128 0xc
+ 841 0487 C1000000 		.4byte	0xc1
+ 842 048b 13       		.byte	0x13
+ 843 048c 00       		.byte	0
+ 844 048d 12       		.uleb128 0x12
+ 845 048e A6040000 		.4byte	.LASF78
+ 846 0492 06       		.byte	0x6
+ 847 0493 9606     		.2byte	0x696
+ 848 0495 99040000 		.4byte	0x499
+ 849 0499 13       		.uleb128 0x13
+ 850 049a 76000000 		.4byte	0x76
+ 851 049e 14       		.uleb128 0x14
+ 852 049f 05020000 		.4byte	.LASF79
+ 853 04a3 05       		.byte	0x5
+ 854 04a4 86       		.byte	0x86
+ 855 04a5 06040000 		.4byte	0x406
+ 856 04a9 00       		.byte	0
+ 857              		.section	.debug_abbrev,"",%progbits
+ 858              	.Ldebug_abbrev0:
+ 859 0000 01       		.uleb128 0x1
+ 860 0001 11       		.uleb128 0x11
+ 861 0002 01       		.byte	0x1
+ 862 0003 25       		.uleb128 0x25
+ 863 0004 0E       		.uleb128 0xe
+ 864 0005 13       		.uleb128 0x13
+ 865 0006 0B       		.uleb128 0xb
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccZ48awh.s 			page 19
+
+
+ 866 0007 03       		.uleb128 0x3
+ 867 0008 0E       		.uleb128 0xe
+ 868 0009 1B       		.uleb128 0x1b
+ 869 000a 0E       		.uleb128 0xe
+ 870 000b 55       		.uleb128 0x55
+ 871 000c 17       		.uleb128 0x17
+ 872 000d 11       		.uleb128 0x11
+ 873 000e 01       		.uleb128 0x1
+ 874 000f 10       		.uleb128 0x10
+ 875 0010 17       		.uleb128 0x17
+ 876 0011 00       		.byte	0
+ 877 0012 00       		.byte	0
+ 878 0013 02       		.uleb128 0x2
+ 879 0014 24       		.uleb128 0x24
+ 880 0015 00       		.byte	0
+ 881 0016 0B       		.uleb128 0xb
+ 882 0017 0B       		.uleb128 0xb
+ 883 0018 3E       		.uleb128 0x3e
+ 884 0019 0B       		.uleb128 0xb
+ 885 001a 03       		.uleb128 0x3
+ 886 001b 0E       		.uleb128 0xe
+ 887 001c 00       		.byte	0
+ 888 001d 00       		.byte	0
+ 889 001e 03       		.uleb128 0x3
+ 890 001f 16       		.uleb128 0x16
+ 891 0020 00       		.byte	0
+ 892 0021 03       		.uleb128 0x3
+ 893 0022 0E       		.uleb128 0xe
+ 894 0023 3A       		.uleb128 0x3a
+ 895 0024 0B       		.uleb128 0xb
+ 896 0025 3B       		.uleb128 0x3b
+ 897 0026 0B       		.uleb128 0xb
+ 898 0027 49       		.uleb128 0x49
+ 899 0028 13       		.uleb128 0x13
+ 900 0029 00       		.byte	0
+ 901 002a 00       		.byte	0
+ 902 002b 04       		.uleb128 0x4
+ 903 002c 24       		.uleb128 0x24
+ 904 002d 00       		.byte	0
+ 905 002e 0B       		.uleb128 0xb
+ 906 002f 0B       		.uleb128 0xb
+ 907 0030 3E       		.uleb128 0x3e
+ 908 0031 0B       		.uleb128 0xb
+ 909 0032 03       		.uleb128 0x3
+ 910 0033 08       		.uleb128 0x8
+ 911 0034 00       		.byte	0
+ 912 0035 00       		.byte	0
+ 913 0036 05       		.uleb128 0x5
+ 914 0037 16       		.uleb128 0x16
+ 915 0038 00       		.byte	0
+ 916 0039 03       		.uleb128 0x3
+ 917 003a 0E       		.uleb128 0xe
+ 918 003b 3A       		.uleb128 0x3a
+ 919 003c 0B       		.uleb128 0xb
+ 920 003d 3B       		.uleb128 0x3b
+ 921 003e 05       		.uleb128 0x5
+ 922 003f 49       		.uleb128 0x49
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccZ48awh.s 			page 20
+
+
+ 923 0040 13       		.uleb128 0x13
+ 924 0041 00       		.byte	0
+ 925 0042 00       		.byte	0
+ 926 0043 06       		.uleb128 0x6
+ 927 0044 04       		.uleb128 0x4
+ 928 0045 01       		.byte	0x1
+ 929 0046 0B       		.uleb128 0xb
+ 930 0047 0B       		.uleb128 0xb
+ 931 0048 49       		.uleb128 0x49
+ 932 0049 13       		.uleb128 0x13
+ 933 004a 3A       		.uleb128 0x3a
+ 934 004b 0B       		.uleb128 0xb
+ 935 004c 3B       		.uleb128 0x3b
+ 936 004d 0B       		.uleb128 0xb
+ 937 004e 01       		.uleb128 0x1
+ 938 004f 13       		.uleb128 0x13
+ 939 0050 00       		.byte	0
+ 940 0051 00       		.byte	0
+ 941 0052 07       		.uleb128 0x7
+ 942 0053 28       		.uleb128 0x28
+ 943 0054 00       		.byte	0
+ 944 0055 03       		.uleb128 0x3
+ 945 0056 0E       		.uleb128 0xe
+ 946 0057 1C       		.uleb128 0x1c
+ 947 0058 0B       		.uleb128 0xb
+ 948 0059 00       		.byte	0
+ 949 005a 00       		.byte	0
+ 950 005b 08       		.uleb128 0x8
+ 951 005c 28       		.uleb128 0x28
+ 952 005d 00       		.byte	0
+ 953 005e 03       		.uleb128 0x3
+ 954 005f 08       		.uleb128 0x8
+ 955 0060 1C       		.uleb128 0x1c
+ 956 0061 0B       		.uleb128 0xb
+ 957 0062 00       		.byte	0
+ 958 0063 00       		.byte	0
+ 959 0064 09       		.uleb128 0x9
+ 960 0065 13       		.uleb128 0x13
+ 961 0066 01       		.byte	0x1
+ 962 0067 0B       		.uleb128 0xb
+ 963 0068 0B       		.uleb128 0xb
+ 964 0069 3A       		.uleb128 0x3a
+ 965 006a 0B       		.uleb128 0xb
+ 966 006b 3B       		.uleb128 0x3b
+ 967 006c 0B       		.uleb128 0xb
+ 968 006d 01       		.uleb128 0x1
+ 969 006e 13       		.uleb128 0x13
+ 970 006f 00       		.byte	0
+ 971 0070 00       		.byte	0
+ 972 0071 0A       		.uleb128 0xa
+ 973 0072 0D       		.uleb128 0xd
+ 974 0073 00       		.byte	0
+ 975 0074 03       		.uleb128 0x3
+ 976 0075 0E       		.uleb128 0xe
+ 977 0076 3A       		.uleb128 0x3a
+ 978 0077 0B       		.uleb128 0xb
+ 979 0078 3B       		.uleb128 0x3b
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccZ48awh.s 			page 21
+
+
+ 980 0079 0B       		.uleb128 0xb
+ 981 007a 49       		.uleb128 0x49
+ 982 007b 13       		.uleb128 0x13
+ 983 007c 38       		.uleb128 0x38
+ 984 007d 0B       		.uleb128 0xb
+ 985 007e 00       		.byte	0
+ 986 007f 00       		.byte	0
+ 987 0080 0B       		.uleb128 0xb
+ 988 0081 01       		.uleb128 0x1
+ 989 0082 01       		.byte	0x1
+ 990 0083 49       		.uleb128 0x49
+ 991 0084 13       		.uleb128 0x13
+ 992 0085 01       		.uleb128 0x1
+ 993 0086 13       		.uleb128 0x13
+ 994 0087 00       		.byte	0
+ 995 0088 00       		.byte	0
+ 996 0089 0C       		.uleb128 0xc
+ 997 008a 21       		.uleb128 0x21
+ 998 008b 00       		.byte	0
+ 999 008c 49       		.uleb128 0x49
+ 1000 008d 13       		.uleb128 0x13
+ 1001 008e 2F       		.uleb128 0x2f
+ 1002 008f 0B       		.uleb128 0xb
+ 1003 0090 00       		.byte	0
+ 1004 0091 00       		.byte	0
+ 1005 0092 0D       		.uleb128 0xd
+ 1006 0093 13       		.uleb128 0x13
+ 1007 0094 01       		.byte	0x1
+ 1008 0095 0B       		.uleb128 0xb
+ 1009 0096 05       		.uleb128 0x5
+ 1010 0097 3A       		.uleb128 0x3a
+ 1011 0098 0B       		.uleb128 0xb
+ 1012 0099 3B       		.uleb128 0x3b
+ 1013 009a 0B       		.uleb128 0xb
+ 1014 009b 01       		.uleb128 0x1
+ 1015 009c 13       		.uleb128 0x13
+ 1016 009d 00       		.byte	0
+ 1017 009e 00       		.byte	0
+ 1018 009f 0E       		.uleb128 0xe
+ 1019 00a0 0D       		.uleb128 0xd
+ 1020 00a1 00       		.byte	0
+ 1021 00a2 03       		.uleb128 0x3
+ 1022 00a3 0E       		.uleb128 0xe
+ 1023 00a4 3A       		.uleb128 0x3a
+ 1024 00a5 0B       		.uleb128 0xb
+ 1025 00a6 3B       		.uleb128 0x3b
+ 1026 00a7 0B       		.uleb128 0xb
+ 1027 00a8 49       		.uleb128 0x49
+ 1028 00a9 13       		.uleb128 0x13
+ 1029 00aa 38       		.uleb128 0x38
+ 1030 00ab 05       		.uleb128 0x5
+ 1031 00ac 00       		.byte	0
+ 1032 00ad 00       		.byte	0
+ 1033 00ae 0F       		.uleb128 0xf
+ 1034 00af 2E       		.uleb128 0x2e
+ 1035 00b0 01       		.byte	0x1
+ 1036 00b1 3F       		.uleb128 0x3f
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccZ48awh.s 			page 22
+
+
+ 1037 00b2 19       		.uleb128 0x19
+ 1038 00b3 03       		.uleb128 0x3
+ 1039 00b4 0E       		.uleb128 0xe
+ 1040 00b5 3A       		.uleb128 0x3a
+ 1041 00b6 0B       		.uleb128 0xb
+ 1042 00b7 3B       		.uleb128 0x3b
+ 1043 00b8 0B       		.uleb128 0xb
+ 1044 00b9 49       		.uleb128 0x49
+ 1045 00ba 13       		.uleb128 0x13
+ 1046 00bb 11       		.uleb128 0x11
+ 1047 00bc 01       		.uleb128 0x1
+ 1048 00bd 12       		.uleb128 0x12
+ 1049 00be 06       		.uleb128 0x6
+ 1050 00bf 40       		.uleb128 0x40
+ 1051 00c0 18       		.uleb128 0x18
+ 1052 00c1 9642     		.uleb128 0x2116
+ 1053 00c3 19       		.uleb128 0x19
+ 1054 00c4 01       		.uleb128 0x1
+ 1055 00c5 13       		.uleb128 0x13
+ 1056 00c6 00       		.byte	0
+ 1057 00c7 00       		.byte	0
+ 1058 00c8 10       		.uleb128 0x10
+ 1059 00c9 34       		.uleb128 0x34
+ 1060 00ca 00       		.byte	0
+ 1061 00cb 03       		.uleb128 0x3
+ 1062 00cc 0E       		.uleb128 0xe
+ 1063 00cd 3A       		.uleb128 0x3a
+ 1064 00ce 0B       		.uleb128 0xb
+ 1065 00cf 3B       		.uleb128 0x3b
+ 1066 00d0 0B       		.uleb128 0xb
+ 1067 00d1 49       		.uleb128 0x49
+ 1068 00d2 13       		.uleb128 0x13
+ 1069 00d3 02       		.uleb128 0x2
+ 1070 00d4 18       		.uleb128 0x18
+ 1071 00d5 00       		.byte	0
+ 1072 00d6 00       		.byte	0
+ 1073 00d7 11       		.uleb128 0x11
+ 1074 00d8 0B       		.uleb128 0xb
+ 1075 00d9 01       		.byte	0x1
+ 1076 00da 11       		.uleb128 0x11
+ 1077 00db 01       		.uleb128 0x1
+ 1078 00dc 12       		.uleb128 0x12
+ 1079 00dd 06       		.uleb128 0x6
+ 1080 00de 00       		.byte	0
+ 1081 00df 00       		.byte	0
+ 1082 00e0 12       		.uleb128 0x12
+ 1083 00e1 34       		.uleb128 0x34
+ 1084 00e2 00       		.byte	0
+ 1085 00e3 03       		.uleb128 0x3
+ 1086 00e4 0E       		.uleb128 0xe
+ 1087 00e5 3A       		.uleb128 0x3a
+ 1088 00e6 0B       		.uleb128 0xb
+ 1089 00e7 3B       		.uleb128 0x3b
+ 1090 00e8 05       		.uleb128 0x5
+ 1091 00e9 49       		.uleb128 0x49
+ 1092 00ea 13       		.uleb128 0x13
+ 1093 00eb 3F       		.uleb128 0x3f
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccZ48awh.s 			page 23
+
+
+ 1094 00ec 19       		.uleb128 0x19
+ 1095 00ed 3C       		.uleb128 0x3c
+ 1096 00ee 19       		.uleb128 0x19
+ 1097 00ef 00       		.byte	0
+ 1098 00f0 00       		.byte	0
+ 1099 00f1 13       		.uleb128 0x13
+ 1100 00f2 35       		.uleb128 0x35
+ 1101 00f3 00       		.byte	0
+ 1102 00f4 49       		.uleb128 0x49
+ 1103 00f5 13       		.uleb128 0x13
+ 1104 00f6 00       		.byte	0
+ 1105 00f7 00       		.byte	0
+ 1106 00f8 14       		.uleb128 0x14
+ 1107 00f9 34       		.uleb128 0x34
+ 1108 00fa 00       		.byte	0
+ 1109 00fb 03       		.uleb128 0x3
+ 1110 00fc 0E       		.uleb128 0xe
+ 1111 00fd 3A       		.uleb128 0x3a
+ 1112 00fe 0B       		.uleb128 0xb
+ 1113 00ff 3B       		.uleb128 0x3b
+ 1114 0100 0B       		.uleb128 0xb
+ 1115 0101 49       		.uleb128 0x49
+ 1116 0102 13       		.uleb128 0x13
+ 1117 0103 3F       		.uleb128 0x3f
+ 1118 0104 19       		.uleb128 0x19
+ 1119 0105 3C       		.uleb128 0x3c
+ 1120 0106 19       		.uleb128 0x19
+ 1121 0107 00       		.byte	0
+ 1122 0108 00       		.byte	0
+ 1123 0109 00       		.byte	0
+ 1124              		.section	.debug_aranges,"",%progbits
+ 1125 0000 1C000000 		.4byte	0x1c
+ 1126 0004 0200     		.2byte	0x2
+ 1127 0006 00000000 		.4byte	.Ldebug_info0
+ 1128 000a 04       		.byte	0x4
+ 1129 000b 00       		.byte	0
+ 1130 000c 0000     		.2byte	0
+ 1131 000e 0000     		.2byte	0
+ 1132 0010 00000000 		.4byte	.LFB64
+ 1133 0014 68010000 		.4byte	.LFE64-.LFB64
+ 1134 0018 00000000 		.4byte	0
+ 1135 001c 00000000 		.4byte	0
+ 1136              		.section	.debug_ranges,"",%progbits
+ 1137              	.Ldebug_ranges0:
+ 1138 0000 00000000 		.4byte	.LFB64
+ 1139 0004 68010000 		.4byte	.LFE64
+ 1140 0008 00000000 		.4byte	0
+ 1141 000c 00000000 		.4byte	0
+ 1142              		.section	.debug_line,"",%progbits
+ 1143              	.Ldebug_line0:
+ 1144 0000 AD010000 		.section	.debug_str,"MS",%progbits,1
+ 1144      02006301 
+ 1144      00000201 
+ 1144      FB0E0D00 
+ 1144      01010101 
+ 1145              	.LASF49:
+ 1146 0000 7265636F 		.ascii	"recordings_idx\000"
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccZ48awh.s 			page 24
+
+
+ 1146      7264696E 
+ 1146      67735F69 
+ 1146      647800
+ 1147              	.LASF56:
+ 1148 000f 77616974 		.ascii	"waiting_for_note_finish\000"
+ 1148      696E675F 
+ 1148      666F725F 
+ 1148      6E6F7465 
+ 1148      5F66696E 
+ 1149              	.LASF50:
+ 1150 0027 6C617374 		.ascii	"last_note_time\000"
+ 1150      5F6E6F74 
+ 1150      655F7469 
+ 1150      6D6500
+ 1151              	.LASF26:
+ 1152 0036 4E4F524D 		.ascii	"NORMAL\000"
+ 1152      414C00
+ 1153              	.LASF19:
+ 1154 003d 46414C53 		.ascii	"FALSE\000"
+ 1154      4500
+ 1155              	.LASF2:
+ 1156 0043 73686F72 		.ascii	"short int\000"
+ 1156      7420696E 
+ 1156      7400
+ 1157              	.LASF18:
+ 1158 004d 73697A65 		.ascii	"sizetype\000"
+ 1158      74797065 
+ 1158      00
+ 1159              	.LASF28:
+ 1160 0056 5245434F 		.ascii	"RECORDING\000"
+ 1160      5244494E 
+ 1160      4700
+ 1161              	.LASF54:
+ 1162 0060 504C4159 		.ascii	"PLAYBACK_NOTES\000"
+ 1162      4241434B 
+ 1162      5F4E4F54 
+ 1162      455300
+ 1163              	.LASF80:
+ 1164 006f 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 1164      43313120 
+ 1164      352E342E 
+ 1164      31203230 
+ 1164      31363036 
+ 1165 00a2 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 1165      20726576 
+ 1165      6973696F 
+ 1165      6E203233 
+ 1165      37373135 
+ 1166 00d5 30202D66 		.ascii	"0 -ffunction-sections -ffat-lto-objects\000"
+ 1166      66756E63 
+ 1166      74696F6E 
+ 1166      2D736563 
+ 1166      74696F6E 
+ 1167              	.LASF83:
+ 1168 00fd 6D61696E 		.ascii	"main\000"
+ 1168      00
+ 1169              	.LASF59:
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccZ48awh.s 			page 25
+
+
+ 1170 0102 6C617374 		.ascii	"last_echo_time\000"
+ 1170      5F656368 
+ 1170      6F5F7469 
+ 1170      6D6500
+ 1171              	.LASF67:
+ 1172 0111 69735F70 		.ascii	"is_playing\000"
+ 1172      6C617969 
+ 1172      6E6700
+ 1173              	.LASF52:
+ 1174 011c 73746172 		.ascii	"started_playing_first_note\000"
+ 1174      7465645F 
+ 1174      706C6179 
+ 1174      696E675F 
+ 1174      66697273 
+ 1175              	.LASF31:
+ 1176 0137 5A45524F 		.ascii	"ZERO\000"
+ 1176      00
+ 1177              	.LASF53:
+ 1178 013c 6E756D5F 		.ascii	"num_recordings\000"
+ 1178      7265636F 
+ 1178      7264696E 
+ 1178      677300
+ 1179              	.LASF58:
+ 1180 014b 6563686F 		.ascii	"echo_volume_multiplier\000"
+ 1180      5F766F6C 
+ 1180      756D655F 
+ 1180      6D756C74 
+ 1180      69706C69 
+ 1181              	.LASF64:
+ 1182 0162 4543484F 		.ascii	"ECHO_DATA\000"
+ 1182      5F444154 
+ 1182      4100
+ 1183              	.LASF66:
+ 1184 016c 61637469 		.ascii	"active_hole\000"
+ 1184      76655F68 
+ 1184      6F6C6500 
+ 1185              	.LASF77:
+ 1186 0178 7265635F 		.ascii	"rec_string_buffer\000"
+ 1186      73747269 
+ 1186      6E675F62 
+ 1186      75666665 
+ 1186      7200
+ 1187              	.LASF30:
+ 1188 018a 4F555450 		.ascii	"OUTPUT_MODE\000"
+ 1188      55545F4D 
+ 1188      4F444500 
+ 1189              	.LASF62:
+ 1190 0196 706C6179 		.ascii	"play_echo\000"
+ 1190      5F656368 
+ 1190      6F00
+ 1191              	.LASF60:
+ 1192 01a0 6563686F 		.ascii	"echo_delay\000"
+ 1192      5F64656C 
+ 1192      617900
+ 1193              	.LASF14:
+ 1194 01ab 666C6F61 		.ascii	"float\000"
+ 1194      7400
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccZ48awh.s 			page 26
+
+
+ 1195              	.LASF45:
+ 1196 01b1 64757261 		.ascii	"duration\000"
+ 1196      74696F6E 
+ 1196      00
+ 1197              	.LASF6:
+ 1198 01ba 6C6F6E67 		.ascii	"long long int\000"
+ 1198      206C6F6E 
+ 1198      6720696E 
+ 1198      7400
+ 1199              	.LASF13:
+ 1200 01c8 696E7438 		.ascii	"int8\000"
+ 1200      00
+ 1201              	.LASF23:
+ 1202 01cd 5355434B 		.ascii	"SUCKED_NOTES\000"
+ 1202      45445F4E 
+ 1202      4F544553 
+ 1202      00
+ 1203              	.LASF68:
+ 1204 01da 7261775F 		.ascii	"raw_harmonica_output\000"
+ 1204      6861726D 
+ 1204      6F6E6963 
+ 1204      615F6F75 
+ 1204      74707574 
+ 1205              	.LASF32:
+ 1206 01ef 54485245 		.ascii	"THREE\000"
+ 1206      4500
+ 1207              	.LASF73:
+ 1208 01f5 6563686F 		.ascii	"echo_data\000"
+ 1208      5F646174 
+ 1208      6100
+ 1209              	.LASF42:
+ 1210 01ff 6E6F7465 		.ascii	"notes\000"
+ 1210      7300
+ 1211              	.LASF79:
+ 1212 0205 6861726D 		.ascii	"harmonica\000"
+ 1212      6F6E6963 
+ 1212      6100
+ 1213              	.LASF40:
+ 1214 020f 52455354 		.ascii	"REST\000"
+ 1214      00
+ 1215              	.LASF29:
+ 1216 0214 504C4159 		.ascii	"PLAYBACK\000"
+ 1216      4241434B 
+ 1216      00
+ 1217              	.LASF41:
+ 1218 021d 4E4F5445 		.ascii	"NOTE\000"
+ 1218      00
+ 1219              	.LASF69:
+ 1220 0222 72656365 		.ascii	"recent_change\000"
+ 1220      6E745F63 
+ 1220      68616E67 
+ 1220      6500
+ 1221              	.LASF17:
+ 1222 0230 6C6F6E67 		.ascii	"long double\000"
+ 1222      20646F75 
+ 1222      626C6500 
+ 1223              	.LASF61:
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccZ48awh.s 			page 27
+
+
+ 1224 023c 6563686F 		.ascii	"echo_duration\000"
+ 1224      5F647572 
+ 1224      6174696F 
+ 1224      6E00
+ 1225              	.LASF1:
+ 1226 024a 756E7369 		.ascii	"unsigned char\000"
+ 1226      676E6564 
+ 1226      20636861 
+ 1226      7200
+ 1227              	.LASF36:
+ 1228 0258 45494748 		.ascii	"EIGHT\000"
+ 1228      5400
+ 1229              	.LASF0:
+ 1230 025e 7369676E 		.ascii	"signed char\000"
+ 1230      65642063 
+ 1230      68617200 
+ 1231              	.LASF70:
+ 1232 026a 766F6C75 		.ascii	"volume_multiplier\000"
+ 1232      6D655F6D 
+ 1232      756C7469 
+ 1232      706C6965 
+ 1232      7200
+ 1233              	.LASF7:
+ 1234 027c 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 1234      206C6F6E 
+ 1234      6720756E 
+ 1234      7369676E 
+ 1234      65642069 
+ 1235              	.LASF37:
+ 1236 0293 4E494E45 		.ascii	"NINE\000"
+ 1236      00
+ 1237              	.LASF75:
+ 1238 0298 6D75786C 		.ascii	"muxline\000"
+ 1238      696E6500 
+ 1239              	.LASF24:
+ 1240 02a0 4E4F5F4E 		.ascii	"NO_NOTES\000"
+ 1240      4F544553 
+ 1240      00
+ 1241              	.LASF8:
+ 1242 02a9 756E7369 		.ascii	"unsigned int\000"
+ 1242      676E6564 
+ 1242      20696E74 
+ 1242      00
+ 1243              	.LASF22:
+ 1244 02b6 424C4F57 		.ascii	"BLOWN_NOTES\000"
+ 1244      4E5F4E4F 
+ 1244      54455300 
+ 1245              	.LASF21:
+ 1246 02c2 68426F6F 		.ascii	"hBool\000"
+ 1246      6C00
+ 1247              	.LASF71:
+ 1248 02c8 6F757470 		.ascii	"output_mode\000"
+ 1248      75745F6D 
+ 1248      6F646500 
+ 1249              	.LASF34:
+ 1250 02d4 46495645 		.ascii	"FIVE\000"
+ 1250      00
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccZ48awh.s 			page 28
+
+
+ 1251              	.LASF55:
+ 1252 02d9 6C617374 		.ascii	"last_played_note\000"
+ 1252      5F706C61 
+ 1252      7965645F 
+ 1252      6E6F7465 
+ 1252      00
+ 1253              	.LASF3:
+ 1254 02ea 73686F72 		.ascii	"short unsigned int\000"
+ 1254      7420756E 
+ 1254      7369676E 
+ 1254      65642069 
+ 1254      6E7400
+ 1255              	.LASF48:
+ 1256 02fd 7265636F 		.ascii	"recordings\000"
+ 1256      7264696E 
+ 1256      677300
+ 1257              	.LASF16:
+ 1258 0308 63686172 		.ascii	"char\000"
+ 1258      00
+ 1259              	.LASF63:
+ 1260 030d 6E756D5F 		.ascii	"num_echos_played\000"
+ 1260      6563686F 
+ 1260      735F706C 
+ 1260      61796564 
+ 1260      00
+ 1261              	.LASF43:
+ 1262 031e 6E756D5F 		.ascii	"num_notes_played\000"
+ 1262      6E6F7465 
+ 1262      735F706C 
+ 1262      61796564 
+ 1262      00
+ 1263              	.LASF10:
+ 1264 032f 696E7433 		.ascii	"int32_t\000"
+ 1264      325F7400 
+ 1265              	.LASF25:
+ 1266 0337 4E4F5445 		.ascii	"NOTE_MODE\000"
+ 1266      5F4D4F44 
+ 1266      4500
+ 1267              	.LASF11:
+ 1268 0341 75696E74 		.ascii	"uint8\000"
+ 1268      3800
+ 1269              	.LASF33:
+ 1270 0347 464F5552 		.ascii	"FOUR\000"
+ 1270      00
+ 1271              	.LASF38:
+ 1272 034c 4E4F5F48 		.ascii	"NO_HOLE\000"
+ 1272      4F4C4500 
+ 1273              	.LASF46:
+ 1274 0354 73746172 		.ascii	"start_time\000"
+ 1274      745F7469 
+ 1274      6D6500
+ 1275              	.LASF47:
+ 1276 035f 504C4159 		.ascii	"PLAYBACK_NOTE\000"
+ 1276      4241434B 
+ 1276      5F4E4F54 
+ 1276      4500
+ 1277              	.LASF51:
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccZ48awh.s 			page 29
+
+
+ 1278 036d 73746172 		.ascii	"started_recording_first_note\000"
+ 1278      7465645F 
+ 1278      7265636F 
+ 1278      7264696E 
+ 1278      675F6669 
+ 1279              	.LASF82:
+ 1280 038a 433A5C55 		.ascii	"C:\\Users\\Matthew\\Dropbox (MIT)\\Sophomore Spring"
+ 1280      73657273 
+ 1280      5C4D6174 
+ 1280      74686577 
+ 1280      5C44726F 
+ 1281 03b9 5C362E31 		.ascii	"\\6.115\\6.115-Labs\\project\\DVDAC_Example01\\DVDA"
+ 1281      31355C36 
+ 1281      2E313135 
+ 1281      2D4C6162 
+ 1281      735C7072 
+ 1282 03e7 435F4578 		.ascii	"C_Example01.cydsn\000"
+ 1282      616D706C 
+ 1282      6530312E 
+ 1282      63796473 
+ 1282      6E00
+ 1283              	.LASF72:
+ 1284 03f9 706C6179 		.ascii	"playback_notes\000"
+ 1284      6261636B 
+ 1284      5F6E6F74 
+ 1284      657300
+ 1285              	.LASF12:
+ 1286 0408 75696E74 		.ascii	"uint32\000"
+ 1286      333200
+ 1287              	.LASF81:
+ 1288 040f 6D61696E 		.ascii	"main.c\000"
+ 1288      2E6300
+ 1289              	.LASF39:
+ 1290 0416 484F4C45 		.ascii	"HOLE\000"
+ 1290      00
+ 1291              	.LASF5:
+ 1292 041b 6C6F6E67 		.ascii	"long unsigned int\000"
+ 1292      20756E73 
+ 1292      69676E65 
+ 1292      6420696E 
+ 1292      7400
+ 1293              	.LASF57:
+ 1294 042d 6C617374 		.ascii	"last_played_note_initialized\000"
+ 1294      5F706C61 
+ 1294      7965645F 
+ 1294      6E6F7465 
+ 1294      5F696E69 
+ 1295              	.LASF76:
+ 1296 044a 6C616265 		.ascii	"labelline\000"
+ 1296      6C6C696E 
+ 1296      6500
+ 1297              	.LASF35:
+ 1298 0454 53455645 		.ascii	"SEVEN\000"
+ 1298      4E00
+ 1299              	.LASF9:
+ 1300 045a 5F5F696E 		.ascii	"__int32_t\000"
+ 1300      7433325F 
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccZ48awh.s 			page 30
+
+
+ 1300      7400
+ 1301              	.LASF44:
+ 1302 0464 4841524D 		.ascii	"HARMONICA_OUTPUT\000"
+ 1302      4F4E4943 
+ 1302      415F4F55 
+ 1302      54505554 
+ 1302      00
+ 1303              	.LASF65:
+ 1304 0475 63757272 		.ascii	"current_note_mode\000"
+ 1304      656E745F 
+ 1304      6E6F7465 
+ 1304      5F6D6F64 
+ 1304      6500
+ 1305              	.LASF15:
+ 1306 0487 646F7562 		.ascii	"double\000"
+ 1306      6C6500
+ 1307              	.LASF20:
+ 1308 048e 54525545 		.ascii	"TRUE\000"
+ 1308      00
+ 1309              	.LASF74:
+ 1310 0493 4861726D 		.ascii	"Harmonica\000"
+ 1310      6F6E6963 
+ 1310      6100
+ 1311              	.LASF4:
+ 1312 049d 6C6F6E67 		.ascii	"long int\000"
+ 1312      20696E74 
+ 1312      00
+ 1313              	.LASF78:
+ 1314 04a6 49544D5F 		.ascii	"ITM_RxBuffer\000"
+ 1314      52784275 
+ 1314      66666572 
+ 1314      00
+ 1315              	.LASF27:
+ 1316 04b3 4543484F 		.ascii	"ECHO\000"
+ 1316      00
+ 1317              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

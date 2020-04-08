@@ -1,0 +1,2128 @@
+ARM GAS  C:\Users\student\AppData\Local\Temp\cclMKz6y.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.file	"audio_isr.c"
+  15              		.text
+  16              	.Ltext0:
+  17              		.cfi_sections	.debug_frame
+  18              		.global	high
+  19              		.bss
+  20              		.align	2
+  21              		.type	high, %object
+  22              		.size	high, 4
+  23              	high:
+  24 0000 00000000 		.space	4
+  25              		.global	c4_table_idx
+  26              		.align	2
+  27              		.type	c4_table_idx, %object
+  28              		.size	c4_table_idx, 4
+  29              	c4_table_idx:
+  30 0004 00000000 		.space	4
+  31              		.section	.text.audio_isr_Start,"ax",%progbits
+  32              		.align	2
+  33              		.global	audio_isr_Start
+  34              		.thumb
+  35              		.thumb_func
+  36              		.type	audio_isr_Start, %function
+  37              	audio_isr_Start:
+  38              	.LFB0:
+  39              		.file 1 ".\\Generated_Source\\PSoC5\\audio_isr.c"
+   1:.\Generated_Source\PSoC5/audio_isr.c **** /*******************************************************************************
+   2:.\Generated_Source\PSoC5/audio_isr.c **** * File Name: audio_isr.c  
+   3:.\Generated_Source\PSoC5/audio_isr.c **** * Version 1.70
+   4:.\Generated_Source\PSoC5/audio_isr.c **** *
+   5:.\Generated_Source\PSoC5/audio_isr.c **** *  Description:
+   6:.\Generated_Source\PSoC5/audio_isr.c **** *   API for controlling the state of an interrupt.
+   7:.\Generated_Source\PSoC5/audio_isr.c **** *
+   8:.\Generated_Source\PSoC5/audio_isr.c **** *
+   9:.\Generated_Source\PSoC5/audio_isr.c **** *  Note:
+  10:.\Generated_Source\PSoC5/audio_isr.c **** *
+  11:.\Generated_Source\PSoC5/audio_isr.c **** ********************************************************************************
+  12:.\Generated_Source\PSoC5/audio_isr.c **** * Copyright 2008-2015, Cypress Semiconductor Corporation.  All rights reserved.
+  13:.\Generated_Source\PSoC5/audio_isr.c **** * You may use this file only in accordance with the license, terms, conditions, 
+  14:.\Generated_Source\PSoC5/audio_isr.c **** * disclaimers, and limitations in the end user license agreement accompanying 
+  15:.\Generated_Source\PSoC5/audio_isr.c **** * the software package with which this file was provided.
+  16:.\Generated_Source\PSoC5/audio_isr.c **** *******************************************************************************/
+  17:.\Generated_Source\PSoC5/audio_isr.c **** 
+  18:.\Generated_Source\PSoC5/audio_isr.c **** 
+ARM GAS  C:\Users\student\AppData\Local\Temp\cclMKz6y.s 			page 2
+
+
+  19:.\Generated_Source\PSoC5/audio_isr.c **** #include <cydevice_trm.h>
+  20:.\Generated_Source\PSoC5/audio_isr.c **** #include <CyLib.h>
+  21:.\Generated_Source\PSoC5/audio_isr.c **** #include <audio_isr.h>
+  22:.\Generated_Source\PSoC5/audio_isr.c **** #include "cyapicallbacks.h"
+  23:.\Generated_Source\PSoC5/audio_isr.c **** 
+  24:.\Generated_Source\PSoC5/audio_isr.c **** #if !defined(audio_isr__REMOVED) /* Check for removal by optimization */
+  25:.\Generated_Source\PSoC5/audio_isr.c **** 
+  26:.\Generated_Source\PSoC5/audio_isr.c **** /*******************************************************************************
+  27:.\Generated_Source\PSoC5/audio_isr.c **** *  Place your includes, defines and code here 
+  28:.\Generated_Source\PSoC5/audio_isr.c **** ********************************************************************************/
+  29:.\Generated_Source\PSoC5/audio_isr.c **** /* `#START audio_isr_intc` */
+  30:.\Generated_Source\PSoC5/audio_isr.c **** #include "Timer_1.h"
+  31:.\Generated_Source\PSoC5/audio_isr.c **** #include "TIMER_1_ISR_PIN.h"
+  32:.\Generated_Source\PSoC5/audio_isr.c **** #include "VDAC8_1.h"
+  33:.\Generated_Source\PSoC5/audio_isr.c **** #include "wav_tables.h"
+  34:.\Generated_Source\PSoC5/audio_isr.c **** int high = 0;
+  35:.\Generated_Source\PSoC5/audio_isr.c **** int c4_table_idx = 0;
+  36:.\Generated_Source\PSoC5/audio_isr.c **** /* `#END` */
+  37:.\Generated_Source\PSoC5/audio_isr.c **** 
+  38:.\Generated_Source\PSoC5/audio_isr.c **** #ifndef CYINT_IRQ_BASE
+  39:.\Generated_Source\PSoC5/audio_isr.c **** #define CYINT_IRQ_BASE      16
+  40:.\Generated_Source\PSoC5/audio_isr.c **** #endif /* CYINT_IRQ_BASE */
+  41:.\Generated_Source\PSoC5/audio_isr.c **** #ifndef CYINT_VECT_TABLE
+  42:.\Generated_Source\PSoC5/audio_isr.c **** #define CYINT_VECT_TABLE    ((cyisraddress **) CYREG_NVIC_VECT_OFFSET)
+  43:.\Generated_Source\PSoC5/audio_isr.c **** #endif /* CYINT_VECT_TABLE */
+  44:.\Generated_Source\PSoC5/audio_isr.c **** 
+  45:.\Generated_Source\PSoC5/audio_isr.c **** /* Declared in startup, used to set unused interrupts to. */
+  46:.\Generated_Source\PSoC5/audio_isr.c **** CY_ISR_PROTO(IntDefaultHandler);
+  47:.\Generated_Source\PSoC5/audio_isr.c **** 
+  48:.\Generated_Source\PSoC5/audio_isr.c **** 
+  49:.\Generated_Source\PSoC5/audio_isr.c **** /*******************************************************************************
+  50:.\Generated_Source\PSoC5/audio_isr.c **** * Function Name: audio_isr_Start
+  51:.\Generated_Source\PSoC5/audio_isr.c **** ********************************************************************************
+  52:.\Generated_Source\PSoC5/audio_isr.c **** *
+  53:.\Generated_Source\PSoC5/audio_isr.c **** * Summary:
+  54:.\Generated_Source\PSoC5/audio_isr.c **** *  Set up the interrupt and enable it. This function disables the interrupt, 
+  55:.\Generated_Source\PSoC5/audio_isr.c **** *  sets the default interrupt vector, sets the priority from the value in the
+  56:.\Generated_Source\PSoC5/audio_isr.c **** *  Design Wide Resources Interrupt Editor, then enables the interrupt to the 
+  57:.\Generated_Source\PSoC5/audio_isr.c **** *  interrupt controller.
+  58:.\Generated_Source\PSoC5/audio_isr.c **** *
+  59:.\Generated_Source\PSoC5/audio_isr.c **** * Parameters:  
+  60:.\Generated_Source\PSoC5/audio_isr.c **** *   None
+  61:.\Generated_Source\PSoC5/audio_isr.c **** *
+  62:.\Generated_Source\PSoC5/audio_isr.c **** * Return:
+  63:.\Generated_Source\PSoC5/audio_isr.c **** *   None
+  64:.\Generated_Source\PSoC5/audio_isr.c **** *
+  65:.\Generated_Source\PSoC5/audio_isr.c **** *******************************************************************************/
+  66:.\Generated_Source\PSoC5/audio_isr.c **** void audio_isr_Start(void)
+  67:.\Generated_Source\PSoC5/audio_isr.c **** {
+  40              		.loc 1 67 0
+  41              		.cfi_startproc
+  42              		@ args = 0, pretend = 0, frame = 0
+  43              		@ frame_needed = 1, uses_anonymous_args = 0
+  44 0000 80B5     		push	{r7, lr}
+  45              		.cfi_def_cfa_offset 8
+  46              		.cfi_offset 7, -8
+  47              		.cfi_offset 14, -4
+ARM GAS  C:\Users\student\AppData\Local\Temp\cclMKz6y.s 			page 3
+
+
+  48 0002 00AF     		add	r7, sp, #0
+  49              		.cfi_def_cfa_register 7
+  68:.\Generated_Source\PSoC5/audio_isr.c ****     /* For all we know the interrupt is active. */
+  69:.\Generated_Source\PSoC5/audio_isr.c ****     audio_isr_Disable();
+  50              		.loc 1 69 0
+  51 0004 FFF7FEFF 		bl	audio_isr_Disable
+  70:.\Generated_Source\PSoC5/audio_isr.c **** 
+  71:.\Generated_Source\PSoC5/audio_isr.c ****     /* Set the ISR to point to the audio_isr Interrupt. */
+  72:.\Generated_Source\PSoC5/audio_isr.c ****     audio_isr_SetVector(&audio_isr_Interrupt);
+  52              		.loc 1 72 0
+  53 0008 0448     		ldr	r0, .L2
+  54 000a FFF7FEFF 		bl	audio_isr_SetVector
+  73:.\Generated_Source\PSoC5/audio_isr.c **** 
+  74:.\Generated_Source\PSoC5/audio_isr.c ****     /* Set the priority. */
+  75:.\Generated_Source\PSoC5/audio_isr.c ****     audio_isr_SetPriority((uint8)audio_isr_INTC_PRIOR_NUMBER);
+  55              		.loc 1 75 0
+  56 000e 0720     		movs	r0, #7
+  57 0010 FFF7FEFF 		bl	audio_isr_SetPriority
+  76:.\Generated_Source\PSoC5/audio_isr.c **** 
+  77:.\Generated_Source\PSoC5/audio_isr.c ****     /* Enable it. */
+  78:.\Generated_Source\PSoC5/audio_isr.c ****     audio_isr_Enable();
+  58              		.loc 1 78 0
+  59 0014 FFF7FEFF 		bl	audio_isr_Enable
+  79:.\Generated_Source\PSoC5/audio_isr.c **** }
+  60              		.loc 1 79 0
+  61 0018 80BD     		pop	{r7, pc}
+  62              	.L3:
+  63 001a 00BF     		.align	2
+  64              	.L2:
+  65 001c 00000000 		.word	audio_isr_Interrupt
+  66              		.cfi_endproc
+  67              	.LFE0:
+  68              		.size	audio_isr_Start, .-audio_isr_Start
+  69              		.section	.text.audio_isr_StartEx,"ax",%progbits
+  70              		.align	2
+  71              		.global	audio_isr_StartEx
+  72              		.thumb
+  73              		.thumb_func
+  74              		.type	audio_isr_StartEx, %function
+  75              	audio_isr_StartEx:
+  76              	.LFB1:
+  80:.\Generated_Source\PSoC5/audio_isr.c **** 
+  81:.\Generated_Source\PSoC5/audio_isr.c **** 
+  82:.\Generated_Source\PSoC5/audio_isr.c **** /*******************************************************************************
+  83:.\Generated_Source\PSoC5/audio_isr.c **** * Function Name: audio_isr_StartEx
+  84:.\Generated_Source\PSoC5/audio_isr.c **** ********************************************************************************
+  85:.\Generated_Source\PSoC5/audio_isr.c **** *
+  86:.\Generated_Source\PSoC5/audio_isr.c **** * Summary:
+  87:.\Generated_Source\PSoC5/audio_isr.c **** *  Sets up the interrupt and enables it. This function disables the interrupt,
+  88:.\Generated_Source\PSoC5/audio_isr.c **** *  sets the interrupt vector based on the address passed in, sets the priority 
+  89:.\Generated_Source\PSoC5/audio_isr.c **** *  from the value in the Design Wide Resources Interrupt Editor, then enables 
+  90:.\Generated_Source\PSoC5/audio_isr.c **** *  the interrupt to the interrupt controller.
+  91:.\Generated_Source\PSoC5/audio_isr.c **** *  
+  92:.\Generated_Source\PSoC5/audio_isr.c **** *  When defining ISR functions, the CY_ISR and CY_ISR_PROTO macros should be 
+  93:.\Generated_Source\PSoC5/audio_isr.c **** *  used to provide consistent definition across compilers:
+  94:.\Generated_Source\PSoC5/audio_isr.c **** *  
+  95:.\Generated_Source\PSoC5/audio_isr.c **** *  Function definition example:
+ARM GAS  C:\Users\student\AppData\Local\Temp\cclMKz6y.s 			page 4
+
+
+  96:.\Generated_Source\PSoC5/audio_isr.c **** *   CY_ISR(MyISR)
+  97:.\Generated_Source\PSoC5/audio_isr.c **** *   {
+  98:.\Generated_Source\PSoC5/audio_isr.c **** *   }
+  99:.\Generated_Source\PSoC5/audio_isr.c **** *   Function prototype example:
+ 100:.\Generated_Source\PSoC5/audio_isr.c **** *   CY_ISR_PROTO(MyISR);
+ 101:.\Generated_Source\PSoC5/audio_isr.c **** *
+ 102:.\Generated_Source\PSoC5/audio_isr.c **** * Parameters:  
+ 103:.\Generated_Source\PSoC5/audio_isr.c **** *   address: Address of the ISR to set in the interrupt vector table.
+ 104:.\Generated_Source\PSoC5/audio_isr.c **** *
+ 105:.\Generated_Source\PSoC5/audio_isr.c **** * Return:
+ 106:.\Generated_Source\PSoC5/audio_isr.c **** *   None
+ 107:.\Generated_Source\PSoC5/audio_isr.c **** *
+ 108:.\Generated_Source\PSoC5/audio_isr.c **** *******************************************************************************/
+ 109:.\Generated_Source\PSoC5/audio_isr.c **** void audio_isr_StartEx(cyisraddress address)
+ 110:.\Generated_Source\PSoC5/audio_isr.c **** {
+  77              		.loc 1 110 0
+  78              		.cfi_startproc
+  79              		@ args = 0, pretend = 0, frame = 8
+  80              		@ frame_needed = 1, uses_anonymous_args = 0
+  81 0000 80B5     		push	{r7, lr}
+  82              		.cfi_def_cfa_offset 8
+  83              		.cfi_offset 7, -8
+  84              		.cfi_offset 14, -4
+  85 0002 82B0     		sub	sp, sp, #8
+  86              		.cfi_def_cfa_offset 16
+  87 0004 00AF     		add	r7, sp, #0
+  88              		.cfi_def_cfa_register 7
+  89 0006 7860     		str	r0, [r7, #4]
+ 111:.\Generated_Source\PSoC5/audio_isr.c ****     /* For all we know the interrupt is active. */
+ 112:.\Generated_Source\PSoC5/audio_isr.c ****     audio_isr_Disable();
+  90              		.loc 1 112 0
+  91 0008 FFF7FEFF 		bl	audio_isr_Disable
+ 113:.\Generated_Source\PSoC5/audio_isr.c **** 
+ 114:.\Generated_Source\PSoC5/audio_isr.c ****     /* Set the ISR to point to the audio_isr Interrupt. */
+ 115:.\Generated_Source\PSoC5/audio_isr.c ****     audio_isr_SetVector(address);
+  92              		.loc 1 115 0
+  93 000c 7868     		ldr	r0, [r7, #4]
+  94 000e FFF7FEFF 		bl	audio_isr_SetVector
+ 116:.\Generated_Source\PSoC5/audio_isr.c **** 
+ 117:.\Generated_Source\PSoC5/audio_isr.c ****     /* Set the priority. */
+ 118:.\Generated_Source\PSoC5/audio_isr.c ****     audio_isr_SetPriority((uint8)audio_isr_INTC_PRIOR_NUMBER);
+  95              		.loc 1 118 0
+  96 0012 0720     		movs	r0, #7
+  97 0014 FFF7FEFF 		bl	audio_isr_SetPriority
+ 119:.\Generated_Source\PSoC5/audio_isr.c **** 
+ 120:.\Generated_Source\PSoC5/audio_isr.c ****     /* Enable it. */
+ 121:.\Generated_Source\PSoC5/audio_isr.c ****     audio_isr_Enable();
+  98              		.loc 1 121 0
+  99 0018 FFF7FEFF 		bl	audio_isr_Enable
+ 122:.\Generated_Source\PSoC5/audio_isr.c **** }
+ 100              		.loc 1 122 0
+ 101 001c 0837     		adds	r7, r7, #8
+ 102              		.cfi_def_cfa_offset 8
+ 103 001e BD46     		mov	sp, r7
+ 104              		.cfi_def_cfa_register 13
+ 105              		@ sp needed
+ 106 0020 80BD     		pop	{r7, pc}
+ARM GAS  C:\Users\student\AppData\Local\Temp\cclMKz6y.s 			page 5
+
+
+ 107              		.cfi_endproc
+ 108              	.LFE1:
+ 109              		.size	audio_isr_StartEx, .-audio_isr_StartEx
+ 110 0022 00BF     		.section	.text.audio_isr_Stop,"ax",%progbits
+ 111              		.align	2
+ 112              		.global	audio_isr_Stop
+ 113              		.thumb
+ 114              		.thumb_func
+ 115              		.type	audio_isr_Stop, %function
+ 116              	audio_isr_Stop:
+ 117              	.LFB2:
+ 123:.\Generated_Source\PSoC5/audio_isr.c **** 
+ 124:.\Generated_Source\PSoC5/audio_isr.c **** 
+ 125:.\Generated_Source\PSoC5/audio_isr.c **** /*******************************************************************************
+ 126:.\Generated_Source\PSoC5/audio_isr.c **** * Function Name: audio_isr_Stop
+ 127:.\Generated_Source\PSoC5/audio_isr.c **** ********************************************************************************
+ 128:.\Generated_Source\PSoC5/audio_isr.c **** *
+ 129:.\Generated_Source\PSoC5/audio_isr.c **** * Summary:
+ 130:.\Generated_Source\PSoC5/audio_isr.c **** *   Disables and removes the interrupt.
+ 131:.\Generated_Source\PSoC5/audio_isr.c **** *
+ 132:.\Generated_Source\PSoC5/audio_isr.c **** * Parameters:  
+ 133:.\Generated_Source\PSoC5/audio_isr.c **** *   None
+ 134:.\Generated_Source\PSoC5/audio_isr.c **** *
+ 135:.\Generated_Source\PSoC5/audio_isr.c **** * Return:
+ 136:.\Generated_Source\PSoC5/audio_isr.c **** *   None
+ 137:.\Generated_Source\PSoC5/audio_isr.c **** *
+ 138:.\Generated_Source\PSoC5/audio_isr.c **** *******************************************************************************/
+ 139:.\Generated_Source\PSoC5/audio_isr.c **** void audio_isr_Stop(void)
+ 140:.\Generated_Source\PSoC5/audio_isr.c **** {
+ 118              		.loc 1 140 0
+ 119              		.cfi_startproc
+ 120              		@ args = 0, pretend = 0, frame = 0
+ 121              		@ frame_needed = 1, uses_anonymous_args = 0
+ 122 0000 80B5     		push	{r7, lr}
+ 123              		.cfi_def_cfa_offset 8
+ 124              		.cfi_offset 7, -8
+ 125              		.cfi_offset 14, -4
+ 126 0002 00AF     		add	r7, sp, #0
+ 127              		.cfi_def_cfa_register 7
+ 141:.\Generated_Source\PSoC5/audio_isr.c ****     /* Disable this interrupt. */
+ 142:.\Generated_Source\PSoC5/audio_isr.c ****     audio_isr_Disable();
+ 128              		.loc 1 142 0
+ 129 0004 FFF7FEFF 		bl	audio_isr_Disable
+ 143:.\Generated_Source\PSoC5/audio_isr.c **** 
+ 144:.\Generated_Source\PSoC5/audio_isr.c ****     /* Set the ISR to point to the passive one. */
+ 145:.\Generated_Source\PSoC5/audio_isr.c ****     audio_isr_SetVector(&IntDefaultHandler);
+ 130              		.loc 1 145 0
+ 131 0008 0148     		ldr	r0, .L6
+ 132 000a FFF7FEFF 		bl	audio_isr_SetVector
+ 146:.\Generated_Source\PSoC5/audio_isr.c **** }
+ 133              		.loc 1 146 0
+ 134 000e 80BD     		pop	{r7, pc}
+ 135              	.L7:
+ 136              		.align	2
+ 137              	.L6:
+ 138 0010 00000000 		.word	IntDefaultHandler
+ 139              		.cfi_endproc
+ARM GAS  C:\Users\student\AppData\Local\Temp\cclMKz6y.s 			page 6
+
+
+ 140              	.LFE2:
+ 141              		.size	audio_isr_Stop, .-audio_isr_Stop
+ 142              		.section	.text.audio_isr_Interrupt,"ax",%progbits
+ 143              		.align	2
+ 144              		.global	audio_isr_Interrupt
+ 145              		.thumb
+ 146              		.thumb_func
+ 147              		.type	audio_isr_Interrupt, %function
+ 148              	audio_isr_Interrupt:
+ 149              	.LFB3:
+ 147:.\Generated_Source\PSoC5/audio_isr.c **** 
+ 148:.\Generated_Source\PSoC5/audio_isr.c **** 
+ 149:.\Generated_Source\PSoC5/audio_isr.c **** /*******************************************************************************
+ 150:.\Generated_Source\PSoC5/audio_isr.c **** * Function Name: audio_isr_Interrupt
+ 151:.\Generated_Source\PSoC5/audio_isr.c **** ********************************************************************************
+ 152:.\Generated_Source\PSoC5/audio_isr.c **** *
+ 153:.\Generated_Source\PSoC5/audio_isr.c **** * Summary:
+ 154:.\Generated_Source\PSoC5/audio_isr.c **** *   The default Interrupt Service Routine for audio_isr.
+ 155:.\Generated_Source\PSoC5/audio_isr.c **** *
+ 156:.\Generated_Source\PSoC5/audio_isr.c **** *   Add custom code between the coments to keep the next version of this file
+ 157:.\Generated_Source\PSoC5/audio_isr.c **** *   from over writting your code.
+ 158:.\Generated_Source\PSoC5/audio_isr.c **** *
+ 159:.\Generated_Source\PSoC5/audio_isr.c **** * Parameters:  
+ 160:.\Generated_Source\PSoC5/audio_isr.c **** *
+ 161:.\Generated_Source\PSoC5/audio_isr.c **** * Return:
+ 162:.\Generated_Source\PSoC5/audio_isr.c **** *   None
+ 163:.\Generated_Source\PSoC5/audio_isr.c **** *
+ 164:.\Generated_Source\PSoC5/audio_isr.c **** *******************************************************************************/
+ 165:.\Generated_Source\PSoC5/audio_isr.c **** CY_ISR(audio_isr_Interrupt)
+ 166:.\Generated_Source\PSoC5/audio_isr.c **** {
+ 150              		.loc 1 166 0
+ 151              		.cfi_startproc
+ 152              		@ args = 0, pretend = 0, frame = 8
+ 153              		@ frame_needed = 1, uses_anonymous_args = 0
+ 154 0000 80B5     		push	{r7, lr}
+ 155              		.cfi_def_cfa_offset 8
+ 156              		.cfi_offset 7, -8
+ 157              		.cfi_offset 14, -4
+ 158 0002 82B0     		sub	sp, sp, #8
+ 159              		.cfi_def_cfa_offset 16
+ 160 0004 00AF     		add	r7, sp, #0
+ 161              		.cfi_def_cfa_register 7
+ 167:.\Generated_Source\PSoC5/audio_isr.c ****     #ifdef audio_isr_INTERRUPT_INTERRUPT_CALLBACK
+ 168:.\Generated_Source\PSoC5/audio_isr.c ****         audio_isr_Interrupt_InterruptCallback();
+ 169:.\Generated_Source\PSoC5/audio_isr.c ****     #endif /* audio_isr_INTERRUPT_INTERRUPT_CALLBACK */ 
+ 170:.\Generated_Source\PSoC5/audio_isr.c **** 
+ 171:.\Generated_Source\PSoC5/audio_isr.c ****     /*  Place your Interrupt code here. */
+ 172:.\Generated_Source\PSoC5/audio_isr.c ****     /* `#START audio_isr_Interrupt` */
+ 173:.\Generated_Source\PSoC5/audio_isr.c ****     Timer_1_ReadStatusRegister();
+ 162              		.loc 1 173 0
+ 163 0006 FFF7FEFF 		bl	Timer_1_ReadStatusRegister
+ 174:.\Generated_Source\PSoC5/audio_isr.c ****     TIMER_1_ISR_PIN_Write(~(TIMER_1_ISR_PIN_Read()));
+ 164              		.loc 1 174 0
+ 165 000a FFF7FEFF 		bl	TIMER_1_ISR_PIN_Read
+ 166 000e 0346     		mov	r3, r0
+ 167 0010 DB43     		mvns	r3, r3
+ 168 0012 DBB2     		uxtb	r3, r3
+ARM GAS  C:\Users\student\AppData\Local\Temp\cclMKz6y.s 			page 7
+
+
+ 169 0014 1846     		mov	r0, r3
+ 170 0016 FFF7FEFF 		bl	TIMER_1_ISR_PIN_Write
+ 175:.\Generated_Source\PSoC5/audio_isr.c ****     c4_table_idx = (c4_table_idx >= c4_num_vals) ? 0 : c4_table_idx;
+ 171              		.loc 1 175 0
+ 172 001a 0F4B     		ldr	r3, .L11
+ 173 001c 1A68     		ldr	r2, [r3]
+ 174 001e 0F4B     		ldr	r3, .L11+4
+ 175 0020 1B68     		ldr	r3, [r3]
+ 176 0022 9A42     		cmp	r2, r3
+ 177 0024 02DA     		bge	.L9
+ 178              		.loc 1 175 0 is_stmt 0 discriminator 1
+ 179 0026 0C4B     		ldr	r3, .L11
+ 180 0028 1B68     		ldr	r3, [r3]
+ 181 002a 00E0     		b	.L10
+ 182              	.L9:
+ 183              		.loc 1 175 0 discriminator 2
+ 184 002c 0023     		movs	r3, #0
+ 185              	.L10:
+ 186              		.loc 1 175 0 discriminator 4
+ 187 002e 0A4A     		ldr	r2, .L11
+ 188 0030 1360     		str	r3, [r2]
+ 176:.\Generated_Source\PSoC5/audio_isr.c ****     int val = c4_sustain[c4_table_idx];
+ 189              		.loc 1 176 0 is_stmt 1 discriminator 4
+ 190 0032 094B     		ldr	r3, .L11
+ 191 0034 1B68     		ldr	r3, [r3]
+ 192 0036 0A4A     		ldr	r2, .L11+8
+ 193 0038 52F82330 		ldr	r3, [r2, r3, lsl #2]
+ 194 003c 7B60     		str	r3, [r7, #4]
+ 177:.\Generated_Source\PSoC5/audio_isr.c ****     VDAC8_1_SetValue(val);
+ 195              		.loc 1 177 0 discriminator 4
+ 196 003e 7B68     		ldr	r3, [r7, #4]
+ 197 0040 DBB2     		uxtb	r3, r3
+ 198 0042 1846     		mov	r0, r3
+ 199 0044 FFF7FEFF 		bl	VDAC8_1_SetValue
+ 178:.\Generated_Source\PSoC5/audio_isr.c ****     c4_table_idx++;
+ 200              		.loc 1 178 0 discriminator 4
+ 201 0048 034B     		ldr	r3, .L11
+ 202 004a 1B68     		ldr	r3, [r3]
+ 203 004c 0133     		adds	r3, r3, #1
+ 204 004e 024A     		ldr	r2, .L11
+ 205 0050 1360     		str	r3, [r2]
+ 179:.\Generated_Source\PSoC5/audio_isr.c **** 
+ 180:.\Generated_Source\PSoC5/audio_isr.c ****     
+ 181:.\Generated_Source\PSoC5/audio_isr.c ****     /* `#END` */
+ 182:.\Generated_Source\PSoC5/audio_isr.c **** }
+ 206              		.loc 1 182 0 discriminator 4
+ 207 0052 0837     		adds	r7, r7, #8
+ 208              		.cfi_def_cfa_offset 8
+ 209 0054 BD46     		mov	sp, r7
+ 210              		.cfi_def_cfa_register 13
+ 211              		@ sp needed
+ 212 0056 80BD     		pop	{r7, pc}
+ 213              	.L12:
+ 214              		.align	2
+ 215              	.L11:
+ 216 0058 00000000 		.word	c4_table_idx
+ 217 005c 00000000 		.word	c4_num_vals
+ARM GAS  C:\Users\student\AppData\Local\Temp\cclMKz6y.s 			page 8
+
+
+ 218 0060 00000000 		.word	c4_sustain
+ 219              		.cfi_endproc
+ 220              	.LFE3:
+ 221              		.size	audio_isr_Interrupt, .-audio_isr_Interrupt
+ 222              		.section	.text.audio_isr_SetVector,"ax",%progbits
+ 223              		.align	2
+ 224              		.global	audio_isr_SetVector
+ 225              		.thumb
+ 226              		.thumb_func
+ 227              		.type	audio_isr_SetVector, %function
+ 228              	audio_isr_SetVector:
+ 229              	.LFB4:
+ 183:.\Generated_Source\PSoC5/audio_isr.c **** 
+ 184:.\Generated_Source\PSoC5/audio_isr.c **** 
+ 185:.\Generated_Source\PSoC5/audio_isr.c **** /*******************************************************************************
+ 186:.\Generated_Source\PSoC5/audio_isr.c **** * Function Name: audio_isr_SetVector
+ 187:.\Generated_Source\PSoC5/audio_isr.c **** ********************************************************************************
+ 188:.\Generated_Source\PSoC5/audio_isr.c **** *
+ 189:.\Generated_Source\PSoC5/audio_isr.c **** * Summary:
+ 190:.\Generated_Source\PSoC5/audio_isr.c **** *   Change the ISR vector for the Interrupt. Note calling audio_isr_Start
+ 191:.\Generated_Source\PSoC5/audio_isr.c **** *   will override any effect this method would have had. To set the vector 
+ 192:.\Generated_Source\PSoC5/audio_isr.c **** *   before the component has been started use audio_isr_StartEx instead.
+ 193:.\Generated_Source\PSoC5/audio_isr.c **** * 
+ 194:.\Generated_Source\PSoC5/audio_isr.c **** *   When defining ISR functions, the CY_ISR and CY_ISR_PROTO macros should be 
+ 195:.\Generated_Source\PSoC5/audio_isr.c **** *   used to provide consistent definition across compilers:
+ 196:.\Generated_Source\PSoC5/audio_isr.c **** *
+ 197:.\Generated_Source\PSoC5/audio_isr.c **** *   Function definition example:
+ 198:.\Generated_Source\PSoC5/audio_isr.c **** *   CY_ISR(MyISR)
+ 199:.\Generated_Source\PSoC5/audio_isr.c **** *   {
+ 200:.\Generated_Source\PSoC5/audio_isr.c **** *   }
+ 201:.\Generated_Source\PSoC5/audio_isr.c **** *
+ 202:.\Generated_Source\PSoC5/audio_isr.c **** *   Function prototype example:
+ 203:.\Generated_Source\PSoC5/audio_isr.c **** *     CY_ISR_PROTO(MyISR);
+ 204:.\Generated_Source\PSoC5/audio_isr.c **** *
+ 205:.\Generated_Source\PSoC5/audio_isr.c **** * Parameters:
+ 206:.\Generated_Source\PSoC5/audio_isr.c **** *   address: Address of the ISR to set in the interrupt vector table.
+ 207:.\Generated_Source\PSoC5/audio_isr.c **** *
+ 208:.\Generated_Source\PSoC5/audio_isr.c **** * Return:
+ 209:.\Generated_Source\PSoC5/audio_isr.c **** *   None
+ 210:.\Generated_Source\PSoC5/audio_isr.c **** *
+ 211:.\Generated_Source\PSoC5/audio_isr.c **** *******************************************************************************/
+ 212:.\Generated_Source\PSoC5/audio_isr.c **** void audio_isr_SetVector(cyisraddress address)
+ 213:.\Generated_Source\PSoC5/audio_isr.c **** {
+ 230              		.loc 1 213 0
+ 231              		.cfi_startproc
+ 232              		@ args = 0, pretend = 0, frame = 16
+ 233              		@ frame_needed = 1, uses_anonymous_args = 0
+ 234              		@ link register save eliminated.
+ 235 0000 80B4     		push	{r7}
+ 236              		.cfi_def_cfa_offset 4
+ 237              		.cfi_offset 7, -4
+ 238 0002 85B0     		sub	sp, sp, #20
+ 239              		.cfi_def_cfa_offset 24
+ 240 0004 00AF     		add	r7, sp, #0
+ 241              		.cfi_def_cfa_register 7
+ 242 0006 7860     		str	r0, [r7, #4]
+ 214:.\Generated_Source\PSoC5/audio_isr.c ****     cyisraddress * ramVectorTable;
+ARM GAS  C:\Users\student\AppData\Local\Temp\cclMKz6y.s 			page 9
+
+
+ 215:.\Generated_Source\PSoC5/audio_isr.c **** 
+ 216:.\Generated_Source\PSoC5/audio_isr.c ****     ramVectorTable = (cyisraddress *) *CYINT_VECT_TABLE;
+ 243              		.loc 1 216 0
+ 244 0008 054B     		ldr	r3, .L14
+ 245 000a 1B68     		ldr	r3, [r3]
+ 246 000c FB60     		str	r3, [r7, #12]
+ 217:.\Generated_Source\PSoC5/audio_isr.c **** 
+ 218:.\Generated_Source\PSoC5/audio_isr.c ****     ramVectorTable[CYINT_IRQ_BASE + (uint32)audio_isr__INTC_NUMBER] = address;
+ 247              		.loc 1 218 0
+ 248 000e FB68     		ldr	r3, [r7, #12]
+ 249 0010 4033     		adds	r3, r3, #64
+ 250 0012 7A68     		ldr	r2, [r7, #4]
+ 251 0014 1A60     		str	r2, [r3]
+ 219:.\Generated_Source\PSoC5/audio_isr.c **** }
+ 252              		.loc 1 219 0
+ 253 0016 1437     		adds	r7, r7, #20
+ 254              		.cfi_def_cfa_offset 4
+ 255 0018 BD46     		mov	sp, r7
+ 256              		.cfi_def_cfa_register 13
+ 257              		@ sp needed
+ 258 001a 5DF8047B 		ldr	r7, [sp], #4
+ 259              		.cfi_restore 7
+ 260              		.cfi_def_cfa_offset 0
+ 261 001e 7047     		bx	lr
+ 262              	.L15:
+ 263              		.align	2
+ 264              	.L14:
+ 265 0020 08ED00E0 		.word	-536810232
+ 266              		.cfi_endproc
+ 267              	.LFE4:
+ 268              		.size	audio_isr_SetVector, .-audio_isr_SetVector
+ 269              		.section	.text.audio_isr_GetVector,"ax",%progbits
+ 270              		.align	2
+ 271              		.global	audio_isr_GetVector
+ 272              		.thumb
+ 273              		.thumb_func
+ 274              		.type	audio_isr_GetVector, %function
+ 275              	audio_isr_GetVector:
+ 276              	.LFB5:
+ 220:.\Generated_Source\PSoC5/audio_isr.c **** 
+ 221:.\Generated_Source\PSoC5/audio_isr.c **** 
+ 222:.\Generated_Source\PSoC5/audio_isr.c **** /*******************************************************************************
+ 223:.\Generated_Source\PSoC5/audio_isr.c **** * Function Name: audio_isr_GetVector
+ 224:.\Generated_Source\PSoC5/audio_isr.c **** ********************************************************************************
+ 225:.\Generated_Source\PSoC5/audio_isr.c **** *
+ 226:.\Generated_Source\PSoC5/audio_isr.c **** * Summary:
+ 227:.\Generated_Source\PSoC5/audio_isr.c **** *   Gets the "address" of the current ISR vector for the Interrupt.
+ 228:.\Generated_Source\PSoC5/audio_isr.c **** *
+ 229:.\Generated_Source\PSoC5/audio_isr.c **** * Parameters:
+ 230:.\Generated_Source\PSoC5/audio_isr.c **** *   None
+ 231:.\Generated_Source\PSoC5/audio_isr.c **** *
+ 232:.\Generated_Source\PSoC5/audio_isr.c **** * Return:
+ 233:.\Generated_Source\PSoC5/audio_isr.c **** *   Address of the ISR in the interrupt vector table.
+ 234:.\Generated_Source\PSoC5/audio_isr.c **** *
+ 235:.\Generated_Source\PSoC5/audio_isr.c **** *******************************************************************************/
+ 236:.\Generated_Source\PSoC5/audio_isr.c **** cyisraddress audio_isr_GetVector(void)
+ 237:.\Generated_Source\PSoC5/audio_isr.c **** {
+ARM GAS  C:\Users\student\AppData\Local\Temp\cclMKz6y.s 			page 10
+
+
+ 277              		.loc 1 237 0
+ 278              		.cfi_startproc
+ 279              		@ args = 0, pretend = 0, frame = 8
+ 280              		@ frame_needed = 1, uses_anonymous_args = 0
+ 281              		@ link register save eliminated.
+ 282 0000 80B4     		push	{r7}
+ 283              		.cfi_def_cfa_offset 4
+ 284              		.cfi_offset 7, -4
+ 285 0002 83B0     		sub	sp, sp, #12
+ 286              		.cfi_def_cfa_offset 16
+ 287 0004 00AF     		add	r7, sp, #0
+ 288              		.cfi_def_cfa_register 7
+ 238:.\Generated_Source\PSoC5/audio_isr.c ****     cyisraddress * ramVectorTable;
+ 239:.\Generated_Source\PSoC5/audio_isr.c **** 
+ 240:.\Generated_Source\PSoC5/audio_isr.c ****     ramVectorTable = (cyisraddress *) *CYINT_VECT_TABLE;
+ 289              		.loc 1 240 0
+ 290 0006 054B     		ldr	r3, .L18
+ 291 0008 1B68     		ldr	r3, [r3]
+ 292 000a 7B60     		str	r3, [r7, #4]
+ 241:.\Generated_Source\PSoC5/audio_isr.c **** 
+ 242:.\Generated_Source\PSoC5/audio_isr.c ****     return ramVectorTable[CYINT_IRQ_BASE + (uint32)audio_isr__INTC_NUMBER];
+ 293              		.loc 1 242 0
+ 294 000c 7B68     		ldr	r3, [r7, #4]
+ 295 000e 1B6C     		ldr	r3, [r3, #64]
+ 243:.\Generated_Source\PSoC5/audio_isr.c **** }
+ 296              		.loc 1 243 0
+ 297 0010 1846     		mov	r0, r3
+ 298 0012 0C37     		adds	r7, r7, #12
+ 299              		.cfi_def_cfa_offset 4
+ 300 0014 BD46     		mov	sp, r7
+ 301              		.cfi_def_cfa_register 13
+ 302              		@ sp needed
+ 303 0016 5DF8047B 		ldr	r7, [sp], #4
+ 304              		.cfi_restore 7
+ 305              		.cfi_def_cfa_offset 0
+ 306 001a 7047     		bx	lr
+ 307              	.L19:
+ 308              		.align	2
+ 309              	.L18:
+ 310 001c 08ED00E0 		.word	-536810232
+ 311              		.cfi_endproc
+ 312              	.LFE5:
+ 313              		.size	audio_isr_GetVector, .-audio_isr_GetVector
+ 314              		.section	.text.audio_isr_SetPriority,"ax",%progbits
+ 315              		.align	2
+ 316              		.global	audio_isr_SetPriority
+ 317              		.thumb
+ 318              		.thumb_func
+ 319              		.type	audio_isr_SetPriority, %function
+ 320              	audio_isr_SetPriority:
+ 321              	.LFB6:
+ 244:.\Generated_Source\PSoC5/audio_isr.c **** 
+ 245:.\Generated_Source\PSoC5/audio_isr.c **** 
+ 246:.\Generated_Source\PSoC5/audio_isr.c **** /*******************************************************************************
+ 247:.\Generated_Source\PSoC5/audio_isr.c **** * Function Name: audio_isr_SetPriority
+ 248:.\Generated_Source\PSoC5/audio_isr.c **** ********************************************************************************
+ 249:.\Generated_Source\PSoC5/audio_isr.c **** *
+ARM GAS  C:\Users\student\AppData\Local\Temp\cclMKz6y.s 			page 11
+
+
+ 250:.\Generated_Source\PSoC5/audio_isr.c **** * Summary:
+ 251:.\Generated_Source\PSoC5/audio_isr.c **** *   Sets the Priority of the Interrupt. 
+ 252:.\Generated_Source\PSoC5/audio_isr.c **** *
+ 253:.\Generated_Source\PSoC5/audio_isr.c **** *   Note calling audio_isr_Start or audio_isr_StartEx will 
+ 254:.\Generated_Source\PSoC5/audio_isr.c **** *   override any effect this API would have had. This API should only be called
+ 255:.\Generated_Source\PSoC5/audio_isr.c **** *   after audio_isr_Start or audio_isr_StartEx has been called. 
+ 256:.\Generated_Source\PSoC5/audio_isr.c **** *   To set the initial priority for the component, use the Design-Wide Resources
+ 257:.\Generated_Source\PSoC5/audio_isr.c **** *   Interrupt Editor.
+ 258:.\Generated_Source\PSoC5/audio_isr.c **** *
+ 259:.\Generated_Source\PSoC5/audio_isr.c **** *   Note This API has no effect on Non-maskable interrupt NMI).
+ 260:.\Generated_Source\PSoC5/audio_isr.c **** *
+ 261:.\Generated_Source\PSoC5/audio_isr.c **** * Parameters:
+ 262:.\Generated_Source\PSoC5/audio_isr.c **** *   priority: Priority of the interrupt, 0 being the highest priority
+ 263:.\Generated_Source\PSoC5/audio_isr.c **** *             PSoC 3 and PSoC 5LP: Priority is from 0 to 7.
+ 264:.\Generated_Source\PSoC5/audio_isr.c **** *             PSoC 4: Priority is from 0 to 3.
+ 265:.\Generated_Source\PSoC5/audio_isr.c **** *
+ 266:.\Generated_Source\PSoC5/audio_isr.c **** * Return:
+ 267:.\Generated_Source\PSoC5/audio_isr.c **** *   None
+ 268:.\Generated_Source\PSoC5/audio_isr.c **** *
+ 269:.\Generated_Source\PSoC5/audio_isr.c **** *******************************************************************************/
+ 270:.\Generated_Source\PSoC5/audio_isr.c **** void audio_isr_SetPriority(uint8 priority)
+ 271:.\Generated_Source\PSoC5/audio_isr.c **** {
+ 322              		.loc 1 271 0
+ 323              		.cfi_startproc
+ 324              		@ args = 0, pretend = 0, frame = 8
+ 325              		@ frame_needed = 1, uses_anonymous_args = 0
+ 326              		@ link register save eliminated.
+ 327 0000 80B4     		push	{r7}
+ 328              		.cfi_def_cfa_offset 4
+ 329              		.cfi_offset 7, -4
+ 330 0002 83B0     		sub	sp, sp, #12
+ 331              		.cfi_def_cfa_offset 16
+ 332 0004 00AF     		add	r7, sp, #0
+ 333              		.cfi_def_cfa_register 7
+ 334 0006 0346     		mov	r3, r0
+ 335 0008 FB71     		strb	r3, [r7, #7]
+ 272:.\Generated_Source\PSoC5/audio_isr.c ****     *audio_isr_INTC_PRIOR = priority << 5;
+ 336              		.loc 1 272 0
+ 337 000a 054A     		ldr	r2, .L21
+ 338 000c FB79     		ldrb	r3, [r7, #7]
+ 339 000e 5B01     		lsls	r3, r3, #5
+ 340 0010 DBB2     		uxtb	r3, r3
+ 341 0012 1370     		strb	r3, [r2]
+ 273:.\Generated_Source\PSoC5/audio_isr.c **** }
+ 342              		.loc 1 273 0
+ 343 0014 0C37     		adds	r7, r7, #12
+ 344              		.cfi_def_cfa_offset 4
+ 345 0016 BD46     		mov	sp, r7
+ 346              		.cfi_def_cfa_register 13
+ 347              		@ sp needed
+ 348 0018 5DF8047B 		ldr	r7, [sp], #4
+ 349              		.cfi_restore 7
+ 350              		.cfi_def_cfa_offset 0
+ 351 001c 7047     		bx	lr
+ 352              	.L22:
+ 353 001e 00BF     		.align	2
+ 354              	.L21:
+ARM GAS  C:\Users\student\AppData\Local\Temp\cclMKz6y.s 			page 12
+
+
+ 355 0020 00E400E0 		.word	-536812544
+ 356              		.cfi_endproc
+ 357              	.LFE6:
+ 358              		.size	audio_isr_SetPriority, .-audio_isr_SetPriority
+ 359              		.section	.text.audio_isr_GetPriority,"ax",%progbits
+ 360              		.align	2
+ 361              		.global	audio_isr_GetPriority
+ 362              		.thumb
+ 363              		.thumb_func
+ 364              		.type	audio_isr_GetPriority, %function
+ 365              	audio_isr_GetPriority:
+ 366              	.LFB7:
+ 274:.\Generated_Source\PSoC5/audio_isr.c **** 
+ 275:.\Generated_Source\PSoC5/audio_isr.c **** 
+ 276:.\Generated_Source\PSoC5/audio_isr.c **** /*******************************************************************************
+ 277:.\Generated_Source\PSoC5/audio_isr.c **** * Function Name: audio_isr_GetPriority
+ 278:.\Generated_Source\PSoC5/audio_isr.c **** ********************************************************************************
+ 279:.\Generated_Source\PSoC5/audio_isr.c **** *
+ 280:.\Generated_Source\PSoC5/audio_isr.c **** * Summary:
+ 281:.\Generated_Source\PSoC5/audio_isr.c **** *   Gets the Priority of the Interrupt.
+ 282:.\Generated_Source\PSoC5/audio_isr.c **** *
+ 283:.\Generated_Source\PSoC5/audio_isr.c **** * Parameters:
+ 284:.\Generated_Source\PSoC5/audio_isr.c **** *   None
+ 285:.\Generated_Source\PSoC5/audio_isr.c **** *
+ 286:.\Generated_Source\PSoC5/audio_isr.c **** * Return:
+ 287:.\Generated_Source\PSoC5/audio_isr.c **** *   Priority of the interrupt, 0 being the highest priority
+ 288:.\Generated_Source\PSoC5/audio_isr.c **** *    PSoC 3 and PSoC 5LP: Priority is from 0 to 7.
+ 289:.\Generated_Source\PSoC5/audio_isr.c **** *    PSoC 4: Priority is from 0 to 3.
+ 290:.\Generated_Source\PSoC5/audio_isr.c **** *
+ 291:.\Generated_Source\PSoC5/audio_isr.c **** *******************************************************************************/
+ 292:.\Generated_Source\PSoC5/audio_isr.c **** uint8 audio_isr_GetPriority(void)
+ 293:.\Generated_Source\PSoC5/audio_isr.c **** {
+ 367              		.loc 1 293 0
+ 368              		.cfi_startproc
+ 369              		@ args = 0, pretend = 0, frame = 8
+ 370              		@ frame_needed = 1, uses_anonymous_args = 0
+ 371              		@ link register save eliminated.
+ 372 0000 80B4     		push	{r7}
+ 373              		.cfi_def_cfa_offset 4
+ 374              		.cfi_offset 7, -4
+ 375 0002 83B0     		sub	sp, sp, #12
+ 376              		.cfi_def_cfa_offset 16
+ 377 0004 00AF     		add	r7, sp, #0
+ 378              		.cfi_def_cfa_register 7
+ 294:.\Generated_Source\PSoC5/audio_isr.c ****     uint8 priority;
+ 295:.\Generated_Source\PSoC5/audio_isr.c **** 
+ 296:.\Generated_Source\PSoC5/audio_isr.c **** 
+ 297:.\Generated_Source\PSoC5/audio_isr.c ****     priority = *audio_isr_INTC_PRIOR >> 5;
+ 379              		.loc 1 297 0
+ 380 0006 064B     		ldr	r3, .L25
+ 381 0008 1B78     		ldrb	r3, [r3]
+ 382 000a DBB2     		uxtb	r3, r3
+ 383 000c 5B09     		lsrs	r3, r3, #5
+ 384 000e FB71     		strb	r3, [r7, #7]
+ 298:.\Generated_Source\PSoC5/audio_isr.c **** 
+ 299:.\Generated_Source\PSoC5/audio_isr.c ****     return priority;
+ 385              		.loc 1 299 0
+ARM GAS  C:\Users\student\AppData\Local\Temp\cclMKz6y.s 			page 13
+
+
+ 386 0010 FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 300:.\Generated_Source\PSoC5/audio_isr.c **** }
+ 387              		.loc 1 300 0
+ 388 0012 1846     		mov	r0, r3
+ 389 0014 0C37     		adds	r7, r7, #12
+ 390              		.cfi_def_cfa_offset 4
+ 391 0016 BD46     		mov	sp, r7
+ 392              		.cfi_def_cfa_register 13
+ 393              		@ sp needed
+ 394 0018 5DF8047B 		ldr	r7, [sp], #4
+ 395              		.cfi_restore 7
+ 396              		.cfi_def_cfa_offset 0
+ 397 001c 7047     		bx	lr
+ 398              	.L26:
+ 399 001e 00BF     		.align	2
+ 400              	.L25:
+ 401 0020 00E400E0 		.word	-536812544
+ 402              		.cfi_endproc
+ 403              	.LFE7:
+ 404              		.size	audio_isr_GetPriority, .-audio_isr_GetPriority
+ 405              		.section	.text.audio_isr_Enable,"ax",%progbits
+ 406              		.align	2
+ 407              		.global	audio_isr_Enable
+ 408              		.thumb
+ 409              		.thumb_func
+ 410              		.type	audio_isr_Enable, %function
+ 411              	audio_isr_Enable:
+ 412              	.LFB8:
+ 301:.\Generated_Source\PSoC5/audio_isr.c **** 
+ 302:.\Generated_Source\PSoC5/audio_isr.c **** 
+ 303:.\Generated_Source\PSoC5/audio_isr.c **** /*******************************************************************************
+ 304:.\Generated_Source\PSoC5/audio_isr.c **** * Function Name: audio_isr_Enable
+ 305:.\Generated_Source\PSoC5/audio_isr.c **** ********************************************************************************
+ 306:.\Generated_Source\PSoC5/audio_isr.c **** *
+ 307:.\Generated_Source\PSoC5/audio_isr.c **** * Summary:
+ 308:.\Generated_Source\PSoC5/audio_isr.c **** *   Enables the interrupt to the interrupt controller. Do not call this function
+ 309:.\Generated_Source\PSoC5/audio_isr.c **** *   unless ISR_Start() has been called or the functionality of the ISR_Start() 
+ 310:.\Generated_Source\PSoC5/audio_isr.c **** *   function, which sets the vector and the priority, has been called.
+ 311:.\Generated_Source\PSoC5/audio_isr.c **** *
+ 312:.\Generated_Source\PSoC5/audio_isr.c **** * Parameters:
+ 313:.\Generated_Source\PSoC5/audio_isr.c **** *   None
+ 314:.\Generated_Source\PSoC5/audio_isr.c **** *
+ 315:.\Generated_Source\PSoC5/audio_isr.c **** * Return:
+ 316:.\Generated_Source\PSoC5/audio_isr.c **** *   None
+ 317:.\Generated_Source\PSoC5/audio_isr.c **** *
+ 318:.\Generated_Source\PSoC5/audio_isr.c **** *******************************************************************************/
+ 319:.\Generated_Source\PSoC5/audio_isr.c **** void audio_isr_Enable(void)
+ 320:.\Generated_Source\PSoC5/audio_isr.c **** {
+ 413              		.loc 1 320 0
+ 414              		.cfi_startproc
+ 415              		@ args = 0, pretend = 0, frame = 0
+ 416              		@ frame_needed = 1, uses_anonymous_args = 0
+ 417              		@ link register save eliminated.
+ 418 0000 80B4     		push	{r7}
+ 419              		.cfi_def_cfa_offset 4
+ 420              		.cfi_offset 7, -4
+ 421 0002 00AF     		add	r7, sp, #0
+ARM GAS  C:\Users\student\AppData\Local\Temp\cclMKz6y.s 			page 14
+
+
+ 422              		.cfi_def_cfa_register 7
+ 321:.\Generated_Source\PSoC5/audio_isr.c ****     /* Enable the general interrupt. */
+ 322:.\Generated_Source\PSoC5/audio_isr.c ****     *audio_isr_INTC_SET_EN = audio_isr__INTC_MASK;
+ 423              		.loc 1 322 0
+ 424 0004 034B     		ldr	r3, .L28
+ 425 0006 0122     		movs	r2, #1
+ 426 0008 1A60     		str	r2, [r3]
+ 323:.\Generated_Source\PSoC5/audio_isr.c **** }
+ 427              		.loc 1 323 0
+ 428 000a BD46     		mov	sp, r7
+ 429              		.cfi_def_cfa_register 13
+ 430              		@ sp needed
+ 431 000c 5DF8047B 		ldr	r7, [sp], #4
+ 432              		.cfi_restore 7
+ 433              		.cfi_def_cfa_offset 0
+ 434 0010 7047     		bx	lr
+ 435              	.L29:
+ 436 0012 00BF     		.align	2
+ 437              	.L28:
+ 438 0014 00E100E0 		.word	-536813312
+ 439              		.cfi_endproc
+ 440              	.LFE8:
+ 441              		.size	audio_isr_Enable, .-audio_isr_Enable
+ 442              		.section	.text.audio_isr_GetState,"ax",%progbits
+ 443              		.align	2
+ 444              		.global	audio_isr_GetState
+ 445              		.thumb
+ 446              		.thumb_func
+ 447              		.type	audio_isr_GetState, %function
+ 448              	audio_isr_GetState:
+ 449              	.LFB9:
+ 324:.\Generated_Source\PSoC5/audio_isr.c **** 
+ 325:.\Generated_Source\PSoC5/audio_isr.c **** 
+ 326:.\Generated_Source\PSoC5/audio_isr.c **** /*******************************************************************************
+ 327:.\Generated_Source\PSoC5/audio_isr.c **** * Function Name: audio_isr_GetState
+ 328:.\Generated_Source\PSoC5/audio_isr.c **** ********************************************************************************
+ 329:.\Generated_Source\PSoC5/audio_isr.c **** *
+ 330:.\Generated_Source\PSoC5/audio_isr.c **** * Summary:
+ 331:.\Generated_Source\PSoC5/audio_isr.c **** *   Gets the state (enabled, disabled) of the Interrupt.
+ 332:.\Generated_Source\PSoC5/audio_isr.c **** *
+ 333:.\Generated_Source\PSoC5/audio_isr.c **** * Parameters:
+ 334:.\Generated_Source\PSoC5/audio_isr.c **** *   None
+ 335:.\Generated_Source\PSoC5/audio_isr.c **** *
+ 336:.\Generated_Source\PSoC5/audio_isr.c **** * Return:
+ 337:.\Generated_Source\PSoC5/audio_isr.c **** *   1 if enabled, 0 if disabled.
+ 338:.\Generated_Source\PSoC5/audio_isr.c **** *
+ 339:.\Generated_Source\PSoC5/audio_isr.c **** *******************************************************************************/
+ 340:.\Generated_Source\PSoC5/audio_isr.c **** uint8 audio_isr_GetState(void)
+ 341:.\Generated_Source\PSoC5/audio_isr.c **** {
+ 450              		.loc 1 341 0
+ 451              		.cfi_startproc
+ 452              		@ args = 0, pretend = 0, frame = 0
+ 453              		@ frame_needed = 1, uses_anonymous_args = 0
+ 454              		@ link register save eliminated.
+ 455 0000 80B4     		push	{r7}
+ 456              		.cfi_def_cfa_offset 4
+ 457              		.cfi_offset 7, -4
+ARM GAS  C:\Users\student\AppData\Local\Temp\cclMKz6y.s 			page 15
+
+
+ 458 0002 00AF     		add	r7, sp, #0
+ 459              		.cfi_def_cfa_register 7
+ 342:.\Generated_Source\PSoC5/audio_isr.c ****     /* Get the state of the general interrupt. */
+ 343:.\Generated_Source\PSoC5/audio_isr.c ****     return ((*audio_isr_INTC_SET_EN & (uint32)audio_isr__INTC_MASK) != 0u) ? 1u:0u;
+ 460              		.loc 1 343 0
+ 461 0004 054B     		ldr	r3, .L32
+ 462 0006 1B68     		ldr	r3, [r3]
+ 463 0008 DBB2     		uxtb	r3, r3
+ 464 000a 03F00103 		and	r3, r3, #1
+ 465 000e DBB2     		uxtb	r3, r3
+ 344:.\Generated_Source\PSoC5/audio_isr.c **** }
+ 466              		.loc 1 344 0
+ 467 0010 1846     		mov	r0, r3
+ 468 0012 BD46     		mov	sp, r7
+ 469              		.cfi_def_cfa_register 13
+ 470              		@ sp needed
+ 471 0014 5DF8047B 		ldr	r7, [sp], #4
+ 472              		.cfi_restore 7
+ 473              		.cfi_def_cfa_offset 0
+ 474 0018 7047     		bx	lr
+ 475              	.L33:
+ 476 001a 00BF     		.align	2
+ 477              	.L32:
+ 478 001c 00E100E0 		.word	-536813312
+ 479              		.cfi_endproc
+ 480              	.LFE9:
+ 481              		.size	audio_isr_GetState, .-audio_isr_GetState
+ 482              		.section	.text.audio_isr_Disable,"ax",%progbits
+ 483              		.align	2
+ 484              		.global	audio_isr_Disable
+ 485              		.thumb
+ 486              		.thumb_func
+ 487              		.type	audio_isr_Disable, %function
+ 488              	audio_isr_Disable:
+ 489              	.LFB10:
+ 345:.\Generated_Source\PSoC5/audio_isr.c **** 
+ 346:.\Generated_Source\PSoC5/audio_isr.c **** 
+ 347:.\Generated_Source\PSoC5/audio_isr.c **** /*******************************************************************************
+ 348:.\Generated_Source\PSoC5/audio_isr.c **** * Function Name: audio_isr_Disable
+ 349:.\Generated_Source\PSoC5/audio_isr.c **** ********************************************************************************
+ 350:.\Generated_Source\PSoC5/audio_isr.c **** *
+ 351:.\Generated_Source\PSoC5/audio_isr.c **** * Summary:
+ 352:.\Generated_Source\PSoC5/audio_isr.c **** *   Disables the Interrupt in the interrupt controller.
+ 353:.\Generated_Source\PSoC5/audio_isr.c **** *
+ 354:.\Generated_Source\PSoC5/audio_isr.c **** * Parameters:
+ 355:.\Generated_Source\PSoC5/audio_isr.c **** *   None
+ 356:.\Generated_Source\PSoC5/audio_isr.c **** *
+ 357:.\Generated_Source\PSoC5/audio_isr.c **** * Return:
+ 358:.\Generated_Source\PSoC5/audio_isr.c **** *   None
+ 359:.\Generated_Source\PSoC5/audio_isr.c **** *
+ 360:.\Generated_Source\PSoC5/audio_isr.c **** *******************************************************************************/
+ 361:.\Generated_Source\PSoC5/audio_isr.c **** void audio_isr_Disable(void)
+ 362:.\Generated_Source\PSoC5/audio_isr.c **** {
+ 490              		.loc 1 362 0
+ 491              		.cfi_startproc
+ 492              		@ args = 0, pretend = 0, frame = 0
+ 493              		@ frame_needed = 1, uses_anonymous_args = 0
+ARM GAS  C:\Users\student\AppData\Local\Temp\cclMKz6y.s 			page 16
+
+
+ 494              		@ link register save eliminated.
+ 495 0000 80B4     		push	{r7}
+ 496              		.cfi_def_cfa_offset 4
+ 497              		.cfi_offset 7, -4
+ 498 0002 00AF     		add	r7, sp, #0
+ 499              		.cfi_def_cfa_register 7
+ 363:.\Generated_Source\PSoC5/audio_isr.c ****     /* Disable the general interrupt. */
+ 364:.\Generated_Source\PSoC5/audio_isr.c ****     *audio_isr_INTC_CLR_EN = audio_isr__INTC_MASK;
+ 500              		.loc 1 364 0
+ 501 0004 034B     		ldr	r3, .L35
+ 502 0006 0122     		movs	r2, #1
+ 503 0008 1A60     		str	r2, [r3]
+ 365:.\Generated_Source\PSoC5/audio_isr.c **** }
+ 504              		.loc 1 365 0
+ 505 000a BD46     		mov	sp, r7
+ 506              		.cfi_def_cfa_register 13
+ 507              		@ sp needed
+ 508 000c 5DF8047B 		ldr	r7, [sp], #4
+ 509              		.cfi_restore 7
+ 510              		.cfi_def_cfa_offset 0
+ 511 0010 7047     		bx	lr
+ 512              	.L36:
+ 513 0012 00BF     		.align	2
+ 514              	.L35:
+ 515 0014 80E100E0 		.word	-536813184
+ 516              		.cfi_endproc
+ 517              	.LFE10:
+ 518              		.size	audio_isr_Disable, .-audio_isr_Disable
+ 519              		.section	.text.audio_isr_SetPending,"ax",%progbits
+ 520              		.align	2
+ 521              		.global	audio_isr_SetPending
+ 522              		.thumb
+ 523              		.thumb_func
+ 524              		.type	audio_isr_SetPending, %function
+ 525              	audio_isr_SetPending:
+ 526              	.LFB11:
+ 366:.\Generated_Source\PSoC5/audio_isr.c **** 
+ 367:.\Generated_Source\PSoC5/audio_isr.c **** 
+ 368:.\Generated_Source\PSoC5/audio_isr.c **** /*******************************************************************************
+ 369:.\Generated_Source\PSoC5/audio_isr.c **** * Function Name: audio_isr_SetPending
+ 370:.\Generated_Source\PSoC5/audio_isr.c **** ********************************************************************************
+ 371:.\Generated_Source\PSoC5/audio_isr.c **** *
+ 372:.\Generated_Source\PSoC5/audio_isr.c **** * Summary:
+ 373:.\Generated_Source\PSoC5/audio_isr.c **** *   Causes the Interrupt to enter the pending state, a software method of
+ 374:.\Generated_Source\PSoC5/audio_isr.c **** *   generating the interrupt.
+ 375:.\Generated_Source\PSoC5/audio_isr.c **** *
+ 376:.\Generated_Source\PSoC5/audio_isr.c **** * Parameters:
+ 377:.\Generated_Source\PSoC5/audio_isr.c **** *   None
+ 378:.\Generated_Source\PSoC5/audio_isr.c **** *
+ 379:.\Generated_Source\PSoC5/audio_isr.c **** * Return:
+ 380:.\Generated_Source\PSoC5/audio_isr.c **** *   None
+ 381:.\Generated_Source\PSoC5/audio_isr.c **** *
+ 382:.\Generated_Source\PSoC5/audio_isr.c **** * Side Effects:
+ 383:.\Generated_Source\PSoC5/audio_isr.c **** *   If interrupts are enabled and the interrupt is set up properly, the ISR is
+ 384:.\Generated_Source\PSoC5/audio_isr.c **** *   entered (depending on the priority of this interrupt and other pending 
+ 385:.\Generated_Source\PSoC5/audio_isr.c **** *   interrupts).
+ 386:.\Generated_Source\PSoC5/audio_isr.c **** *
+ARM GAS  C:\Users\student\AppData\Local\Temp\cclMKz6y.s 			page 17
+
+
+ 387:.\Generated_Source\PSoC5/audio_isr.c **** *******************************************************************************/
+ 388:.\Generated_Source\PSoC5/audio_isr.c **** void audio_isr_SetPending(void)
+ 389:.\Generated_Source\PSoC5/audio_isr.c **** {
+ 527              		.loc 1 389 0
+ 528              		.cfi_startproc
+ 529              		@ args = 0, pretend = 0, frame = 0
+ 530              		@ frame_needed = 1, uses_anonymous_args = 0
+ 531              		@ link register save eliminated.
+ 532 0000 80B4     		push	{r7}
+ 533              		.cfi_def_cfa_offset 4
+ 534              		.cfi_offset 7, -4
+ 535 0002 00AF     		add	r7, sp, #0
+ 536              		.cfi_def_cfa_register 7
+ 390:.\Generated_Source\PSoC5/audio_isr.c ****     *audio_isr_INTC_SET_PD = audio_isr__INTC_MASK;
+ 537              		.loc 1 390 0
+ 538 0004 034B     		ldr	r3, .L38
+ 539 0006 0122     		movs	r2, #1
+ 540 0008 1A60     		str	r2, [r3]
+ 391:.\Generated_Source\PSoC5/audio_isr.c **** }
+ 541              		.loc 1 391 0
+ 542 000a BD46     		mov	sp, r7
+ 543              		.cfi_def_cfa_register 13
+ 544              		@ sp needed
+ 545 000c 5DF8047B 		ldr	r7, [sp], #4
+ 546              		.cfi_restore 7
+ 547              		.cfi_def_cfa_offset 0
+ 548 0010 7047     		bx	lr
+ 549              	.L39:
+ 550 0012 00BF     		.align	2
+ 551              	.L38:
+ 552 0014 00E200E0 		.word	-536813056
+ 553              		.cfi_endproc
+ 554              	.LFE11:
+ 555              		.size	audio_isr_SetPending, .-audio_isr_SetPending
+ 556              		.section	.text.audio_isr_ClearPending,"ax",%progbits
+ 557              		.align	2
+ 558              		.global	audio_isr_ClearPending
+ 559              		.thumb
+ 560              		.thumb_func
+ 561              		.type	audio_isr_ClearPending, %function
+ 562              	audio_isr_ClearPending:
+ 563              	.LFB12:
+ 392:.\Generated_Source\PSoC5/audio_isr.c **** 
+ 393:.\Generated_Source\PSoC5/audio_isr.c **** 
+ 394:.\Generated_Source\PSoC5/audio_isr.c **** /*******************************************************************************
+ 395:.\Generated_Source\PSoC5/audio_isr.c **** * Function Name: audio_isr_ClearPending
+ 396:.\Generated_Source\PSoC5/audio_isr.c **** ********************************************************************************
+ 397:.\Generated_Source\PSoC5/audio_isr.c **** *
+ 398:.\Generated_Source\PSoC5/audio_isr.c **** * Summary:
+ 399:.\Generated_Source\PSoC5/audio_isr.c **** *   Clears a pending interrupt in the interrupt controller.
+ 400:.\Generated_Source\PSoC5/audio_isr.c **** *
+ 401:.\Generated_Source\PSoC5/audio_isr.c **** *   Note Some interrupt sources are clear-on-read and require the block 
+ 402:.\Generated_Source\PSoC5/audio_isr.c **** *   interrupt/status register to be read/cleared with the appropriate block API 
+ 403:.\Generated_Source\PSoC5/audio_isr.c **** *   (GPIO, UART, and so on). Otherwise the ISR will continue to remain in 
+ 404:.\Generated_Source\PSoC5/audio_isr.c **** *   pending state even though the interrupt itself is cleared using this API.
+ 405:.\Generated_Source\PSoC5/audio_isr.c **** *
+ 406:.\Generated_Source\PSoC5/audio_isr.c **** * Parameters:
+ARM GAS  C:\Users\student\AppData\Local\Temp\cclMKz6y.s 			page 18
+
+
+ 407:.\Generated_Source\PSoC5/audio_isr.c **** *   None
+ 408:.\Generated_Source\PSoC5/audio_isr.c **** *
+ 409:.\Generated_Source\PSoC5/audio_isr.c **** * Return:
+ 410:.\Generated_Source\PSoC5/audio_isr.c **** *   None
+ 411:.\Generated_Source\PSoC5/audio_isr.c **** *
+ 412:.\Generated_Source\PSoC5/audio_isr.c **** *******************************************************************************/
+ 413:.\Generated_Source\PSoC5/audio_isr.c **** void audio_isr_ClearPending(void)
+ 414:.\Generated_Source\PSoC5/audio_isr.c **** {
+ 564              		.loc 1 414 0
+ 565              		.cfi_startproc
+ 566              		@ args = 0, pretend = 0, frame = 0
+ 567              		@ frame_needed = 1, uses_anonymous_args = 0
+ 568              		@ link register save eliminated.
+ 569 0000 80B4     		push	{r7}
+ 570              		.cfi_def_cfa_offset 4
+ 571              		.cfi_offset 7, -4
+ 572 0002 00AF     		add	r7, sp, #0
+ 573              		.cfi_def_cfa_register 7
+ 415:.\Generated_Source\PSoC5/audio_isr.c ****     *audio_isr_INTC_CLR_PD = audio_isr__INTC_MASK;
+ 574              		.loc 1 415 0
+ 575 0004 034B     		ldr	r3, .L41
+ 576 0006 0122     		movs	r2, #1
+ 577 0008 1A60     		str	r2, [r3]
+ 416:.\Generated_Source\PSoC5/audio_isr.c **** }
+ 578              		.loc 1 416 0
+ 579 000a BD46     		mov	sp, r7
+ 580              		.cfi_def_cfa_register 13
+ 581              		@ sp needed
+ 582 000c 5DF8047B 		ldr	r7, [sp], #4
+ 583              		.cfi_restore 7
+ 584              		.cfi_def_cfa_offset 0
+ 585 0010 7047     		bx	lr
+ 586              	.L42:
+ 587 0012 00BF     		.align	2
+ 588              	.L41:
+ 589 0014 80E200E0 		.word	-536812928
+ 590              		.cfi_endproc
+ 591              	.LFE12:
+ 592              		.size	audio_isr_ClearPending, .-audio_isr_ClearPending
+ 593              		.text
+ 594              	.Letext0:
+ 595              		.file 2 "Generated_Source\\PSoC5/cytypes.h"
+ 596              		.file 3 "./wav_tables.h"
+ 597              		.section	.debug_info,"",%progbits
+ 598              	.Ldebug_info0:
+ 599 0000 91020000 		.4byte	0x291
+ 600 0004 0400     		.2byte	0x4
+ 601 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 602 000a 04       		.byte	0x4
+ 603 000b 01       		.uleb128 0x1
+ 604 000c 16010000 		.4byte	.LASF37
+ 605 0010 01       		.byte	0x1
+ 606 0011 41000000 		.4byte	.LASF38
+ 607 0015 91020000 		.4byte	.LASF39
+ 608 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 609 001d 00000000 		.4byte	0
+ 610 0021 00000000 		.4byte	.Ldebug_line0
+ARM GAS  C:\Users\student\AppData\Local\Temp\cclMKz6y.s 			page 19
+
+
+ 611 0025 02       		.uleb128 0x2
+ 612 0026 04       		.byte	0x4
+ 613 0027 05       		.byte	0x5
+ 614 0028 696E7400 		.ascii	"int\000"
+ 615 002c 03       		.uleb128 0x3
+ 616 002d 04       		.byte	0x4
+ 617 002e 07       		.byte	0x7
+ 618 002f CF010000 		.4byte	.LASF0
+ 619 0033 03       		.uleb128 0x3
+ 620 0034 01       		.byte	0x1
+ 621 0035 06       		.byte	0x6
+ 622 0036 E7020000 		.4byte	.LASF1
+ 623 003a 03       		.uleb128 0x3
+ 624 003b 01       		.byte	0x1
+ 625 003c 08       		.byte	0x8
+ 626 003d A1000000 		.4byte	.LASF2
+ 627 0041 03       		.uleb128 0x3
+ 628 0042 02       		.byte	0x2
+ 629 0043 05       		.byte	0x5
+ 630 0044 5F020000 		.4byte	.LASF3
+ 631 0048 03       		.uleb128 0x3
+ 632 0049 02       		.byte	0x2
+ 633 004a 07       		.byte	0x7
+ 634 004b 76000000 		.4byte	.LASF4
+ 635 004f 03       		.uleb128 0x3
+ 636 0050 04       		.byte	0x4
+ 637 0051 05       		.byte	0x5
+ 638 0052 DE020000 		.4byte	.LASF5
+ 639 0056 03       		.uleb128 0x3
+ 640 0057 04       		.byte	0x4
+ 641 0058 07       		.byte	0x7
+ 642 0059 CA000000 		.4byte	.LASF6
+ 643 005d 03       		.uleb128 0x3
+ 644 005e 08       		.byte	0x8
+ 645 005f 05       		.byte	0x5
+ 646 0060 3D020000 		.4byte	.LASF7
+ 647 0064 03       		.uleb128 0x3
+ 648 0065 08       		.byte	0x8
+ 649 0066 07       		.byte	0x7
+ 650 0067 F8010000 		.4byte	.LASF8
+ 651 006b 03       		.uleb128 0x3
+ 652 006c 04       		.byte	0x4
+ 653 006d 07       		.byte	0x7
+ 654 006e 34020000 		.4byte	.LASF9
+ 655 0072 04       		.uleb128 0x4
+ 656 0073 04       		.byte	0x4
+ 657 0074 78000000 		.4byte	0x78
+ 658 0078 05       		.uleb128 0x5
+ 659 0079 03       		.uleb128 0x3
+ 660 007a 01       		.byte	0x1
+ 661 007b 08       		.byte	0x8
+ 662 007c 4B020000 		.4byte	.LASF10
+ 663 0080 06       		.uleb128 0x6
+ 664 0081 EE000000 		.4byte	.LASF11
+ 665 0085 02       		.byte	0x2
+ 666 0086 9201     		.2byte	0x192
+ 667 0088 3A000000 		.4byte	0x3a
+ARM GAS  C:\Users\student\AppData\Local\Temp\cclMKz6y.s 			page 20
+
+
+ 668 008c 06       		.uleb128 0x6
+ 669 008d C8010000 		.4byte	.LASF12
+ 670 0091 02       		.byte	0x2
+ 671 0092 9401     		.2byte	0x194
+ 672 0094 56000000 		.4byte	0x56
+ 673 0098 03       		.uleb128 0x3
+ 674 0099 04       		.byte	0x4
+ 675 009a 04       		.byte	0x4
+ 676 009b 9B000000 		.4byte	.LASF13
+ 677 009f 03       		.uleb128 0x3
+ 678 00a0 08       		.byte	0x8
+ 679 00a1 04       		.byte	0x4
+ 680 00a2 A4010000 		.4byte	.LASF14
+ 681 00a6 06       		.uleb128 0x6
+ 682 00a7 C5000000 		.4byte	.LASF15
+ 683 00ab 02       		.byte	0x2
+ 684 00ac 3C02     		.2byte	0x23c
+ 685 00ae B2000000 		.4byte	0xb2
+ 686 00b2 07       		.uleb128 0x7
+ 687 00b3 80000000 		.4byte	0x80
+ 688 00b7 06       		.uleb128 0x6
+ 689 00b8 00000000 		.4byte	.LASF16
+ 690 00bc 02       		.byte	0x2
+ 691 00bd 3E02     		.2byte	0x23e
+ 692 00bf C3000000 		.4byte	0xc3
+ 693 00c3 07       		.uleb128 0x7
+ 694 00c4 8C000000 		.4byte	0x8c
+ 695 00c8 06       		.uleb128 0x6
+ 696 00c9 27020000 		.4byte	.LASF17
+ 697 00cd 02       		.byte	0x2
+ 698 00ce 4E02     		.2byte	0x24e
+ 699 00d0 72000000 		.4byte	0x72
+ 700 00d4 08       		.uleb128 0x8
+ 701 00d5 66000000 		.4byte	.LASF18
+ 702 00d9 01       		.byte	0x1
+ 703 00da 42       		.byte	0x42
+ 704 00db 00000000 		.4byte	.LFB0
+ 705 00df 20000000 		.4byte	.LFE0-.LFB0
+ 706 00e3 01       		.uleb128 0x1
+ 707 00e4 9C       		.byte	0x9c
+ 708 00e5 09       		.uleb128 0x9
+ 709 00e6 89000000 		.4byte	.LASF20
+ 710 00ea 01       		.byte	0x1
+ 711 00eb 6D       		.byte	0x6d
+ 712 00ec 00000000 		.4byte	.LFB1
+ 713 00f0 22000000 		.4byte	.LFE1-.LFB1
+ 714 00f4 01       		.uleb128 0x1
+ 715 00f5 9C       		.byte	0x9c
+ 716 00f6 09010000 		.4byte	0x109
+ 717 00fa 0A       		.uleb128 0xa
+ 718 00fb F0010000 		.4byte	.LASF23
+ 719 00ff 01       		.byte	0x1
+ 720 0100 6D       		.byte	0x6d
+ 721 0101 C8000000 		.4byte	0xc8
+ 722 0105 02       		.uleb128 0x2
+ 723 0106 91       		.byte	0x91
+ 724 0107 74       		.sleb128 -12
+ARM GAS  C:\Users\student\AppData\Local\Temp\cclMKz6y.s 			page 21
+
+
+ 725 0108 00       		.byte	0
+ 726 0109 08       		.uleb128 0x8
+ 727 010a 07010000 		.4byte	.LASF19
+ 728 010e 01       		.byte	0x1
+ 729 010f 8B       		.byte	0x8b
+ 730 0110 00000000 		.4byte	.LFB2
+ 731 0114 14000000 		.4byte	.LFE2-.LFB2
+ 732 0118 01       		.uleb128 0x1
+ 733 0119 9C       		.byte	0x9c
+ 734 011a 09       		.uleb128 0x9
+ 735 011b AB010000 		.4byte	.LASF21
+ 736 011f 01       		.byte	0x1
+ 737 0120 A5       		.byte	0xa5
+ 738 0121 00000000 		.4byte	.LFB3
+ 739 0125 64000000 		.4byte	.LFE3-.LFB3
+ 740 0129 01       		.uleb128 0x1
+ 741 012a 9C       		.byte	0x9c
+ 742 012b 3E010000 		.4byte	0x13e
+ 743 012f 0B       		.uleb128 0xb
+ 744 0130 76616C00 		.ascii	"val\000"
+ 745 0134 01       		.byte	0x1
+ 746 0135 B0       		.byte	0xb0
+ 747 0136 25000000 		.4byte	0x25
+ 748 013a 02       		.uleb128 0x2
+ 749 013b 91       		.byte	0x91
+ 750 013c 74       		.sleb128 -12
+ 751 013d 00       		.byte	0
+ 752 013e 0C       		.uleb128 0xc
+ 753 013f 28000000 		.4byte	.LASF22
+ 754 0143 01       		.byte	0x1
+ 755 0144 D4       		.byte	0xd4
+ 756 0145 00000000 		.4byte	.LFB4
+ 757 0149 24000000 		.4byte	.LFE4-.LFB4
+ 758 014d 01       		.uleb128 0x1
+ 759 014e 9C       		.byte	0x9c
+ 760 014f 70010000 		.4byte	0x170
+ 761 0153 0A       		.uleb128 0xa
+ 762 0154 F0010000 		.4byte	.LASF23
+ 763 0158 01       		.byte	0x1
+ 764 0159 D4       		.byte	0xd4
+ 765 015a C8000000 		.4byte	0xc8
+ 766 015e 02       		.uleb128 0x2
+ 767 015f 91       		.byte	0x91
+ 768 0160 6C       		.sleb128 -20
+ 769 0161 0D       		.uleb128 0xd
+ 770 0162 50020000 		.4byte	.LASF24
+ 771 0166 01       		.byte	0x1
+ 772 0167 D6       		.byte	0xd6
+ 773 0168 70010000 		.4byte	0x170
+ 774 016c 02       		.uleb128 0x2
+ 775 016d 91       		.byte	0x91
+ 776 016e 74       		.sleb128 -12
+ 777 016f 00       		.byte	0
+ 778 0170 04       		.uleb128 0x4
+ 779 0171 04       		.byte	0x4
+ 780 0172 C8000000 		.4byte	0xc8
+ 781 0176 0E       		.uleb128 0xe
+ARM GAS  C:\Users\student\AppData\Local\Temp\cclMKz6y.s 			page 22
+
+
+ 782 0177 DC010000 		.4byte	.LASF27
+ 783 017b 01       		.byte	0x1
+ 784 017c EC       		.byte	0xec
+ 785 017d C8000000 		.4byte	0xc8
+ 786 0181 00000000 		.4byte	.LFB5
+ 787 0185 20000000 		.4byte	.LFE5-.LFB5
+ 788 0189 01       		.uleb128 0x1
+ 789 018a 9C       		.byte	0x9c
+ 790 018b 9E010000 		.4byte	0x19e
+ 791 018f 0D       		.uleb128 0xd
+ 792 0190 50020000 		.4byte	.LASF24
+ 793 0194 01       		.byte	0x1
+ 794 0195 EE       		.byte	0xee
+ 795 0196 70010000 		.4byte	0x170
+ 796 019a 02       		.uleb128 0x2
+ 797 019b 91       		.byte	0x91
+ 798 019c 74       		.sleb128 -12
+ 799 019d 00       		.byte	0
+ 800 019e 0F       		.uleb128 0xf
+ 801 019f AF000000 		.4byte	.LASF25
+ 802 01a3 01       		.byte	0x1
+ 803 01a4 0E01     		.2byte	0x10e
+ 804 01a6 00000000 		.4byte	.LFB6
+ 805 01aa 24000000 		.4byte	.LFE6-.LFB6
+ 806 01ae 01       		.uleb128 0x1
+ 807 01af 9C       		.byte	0x9c
+ 808 01b0 C4010000 		.4byte	0x1c4
+ 809 01b4 10       		.uleb128 0x10
+ 810 01b5 BF010000 		.4byte	.LASF26
+ 811 01b9 01       		.byte	0x1
+ 812 01ba 0E01     		.2byte	0x10e
+ 813 01bc 80000000 		.4byte	0x80
+ 814 01c0 02       		.uleb128 0x2
+ 815 01c1 91       		.byte	0x91
+ 816 01c2 77       		.sleb128 -9
+ 817 01c3 00       		.byte	0
+ 818 01c4 11       		.uleb128 0x11
+ 819 01c5 06000000 		.4byte	.LASF28
+ 820 01c9 01       		.byte	0x1
+ 821 01ca 2401     		.2byte	0x124
+ 822 01cc 80000000 		.4byte	0x80
+ 823 01d0 00000000 		.4byte	.LFB7
+ 824 01d4 24000000 		.4byte	.LFE7-.LFB7
+ 825 01d8 01       		.uleb128 0x1
+ 826 01d9 9C       		.byte	0x9c
+ 827 01da EE010000 		.4byte	0x1ee
+ 828 01de 12       		.uleb128 0x12
+ 829 01df BF010000 		.4byte	.LASF26
+ 830 01e3 01       		.byte	0x1
+ 831 01e4 2601     		.2byte	0x126
+ 832 01e6 80000000 		.4byte	0x80
+ 833 01ea 02       		.uleb128 0x2
+ 834 01eb 91       		.byte	0x91
+ 835 01ec 77       		.sleb128 -9
+ 836 01ed 00       		.byte	0
+ 837 01ee 13       		.uleb128 0x13
+ 838 01ef 69020000 		.4byte	.LASF29
+ARM GAS  C:\Users\student\AppData\Local\Temp\cclMKz6y.s 			page 23
+
+
+ 839 01f3 01       		.byte	0x1
+ 840 01f4 3F01     		.2byte	0x13f
+ 841 01f6 00000000 		.4byte	.LFB8
+ 842 01fa 18000000 		.4byte	.LFE8-.LFB8
+ 843 01fe 01       		.uleb128 0x1
+ 844 01ff 9C       		.byte	0x9c
+ 845 0200 14       		.uleb128 0x14
+ 846 0201 F4000000 		.4byte	.LASF40
+ 847 0205 01       		.byte	0x1
+ 848 0206 5401     		.2byte	0x154
+ 849 0208 80000000 		.4byte	0x80
+ 850 020c 00000000 		.4byte	.LFB9
+ 851 0210 20000000 		.4byte	.LFE9-.LFB9
+ 852 0214 01       		.uleb128 0x1
+ 853 0215 9C       		.byte	0x9c
+ 854 0216 13       		.uleb128 0x13
+ 855 0217 DC000000 		.4byte	.LASF30
+ 856 021b 01       		.byte	0x1
+ 857 021c 6901     		.2byte	0x169
+ 858 021e 00000000 		.4byte	.LFB10
+ 859 0222 18000000 		.4byte	.LFE10-.LFB10
+ 860 0226 01       		.uleb128 0x1
+ 861 0227 9C       		.byte	0x9c
+ 862 0228 13       		.uleb128 0x13
+ 863 0229 F3020000 		.4byte	.LASF31
+ 864 022d 01       		.byte	0x1
+ 865 022e 8401     		.2byte	0x184
+ 866 0230 00000000 		.4byte	.LFB11
+ 867 0234 18000000 		.4byte	.LFE11-.LFB11
+ 868 0238 01       		.uleb128 0x1
+ 869 0239 9C       		.byte	0x9c
+ 870 023a 13       		.uleb128 0x13
+ 871 023b 7A020000 		.4byte	.LASF32
+ 872 023f 01       		.byte	0x1
+ 873 0240 9D01     		.2byte	0x19d
+ 874 0242 00000000 		.4byte	.LFB12
+ 875 0246 18000000 		.4byte	.LFE12-.LFB12
+ 876 024a 01       		.uleb128 0x1
+ 877 024b 9C       		.byte	0x9c
+ 878 024c 15       		.uleb128 0x15
+ 879 024d 25000000 		.4byte	0x25
+ 880 0251 5C020000 		.4byte	0x25c
+ 881 0255 16       		.uleb128 0x16
+ 882 0256 6B000000 		.4byte	0x6b
+ 883 025a A7       		.byte	0xa7
+ 884 025b 00       		.byte	0
+ 885 025c 17       		.uleb128 0x17
+ 886 025d 1C020000 		.4byte	.LASF33
+ 887 0261 03       		.byte	0x3
+ 888 0262 10       		.byte	0x10
+ 889 0263 4C020000 		.4byte	0x24c
+ 890 0267 17       		.uleb128 0x17
+ 891 0268 1C000000 		.4byte	.LASF34
+ 892 026c 03       		.byte	0x3
+ 893 026d 11       		.byte	0x11
+ 894 026e 25000000 		.4byte	0x25
+ 895 0272 18       		.uleb128 0x18
+ARM GAS  C:\Users\student\AppData\Local\Temp\cclMKz6y.s 			page 24
+
+
+ 896 0273 3C000000 		.4byte	.LASF35
+ 897 0277 01       		.byte	0x1
+ 898 0278 22       		.byte	0x22
+ 899 0279 25000000 		.4byte	0x25
+ 900 027d 05       		.uleb128 0x5
+ 901 027e 03       		.byte	0x3
+ 902 027f 00000000 		.4byte	high
+ 903 0283 18       		.uleb128 0x18
+ 904 0284 0F020000 		.4byte	.LASF36
+ 905 0288 01       		.byte	0x1
+ 906 0289 23       		.byte	0x23
+ 907 028a 25000000 		.4byte	0x25
+ 908 028e 05       		.uleb128 0x5
+ 909 028f 03       		.byte	0x3
+ 910 0290 00000000 		.4byte	c4_table_idx
+ 911 0294 00       		.byte	0
+ 912              		.section	.debug_abbrev,"",%progbits
+ 913              	.Ldebug_abbrev0:
+ 914 0000 01       		.uleb128 0x1
+ 915 0001 11       		.uleb128 0x11
+ 916 0002 01       		.byte	0x1
+ 917 0003 25       		.uleb128 0x25
+ 918 0004 0E       		.uleb128 0xe
+ 919 0005 13       		.uleb128 0x13
+ 920 0006 0B       		.uleb128 0xb
+ 921 0007 03       		.uleb128 0x3
+ 922 0008 0E       		.uleb128 0xe
+ 923 0009 1B       		.uleb128 0x1b
+ 924 000a 0E       		.uleb128 0xe
+ 925 000b 55       		.uleb128 0x55
+ 926 000c 17       		.uleb128 0x17
+ 927 000d 11       		.uleb128 0x11
+ 928 000e 01       		.uleb128 0x1
+ 929 000f 10       		.uleb128 0x10
+ 930 0010 17       		.uleb128 0x17
+ 931 0011 00       		.byte	0
+ 932 0012 00       		.byte	0
+ 933 0013 02       		.uleb128 0x2
+ 934 0014 24       		.uleb128 0x24
+ 935 0015 00       		.byte	0
+ 936 0016 0B       		.uleb128 0xb
+ 937 0017 0B       		.uleb128 0xb
+ 938 0018 3E       		.uleb128 0x3e
+ 939 0019 0B       		.uleb128 0xb
+ 940 001a 03       		.uleb128 0x3
+ 941 001b 08       		.uleb128 0x8
+ 942 001c 00       		.byte	0
+ 943 001d 00       		.byte	0
+ 944 001e 03       		.uleb128 0x3
+ 945 001f 24       		.uleb128 0x24
+ 946 0020 00       		.byte	0
+ 947 0021 0B       		.uleb128 0xb
+ 948 0022 0B       		.uleb128 0xb
+ 949 0023 3E       		.uleb128 0x3e
+ 950 0024 0B       		.uleb128 0xb
+ 951 0025 03       		.uleb128 0x3
+ 952 0026 0E       		.uleb128 0xe
+ARM GAS  C:\Users\student\AppData\Local\Temp\cclMKz6y.s 			page 25
+
+
+ 953 0027 00       		.byte	0
+ 954 0028 00       		.byte	0
+ 955 0029 04       		.uleb128 0x4
+ 956 002a 0F       		.uleb128 0xf
+ 957 002b 00       		.byte	0
+ 958 002c 0B       		.uleb128 0xb
+ 959 002d 0B       		.uleb128 0xb
+ 960 002e 49       		.uleb128 0x49
+ 961 002f 13       		.uleb128 0x13
+ 962 0030 00       		.byte	0
+ 963 0031 00       		.byte	0
+ 964 0032 05       		.uleb128 0x5
+ 965 0033 15       		.uleb128 0x15
+ 966 0034 00       		.byte	0
+ 967 0035 27       		.uleb128 0x27
+ 968 0036 19       		.uleb128 0x19
+ 969 0037 00       		.byte	0
+ 970 0038 00       		.byte	0
+ 971 0039 06       		.uleb128 0x6
+ 972 003a 16       		.uleb128 0x16
+ 973 003b 00       		.byte	0
+ 974 003c 03       		.uleb128 0x3
+ 975 003d 0E       		.uleb128 0xe
+ 976 003e 3A       		.uleb128 0x3a
+ 977 003f 0B       		.uleb128 0xb
+ 978 0040 3B       		.uleb128 0x3b
+ 979 0041 05       		.uleb128 0x5
+ 980 0042 49       		.uleb128 0x49
+ 981 0043 13       		.uleb128 0x13
+ 982 0044 00       		.byte	0
+ 983 0045 00       		.byte	0
+ 984 0046 07       		.uleb128 0x7
+ 985 0047 35       		.uleb128 0x35
+ 986 0048 00       		.byte	0
+ 987 0049 49       		.uleb128 0x49
+ 988 004a 13       		.uleb128 0x13
+ 989 004b 00       		.byte	0
+ 990 004c 00       		.byte	0
+ 991 004d 08       		.uleb128 0x8
+ 992 004e 2E       		.uleb128 0x2e
+ 993 004f 00       		.byte	0
+ 994 0050 3F       		.uleb128 0x3f
+ 995 0051 19       		.uleb128 0x19
+ 996 0052 03       		.uleb128 0x3
+ 997 0053 0E       		.uleb128 0xe
+ 998 0054 3A       		.uleb128 0x3a
+ 999 0055 0B       		.uleb128 0xb
+ 1000 0056 3B       		.uleb128 0x3b
+ 1001 0057 0B       		.uleb128 0xb
+ 1002 0058 27       		.uleb128 0x27
+ 1003 0059 19       		.uleb128 0x19
+ 1004 005a 11       		.uleb128 0x11
+ 1005 005b 01       		.uleb128 0x1
+ 1006 005c 12       		.uleb128 0x12
+ 1007 005d 06       		.uleb128 0x6
+ 1008 005e 40       		.uleb128 0x40
+ 1009 005f 18       		.uleb128 0x18
+ARM GAS  C:\Users\student\AppData\Local\Temp\cclMKz6y.s 			page 26
+
+
+ 1010 0060 9642     		.uleb128 0x2116
+ 1011 0062 19       		.uleb128 0x19
+ 1012 0063 00       		.byte	0
+ 1013 0064 00       		.byte	0
+ 1014 0065 09       		.uleb128 0x9
+ 1015 0066 2E       		.uleb128 0x2e
+ 1016 0067 01       		.byte	0x1
+ 1017 0068 3F       		.uleb128 0x3f
+ 1018 0069 19       		.uleb128 0x19
+ 1019 006a 03       		.uleb128 0x3
+ 1020 006b 0E       		.uleb128 0xe
+ 1021 006c 3A       		.uleb128 0x3a
+ 1022 006d 0B       		.uleb128 0xb
+ 1023 006e 3B       		.uleb128 0x3b
+ 1024 006f 0B       		.uleb128 0xb
+ 1025 0070 27       		.uleb128 0x27
+ 1026 0071 19       		.uleb128 0x19
+ 1027 0072 11       		.uleb128 0x11
+ 1028 0073 01       		.uleb128 0x1
+ 1029 0074 12       		.uleb128 0x12
+ 1030 0075 06       		.uleb128 0x6
+ 1031 0076 40       		.uleb128 0x40
+ 1032 0077 18       		.uleb128 0x18
+ 1033 0078 9642     		.uleb128 0x2116
+ 1034 007a 19       		.uleb128 0x19
+ 1035 007b 01       		.uleb128 0x1
+ 1036 007c 13       		.uleb128 0x13
+ 1037 007d 00       		.byte	0
+ 1038 007e 00       		.byte	0
+ 1039 007f 0A       		.uleb128 0xa
+ 1040 0080 05       		.uleb128 0x5
+ 1041 0081 00       		.byte	0
+ 1042 0082 03       		.uleb128 0x3
+ 1043 0083 0E       		.uleb128 0xe
+ 1044 0084 3A       		.uleb128 0x3a
+ 1045 0085 0B       		.uleb128 0xb
+ 1046 0086 3B       		.uleb128 0x3b
+ 1047 0087 0B       		.uleb128 0xb
+ 1048 0088 49       		.uleb128 0x49
+ 1049 0089 13       		.uleb128 0x13
+ 1050 008a 02       		.uleb128 0x2
+ 1051 008b 18       		.uleb128 0x18
+ 1052 008c 00       		.byte	0
+ 1053 008d 00       		.byte	0
+ 1054 008e 0B       		.uleb128 0xb
+ 1055 008f 34       		.uleb128 0x34
+ 1056 0090 00       		.byte	0
+ 1057 0091 03       		.uleb128 0x3
+ 1058 0092 08       		.uleb128 0x8
+ 1059 0093 3A       		.uleb128 0x3a
+ 1060 0094 0B       		.uleb128 0xb
+ 1061 0095 3B       		.uleb128 0x3b
+ 1062 0096 0B       		.uleb128 0xb
+ 1063 0097 49       		.uleb128 0x49
+ 1064 0098 13       		.uleb128 0x13
+ 1065 0099 02       		.uleb128 0x2
+ 1066 009a 18       		.uleb128 0x18
+ARM GAS  C:\Users\student\AppData\Local\Temp\cclMKz6y.s 			page 27
+
+
+ 1067 009b 00       		.byte	0
+ 1068 009c 00       		.byte	0
+ 1069 009d 0C       		.uleb128 0xc
+ 1070 009e 2E       		.uleb128 0x2e
+ 1071 009f 01       		.byte	0x1
+ 1072 00a0 3F       		.uleb128 0x3f
+ 1073 00a1 19       		.uleb128 0x19
+ 1074 00a2 03       		.uleb128 0x3
+ 1075 00a3 0E       		.uleb128 0xe
+ 1076 00a4 3A       		.uleb128 0x3a
+ 1077 00a5 0B       		.uleb128 0xb
+ 1078 00a6 3B       		.uleb128 0x3b
+ 1079 00a7 0B       		.uleb128 0xb
+ 1080 00a8 27       		.uleb128 0x27
+ 1081 00a9 19       		.uleb128 0x19
+ 1082 00aa 11       		.uleb128 0x11
+ 1083 00ab 01       		.uleb128 0x1
+ 1084 00ac 12       		.uleb128 0x12
+ 1085 00ad 06       		.uleb128 0x6
+ 1086 00ae 40       		.uleb128 0x40
+ 1087 00af 18       		.uleb128 0x18
+ 1088 00b0 9742     		.uleb128 0x2117
+ 1089 00b2 19       		.uleb128 0x19
+ 1090 00b3 01       		.uleb128 0x1
+ 1091 00b4 13       		.uleb128 0x13
+ 1092 00b5 00       		.byte	0
+ 1093 00b6 00       		.byte	0
+ 1094 00b7 0D       		.uleb128 0xd
+ 1095 00b8 34       		.uleb128 0x34
+ 1096 00b9 00       		.byte	0
+ 1097 00ba 03       		.uleb128 0x3
+ 1098 00bb 0E       		.uleb128 0xe
+ 1099 00bc 3A       		.uleb128 0x3a
+ 1100 00bd 0B       		.uleb128 0xb
+ 1101 00be 3B       		.uleb128 0x3b
+ 1102 00bf 0B       		.uleb128 0xb
+ 1103 00c0 49       		.uleb128 0x49
+ 1104 00c1 13       		.uleb128 0x13
+ 1105 00c2 02       		.uleb128 0x2
+ 1106 00c3 18       		.uleb128 0x18
+ 1107 00c4 00       		.byte	0
+ 1108 00c5 00       		.byte	0
+ 1109 00c6 0E       		.uleb128 0xe
+ 1110 00c7 2E       		.uleb128 0x2e
+ 1111 00c8 01       		.byte	0x1
+ 1112 00c9 3F       		.uleb128 0x3f
+ 1113 00ca 19       		.uleb128 0x19
+ 1114 00cb 03       		.uleb128 0x3
+ 1115 00cc 0E       		.uleb128 0xe
+ 1116 00cd 3A       		.uleb128 0x3a
+ 1117 00ce 0B       		.uleb128 0xb
+ 1118 00cf 3B       		.uleb128 0x3b
+ 1119 00d0 0B       		.uleb128 0xb
+ 1120 00d1 27       		.uleb128 0x27
+ 1121 00d2 19       		.uleb128 0x19
+ 1122 00d3 49       		.uleb128 0x49
+ 1123 00d4 13       		.uleb128 0x13
+ARM GAS  C:\Users\student\AppData\Local\Temp\cclMKz6y.s 			page 28
+
+
+ 1124 00d5 11       		.uleb128 0x11
+ 1125 00d6 01       		.uleb128 0x1
+ 1126 00d7 12       		.uleb128 0x12
+ 1127 00d8 06       		.uleb128 0x6
+ 1128 00d9 40       		.uleb128 0x40
+ 1129 00da 18       		.uleb128 0x18
+ 1130 00db 9742     		.uleb128 0x2117
+ 1131 00dd 19       		.uleb128 0x19
+ 1132 00de 01       		.uleb128 0x1
+ 1133 00df 13       		.uleb128 0x13
+ 1134 00e0 00       		.byte	0
+ 1135 00e1 00       		.byte	0
+ 1136 00e2 0F       		.uleb128 0xf
+ 1137 00e3 2E       		.uleb128 0x2e
+ 1138 00e4 01       		.byte	0x1
+ 1139 00e5 3F       		.uleb128 0x3f
+ 1140 00e6 19       		.uleb128 0x19
+ 1141 00e7 03       		.uleb128 0x3
+ 1142 00e8 0E       		.uleb128 0xe
+ 1143 00e9 3A       		.uleb128 0x3a
+ 1144 00ea 0B       		.uleb128 0xb
+ 1145 00eb 3B       		.uleb128 0x3b
+ 1146 00ec 05       		.uleb128 0x5
+ 1147 00ed 27       		.uleb128 0x27
+ 1148 00ee 19       		.uleb128 0x19
+ 1149 00ef 11       		.uleb128 0x11
+ 1150 00f0 01       		.uleb128 0x1
+ 1151 00f1 12       		.uleb128 0x12
+ 1152 00f2 06       		.uleb128 0x6
+ 1153 00f3 40       		.uleb128 0x40
+ 1154 00f4 18       		.uleb128 0x18
+ 1155 00f5 9742     		.uleb128 0x2117
+ 1156 00f7 19       		.uleb128 0x19
+ 1157 00f8 01       		.uleb128 0x1
+ 1158 00f9 13       		.uleb128 0x13
+ 1159 00fa 00       		.byte	0
+ 1160 00fb 00       		.byte	0
+ 1161 00fc 10       		.uleb128 0x10
+ 1162 00fd 05       		.uleb128 0x5
+ 1163 00fe 00       		.byte	0
+ 1164 00ff 03       		.uleb128 0x3
+ 1165 0100 0E       		.uleb128 0xe
+ 1166 0101 3A       		.uleb128 0x3a
+ 1167 0102 0B       		.uleb128 0xb
+ 1168 0103 3B       		.uleb128 0x3b
+ 1169 0104 05       		.uleb128 0x5
+ 1170 0105 49       		.uleb128 0x49
+ 1171 0106 13       		.uleb128 0x13
+ 1172 0107 02       		.uleb128 0x2
+ 1173 0108 18       		.uleb128 0x18
+ 1174 0109 00       		.byte	0
+ 1175 010a 00       		.byte	0
+ 1176 010b 11       		.uleb128 0x11
+ 1177 010c 2E       		.uleb128 0x2e
+ 1178 010d 01       		.byte	0x1
+ 1179 010e 3F       		.uleb128 0x3f
+ 1180 010f 19       		.uleb128 0x19
+ARM GAS  C:\Users\student\AppData\Local\Temp\cclMKz6y.s 			page 29
+
+
+ 1181 0110 03       		.uleb128 0x3
+ 1182 0111 0E       		.uleb128 0xe
+ 1183 0112 3A       		.uleb128 0x3a
+ 1184 0113 0B       		.uleb128 0xb
+ 1185 0114 3B       		.uleb128 0x3b
+ 1186 0115 05       		.uleb128 0x5
+ 1187 0116 27       		.uleb128 0x27
+ 1188 0117 19       		.uleb128 0x19
+ 1189 0118 49       		.uleb128 0x49
+ 1190 0119 13       		.uleb128 0x13
+ 1191 011a 11       		.uleb128 0x11
+ 1192 011b 01       		.uleb128 0x1
+ 1193 011c 12       		.uleb128 0x12
+ 1194 011d 06       		.uleb128 0x6
+ 1195 011e 40       		.uleb128 0x40
+ 1196 011f 18       		.uleb128 0x18
+ 1197 0120 9742     		.uleb128 0x2117
+ 1198 0122 19       		.uleb128 0x19
+ 1199 0123 01       		.uleb128 0x1
+ 1200 0124 13       		.uleb128 0x13
+ 1201 0125 00       		.byte	0
+ 1202 0126 00       		.byte	0
+ 1203 0127 12       		.uleb128 0x12
+ 1204 0128 34       		.uleb128 0x34
+ 1205 0129 00       		.byte	0
+ 1206 012a 03       		.uleb128 0x3
+ 1207 012b 0E       		.uleb128 0xe
+ 1208 012c 3A       		.uleb128 0x3a
+ 1209 012d 0B       		.uleb128 0xb
+ 1210 012e 3B       		.uleb128 0x3b
+ 1211 012f 05       		.uleb128 0x5
+ 1212 0130 49       		.uleb128 0x49
+ 1213 0131 13       		.uleb128 0x13
+ 1214 0132 02       		.uleb128 0x2
+ 1215 0133 18       		.uleb128 0x18
+ 1216 0134 00       		.byte	0
+ 1217 0135 00       		.byte	0
+ 1218 0136 13       		.uleb128 0x13
+ 1219 0137 2E       		.uleb128 0x2e
+ 1220 0138 00       		.byte	0
+ 1221 0139 3F       		.uleb128 0x3f
+ 1222 013a 19       		.uleb128 0x19
+ 1223 013b 03       		.uleb128 0x3
+ 1224 013c 0E       		.uleb128 0xe
+ 1225 013d 3A       		.uleb128 0x3a
+ 1226 013e 0B       		.uleb128 0xb
+ 1227 013f 3B       		.uleb128 0x3b
+ 1228 0140 05       		.uleb128 0x5
+ 1229 0141 27       		.uleb128 0x27
+ 1230 0142 19       		.uleb128 0x19
+ 1231 0143 11       		.uleb128 0x11
+ 1232 0144 01       		.uleb128 0x1
+ 1233 0145 12       		.uleb128 0x12
+ 1234 0146 06       		.uleb128 0x6
+ 1235 0147 40       		.uleb128 0x40
+ 1236 0148 18       		.uleb128 0x18
+ 1237 0149 9742     		.uleb128 0x2117
+ARM GAS  C:\Users\student\AppData\Local\Temp\cclMKz6y.s 			page 30
+
+
+ 1238 014b 19       		.uleb128 0x19
+ 1239 014c 00       		.byte	0
+ 1240 014d 00       		.byte	0
+ 1241 014e 14       		.uleb128 0x14
+ 1242 014f 2E       		.uleb128 0x2e
+ 1243 0150 00       		.byte	0
+ 1244 0151 3F       		.uleb128 0x3f
+ 1245 0152 19       		.uleb128 0x19
+ 1246 0153 03       		.uleb128 0x3
+ 1247 0154 0E       		.uleb128 0xe
+ 1248 0155 3A       		.uleb128 0x3a
+ 1249 0156 0B       		.uleb128 0xb
+ 1250 0157 3B       		.uleb128 0x3b
+ 1251 0158 05       		.uleb128 0x5
+ 1252 0159 27       		.uleb128 0x27
+ 1253 015a 19       		.uleb128 0x19
+ 1254 015b 49       		.uleb128 0x49
+ 1255 015c 13       		.uleb128 0x13
+ 1256 015d 11       		.uleb128 0x11
+ 1257 015e 01       		.uleb128 0x1
+ 1258 015f 12       		.uleb128 0x12
+ 1259 0160 06       		.uleb128 0x6
+ 1260 0161 40       		.uleb128 0x40
+ 1261 0162 18       		.uleb128 0x18
+ 1262 0163 9742     		.uleb128 0x2117
+ 1263 0165 19       		.uleb128 0x19
+ 1264 0166 00       		.byte	0
+ 1265 0167 00       		.byte	0
+ 1266 0168 15       		.uleb128 0x15
+ 1267 0169 01       		.uleb128 0x1
+ 1268 016a 01       		.byte	0x1
+ 1269 016b 49       		.uleb128 0x49
+ 1270 016c 13       		.uleb128 0x13
+ 1271 016d 01       		.uleb128 0x1
+ 1272 016e 13       		.uleb128 0x13
+ 1273 016f 00       		.byte	0
+ 1274 0170 00       		.byte	0
+ 1275 0171 16       		.uleb128 0x16
+ 1276 0172 21       		.uleb128 0x21
+ 1277 0173 00       		.byte	0
+ 1278 0174 49       		.uleb128 0x49
+ 1279 0175 13       		.uleb128 0x13
+ 1280 0176 2F       		.uleb128 0x2f
+ 1281 0177 0B       		.uleb128 0xb
+ 1282 0178 00       		.byte	0
+ 1283 0179 00       		.byte	0
+ 1284 017a 17       		.uleb128 0x17
+ 1285 017b 34       		.uleb128 0x34
+ 1286 017c 00       		.byte	0
+ 1287 017d 03       		.uleb128 0x3
+ 1288 017e 0E       		.uleb128 0xe
+ 1289 017f 3A       		.uleb128 0x3a
+ 1290 0180 0B       		.uleb128 0xb
+ 1291 0181 3B       		.uleb128 0x3b
+ 1292 0182 0B       		.uleb128 0xb
+ 1293 0183 49       		.uleb128 0x49
+ 1294 0184 13       		.uleb128 0x13
+ARM GAS  C:\Users\student\AppData\Local\Temp\cclMKz6y.s 			page 31
+
+
+ 1295 0185 3F       		.uleb128 0x3f
+ 1296 0186 19       		.uleb128 0x19
+ 1297 0187 3C       		.uleb128 0x3c
+ 1298 0188 19       		.uleb128 0x19
+ 1299 0189 00       		.byte	0
+ 1300 018a 00       		.byte	0
+ 1301 018b 18       		.uleb128 0x18
+ 1302 018c 34       		.uleb128 0x34
+ 1303 018d 00       		.byte	0
+ 1304 018e 03       		.uleb128 0x3
+ 1305 018f 0E       		.uleb128 0xe
+ 1306 0190 3A       		.uleb128 0x3a
+ 1307 0191 0B       		.uleb128 0xb
+ 1308 0192 3B       		.uleb128 0x3b
+ 1309 0193 0B       		.uleb128 0xb
+ 1310 0194 49       		.uleb128 0x49
+ 1311 0195 13       		.uleb128 0x13
+ 1312 0196 3F       		.uleb128 0x3f
+ 1313 0197 19       		.uleb128 0x19
+ 1314 0198 02       		.uleb128 0x2
+ 1315 0199 18       		.uleb128 0x18
+ 1316 019a 00       		.byte	0
+ 1317 019b 00       		.byte	0
+ 1318 019c 00       		.byte	0
+ 1319              		.section	.debug_aranges,"",%progbits
+ 1320 0000 7C000000 		.4byte	0x7c
+ 1321 0004 0200     		.2byte	0x2
+ 1322 0006 00000000 		.4byte	.Ldebug_info0
+ 1323 000a 04       		.byte	0x4
+ 1324 000b 00       		.byte	0
+ 1325 000c 0000     		.2byte	0
+ 1326 000e 0000     		.2byte	0
+ 1327 0010 00000000 		.4byte	.LFB0
+ 1328 0014 20000000 		.4byte	.LFE0-.LFB0
+ 1329 0018 00000000 		.4byte	.LFB1
+ 1330 001c 22000000 		.4byte	.LFE1-.LFB1
+ 1331 0020 00000000 		.4byte	.LFB2
+ 1332 0024 14000000 		.4byte	.LFE2-.LFB2
+ 1333 0028 00000000 		.4byte	.LFB3
+ 1334 002c 64000000 		.4byte	.LFE3-.LFB3
+ 1335 0030 00000000 		.4byte	.LFB4
+ 1336 0034 24000000 		.4byte	.LFE4-.LFB4
+ 1337 0038 00000000 		.4byte	.LFB5
+ 1338 003c 20000000 		.4byte	.LFE5-.LFB5
+ 1339 0040 00000000 		.4byte	.LFB6
+ 1340 0044 24000000 		.4byte	.LFE6-.LFB6
+ 1341 0048 00000000 		.4byte	.LFB7
+ 1342 004c 24000000 		.4byte	.LFE7-.LFB7
+ 1343 0050 00000000 		.4byte	.LFB8
+ 1344 0054 18000000 		.4byte	.LFE8-.LFB8
+ 1345 0058 00000000 		.4byte	.LFB9
+ 1346 005c 20000000 		.4byte	.LFE9-.LFB9
+ 1347 0060 00000000 		.4byte	.LFB10
+ 1348 0064 18000000 		.4byte	.LFE10-.LFB10
+ 1349 0068 00000000 		.4byte	.LFB11
+ 1350 006c 18000000 		.4byte	.LFE11-.LFB11
+ 1351 0070 00000000 		.4byte	.LFB12
+ARM GAS  C:\Users\student\AppData\Local\Temp\cclMKz6y.s 			page 32
+
+
+ 1352 0074 18000000 		.4byte	.LFE12-.LFB12
+ 1353 0078 00000000 		.4byte	0
+ 1354 007c 00000000 		.4byte	0
+ 1355              		.section	.debug_ranges,"",%progbits
+ 1356              	.Ldebug_ranges0:
+ 1357 0000 00000000 		.4byte	.LFB0
+ 1358 0004 20000000 		.4byte	.LFE0
+ 1359 0008 00000000 		.4byte	.LFB1
+ 1360 000c 22000000 		.4byte	.LFE1
+ 1361 0010 00000000 		.4byte	.LFB2
+ 1362 0014 14000000 		.4byte	.LFE2
+ 1363 0018 00000000 		.4byte	.LFB3
+ 1364 001c 64000000 		.4byte	.LFE3
+ 1365 0020 00000000 		.4byte	.LFB4
+ 1366 0024 24000000 		.4byte	.LFE4
+ 1367 0028 00000000 		.4byte	.LFB5
+ 1368 002c 20000000 		.4byte	.LFE5
+ 1369 0030 00000000 		.4byte	.LFB6
+ 1370 0034 24000000 		.4byte	.LFE6
+ 1371 0038 00000000 		.4byte	.LFB7
+ 1372 003c 24000000 		.4byte	.LFE7
+ 1373 0040 00000000 		.4byte	.LFB8
+ 1374 0044 18000000 		.4byte	.LFE8
+ 1375 0048 00000000 		.4byte	.LFB9
+ 1376 004c 20000000 		.4byte	.LFE9
+ 1377 0050 00000000 		.4byte	.LFB10
+ 1378 0054 18000000 		.4byte	.LFE10
+ 1379 0058 00000000 		.4byte	.LFB11
+ 1380 005c 18000000 		.4byte	.LFE11
+ 1381 0060 00000000 		.4byte	.LFB12
+ 1382 0064 18000000 		.4byte	.LFE12
+ 1383 0068 00000000 		.4byte	0
+ 1384 006c 00000000 		.4byte	0
+ 1385              		.section	.debug_line,"",%progbits
+ 1386              	.Ldebug_line0:
+ 1387 0000 91010000 		.section	.debug_str,"MS",%progbits,1
+ 1387      02007100 
+ 1387      00000201 
+ 1387      FB0E0D00 
+ 1387      01010101 
+ 1388              	.LASF16:
+ 1389 0000 72656733 		.ascii	"reg32\000"
+ 1389      3200
+ 1390              	.LASF28:
+ 1391 0006 61756469 		.ascii	"audio_isr_GetPriority\000"
+ 1391      6F5F6973 
+ 1391      725F4765 
+ 1391      74507269 
+ 1391      6F726974 
+ 1392              	.LASF34:
+ 1393 001c 63345F6E 		.ascii	"c4_num_vals\000"
+ 1393      756D5F76 
+ 1393      616C7300 
+ 1394              	.LASF22:
+ 1395 0028 61756469 		.ascii	"audio_isr_SetVector\000"
+ 1395      6F5F6973 
+ 1395      725F5365 
+ARM GAS  C:\Users\student\AppData\Local\Temp\cclMKz6y.s 			page 33
+
+
+ 1395      74566563 
+ 1395      746F7200 
+ 1396              	.LASF35:
+ 1397 003c 68696768 		.ascii	"high\000"
+ 1397      00
+ 1398              	.LASF38:
+ 1399 0041 2E5C4765 		.ascii	".\\Generated_Source\\PSoC5\\audio_isr.c\000"
+ 1399      6E657261 
+ 1399      7465645F 
+ 1399      536F7572 
+ 1399      63655C50 
+ 1400              	.LASF18:
+ 1401 0066 61756469 		.ascii	"audio_isr_Start\000"
+ 1401      6F5F6973 
+ 1401      725F5374 
+ 1401      61727400 
+ 1402              	.LASF4:
+ 1403 0076 73686F72 		.ascii	"short unsigned int\000"
+ 1403      7420756E 
+ 1403      7369676E 
+ 1403      65642069 
+ 1403      6E7400
+ 1404              	.LASF20:
+ 1405 0089 61756469 		.ascii	"audio_isr_StartEx\000"
+ 1405      6F5F6973 
+ 1405      725F5374 
+ 1405      61727445 
+ 1405      7800
+ 1406              	.LASF13:
+ 1407 009b 666C6F61 		.ascii	"float\000"
+ 1407      7400
+ 1408              	.LASF2:
+ 1409 00a1 756E7369 		.ascii	"unsigned char\000"
+ 1409      676E6564 
+ 1409      20636861 
+ 1409      7200
+ 1410              	.LASF25:
+ 1411 00af 61756469 		.ascii	"audio_isr_SetPriority\000"
+ 1411      6F5F6973 
+ 1411      725F5365 
+ 1411      74507269 
+ 1411      6F726974 
+ 1412              	.LASF15:
+ 1413 00c5 72656738 		.ascii	"reg8\000"
+ 1413      00
+ 1414              	.LASF6:
+ 1415 00ca 6C6F6E67 		.ascii	"long unsigned int\000"
+ 1415      20756E73 
+ 1415      69676E65 
+ 1415      6420696E 
+ 1415      7400
+ 1416              	.LASF30:
+ 1417 00dc 61756469 		.ascii	"audio_isr_Disable\000"
+ 1417      6F5F6973 
+ 1417      725F4469 
+ 1417      7361626C 
+ 1417      6500
+ARM GAS  C:\Users\student\AppData\Local\Temp\cclMKz6y.s 			page 34
+
+
+ 1418              	.LASF11:
+ 1419 00ee 75696E74 		.ascii	"uint8\000"
+ 1419      3800
+ 1420              	.LASF40:
+ 1421 00f4 61756469 		.ascii	"audio_isr_GetState\000"
+ 1421      6F5F6973 
+ 1421      725F4765 
+ 1421      74537461 
+ 1421      746500
+ 1422              	.LASF19:
+ 1423 0107 61756469 		.ascii	"audio_isr_Stop\000"
+ 1423      6F5F6973 
+ 1423      725F5374 
+ 1423      6F7000
+ 1424              	.LASF37:
+ 1425 0116 474E5520 		.ascii	"GNU C 4.9.3 20150303 (release) [ARM/embedded-4_9-br"
+ 1425      4320342E 
+ 1425      392E3320 
+ 1425      32303135 
+ 1425      30333033 
+ 1426 0149 616E6368 		.ascii	"anch revision 221220] -mcpu=cortex-m3 -mthumb -g -O"
+ 1426      20726576 
+ 1426      6973696F 
+ 1426      6E203232 
+ 1426      31323230 
+ 1427 017c 30202D66 		.ascii	"0 -ffunction-sections -ffat-lto-objects\000"
+ 1427      66756E63 
+ 1427      74696F6E 
+ 1427      2D736563 
+ 1427      74696F6E 
+ 1428              	.LASF14:
+ 1429 01a4 646F7562 		.ascii	"double\000"
+ 1429      6C6500
+ 1430              	.LASF21:
+ 1431 01ab 61756469 		.ascii	"audio_isr_Interrupt\000"
+ 1431      6F5F6973 
+ 1431      725F496E 
+ 1431      74657272 
+ 1431      75707400 
+ 1432              	.LASF26:
+ 1433 01bf 7072696F 		.ascii	"priority\000"
+ 1433      72697479 
+ 1433      00
+ 1434              	.LASF12:
+ 1435 01c8 75696E74 		.ascii	"uint32\000"
+ 1435      333200
+ 1436              	.LASF0:
+ 1437 01cf 756E7369 		.ascii	"unsigned int\000"
+ 1437      676E6564 
+ 1437      20696E74 
+ 1437      00
+ 1438              	.LASF27:
+ 1439 01dc 61756469 		.ascii	"audio_isr_GetVector\000"
+ 1439      6F5F6973 
+ 1439      725F4765 
+ 1439      74566563 
+ 1439      746F7200 
+ARM GAS  C:\Users\student\AppData\Local\Temp\cclMKz6y.s 			page 35
+
+
+ 1440              	.LASF23:
+ 1441 01f0 61646472 		.ascii	"address\000"
+ 1441      65737300 
+ 1442              	.LASF8:
+ 1443 01f8 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 1443      206C6F6E 
+ 1443      6720756E 
+ 1443      7369676E 
+ 1443      65642069 
+ 1444              	.LASF36:
+ 1445 020f 63345F74 		.ascii	"c4_table_idx\000"
+ 1445      61626C65 
+ 1445      5F696478 
+ 1445      00
+ 1446              	.LASF33:
+ 1447 021c 63345F73 		.ascii	"c4_sustain\000"
+ 1447      75737461 
+ 1447      696E00
+ 1448              	.LASF17:
+ 1449 0227 63796973 		.ascii	"cyisraddress\000"
+ 1449      72616464 
+ 1449      72657373 
+ 1449      00
+ 1450              	.LASF9:
+ 1451 0234 73697A65 		.ascii	"sizetype\000"
+ 1451      74797065 
+ 1451      00
+ 1452              	.LASF7:
+ 1453 023d 6C6F6E67 		.ascii	"long long int\000"
+ 1453      206C6F6E 
+ 1453      6720696E 
+ 1453      7400
+ 1454              	.LASF10:
+ 1455 024b 63686172 		.ascii	"char\000"
+ 1455      00
+ 1456              	.LASF24:
+ 1457 0250 72616D56 		.ascii	"ramVectorTable\000"
+ 1457      6563746F 
+ 1457      72546162 
+ 1457      6C6500
+ 1458              	.LASF3:
+ 1459 025f 73686F72 		.ascii	"short int\000"
+ 1459      7420696E 
+ 1459      7400
+ 1460              	.LASF29:
+ 1461 0269 61756469 		.ascii	"audio_isr_Enable\000"
+ 1461      6F5F6973 
+ 1461      725F456E 
+ 1461      61626C65 
+ 1461      00
+ 1462              	.LASF32:
+ 1463 027a 61756469 		.ascii	"audio_isr_ClearPending\000"
+ 1463      6F5F6973 
+ 1463      725F436C 
+ 1463      65617250 
+ 1463      656E6469 
+ 1464              	.LASF39:
+ARM GAS  C:\Users\student\AppData\Local\Temp\cclMKz6y.s 			page 36
+
+
+ 1465 0291 433A5C55 		.ascii	"C:\\Users\\student\\Desktop\\6.115\\project\\DVDAC_"
+ 1465      73657273 
+ 1465      5C737475 
+ 1465      64656E74 
+ 1465      5C446573 
+ 1466 02be 4578616D 		.ascii	"Example01\\DVDAC_Example01.cydsn\000"
+ 1466      706C6530 
+ 1466      315C4456 
+ 1466      4441435F 
+ 1466      4578616D 
+ 1467              	.LASF5:
+ 1468 02de 6C6F6E67 		.ascii	"long int\000"
+ 1468      20696E74 
+ 1468      00
+ 1469              	.LASF1:
+ 1470 02e7 7369676E 		.ascii	"signed char\000"
+ 1470      65642063 
+ 1470      68617200 
+ 1471              	.LASF31:
+ 1472 02f3 61756469 		.ascii	"audio_isr_SetPending\000"
+ 1472      6F5F6973 
+ 1472      725F5365 
+ 1472      7450656E 
+ 1472      64696E67 
+ 1473              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.9.3 20150303 (release) [ARM/embedded-4_9-br

@@ -1,0 +1,402 @@
+ARM GAS  C:\Users\student\AppData\Local\Temp\ccJ55mve.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.file	"wav_tables.c"
+  15              		.text
+  16              	.Ltext0:
+  17              		.cfi_sections	.debug_frame
+  18              		.global	c4_sustain
+  19              		.data
+  20              		.align	2
+  21              		.type	c4_sustain, %object
+  22              		.size	c4_sustain, 672
+  23              	c4_sustain:
+  24 0000 77000000 		.word	119
+  25 0004 65000000 		.word	101
+  26 0008 63000000 		.word	99
+  27 000c 6E000000 		.word	110
+  28 0010 83000000 		.word	131
+  29 0014 96000000 		.word	150
+  30 0018 9E000000 		.word	158
+  31 001c 96000000 		.word	150
+  32 0020 86000000 		.word	134
+  33 0024 7B000000 		.word	123
+  34 0028 70000000 		.word	112
+  35 002c 59000000 		.word	89
+  36 0030 39000000 		.word	57
+  37 0034 16000000 		.word	22
+  38 0038 02000000 		.word	2
+  39 003c 14000000 		.word	20
+  40 0040 39000000 		.word	57
+  41 0044 52000000 		.word	82
+  42 0048 5D000000 		.word	93
+  43 004c 63000000 		.word	99
+  44 0050 5F000000 		.word	95
+  45 0054 4D000000 		.word	77
+  46 0058 32000000 		.word	50
+  47 005c 1F000000 		.word	31
+  48 0060 1A000000 		.word	26
+  49 0064 1F000000 		.word	31
+  50 0068 29000000 		.word	41
+  51 006c 2F000000 		.word	47
+  52 0070 31000000 		.word	49
+  53 0074 39000000 		.word	57
+  54 0078 47000000 		.word	71
+  55 007c 55000000 		.word	85
+  56 0080 5E000000 		.word	94
+  57 0084 60000000 		.word	96
+ARM GAS  C:\Users\student\AppData\Local\Temp\ccJ55mve.s 			page 2
+
+
+  58 0088 5D000000 		.word	93
+  59 008c 57000000 		.word	87
+  60 0090 52000000 		.word	82
+  61 0094 50000000 		.word	80
+  62 0098 52000000 		.word	82
+  63 009c 58000000 		.word	88
+  64 00a0 60000000 		.word	96
+  65 00a4 68000000 		.word	104
+  66 00a8 70000000 		.word	112
+  67 00ac 74000000 		.word	116
+  68 00b0 76000000 		.word	118
+  69 00b4 78000000 		.word	120
+  70 00b8 7A000000 		.word	122
+  71 00bc 7A000000 		.word	122
+  72 00c0 78000000 		.word	120
+  73 00c4 77000000 		.word	119
+  74 00c8 79000000 		.word	121
+  75 00cc 79000000 		.word	121
+  76 00d0 74000000 		.word	116
+  77 00d4 71000000 		.word	113
+  78 00d8 78000000 		.word	120
+  79 00dc 83000000 		.word	131
+  80 00e0 8C000000 		.word	140
+  81 00e4 8D000000 		.word	141
+  82 00e8 8A000000 		.word	138
+  83 00ec 8B000000 		.word	139
+  84 00f0 8A000000 		.word	138
+  85 00f4 83000000 		.word	131
+  86 00f8 7A000000 		.word	122
+  87 00fc 77000000 		.word	119
+  88 0100 7C000000 		.word	124
+  89 0104 81000000 		.word	129
+  90 0108 7F000000 		.word	127
+  91 010c 7B000000 		.word	123
+  92 0110 81000000 		.word	129
+  93 0114 8D000000 		.word	141
+  94 0118 95000000 		.word	149
+  95 011c 95000000 		.word	149
+  96 0120 90000000 		.word	144
+  97 0124 8E000000 		.word	142
+  98 0128 8D000000 		.word	141
+  99 012c 8A000000 		.word	138
+ 100 0130 89000000 		.word	137
+ 101 0134 8E000000 		.word	142
+ 102 0138 95000000 		.word	149
+ 103 013c 97000000 		.word	151
+ 104 0140 96000000 		.word	150
+ 105 0144 98000000 		.word	152
+ 106 0148 A0000000 		.word	160
+ 107 014c A8000000 		.word	168
+ 108 0150 AE000000 		.word	174
+ 109 0154 B0000000 		.word	176
+ 110 0158 B3000000 		.word	179
+ 111 015c B6000000 		.word	182
+ 112 0160 B6000000 		.word	182
+ 113 0164 AF000000 		.word	175
+ 114 0168 A6000000 		.word	166
+ARM GAS  C:\Users\student\AppData\Local\Temp\ccJ55mve.s 			page 3
+
+
+ 115 016c A2000000 		.word	162
+ 116 0170 A5000000 		.word	165
+ 117 0174 AB000000 		.word	171
+ 118 0178 B0000000 		.word	176
+ 119 017c B8000000 		.word	184
+ 120 0180 BC000000 		.word	188
+ 121 0184 C1000000 		.word	193
+ 122 0188 CC000000 		.word	204
+ 123 018c D8000000 		.word	216
+ 124 0190 EC000000 		.word	236
+ 125 0194 FD000000 		.word	253
+ 126 0198 FB000000 		.word	251
+ 127 019c FF000000 		.word	255
+ 128 01a0 F6000000 		.word	246
+ 129 01a4 AE000000 		.word	174
+ 130 01a8 60000000 		.word	96
+ 131 01ac 5A000000 		.word	90
+ 132 01b0 74000000 		.word	116
+ 133 01b4 85000000 		.word	133
+ 134 01b8 A2000000 		.word	162
+ 135 01bc CD000000 		.word	205
+ 136 01c0 F3000000 		.word	243
+ 137 01c4 F4000000 		.word	244
+ 138 01c8 C4000000 		.word	196
+ 139 01cc 8F000000 		.word	143
+ 140 01d0 83000000 		.word	131
+ 141 01d4 8F000000 		.word	143
+ 142 01d8 7D000000 		.word	125
+ 143 01dc 3F000000 		.word	63
+ 144 01e0 0A000000 		.word	10
+ 145 01e4 0C000000 		.word	12
+ 146 01e8 2E000000 		.word	46
+ 147 01ec 47000000 		.word	71
+ 148 01f0 5C000000 		.word	92
+ 149 01f4 77000000 		.word	119
+ 150 01f8 8F000000 		.word	143
+ 151 01fc 92000000 		.word	146
+ 152 0200 7C000000 		.word	124
+ 153 0204 5E000000 		.word	94
+ 154 0208 4E000000 		.word	78
+ 155 020c 47000000 		.word	71
+ 156 0210 42000000 		.word	66
+ 157 0214 41000000 		.word	65
+ 158 0218 45000000 		.word	69
+ 159 021c 49000000 		.word	73
+ 160 0220 4B000000 		.word	75
+ 161 0224 4C000000 		.word	76
+ 162 0228 54000000 		.word	84
+ 163 022c 64000000 		.word	100
+ 164 0230 74000000 		.word	116
+ 165 0234 7F000000 		.word	127
+ 166 0238 80000000 		.word	128
+ 167 023c 79000000 		.word	121
+ 168 0240 7A000000 		.word	122
+ 169 0244 82000000 		.word	130
+ 170 0248 8A000000 		.word	138
+ 171 024c 8E000000 		.word	142
+ARM GAS  C:\Users\student\AppData\Local\Temp\ccJ55mve.s 			page 4
+
+
+ 172 0250 89000000 		.word	137
+ 173 0254 84000000 		.word	132
+ 174 0258 88000000 		.word	136
+ 175 025c 87000000 		.word	135
+ 176 0260 80000000 		.word	128
+ 177 0264 7F000000 		.word	127
+ 178 0268 87000000 		.word	135
+ 179 026c 9D000000 		.word	157
+ 180 0270 B9000000 		.word	185
+ 181 0274 C8000000 		.word	200
+ 182 0278 C5000000 		.word	197
+ 183 027c B9000000 		.word	185
+ 184 0280 AF000000 		.word	175
+ 185 0284 B0000000 		.word	176
+ 186 0288 B8000000 		.word	184
+ 187 028c BE000000 		.word	190
+ 188 0290 BC000000 		.word	188
+ 189 0294 AB000000 		.word	171
+ 190 0298 93000000 		.word	147
+ 191 029c 7C000000 		.word	124
+ 192              		.global	c4_num_vals
+ 193              		.align	2
+ 194              		.type	c4_num_vals, %object
+ 195              		.size	c4_num_vals, 4
+ 196              	c4_num_vals:
+ 197 02a0 A8000000 		.word	168
+ 198              		.text
+ 199              	.Letext0:
+ 200              		.file 1 ".\\wav_tables.c"
+ 201              		.section	.debug_info,"",%progbits
+ 202              	.Ldebug_info0:
+ 203 0000 5A000000 		.4byte	0x5a
+ 204 0004 0400     		.2byte	0x4
+ 205 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 206 000a 04       		.byte	0x4
+ 207 000b 01       		.uleb128 0x1
+ 208 000c 00000000 		.4byte	.LASF3
+ 209 0010 01       		.byte	0x1
+ 210 0011 EF000000 		.4byte	.LASF4
+ 211 0015 97000000 		.4byte	.LASF5
+ 212 0019 00000000 		.4byte	.Ldebug_line0
+ 213 001d 02       		.uleb128 0x2
+ 214 001e 34000000 		.4byte	0x34
+ 215 0022 2D000000 		.4byte	0x2d
+ 216 0026 03       		.uleb128 0x3
+ 217 0027 2D000000 		.4byte	0x2d
+ 218 002b A7       		.byte	0xa7
+ 219 002c 00       		.byte	0
+ 220 002d 04       		.uleb128 0x4
+ 221 002e 04       		.byte	0x4
+ 222 002f 07       		.byte	0x7
+ 223 0030 8E000000 		.4byte	.LASF0
+ 224 0034 05       		.uleb128 0x5
+ 225 0035 04       		.byte	0x4
+ 226 0036 05       		.byte	0x5
+ 227 0037 696E7400 		.ascii	"int\000"
+ 228 003b 06       		.uleb128 0x6
+ARM GAS  C:\Users\student\AppData\Local\Temp\ccJ55mve.s 			page 5
+
+
+ 229 003c E4000000 		.4byte	.LASF1
+ 230 0040 01       		.byte	0x1
+ 231 0041 0E       		.byte	0xe
+ 232 0042 1D000000 		.4byte	0x1d
+ 233 0046 05       		.uleb128 0x5
+ 234 0047 03       		.byte	0x3
+ 235 0048 00000000 		.4byte	c4_sustain
+ 236 004c 06       		.uleb128 0x6
+ 237 004d FE000000 		.4byte	.LASF2
+ 238 0051 01       		.byte	0x1
+ 239 0052 0F       		.byte	0xf
+ 240 0053 34000000 		.4byte	0x34
+ 241 0057 05       		.uleb128 0x5
+ 242 0058 03       		.byte	0x3
+ 243 0059 00000000 		.4byte	c4_num_vals
+ 244 005d 00       		.byte	0
+ 245              		.section	.debug_abbrev,"",%progbits
+ 246              	.Ldebug_abbrev0:
+ 247 0000 01       		.uleb128 0x1
+ 248 0001 11       		.uleb128 0x11
+ 249 0002 01       		.byte	0x1
+ 250 0003 25       		.uleb128 0x25
+ 251 0004 0E       		.uleb128 0xe
+ 252 0005 13       		.uleb128 0x13
+ 253 0006 0B       		.uleb128 0xb
+ 254 0007 03       		.uleb128 0x3
+ 255 0008 0E       		.uleb128 0xe
+ 256 0009 1B       		.uleb128 0x1b
+ 257 000a 0E       		.uleb128 0xe
+ 258 000b 10       		.uleb128 0x10
+ 259 000c 17       		.uleb128 0x17
+ 260 000d 00       		.byte	0
+ 261 000e 00       		.byte	0
+ 262 000f 02       		.uleb128 0x2
+ 263 0010 01       		.uleb128 0x1
+ 264 0011 01       		.byte	0x1
+ 265 0012 49       		.uleb128 0x49
+ 266 0013 13       		.uleb128 0x13
+ 267 0014 01       		.uleb128 0x1
+ 268 0015 13       		.uleb128 0x13
+ 269 0016 00       		.byte	0
+ 270 0017 00       		.byte	0
+ 271 0018 03       		.uleb128 0x3
+ 272 0019 21       		.uleb128 0x21
+ 273 001a 00       		.byte	0
+ 274 001b 49       		.uleb128 0x49
+ 275 001c 13       		.uleb128 0x13
+ 276 001d 2F       		.uleb128 0x2f
+ 277 001e 0B       		.uleb128 0xb
+ 278 001f 00       		.byte	0
+ 279 0020 00       		.byte	0
+ 280 0021 04       		.uleb128 0x4
+ 281 0022 24       		.uleb128 0x24
+ 282 0023 00       		.byte	0
+ 283 0024 0B       		.uleb128 0xb
+ 284 0025 0B       		.uleb128 0xb
+ 285 0026 3E       		.uleb128 0x3e
+ARM GAS  C:\Users\student\AppData\Local\Temp\ccJ55mve.s 			page 6
+
+
+ 286 0027 0B       		.uleb128 0xb
+ 287 0028 03       		.uleb128 0x3
+ 288 0029 0E       		.uleb128 0xe
+ 289 002a 00       		.byte	0
+ 290 002b 00       		.byte	0
+ 291 002c 05       		.uleb128 0x5
+ 292 002d 24       		.uleb128 0x24
+ 293 002e 00       		.byte	0
+ 294 002f 0B       		.uleb128 0xb
+ 295 0030 0B       		.uleb128 0xb
+ 296 0031 3E       		.uleb128 0x3e
+ 297 0032 0B       		.uleb128 0xb
+ 298 0033 03       		.uleb128 0x3
+ 299 0034 08       		.uleb128 0x8
+ 300 0035 00       		.byte	0
+ 301 0036 00       		.byte	0
+ 302 0037 06       		.uleb128 0x6
+ 303 0038 34       		.uleb128 0x34
+ 304 0039 00       		.byte	0
+ 305 003a 03       		.uleb128 0x3
+ 306 003b 0E       		.uleb128 0xe
+ 307 003c 3A       		.uleb128 0x3a
+ 308 003d 0B       		.uleb128 0xb
+ 309 003e 3B       		.uleb128 0x3b
+ 310 003f 0B       		.uleb128 0xb
+ 311 0040 49       		.uleb128 0x49
+ 312 0041 13       		.uleb128 0x13
+ 313 0042 3F       		.uleb128 0x3f
+ 314 0043 19       		.uleb128 0x19
+ 315 0044 02       		.uleb128 0x2
+ 316 0045 18       		.uleb128 0x18
+ 317 0046 00       		.byte	0
+ 318 0047 00       		.byte	0
+ 319 0048 00       		.byte	0
+ 320              		.section	.debug_aranges,"",%progbits
+ 321 0000 14000000 		.4byte	0x14
+ 322 0004 0200     		.2byte	0x2
+ 323 0006 00000000 		.4byte	.Ldebug_info0
+ 324 000a 04       		.byte	0x4
+ 325 000b 00       		.byte	0
+ 326 000c 0000     		.2byte	0
+ 327 000e 0000     		.2byte	0
+ 328 0010 00000000 		.4byte	0
+ 329 0014 00000000 		.4byte	0
+ 330              		.section	.debug_line,"",%progbits
+ 331              	.Ldebug_line0:
+ 332 0000 2B000000 		.section	.debug_str,"MS",%progbits,1
+ 332      02002500 
+ 332      00000201 
+ 332      FB0E0D00 
+ 332      01010101 
+ 333              	.LASF3:
+ 334 0000 474E5520 		.ascii	"GNU C 4.9.3 20150303 (release) [ARM/embedded-4_9-br"
+ 334      4320342E 
+ 334      392E3320 
+ 334      32303135 
+ 334      30333033 
+ARM GAS  C:\Users\student\AppData\Local\Temp\ccJ55mve.s 			page 7
+
+
+ 335 0033 616E6368 		.ascii	"anch revision 221220] -mcpu=cortex-m3 -mthumb -g -O"
+ 335      20726576 
+ 335      6973696F 
+ 335      6E203232 
+ 335      31323230 
+ 336 0066 30202D66 		.ascii	"0 -ffunction-sections -ffat-lto-objects\000"
+ 336      66756E63 
+ 336      74696F6E 
+ 336      2D736563 
+ 336      74696F6E 
+ 337              	.LASF0:
+ 338 008e 73697A65 		.ascii	"sizetype\000"
+ 338      74797065 
+ 338      00
+ 339              	.LASF5:
+ 340 0097 433A5C55 		.ascii	"C:\\Users\\student\\Desktop\\6.115\\project\\DVDAC_"
+ 340      73657273 
+ 340      5C737475 
+ 340      64656E74 
+ 340      5C446573 
+ 341 00c4 4578616D 		.ascii	"Example01\\DVDAC_Example01.cydsn\000"
+ 341      706C6530 
+ 341      315C4456 
+ 341      4441435F 
+ 341      4578616D 
+ 342              	.LASF1:
+ 343 00e4 63345F73 		.ascii	"c4_sustain\000"
+ 343      75737461 
+ 343      696E00
+ 344              	.LASF4:
+ 345 00ef 2E5C7761 		.ascii	".\\wav_tables.c\000"
+ 345      765F7461 
+ 345      626C6573 
+ 345      2E6300
+ 346              	.LASF2:
+ 347 00fe 63345F6E 		.ascii	"c4_num_vals\000"
+ 347      756D5F76 
+ 347      616C7300 
+ 348              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.9.3 20150303 (release) [ARM/embedded-4_9-br

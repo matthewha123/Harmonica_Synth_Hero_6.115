@@ -1,0 +1,3990 @@
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cc8zrVxn.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"game.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.global	last_game_update
+  20              		.bss
+  21              		.align	2
+  22              		.type	last_game_update, %object
+  23              		.size	last_game_update, 4
+  24              	last_game_update:
+  25 0000 00000000 		.space	4
+  26              		.global	num_ticks
+  27              		.align	2
+  28              		.type	num_ticks, %object
+  29              		.size	num_ticks, 4
+  30              	num_ticks:
+  31 0004 00000000 		.space	4
+  32              		.comm	test_group,20,4
+  33              		.global	num_note_groups
+  34              		.section	.rodata
+  35              		.type	num_note_groups, %object
+  36              		.size	num_note_groups, 1
+  37              	num_note_groups:
+  38 0000 03       		.byte	3
+  39              		.comm	note_groups,60,4
+  40              		.section	.text.game_init,"ax",%progbits
+  41              		.align	2
+  42              		.global	game_init
+  43              		.thumb
+  44              		.thumb_func
+  45              		.type	game_init, %function
+  46              	game_init:
+  47              	.LFB0:
+  48              		.file 1 "game.c"
+   1:game.c        **** /* ========================================
+   2:game.c        ****  *
+   3:game.c        ****  * Copyright YOUR COMPANY, THE YEAR
+   4:game.c        ****  * All Rights Reserved
+   5:game.c        ****  * UNPUBLISHED, LICENSED SOFTWARE.
+   6:game.c        ****  *
+   7:game.c        ****  * CONFIDENTIAL AND PROPRIETARY INFORMATION
+   8:game.c        ****  * WHICH IS THE PROPERTY OF your company.
+   9:game.c        ****  *
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cc8zrVxn.s 			page 2
+
+
+  10:game.c        ****  * ========================================
+  11:game.c        **** */
+  12:game.c        **** #include "game.h"
+  13:game.c        **** 
+  14:game.c        **** uint32 last_game_update = 0;
+  15:game.c        **** uint32 num_ticks = 0;
+  16:game.c        **** NOTE_GROUP test_group;
+  17:game.c        **** 
+  18:game.c        **** const uint8 num_note_groups = 3;
+  19:game.c        **** NOTE_GROUP note_groups[3];
+  20:game.c        **** 
+  21:game.c        **** void game_init() {
+  49              		.loc 1 21 0
+  50              		.cfi_startproc
+  51              		@ args = 0, pretend = 0, frame = 8
+  52              		@ frame_needed = 1, uses_anonymous_args = 0
+  53 0000 B0B5     		push	{r4, r5, r7, lr}
+  54              		.cfi_def_cfa_offset 16
+  55              		.cfi_offset 4, -16
+  56              		.cfi_offset 5, -12
+  57              		.cfi_offset 7, -8
+  58              		.cfi_offset 14, -4
+  59 0002 82B0     		sub	sp, sp, #8
+  60              		.cfi_def_cfa_offset 24
+  61 0004 00AF     		add	r7, sp, #0
+  62              		.cfi_def_cfa_register 7
+  63              	.LBB2:
+  22:game.c        ****     
+  23:game.c        ****     for(int idx = 0; idx < num_note_groups; idx++) {
+  64              		.loc 1 23 0
+  65 0006 0023     		movs	r3, #0
+  66 0008 7B60     		str	r3, [r7, #4]
+  67 000a 0CE0     		b	.L2
+  68              	.L3:
+  24:game.c        ****         note_groups[idx].active = FALSE;
+  69              		.loc 1 24 0 discriminator 3
+  70 000c 2249     		ldr	r1, .L4
+  71 000e 7A68     		ldr	r2, [r7, #4]
+  72 0010 1346     		mov	r3, r2
+  73 0012 9B00     		lsls	r3, r3, #2
+  74 0014 1344     		add	r3, r3, r2
+  75 0016 9B00     		lsls	r3, r3, #2
+  76 0018 0B44     		add	r3, r3, r1
+  77 001a 0333     		adds	r3, r3, #3
+  78 001c 0022     		movs	r2, #0
+  79 001e 1A70     		strb	r2, [r3]
+  23:game.c        ****         note_groups[idx].active = FALSE;
+  80              		.loc 1 23 0 discriminator 3
+  81 0020 7B68     		ldr	r3, [r7, #4]
+  82 0022 0133     		adds	r3, r3, #1
+  83 0024 7B60     		str	r3, [r7, #4]
+  84              	.L2:
+  23:game.c        ****         note_groups[idx].active = FALSE;
+  85              		.loc 1 23 0 is_stmt 0 discriminator 1
+  86 0026 0323     		movs	r3, #3
+  87 0028 1A46     		mov	r2, r3
+  88 002a 7B68     		ldr	r3, [r7, #4]
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cc8zrVxn.s 			page 3
+
+
+  89 002c 9A42     		cmp	r2, r3
+  90 002e EDDC     		bgt	.L3
+  91              	.LBE2:
+  25:game.c        ****         
+  26:game.c        ****     }
+  27:game.c        ****     
+  28:game.c        ****     test_group.num_notes = 3;
+  92              		.loc 1 28 0 is_stmt 1
+  93 0030 1A4B     		ldr	r3, .L4+4
+  94 0032 0322     		movs	r2, #3
+  95 0034 1A70     		strb	r2, [r3]
+  29:game.c        ****     test_group.center_hole = 4; // 0 indexed
+  96              		.loc 1 29 0
+  97 0036 194B     		ldr	r3, .L4+4
+  98 0038 0422     		movs	r2, #4
+  99 003a 5A70     		strb	r2, [r3, #1]
+  30:game.c        ****     test_group.mode = SUCKED_NOTES;
+ 100              		.loc 1 30 0
+ 101 003c 174B     		ldr	r3, .L4+4
+ 102 003e 0122     		movs	r2, #1
+ 103 0040 9A70     		strb	r2, [r3, #2]
+  31:game.c        ****     test_group.active = TRUE;
+ 104              		.loc 1 31 0
+ 105 0042 164B     		ldr	r3, .L4+4
+ 106 0044 0122     		movs	r2, #1
+ 107 0046 DA70     		strb	r2, [r3, #3]
+  32:game.c        ****     test_group.pos = (Position){.x = get_x(test_group.center_hole), .y = 0};
+ 108              		.loc 1 32 0
+ 109 0048 144B     		ldr	r3, .L4+4
+ 110 004a 5B78     		ldrb	r3, [r3, #1]	@ zero_extendqisi2
+ 111 004c 1846     		mov	r0, r3
+ 112 004e FFF7FEFF 		bl	get_x
+ 113 0052 0346     		mov	r3, r0
+ 114 0054 1A46     		mov	r2, r3
+ 115 0056 114B     		ldr	r3, .L4+4
+ 116 0058 1A71     		strb	r2, [r3, #4]
+ 117 005a 104B     		ldr	r3, .L4+4
+ 118 005c 0022     		movs	r2, #0
+ 119 005e 9A60     		str	r2, [r3, #8]
+  33:game.c        ****     test_group.speed = 2;
+ 120              		.loc 1 33 0
+ 121 0060 0E4B     		ldr	r3, .L4+4
+ 122 0062 0222     		movs	r2, #2
+ 123 0064 1A73     		strb	r2, [r3, #12]
+  34:game.c        ****     test_group.holes[0] = 3;
+ 124              		.loc 1 34 0
+ 125 0066 0D4B     		ldr	r3, .L4+4
+ 126 0068 0322     		movs	r2, #3
+ 127 006a 5A73     		strb	r2, [r3, #13]
+  35:game.c        ****     test_group.holes[1] = 4;
+ 128              		.loc 1 35 0
+ 129 006c 0B4B     		ldr	r3, .L4+4
+ 130 006e 0422     		movs	r2, #4
+ 131 0070 9A73     		strb	r2, [r3, #14]
+  36:game.c        ****     test_group.holes[2] = 5;
+ 132              		.loc 1 36 0
+ 133 0072 0A4B     		ldr	r3, .L4+4
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cc8zrVxn.s 			page 4
+
+
+ 134 0074 0522     		movs	r2, #5
+ 135 0076 DA73     		strb	r2, [r3, #15]
+  37:game.c        ****     test_group.length = 25;
+ 136              		.loc 1 37 0
+ 137 0078 084B     		ldr	r3, .L4+4
+ 138 007a 1922     		movs	r2, #25
+ 139 007c DA74     		strb	r2, [r3, #19]
+  38:game.c        ****     note_groups[0] = test_group;
+ 140              		.loc 1 38 0
+ 141 007e 064A     		ldr	r2, .L4
+ 142 0080 064B     		ldr	r3, .L4+4
+ 143 0082 1446     		mov	r4, r2
+ 144 0084 1D46     		mov	r5, r3
+ 145 0086 0FCD     		ldmia	r5!, {r0, r1, r2, r3}
+ 146 0088 0FC4     		stmia	r4!, {r0, r1, r2, r3}
+ 147 008a 2B68     		ldr	r3, [r5]
+ 148 008c 2360     		str	r3, [r4]
+  39:game.c        **** }
+ 149              		.loc 1 39 0
+ 150 008e 00BF     		nop
+ 151 0090 0837     		adds	r7, r7, #8
+ 152              		.cfi_def_cfa_offset 16
+ 153 0092 BD46     		mov	sp, r7
+ 154              		.cfi_def_cfa_register 13
+ 155              		@ sp needed
+ 156 0094 B0BD     		pop	{r4, r5, r7, pc}
+ 157              	.L5:
+ 158 0096 00BF     		.align	2
+ 159              	.L4:
+ 160 0098 00000000 		.word	note_groups
+ 161 009c 00000000 		.word	test_group
+ 162              		.cfi_endproc
+ 163              	.LFE0:
+ 164              		.size	game_init, .-game_init
+ 165              		.section	.text.get_x,"ax",%progbits
+ 166              		.align	2
+ 167              		.global	get_x
+ 168              		.thumb
+ 169              		.thumb_func
+ 170              		.type	get_x, %function
+ 171              	get_x:
+ 172              	.LFB1:
+  40:game.c        **** 
+  41:game.c        **** uint8 get_x(uint8 hole) {
+ 173              		.loc 1 41 0
+ 174              		.cfi_startproc
+ 175              		@ args = 0, pretend = 0, frame = 8
+ 176              		@ frame_needed = 1, uses_anonymous_args = 0
+ 177              		@ link register save eliminated.
+ 178 0000 80B4     		push	{r7}
+ 179              		.cfi_def_cfa_offset 4
+ 180              		.cfi_offset 7, -4
+ 181 0002 83B0     		sub	sp, sp, #12
+ 182              		.cfi_def_cfa_offset 16
+ 183 0004 00AF     		add	r7, sp, #0
+ 184              		.cfi_def_cfa_register 7
+ 185 0006 0346     		mov	r3, r0
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cc8zrVxn.s 			page 5
+
+
+ 186 0008 FB71     		strb	r3, [r7, #7]
+  42:game.c        ****     if(hole > 9) {
+ 187              		.loc 1 42 0
+ 188 000a FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 189 000c 092B     		cmp	r3, #9
+ 190 000e 01D9     		bls	.L7
+  43:game.c        ****         return 255;
+ 191              		.loc 1 43 0
+ 192 0010 FF23     		movs	r3, #255
+ 193 0012 07E0     		b	.L8
+ 194              	.L7:
+  44:game.c        ****     } else {
+  45:game.c        ****         return NOTE_LINE_START_OFFSET + 
+ 195              		.loc 1 45 0
+ 196 0014 FB79     		ldrb	r3, [r7, #7]
+ 197 0016 1A46     		mov	r2, r3
+ 198 0018 9200     		lsls	r2, r2, #2
+ 199 001a 1344     		add	r3, r3, r2
+ 200 001c 5B00     		lsls	r3, r3, #1
+ 201 001e DBB2     		uxtb	r3, r3
+ 202 0020 0333     		adds	r3, r3, #3
+ 203 0022 DBB2     		uxtb	r3, r3
+ 204              	.L8:
+  46:game.c        ****                 (NOTE_LINE_SPACING * hole);
+  47:game.c        ****     }
+  48:game.c        **** }
+ 205              		.loc 1 48 0
+ 206 0024 1846     		mov	r0, r3
+ 207 0026 0C37     		adds	r7, r7, #12
+ 208              		.cfi_def_cfa_offset 4
+ 209 0028 BD46     		mov	sp, r7
+ 210              		.cfi_def_cfa_register 13
+ 211              		@ sp needed
+ 212 002a 80BC     		pop	{r7}
+ 213              		.cfi_restore 7
+ 214              		.cfi_def_cfa_offset 0
+ 215 002c 7047     		bx	lr
+ 216              		.cfi_endproc
+ 217              	.LFE1:
+ 218              		.size	get_x, .-get_x
+ 219 002e 00BF     		.section	.text.game_tick,"ax",%progbits
+ 220              		.align	2
+ 221              		.global	game_tick
+ 222              		.thumb
+ 223              		.thumb_func
+ 224              		.type	game_tick, %function
+ 225              	game_tick:
+ 226              	.LFB2:
+  49:game.c        **** 
+  50:game.c        **** void game_tick(Harmonica* h) {
+ 227              		.loc 1 50 0
+ 228              		.cfi_startproc
+ 229              		@ args = 0, pretend = 0, frame = 8
+ 230              		@ frame_needed = 1, uses_anonymous_args = 0
+ 231 0000 80B5     		push	{r7, lr}
+ 232              		.cfi_def_cfa_offset 8
+ 233              		.cfi_offset 7, -8
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cc8zrVxn.s 			page 6
+
+
+ 234              		.cfi_offset 14, -4
+ 235 0002 82B0     		sub	sp, sp, #8
+ 236              		.cfi_def_cfa_offset 16
+ 237 0004 00AF     		add	r7, sp, #0
+ 238              		.cfi_def_cfa_register 7
+ 239 0006 7860     		str	r0, [r7, #4]
+  51:game.c        ****     if(ms_counter_ReadCounter() - last_game_update > GAME_UPDATE_PERIOD_MS) {
+ 240              		.loc 1 51 0
+ 241 0008 FFF7FEFF 		bl	ms_counter_ReadCounter
+ 242 000c 0246     		mov	r2, r0
+ 243 000e 174B     		ldr	r3, .L12
+ 244 0010 1B68     		ldr	r3, [r3]
+ 245 0012 D31A     		subs	r3, r2, r3
+ 246 0014 642B     		cmp	r3, #100
+ 247 0016 25D9     		bls	.L11
+  52:game.c        ****         
+  53:game.c        ****         clear_whole_display();
+ 248              		.loc 1 53 0
+ 249 0018 FFF7FEFF 		bl	clear_whole_display
+  54:game.c        ****         CyDelay(1);
+ 250              		.loc 1 54 0
+ 251 001c 0120     		movs	r0, #1
+ 252 001e FFF7FEFF 		bl	CyDelay
+  55:game.c        ****         draw_note_lines(0xFFFF);
+ 253              		.loc 1 55 0
+ 254 0022 4FF6FF70 		movw	r0, #65535
+ 255 0026 FFF7FEFF 		bl	draw_note_lines
+  56:game.c        ****         CyDelay(1);
+ 256              		.loc 1 56 0
+ 257 002a 0120     		movs	r0, #1
+ 258 002c FFF7FEFF 		bl	CyDelay
+  57:game.c        ****         draw_play_line(0xFFFF);
+ 259              		.loc 1 57 0
+ 260 0030 4FF6FF70 		movw	r0, #65535
+ 261 0034 FFF7FEFF 		bl	draw_play_line
+  58:game.c        ****         CyDelay(1);
+ 262              		.loc 1 58 0
+ 263 0038 0120     		movs	r0, #1
+ 264 003a FFF7FEFF 		bl	CyDelay
+  59:game.c        ****         handle_move_note_groups(note_groups);
+ 265              		.loc 1 59 0
+ 266 003e 0C48     		ldr	r0, .L12+4
+ 267 0040 FFF7FEFF 		bl	handle_move_note_groups
+  60:game.c        ****         handle_note_group_spawn(note_groups);
+ 268              		.loc 1 60 0
+ 269 0044 0A48     		ldr	r0, .L12+4
+ 270 0046 FFF7FEFF 		bl	handle_note_group_spawn
+  61:game.c        ****         draw_all_note_groups(h);
+ 271              		.loc 1 61 0
+ 272 004a 7868     		ldr	r0, [r7, #4]
+ 273 004c FFF7FEFF 		bl	draw_all_note_groups
+  62:game.c        ****         num_ticks++;
+ 274              		.loc 1 62 0
+ 275 0050 084B     		ldr	r3, .L12+8
+ 276 0052 1B68     		ldr	r3, [r3]
+ 277 0054 0133     		adds	r3, r3, #1
+ 278 0056 074A     		ldr	r2, .L12+8
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cc8zrVxn.s 			page 7
+
+
+ 279 0058 1360     		str	r3, [r2]
+  63:game.c        ****         last_game_update = ms_counter_ReadCounter();
+ 280              		.loc 1 63 0
+ 281 005a FFF7FEFF 		bl	ms_counter_ReadCounter
+ 282 005e 0246     		mov	r2, r0
+ 283 0060 024B     		ldr	r3, .L12
+ 284 0062 1A60     		str	r2, [r3]
+ 285              	.L11:
+  64:game.c        ****     }
+  65:game.c        **** }
+ 286              		.loc 1 65 0
+ 287 0064 00BF     		nop
+ 288 0066 0837     		adds	r7, r7, #8
+ 289              		.cfi_def_cfa_offset 8
+ 290 0068 BD46     		mov	sp, r7
+ 291              		.cfi_def_cfa_register 13
+ 292              		@ sp needed
+ 293 006a 80BD     		pop	{r7, pc}
+ 294              	.L13:
+ 295              		.align	2
+ 296              	.L12:
+ 297 006c 00000000 		.word	last_game_update
+ 298 0070 00000000 		.word	note_groups
+ 299 0074 00000000 		.word	num_ticks
+ 300              		.cfi_endproc
+ 301              	.LFE2:
+ 302              		.size	game_tick, .-game_tick
+ 303              		.section	.text.draw_note_lines,"ax",%progbits
+ 304              		.align	2
+ 305              		.global	draw_note_lines
+ 306              		.thumb
+ 307              		.thumb_func
+ 308              		.type	draw_note_lines, %function
+ 309              	draw_note_lines:
+ 310              	.LFB3:
+  66:game.c        **** 
+  67:game.c        **** void draw_note_lines(uint16_t color) {
+ 311              		.loc 1 67 0
+ 312              		.cfi_startproc
+ 313              		@ args = 0, pretend = 0, frame = 24
+ 314              		@ frame_needed = 1, uses_anonymous_args = 0
+ 315 0000 80B5     		push	{r7, lr}
+ 316              		.cfi_def_cfa_offset 8
+ 317              		.cfi_offset 7, -8
+ 318              		.cfi_offset 14, -4
+ 319 0002 88B0     		sub	sp, sp, #32
+ 320              		.cfi_def_cfa_offset 40
+ 321 0004 02AF     		add	r7, sp, #8
+ 322              		.cfi_def_cfa 7, 32
+ 323 0006 0346     		mov	r3, r0
+ 324 0008 FB80     		strh	r3, [r7, #6]	@ movhi
+  68:game.c        ****     uint8 start_x = NOTE_LINE_START_OFFSET;
+ 325              		.loc 1 68 0
+ 326 000a 0323     		movs	r3, #3
+ 327 000c FB75     		strb	r3, [r7, #23]
+  69:game.c        ****     uint8 x_delta = NOTE_LINE_SPACING;
+ 328              		.loc 1 69 0
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cc8zrVxn.s 			page 8
+
+
+ 329 000e 0A23     		movs	r3, #10
+ 330 0010 FB73     		strb	r3, [r7, #15]
+ 331              	.LBB3:
+  70:game.c        ****     for(int line = 0; line < NUM_NOTE_LINES; line++) {
+ 332              		.loc 1 70 0
+ 333 0012 0023     		movs	r3, #0
+ 334 0014 3B61     		str	r3, [r7, #16]
+ 335 0016 0EE0     		b	.L15
+ 336              	.L16:
+  71:game.c        ****         draw_line(start_x,0, start_x, RGB_OLED_HEIGHT, color);
+ 337              		.loc 1 71 0 discriminator 3
+ 338 0018 FA7D     		ldrb	r2, [r7, #23]	@ zero_extendqisi2
+ 339 001a F87D     		ldrb	r0, [r7, #23]	@ zero_extendqisi2
+ 340 001c FB88     		ldrh	r3, [r7, #6]
+ 341 001e 0093     		str	r3, [sp]
+ 342 0020 4023     		movs	r3, #64
+ 343 0022 0021     		movs	r1, #0
+ 344 0024 FFF7FEFF 		bl	draw_line
+  72:game.c        ****         start_x += x_delta;
+ 345              		.loc 1 72 0 discriminator 3
+ 346 0028 FA7D     		ldrb	r2, [r7, #23]
+ 347 002a FB7B     		ldrb	r3, [r7, #15]
+ 348 002c 1344     		add	r3, r3, r2
+ 349 002e FB75     		strb	r3, [r7, #23]
+  70:game.c        ****     for(int line = 0; line < NUM_NOTE_LINES; line++) {
+ 350              		.loc 1 70 0 discriminator 3
+ 351 0030 3B69     		ldr	r3, [r7, #16]
+ 352 0032 0133     		adds	r3, r3, #1
+ 353 0034 3B61     		str	r3, [r7, #16]
+ 354              	.L15:
+  70:game.c        ****     for(int line = 0; line < NUM_NOTE_LINES; line++) {
+ 355              		.loc 1 70 0 is_stmt 0 discriminator 1
+ 356 0036 3B69     		ldr	r3, [r7, #16]
+ 357 0038 092B     		cmp	r3, #9
+ 358 003a EDDD     		ble	.L16
+ 359              	.LBE3:
+  73:game.c        ****     }
+  74:game.c        **** }
+ 360              		.loc 1 74 0 is_stmt 1
+ 361 003c 00BF     		nop
+ 362 003e 1837     		adds	r7, r7, #24
+ 363              		.cfi_def_cfa_offset 8
+ 364 0040 BD46     		mov	sp, r7
+ 365              		.cfi_def_cfa_register 13
+ 366              		@ sp needed
+ 367 0042 80BD     		pop	{r7, pc}
+ 368              		.cfi_endproc
+ 369              	.LFE3:
+ 370              		.size	draw_note_lines, .-draw_note_lines
+ 371              		.section	.text.draw_play_line,"ax",%progbits
+ 372              		.align	2
+ 373              		.global	draw_play_line
+ 374              		.thumb
+ 375              		.thumb_func
+ 376              		.type	draw_play_line, %function
+ 377              	draw_play_line:
+ 378              	.LFB4:
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cc8zrVxn.s 			page 9
+
+
+  75:game.c        **** 
+  76:game.c        **** void draw_play_line(uint16_t color) {
+ 379              		.loc 1 76 0
+ 380              		.cfi_startproc
+ 381              		@ args = 0, pretend = 0, frame = 16
+ 382              		@ frame_needed = 1, uses_anonymous_args = 0
+ 383 0000 80B5     		push	{r7, lr}
+ 384              		.cfi_def_cfa_offset 8
+ 385              		.cfi_offset 7, -8
+ 386              		.cfi_offset 14, -4
+ 387 0002 86B0     		sub	sp, sp, #24
+ 388              		.cfi_def_cfa_offset 32
+ 389 0004 02AF     		add	r7, sp, #8
+ 390              		.cfi_def_cfa 7, 24
+ 391 0006 0346     		mov	r3, r0
+ 392 0008 FB80     		strh	r3, [r7, #6]	@ movhi
+  77:game.c        ****     uint8 y = PLAY_LINE_Y;
+ 393              		.loc 1 77 0
+ 394 000a 3723     		movs	r3, #55
+ 395 000c FB73     		strb	r3, [r7, #15]
+  78:game.c        ****     draw_line(0, y, RGB_OLED_WIDTH, y, color);
+ 396              		.loc 1 78 0
+ 397 000e FA7B     		ldrb	r2, [r7, #15]	@ zero_extendqisi2
+ 398 0010 F97B     		ldrb	r1, [r7, #15]	@ zero_extendqisi2
+ 399 0012 FB88     		ldrh	r3, [r7, #6]
+ 400 0014 0093     		str	r3, [sp]
+ 401 0016 1346     		mov	r3, r2
+ 402 0018 6022     		movs	r2, #96
+ 403 001a 0020     		movs	r0, #0
+ 404 001c FFF7FEFF 		bl	draw_line
+  79:game.c        **** }
+ 405              		.loc 1 79 0
+ 406 0020 00BF     		nop
+ 407 0022 1037     		adds	r7, r7, #16
+ 408              		.cfi_def_cfa_offset 8
+ 409 0024 BD46     		mov	sp, r7
+ 410              		.cfi_def_cfa_register 13
+ 411              		@ sp needed
+ 412 0026 80BD     		pop	{r7, pc}
+ 413              		.cfi_endproc
+ 414              	.LFE4:
+ 415              		.size	draw_play_line, .-draw_play_line
+ 416              		.section	.text.draw_note_group,"ax",%progbits
+ 417              		.align	2
+ 418              		.global	draw_note_group
+ 419              		.thumb
+ 420              		.thumb_func
+ 421              		.type	draw_note_group, %function
+ 422              	draw_note_group:
+ 423              	.LFB5:
+  80:game.c        **** 
+  81:game.c        **** void draw_note_group(NOTE_GROUP* note_group, Harmonica* h) {
+ 424              		.loc 1 81 0
+ 425              		.cfi_startproc
+ 426              		@ args = 0, pretend = 0, frame = 32
+ 427              		@ frame_needed = 1, uses_anonymous_args = 0
+ 428 0000 90B5     		push	{r4, r7, lr}
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cc8zrVxn.s 			page 10
+
+
+ 429              		.cfi_def_cfa_offset 12
+ 430              		.cfi_offset 4, -12
+ 431              		.cfi_offset 7, -8
+ 432              		.cfi_offset 14, -4
+ 433 0002 8BB0     		sub	sp, sp, #44
+ 434              		.cfi_def_cfa_offset 56
+ 435 0004 02AF     		add	r7, sp, #8
+ 436              		.cfi_def_cfa 7, 48
+ 437 0006 7860     		str	r0, [r7, #4]
+ 438 0008 3960     		str	r1, [r7]
+  82:game.c        ****     if(note_group->active == FALSE) {
+ 439              		.loc 1 82 0
+ 440 000a 7B68     		ldr	r3, [r7, #4]
+ 441 000c DB78     		ldrb	r3, [r3, #3]	@ zero_extendqisi2
+ 442 000e 002B     		cmp	r3, #0
+ 443 0010 6ED0     		beq	.L33
+  83:game.c        ****         return;
+  84:game.c        ****     }
+  85:game.c        ****     hBool isNegative = (note_group->pos.y < 0) ? TRUE : FALSE;
+ 444              		.loc 1 85 0
+ 445 0012 7B68     		ldr	r3, [r7, #4]
+ 446 0014 9B68     		ldr	r3, [r3, #8]
+ 447 0016 DB0F     		lsrs	r3, r3, #31
+ 448 0018 DBB2     		uxtb	r3, r3
+ 449 001a FB75     		strb	r3, [r7, #23]
+  86:game.c        ****     uint8 start_y = (isNegative) ? 0 : note_group->pos.y;
+ 450              		.loc 1 86 0
+ 451 001c FB7D     		ldrb	r3, [r7, #23]	@ zero_extendqisi2
+ 452 001e 002B     		cmp	r3, #0
+ 453 0020 03D1     		bne	.L21
+ 454              		.loc 1 86 0 is_stmt 0 discriminator 1
+ 455 0022 7B68     		ldr	r3, [r7, #4]
+ 456 0024 9B68     		ldr	r3, [r3, #8]
+ 457 0026 DBB2     		uxtb	r3, r3
+ 458 0028 00E0     		b	.L22
+ 459              	.L21:
+ 460              		.loc 1 86 0 discriminator 2
+ 461 002a 0023     		movs	r3, #0
+ 462              	.L22:
+ 463              		.loc 1 86 0 discriminator 4
+ 464 002c BB75     		strb	r3, [r7, #22]
+  87:game.c        ****     int8 end_y_signed = (isNegative) ? (note_group->pos.y + note_group->length): start_y + note_gro
+ 465              		.loc 1 87 0 is_stmt 1 discriminator 4
+ 466 002e FB7D     		ldrb	r3, [r7, #23]	@ zero_extendqisi2
+ 467 0030 002B     		cmp	r3, #0
+ 468 0032 08D0     		beq	.L23
+ 469              		.loc 1 87 0 is_stmt 0 discriminator 1
+ 470 0034 7B68     		ldr	r3, [r7, #4]
+ 471 0036 9B68     		ldr	r3, [r3, #8]
+ 472 0038 DAB2     		uxtb	r2, r3
+ 473 003a 7B68     		ldr	r3, [r7, #4]
+ 474 003c DB7C     		ldrb	r3, [r3, #19]	@ zero_extendqisi2
+ 475 003e 1344     		add	r3, r3, r2
+ 476 0040 DBB2     		uxtb	r3, r3
+ 477 0042 5BB2     		sxtb	r3, r3
+ 478 0044 05E0     		b	.L24
+ 479              	.L23:
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cc8zrVxn.s 			page 11
+
+
+ 480              		.loc 1 87 0 discriminator 2
+ 481 0046 7B68     		ldr	r3, [r7, #4]
+ 482 0048 DA7C     		ldrb	r2, [r3, #19]	@ zero_extendqisi2
+ 483 004a BB7D     		ldrb	r3, [r7, #22]
+ 484 004c 1344     		add	r3, r3, r2
+ 485 004e DBB2     		uxtb	r3, r3
+ 486 0050 5BB2     		sxtb	r3, r3
+ 487              	.L24:
+ 488              		.loc 1 87 0 discriminator 4
+ 489 0052 7B75     		strb	r3, [r7, #21]
+  88:game.c        ****     uint8 end_y = (end_y_signed < 0) ? 0 : (uint8) end_y_signed;
+ 490              		.loc 1 88 0 is_stmt 1 discriminator 4
+ 491 0054 97F91530 		ldrsb	r3, [r7, #21]
+ 492 0058 23EAE373 		bic	r3, r3, r3, asr #31
+ 493 005c 5BB2     		sxtb	r3, r3
+ 494 005e 3B75     		strb	r3, [r7, #20]
+  89:game.c        ****     hBool cross_play_line = ((PLAY_LINE_Y >= start_y) && (PLAY_LINE_Y < end_y)) ?
+  90:game.c        ****                                 TRUE : FALSE;
+ 495              		.loc 1 90 0 discriminator 4
+ 496 0060 BB7D     		ldrb	r3, [r7, #22]	@ zero_extendqisi2
+ 497 0062 372B     		cmp	r3, #55
+ 498 0064 04D8     		bhi	.L25
+ 499              		.loc 1 90 0 is_stmt 0 discriminator 1
+ 500 0066 3B7D     		ldrb	r3, [r7, #20]	@ zero_extendqisi2
+ 501 0068 372B     		cmp	r3, #55
+ 502 006a 01D9     		bls	.L25
+ 503              		.loc 1 90 0 discriminator 3
+ 504 006c 0123     		movs	r3, #1
+ 505 006e 00E0     		b	.L26
+ 506              	.L25:
+ 507              		.loc 1 90 0 discriminator 4
+ 508 0070 0023     		movs	r3, #0
+ 509              	.L26:
+  89:game.c        ****     hBool cross_play_line = ((PLAY_LINE_Y >= start_y) && (PLAY_LINE_Y < end_y)) ?
+ 510              		.loc 1 89 0 is_stmt 1
+ 511 0072 FB74     		strb	r3, [r7, #19]
+  91:game.c        ****     uint16 outline_color;
+  92:game.c        ****     uint16 body_color = get_body_color(note_group);
+ 512              		.loc 1 92 0
+ 513 0074 7868     		ldr	r0, [r7, #4]
+ 514 0076 FFF7FEFF 		bl	get_body_color
+ 515 007a 0346     		mov	r3, r0
+ 516 007c 3B82     		strh	r3, [r7, #16]	@ movhi
+  93:game.c        ****     if(cross_play_line == FALSE) {
+ 517              		.loc 1 93 0
+ 518 007e FB7C     		ldrb	r3, [r7, #19]	@ zero_extendqisi2
+ 519 0080 002B     		cmp	r3, #0
+ 520 0082 02D1     		bne	.L27
+  94:game.c        ****         outline_color = body_color;
+ 521              		.loc 1 94 0
+ 522 0084 3B8A     		ldrh	r3, [r7, #16]	@ movhi
+ 523 0086 FB83     		strh	r3, [r7, #30]	@ movhi
+ 524 0088 0CE0     		b	.L28
+ 525              	.L27:
+  95:game.c        ****     } else {
+  96:game.c        ****         outline_color = (is_playing(h, note_group) == TRUE) ? PASS_COLOR : FAIL_COLOR;
+ 526              		.loc 1 96 0
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cc8zrVxn.s 			page 12
+
+
+ 527 008a 7968     		ldr	r1, [r7, #4]
+ 528 008c 3868     		ldr	r0, [r7]
+ 529 008e FFF7FEFF 		bl	is_playing
+ 530 0092 0346     		mov	r3, r0
+ 531 0094 012B     		cmp	r3, #1
+ 532 0096 02D1     		bne	.L29
+ 533              		.loc 1 96 0 is_stmt 0 discriminator 1
+ 534 0098 4FF4FC63 		mov	r3, #2016
+ 535 009c 01E0     		b	.L30
+ 536              	.L29:
+ 537              		.loc 1 96 0 discriminator 2
+ 538 009e 4FF47143 		mov	r3, #61696
+ 539              	.L30:
+ 540              		.loc 1 96 0 discriminator 4
+ 541 00a2 FB83     		strh	r3, [r7, #30]	@ movhi
+ 542              	.L28:
+ 543              	.LBB4:
+  97:game.c        ****     }
+  98:game.c        ****     
+  99:game.c        ****     for(int idx = 0; idx < note_group->num_notes; idx++) {
+ 544              		.loc 1 99 0 is_stmt 1
+ 545 00a4 0023     		movs	r3, #0
+ 546 00a6 BB61     		str	r3, [r7, #24]
+ 547 00a8 1BE0     		b	.L31
+ 548              	.L32:
+ 549              	.LBB5:
+ 100:game.c        ****         uint8 start_x = get_x(note_group->holes[idx]) - (NOTE_WIDTH / 2);
+ 550              		.loc 1 100 0 discriminator 3
+ 551 00aa 7A68     		ldr	r2, [r7, #4]
+ 552 00ac BB69     		ldr	r3, [r7, #24]
+ 553 00ae 1344     		add	r3, r3, r2
+ 554 00b0 0D33     		adds	r3, r3, #13
+ 555 00b2 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 556 00b4 1846     		mov	r0, r3
+ 557 00b6 FFF7FEFF 		bl	get_x
+ 558 00ba 0346     		mov	r3, r0
+ 559 00bc 023B     		subs	r3, r3, #2
+ 560 00be FB73     		strb	r3, [r7, #15]
+ 101:game.c        ****         uint8 end_x = start_x + NOTE_WIDTH - 1;
+ 561              		.loc 1 101 0 discriminator 3
+ 562 00c0 FB7B     		ldrb	r3, [r7, #15]
+ 563 00c2 0433     		adds	r3, r3, #4
+ 564 00c4 BB73     		strb	r3, [r7, #14]
+ 102:game.c        ****         draw_rect(start_x, start_y, end_x, end_y, outline_color, body_color);
+ 565              		.loc 1 102 0 discriminator 3
+ 566 00c6 3C7D     		ldrb	r4, [r7, #20]	@ zero_extendqisi2
+ 567 00c8 BA7B     		ldrb	r2, [r7, #14]	@ zero_extendqisi2
+ 568 00ca B97D     		ldrb	r1, [r7, #22]	@ zero_extendqisi2
+ 569 00cc F87B     		ldrb	r0, [r7, #15]	@ zero_extendqisi2
+ 570 00ce 3B8A     		ldrh	r3, [r7, #16]
+ 571 00d0 0193     		str	r3, [sp, #4]
+ 572 00d2 FB8B     		ldrh	r3, [r7, #30]
+ 573 00d4 0093     		str	r3, [sp]
+ 574 00d6 2346     		mov	r3, r4
+ 575 00d8 FFF7FEFF 		bl	draw_rect
+ 576              	.LBE5:
+  99:game.c        ****         uint8 start_x = get_x(note_group->holes[idx]) - (NOTE_WIDTH / 2);
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cc8zrVxn.s 			page 13
+
+
+ 577              		.loc 1 99 0 discriminator 3
+ 578 00dc BB69     		ldr	r3, [r7, #24]
+ 579 00de 0133     		adds	r3, r3, #1
+ 580 00e0 BB61     		str	r3, [r7, #24]
+ 581              	.L31:
+  99:game.c        ****         uint8 start_x = get_x(note_group->holes[idx]) - (NOTE_WIDTH / 2);
+ 582              		.loc 1 99 0 is_stmt 0 discriminator 1
+ 583 00e2 7B68     		ldr	r3, [r7, #4]
+ 584 00e4 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 585 00e6 1A46     		mov	r2, r3
+ 586 00e8 BB69     		ldr	r3, [r7, #24]
+ 587 00ea 9A42     		cmp	r2, r3
+ 588 00ec DDDC     		bgt	.L32
+ 589 00ee 00E0     		b	.L18
+ 590              	.L33:
+ 591              	.LBE4:
+  83:game.c        ****     }
+ 592              		.loc 1 83 0 is_stmt 1
+ 593 00f0 00BF     		nop
+ 594              	.L18:
+ 103:game.c        ****     }
+ 104:game.c        **** 
+ 105:game.c        **** }
+ 595              		.loc 1 105 0
+ 596 00f2 2437     		adds	r7, r7, #36
+ 597              		.cfi_def_cfa_offset 12
+ 598 00f4 BD46     		mov	sp, r7
+ 599              		.cfi_def_cfa_register 13
+ 600              		@ sp needed
+ 601 00f6 90BD     		pop	{r4, r7, pc}
+ 602              		.cfi_endproc
+ 603              	.LFE5:
+ 604              		.size	draw_note_group, .-draw_note_group
+ 605              		.section	.text.handle_move_note_groups,"ax",%progbits
+ 606              		.align	2
+ 607              		.global	handle_move_note_groups
+ 608              		.thumb
+ 609              		.thumb_func
+ 610              		.type	handle_move_note_groups, %function
+ 611              	handle_move_note_groups:
+ 612              	.LFB6:
+ 106:game.c        **** 
+ 107:game.c        **** void handle_move_note_groups(NOTE_GROUP* note_groups) {
+ 613              		.loc 1 107 0
+ 614              		.cfi_startproc
+ 615              		@ args = 0, pretend = 0, frame = 16
+ 616              		@ frame_needed = 1, uses_anonymous_args = 0
+ 617              		@ link register save eliminated.
+ 618 0000 80B4     		push	{r7}
+ 619              		.cfi_def_cfa_offset 4
+ 620              		.cfi_offset 7, -4
+ 621 0002 85B0     		sub	sp, sp, #20
+ 622              		.cfi_def_cfa_offset 24
+ 623 0004 00AF     		add	r7, sp, #0
+ 624              		.cfi_def_cfa_register 7
+ 625 0006 7860     		str	r0, [r7, #4]
+ 108:game.c        ****     if(num_ticks > TICK_MOVEMENT_PERIOD) {
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cc8zrVxn.s 			page 14
+
+
+ 626              		.loc 1 108 0
+ 627 0008 184B     		ldr	r3, .L40
+ 628 000a 1B68     		ldr	r3, [r3]
+ 629 000c 022B     		cmp	r3, #2
+ 630 000e 28D9     		bls	.L39
+ 631              	.LBB6:
+ 109:game.c        ****         for(int idx = 0; idx < num_note_groups; idx++) {
+ 632              		.loc 1 109 0
+ 633 0010 0023     		movs	r3, #0
+ 634 0012 FB60     		str	r3, [r7, #12]
+ 635 0014 1DE0     		b	.L36
+ 636              	.L38:
+ 637              	.LBB7:
+ 110:game.c        ****             NOTE_GROUP* note_group = &note_groups[idx];
+ 638              		.loc 1 110 0
+ 639 0016 FA68     		ldr	r2, [r7, #12]
+ 640 0018 1346     		mov	r3, r2
+ 641 001a 9B00     		lsls	r3, r3, #2
+ 642 001c 1344     		add	r3, r3, r2
+ 643 001e 9B00     		lsls	r3, r3, #2
+ 644 0020 1A46     		mov	r2, r3
+ 645 0022 7B68     		ldr	r3, [r7, #4]
+ 646 0024 1344     		add	r3, r3, r2
+ 647 0026 BB60     		str	r3, [r7, #8]
+ 111:game.c        ****             
+ 112:game.c        ****             if(note_group->active == TRUE) {
+ 648              		.loc 1 112 0
+ 649 0028 BB68     		ldr	r3, [r7, #8]
+ 650 002a DB78     		ldrb	r3, [r3, #3]	@ zero_extendqisi2
+ 651 002c 012B     		cmp	r3, #1
+ 652 002e 0DD1     		bne	.L37
+ 113:game.c        ****                 note_group->pos.y += note_group->speed;
+ 653              		.loc 1 113 0
+ 654 0030 BB68     		ldr	r3, [r7, #8]
+ 655 0032 9B68     		ldr	r3, [r3, #8]
+ 656 0034 BA68     		ldr	r2, [r7, #8]
+ 657 0036 127B     		ldrb	r2, [r2, #12]	@ zero_extendqisi2
+ 658 0038 1A44     		add	r2, r2, r3
+ 659 003a BB68     		ldr	r3, [r7, #8]
+ 660 003c 9A60     		str	r2, [r3, #8]
+ 114:game.c        ****                 
+ 115:game.c        ****                 if(note_group->pos.y > RGB_OLED_HEIGHT) {
+ 661              		.loc 1 115 0
+ 662 003e BB68     		ldr	r3, [r7, #8]
+ 663 0040 9B68     		ldr	r3, [r3, #8]
+ 664 0042 402B     		cmp	r3, #64
+ 665 0044 02DD     		ble	.L37
+ 116:game.c        ****                     note_group->active = FALSE;
+ 666              		.loc 1 116 0
+ 667 0046 BB68     		ldr	r3, [r7, #8]
+ 668 0048 0022     		movs	r2, #0
+ 669 004a DA70     		strb	r2, [r3, #3]
+ 670              	.L37:
+ 671              	.LBE7:
+ 109:game.c        ****             NOTE_GROUP* note_group = &note_groups[idx];
+ 672              		.loc 1 109 0 discriminator 2
+ 673 004c FB68     		ldr	r3, [r7, #12]
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cc8zrVxn.s 			page 15
+
+
+ 674 004e 0133     		adds	r3, r3, #1
+ 675 0050 FB60     		str	r3, [r7, #12]
+ 676              	.L36:
+ 109:game.c        ****             NOTE_GROUP* note_group = &note_groups[idx];
+ 677              		.loc 1 109 0 is_stmt 0 discriminator 1
+ 678 0052 0323     		movs	r3, #3
+ 679 0054 1A46     		mov	r2, r3
+ 680 0056 FB68     		ldr	r3, [r7, #12]
+ 681 0058 9A42     		cmp	r2, r3
+ 682 005a DCDC     		bgt	.L38
+ 683              	.LBE6:
+ 117:game.c        ****                 }
+ 118:game.c        ****             }
+ 119:game.c        ****         }
+ 120:game.c        ****         
+ 121:game.c        ****         num_ticks = 0;
+ 684              		.loc 1 121 0 is_stmt 1
+ 685 005c 034B     		ldr	r3, .L40
+ 686 005e 0022     		movs	r2, #0
+ 687 0060 1A60     		str	r2, [r3]
+ 688              	.L39:
+ 122:game.c        ****     }
+ 123:game.c        ****     
+ 124:game.c        **** }
+ 689              		.loc 1 124 0
+ 690 0062 00BF     		nop
+ 691 0064 1437     		adds	r7, r7, #20
+ 692              		.cfi_def_cfa_offset 4
+ 693 0066 BD46     		mov	sp, r7
+ 694              		.cfi_def_cfa_register 13
+ 695              		@ sp needed
+ 696 0068 80BC     		pop	{r7}
+ 697              		.cfi_restore 7
+ 698              		.cfi_def_cfa_offset 0
+ 699 006a 7047     		bx	lr
+ 700              	.L41:
+ 701              		.align	2
+ 702              	.L40:
+ 703 006c 00000000 		.word	num_ticks
+ 704              		.cfi_endproc
+ 705              	.LFE6:
+ 706              		.size	handle_move_note_groups, .-handle_move_note_groups
+ 707              		.section	.text.get_body_color,"ax",%progbits
+ 708              		.align	2
+ 709              		.global	get_body_color
+ 710              		.thumb
+ 711              		.thumb_func
+ 712              		.type	get_body_color, %function
+ 713              	get_body_color:
+ 714              	.LFB7:
+ 125:game.c        **** 
+ 126:game.c        **** uint16 get_body_color(NOTE_GROUP* note_group) {
+ 715              		.loc 1 126 0
+ 716              		.cfi_startproc
+ 717              		@ args = 0, pretend = 0, frame = 8
+ 718              		@ frame_needed = 1, uses_anonymous_args = 0
+ 719              		@ link register save eliminated.
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cc8zrVxn.s 			page 16
+
+
+ 720 0000 80B4     		push	{r7}
+ 721              		.cfi_def_cfa_offset 4
+ 722              		.cfi_offset 7, -4
+ 723 0002 83B0     		sub	sp, sp, #12
+ 724              		.cfi_def_cfa_offset 16
+ 725 0004 00AF     		add	r7, sp, #0
+ 726              		.cfi_def_cfa_register 7
+ 727 0006 7860     		str	r0, [r7, #4]
+ 127:game.c        ****     return (note_group->mode == BLOWN_NOTES) ? BLOWN_COLOR : SUCK_COLOR;
+ 728              		.loc 1 127 0
+ 729 0008 7B68     		ldr	r3, [r7, #4]
+ 730 000a 9B78     		ldrb	r3, [r3, #2]	@ zero_extendqisi2
+ 731 000c 002B     		cmp	r3, #0
+ 732 000e 01D1     		bne	.L43
+ 733              		.loc 1 127 0 is_stmt 0 discriminator 1
+ 734 0010 1F23     		movs	r3, #31
+ 735 0012 01E0     		b	.L44
+ 736              	.L43:
+ 737              		.loc 1 127 0 discriminator 2
+ 738 0014 4AF21F03 		movw	r3, #40991
+ 739              	.L44:
+ 128:game.c        **** }
+ 740              		.loc 1 128 0 is_stmt 1 discriminator 4
+ 741 0018 1846     		mov	r0, r3
+ 742 001a 0C37     		adds	r7, r7, #12
+ 743              		.cfi_def_cfa_offset 4
+ 744 001c BD46     		mov	sp, r7
+ 745              		.cfi_def_cfa_register 13
+ 746              		@ sp needed
+ 747 001e 80BC     		pop	{r7}
+ 748              		.cfi_restore 7
+ 749              		.cfi_def_cfa_offset 0
+ 750 0020 7047     		bx	lr
+ 751              		.cfi_endproc
+ 752              	.LFE7:
+ 753              		.size	get_body_color, .-get_body_color
+ 754 0022 00BF     		.section	.text.is_playing,"ax",%progbits
+ 755              		.align	2
+ 756              		.global	is_playing
+ 757              		.thumb
+ 758              		.thumb_func
+ 759              		.type	is_playing, %function
+ 760              	is_playing:
+ 761              	.LFB8:
+ 129:game.c        **** 
+ 130:game.c        **** hBool is_playing(Harmonica* h, NOTE_GROUP* note_group) {
+ 762              		.loc 1 130 0
+ 763              		.cfi_startproc
+ 764              		@ args = 0, pretend = 0, frame = 16
+ 765              		@ frame_needed = 1, uses_anonymous_args = 0
+ 766              		@ link register save eliminated.
+ 767 0000 80B4     		push	{r7}
+ 768              		.cfi_def_cfa_offset 4
+ 769              		.cfi_offset 7, -4
+ 770 0002 85B0     		sub	sp, sp, #20
+ 771              		.cfi_def_cfa_offset 24
+ 772 0004 00AF     		add	r7, sp, #0
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cc8zrVxn.s 			page 17
+
+
+ 773              		.cfi_def_cfa_register 7
+ 774 0006 7860     		str	r0, [r7, #4]
+ 775 0008 3960     		str	r1, [r7]
+ 131:game.c        ****     uint8 harmonica_num_notes = h->raw_harmonica_output.num_notes_played;
+ 776              		.loc 1 131 0
+ 777 000a 7B68     		ldr	r3, [r7, #4]
+ 778 000c 93F90D30 		ldrsb	r3, [r3, #13]
+ 779 0010 FB73     		strb	r3, [r7, #15]
+ 132:game.c        ****     HOLE center_hole = h->active_hole;
+ 780              		.loc 1 132 0
+ 781 0012 7B68     		ldr	r3, [r7, #4]
+ 782 0014 5B78     		ldrb	r3, [r3, #1]
+ 783 0016 BB73     		strb	r3, [r7, #14]
+ 133:game.c        ****     
+ 134:game.c        ****     return harmonica_num_notes == note_group->num_notes &&
+ 784              		.loc 1 134 0
+ 785 0018 3B68     		ldr	r3, [r7]
+ 786 001a 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 135:game.c        ****             center_hole == note_group->center_hole 
+ 136:game.c        ****             && h->output_mode == NORMAL &&
+ 787              		.loc 1 136 0
+ 788 001c FA7B     		ldrb	r2, [r7, #15]	@ zero_extendqisi2
+ 789 001e 9A42     		cmp	r2, r3
+ 790 0020 10D1     		bne	.L47
+ 135:game.c        ****             center_hole == note_group->center_hole 
+ 791              		.loc 1 135 0
+ 792 0022 3B68     		ldr	r3, [r7]
+ 793 0024 5B78     		ldrb	r3, [r3, #1]	@ zero_extendqisi2
+ 134:game.c        ****             center_hole == note_group->center_hole 
+ 794              		.loc 1 134 0
+ 795 0026 BA7B     		ldrb	r2, [r7, #14]	@ zero_extendqisi2
+ 796 0028 9A42     		cmp	r2, r3
+ 797 002a 0BD1     		bne	.L47
+ 798              		.loc 1 136 0 discriminator 3
+ 799 002c 7B68     		ldr	r3, [r7, #4]
+ 800 002e 1B7D     		ldrb	r3, [r3, #20]	@ zero_extendqisi2
+ 801 0030 002B     		cmp	r3, #0
+ 802 0032 07D1     		bne	.L47
+ 137:game.c        ****             h->current_note_mode == note_group->mode;
+ 803              		.loc 1 137 0 discriminator 2
+ 804 0034 7B68     		ldr	r3, [r7, #4]
+ 805 0036 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+ 806 0038 3B68     		ldr	r3, [r7]
+ 807 003a 9B78     		ldrb	r3, [r3, #2]	@ zero_extendqisi2
+ 136:game.c        ****             h->current_note_mode == note_group->mode;
+ 808              		.loc 1 136 0 discriminator 2
+ 809 003c 9A42     		cmp	r2, r3
+ 810 003e 01D1     		bne	.L47
+ 136:game.c        ****             h->current_note_mode == note_group->mode;
+ 811              		.loc 1 136 0 is_stmt 0 discriminator 4
+ 812 0040 0123     		movs	r3, #1
+ 813 0042 00E0     		b	.L48
+ 814              	.L47:
+ 136:game.c        ****             h->current_note_mode == note_group->mode;
+ 815              		.loc 1 136 0 discriminator 5
+ 816 0044 0023     		movs	r3, #0
+ 817              	.L48:
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cc8zrVxn.s 			page 18
+
+
+ 134:game.c        ****             center_hole == note_group->center_hole 
+ 818              		.loc 1 134 0 is_stmt 1
+ 819 0046 DBB2     		uxtb	r3, r3
+ 138:game.c        **** }
+ 820              		.loc 1 138 0
+ 821 0048 1846     		mov	r0, r3
+ 822 004a 1437     		adds	r7, r7, #20
+ 823              		.cfi_def_cfa_offset 4
+ 824 004c BD46     		mov	sp, r7
+ 825              		.cfi_def_cfa_register 13
+ 826              		@ sp needed
+ 827 004e 80BC     		pop	{r7}
+ 828              		.cfi_restore 7
+ 829              		.cfi_def_cfa_offset 0
+ 830 0050 7047     		bx	lr
+ 831              		.cfi_endproc
+ 832              	.LFE8:
+ 833              		.size	is_playing, .-is_playing
+ 834 0052 00BF     		.section	.text.generate_random_note_group,"ax",%progbits
+ 835              		.align	2
+ 836              		.global	generate_random_note_group
+ 837              		.thumb
+ 838              		.thumb_func
+ 839              		.type	generate_random_note_group, %function
+ 840              	generate_random_note_group:
+ 841              	.LFB9:
+ 139:game.c        **** 
+ 140:game.c        **** void generate_random_note_group(NOTE_GROUP* note_group) {
+ 842              		.loc 1 140 0
+ 843              		.cfi_startproc
+ 844              		@ args = 0, pretend = 0, frame = 16
+ 845              		@ frame_needed = 1, uses_anonymous_args = 0
+ 846 0000 90B5     		push	{r4, r7, lr}
+ 847              		.cfi_def_cfa_offset 12
+ 848              		.cfi_offset 4, -12
+ 849              		.cfi_offset 7, -8
+ 850              		.cfi_offset 14, -4
+ 851 0002 85B0     		sub	sp, sp, #20
+ 852              		.cfi_def_cfa_offset 32
+ 853 0004 00AF     		add	r7, sp, #0
+ 854              		.cfi_def_cfa_register 7
+ 855 0006 7860     		str	r0, [r7, #4]
+ 141:game.c        ****     
+ 142:game.c        ****     uint8 rand_val = (ms_counter_ReadCounter() % 10);
+ 856              		.loc 1 142 0
+ 857 0008 FFF7FEFF 		bl	ms_counter_ReadCounter
+ 858 000c 0146     		mov	r1, r0
+ 859 000e 354B     		ldr	r3, .L51
+ 860 0010 A3FB0123 		umull	r2, r3, r3, r1
+ 861 0014 DA08     		lsrs	r2, r3, #3
+ 862 0016 1346     		mov	r3, r2
+ 863 0018 9B00     		lsls	r3, r3, #2
+ 864 001a 1344     		add	r3, r3, r2
+ 865 001c 5B00     		lsls	r3, r3, #1
+ 866 001e CA1A     		subs	r2, r1, r3
+ 867 0020 1346     		mov	r3, r2
+ 868 0022 FB73     		strb	r3, [r7, #15]
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cc8zrVxn.s 			page 19
+
+
+ 143:game.c        ****     note_group->center_hole = rand_val; // 0 indexed
+ 869              		.loc 1 143 0
+ 870 0024 7B68     		ldr	r3, [r7, #4]
+ 871 0026 FA7B     		ldrb	r2, [r7, #15]
+ 872 0028 5A70     		strb	r2, [r3, #1]
+ 144:game.c        ****     
+ 145:game.c        ****     // calculating largest possible num_notes without bleeding outside of range
+ 146:game.c        ****     uint8 upper_dist = 10 - note_group->center_hole + 1;
+ 873              		.loc 1 146 0
+ 874 002a 7B68     		ldr	r3, [r7, #4]
+ 875 002c 5B78     		ldrb	r3, [r3, #1]	@ zero_extendqisi2
+ 876 002e C3F10B03 		rsb	r3, r3, #11
+ 877 0032 BB73     		strb	r3, [r7, #14]
+ 147:game.c        ****     uint8 lower_dist = note_group->center_hole + 1;
+ 878              		.loc 1 147 0
+ 879 0034 7B68     		ldr	r3, [r7, #4]
+ 880 0036 5B78     		ldrb	r3, [r3, #1]	@ zero_extendqisi2
+ 881 0038 0133     		adds	r3, r3, #1
+ 882 003a 7B73     		strb	r3, [r7, #13]
+ 148:game.c        ****     
+ 149:game.c        ****     uint8 max_num_notes = (upper_dist < lower_dist) ? upper_dist : lower_dist;
+ 883              		.loc 1 149 0
+ 884 003c 7A7B     		ldrb	r2, [r7, #13]	@ zero_extendqisi2
+ 885 003e BB7B     		ldrb	r3, [r7, #14]	@ zero_extendqisi2
+ 886 0040 9342     		cmp	r3, r2
+ 887 0042 28BF     		it	cs
+ 888 0044 1346     		movcs	r3, r2
+ 889 0046 3B73     		strb	r3, [r7, #12]
+ 150:game.c        ****     
+ 151:game.c        ****     note_group->num_notes = (ms_counter_ReadCounter() % max_num_notes) + 1;
+ 890              		.loc 1 151 0
+ 891 0048 FFF7FEFF 		bl	ms_counter_ReadCounter
+ 892 004c 0246     		mov	r2, r0
+ 893 004e 3B7B     		ldrb	r3, [r7, #12]	@ zero_extendqisi2
+ 894 0050 B2FBF3F1 		udiv	r1, r2, r3
+ 895 0054 03FB01F3 		mul	r3, r3, r1
+ 896 0058 D31A     		subs	r3, r2, r3
+ 897 005a DBB2     		uxtb	r3, r3
+ 898 005c 0133     		adds	r3, r3, #1
+ 899 005e DAB2     		uxtb	r2, r3
+ 900 0060 7B68     		ldr	r3, [r7, #4]
+ 901 0062 1A70     		strb	r2, [r3]
+ 152:game.c        ****     note_group->mode = ((game_random_mode_generator_ReadCounter() % 2) == 0) ? SUCKED_NOTES : BLOWN
+ 902              		.loc 1 152 0
+ 903 0064 FFF7FEFF 		bl	game_random_mode_generator_ReadCounter
+ 904 0068 0346     		mov	r3, r0
+ 905 006a 03F00103 		and	r3, r3, #1
+ 906 006e 9BB2     		uxth	r3, r3
+ 907 0070 002B     		cmp	r3, #0
+ 908 0072 0CBF     		ite	eq
+ 909 0074 0123     		moveq	r3, #1
+ 910 0076 0023     		movne	r3, #0
+ 911 0078 DBB2     		uxtb	r3, r3
+ 912 007a 1A46     		mov	r2, r3
+ 913 007c 7B68     		ldr	r3, [r7, #4]
+ 914 007e 9A70     		strb	r2, [r3, #2]
+ 153:game.c        ****     note_group->active = TRUE;
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cc8zrVxn.s 			page 20
+
+
+ 915              		.loc 1 153 0
+ 916 0080 7B68     		ldr	r3, [r7, #4]
+ 917 0082 0122     		movs	r2, #1
+ 918 0084 DA70     		strb	r2, [r3, #3]
+ 154:game.c        ****     note_group->pos = (Position){.x = get_x(note_group->center_hole), .y = -25};
+ 919              		.loc 1 154 0
+ 920 0086 7B68     		ldr	r3, [r7, #4]
+ 921 0088 5B78     		ldrb	r3, [r3, #1]	@ zero_extendqisi2
+ 922 008a 1846     		mov	r0, r3
+ 923 008c FFF7FEFF 		bl	get_x
+ 924 0090 0346     		mov	r3, r0
+ 925 0092 1A46     		mov	r2, r3
+ 926 0094 7B68     		ldr	r3, [r7, #4]
+ 927 0096 1A71     		strb	r2, [r3, #4]
+ 928 0098 7B68     		ldr	r3, [r7, #4]
+ 929 009a 6FF01802 		mvn	r2, #24
+ 930 009e 9A60     		str	r2, [r3, #8]
+ 155:game.c        ****     note_group->speed = 2;
+ 931              		.loc 1 155 0
+ 932 00a0 7B68     		ldr	r3, [r7, #4]
+ 933 00a2 0222     		movs	r2, #2
+ 934 00a4 1A73     		strb	r2, [r3, #12]
+ 156:game.c        ****     
+ 157:game.c        ****     write_note_group_holes(note_group);
+ 935              		.loc 1 157 0
+ 936 00a6 7868     		ldr	r0, [r7, #4]
+ 937 00a8 FFF7FEFF 		bl	write_note_group_holes
+ 158:game.c        ****     
+ 159:game.c        ****     
+ 160:game.c        ****     note_group->length = ((ms_counter_ReadCounter() * game_random_mode_generator_ReadCounter()) % 1
+ 938              		.loc 1 160 0
+ 939 00ac FFF7FEFF 		bl	ms_counter_ReadCounter
+ 940 00b0 0346     		mov	r3, r0
+ 941 00b2 DCB2     		uxtb	r4, r3
+ 942 00b4 FFF7FEFF 		bl	game_random_mode_generator_ReadCounter
+ 943 00b8 0346     		mov	r3, r0
+ 944 00ba DBB2     		uxtb	r3, r3
+ 945 00bc 03FB04F3 		mul	r3, r3, r4
+ 946 00c0 DBB2     		uxtb	r3, r3
+ 947 00c2 03F00F03 		and	r3, r3, #15
+ 948 00c6 DBB2     		uxtb	r3, r3
+ 949 00c8 0F33     		adds	r3, r3, #15
+ 950 00ca DAB2     		uxtb	r2, r3
+ 951 00cc 7B68     		ldr	r3, [r7, #4]
+ 952 00ce DA74     		strb	r2, [r3, #19]
+ 161:game.c        ****     
+ 162:game.c        ****     CyDelay(note_group->length);
+ 953              		.loc 1 162 0
+ 954 00d0 7B68     		ldr	r3, [r7, #4]
+ 955 00d2 DB7C     		ldrb	r3, [r3, #19]	@ zero_extendqisi2
+ 956 00d4 1846     		mov	r0, r3
+ 957 00d6 FFF7FEFF 		bl	CyDelay
+ 163:game.c        **** }
+ 958              		.loc 1 163 0
+ 959 00da 00BF     		nop
+ 960 00dc 1437     		adds	r7, r7, #20
+ 961              		.cfi_def_cfa_offset 12
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cc8zrVxn.s 			page 21
+
+
+ 962 00de BD46     		mov	sp, r7
+ 963              		.cfi_def_cfa_register 13
+ 964              		@ sp needed
+ 965 00e0 90BD     		pop	{r4, r7, pc}
+ 966              	.L52:
+ 967 00e2 00BF     		.align	2
+ 968              	.L51:
+ 969 00e4 CDCCCCCC 		.word	-858993459
+ 970              		.cfi_endproc
+ 971              	.LFE9:
+ 972              		.size	generate_random_note_group, .-generate_random_note_group
+ 973              		.section	.text.write_note_group_holes,"ax",%progbits
+ 974              		.align	2
+ 975              		.global	write_note_group_holes
+ 976              		.thumb
+ 977              		.thumb_func
+ 978              		.type	write_note_group_holes, %function
+ 979              	write_note_group_holes:
+ 980              	.LFB10:
+ 164:game.c        **** 
+ 165:game.c        **** void write_note_group_holes(NOTE_GROUP* note_group) {
+ 981              		.loc 1 165 0
+ 982              		.cfi_startproc
+ 983              		@ args = 0, pretend = 0, frame = 16
+ 984              		@ frame_needed = 1, uses_anonymous_args = 0
+ 985              		@ link register save eliminated.
+ 986 0000 80B4     		push	{r7}
+ 987              		.cfi_def_cfa_offset 4
+ 988              		.cfi_offset 7, -4
+ 989 0002 85B0     		sub	sp, sp, #20
+ 990              		.cfi_def_cfa_offset 24
+ 991 0004 00AF     		add	r7, sp, #0
+ 992              		.cfi_def_cfa_register 7
+ 993 0006 7860     		str	r0, [r7, #4]
+ 166:game.c        ****     // need to figure out lower hole
+ 167:game.c        ****    uint8 hole_offset = note_group->num_notes / 2;
+ 994              		.loc 1 167 0
+ 995 0008 7B68     		ldr	r3, [r7, #4]
+ 996 000a 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 997 000c 5B08     		lsrs	r3, r3, #1
+ 998 000e BB73     		strb	r3, [r7, #14]
+ 168:game.c        ****    int8 center_hole_int8 = (int8) note_group->center_hole;
+ 999              		.loc 1 168 0
+ 1000 0010 7B68     		ldr	r3, [r7, #4]
+ 1001 0012 5B78     		ldrb	r3, [r3, #1]	@ zero_extendqisi2
+ 1002 0014 7B73     		strb	r3, [r7, #13]
+ 169:game.c        ****    int8 lowest_hole_raw = (center_hole_int8 - hole_offset);
+ 1003              		.loc 1 169 0
+ 1004 0016 7A7B     		ldrb	r2, [r7, #13]	@ zero_extendqisi2
+ 1005 0018 BB7B     		ldrb	r3, [r7, #14]
+ 1006 001a D31A     		subs	r3, r2, r3
+ 1007 001c DBB2     		uxtb	r3, r3
+ 1008 001e 3B73     		strb	r3, [r7, #12]
+ 170:game.c        ****    int8 lowest_hole = (lowest_hole_raw < 0) ? 0 : lowest_hole_raw;
+ 1009              		.loc 1 170 0
+ 1010 0020 97F90C30 		ldrsb	r3, [r7, #12]
+ 1011 0024 23EAE373 		bic	r3, r3, r3, asr #31
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cc8zrVxn.s 			page 22
+
+
+ 1012 0028 FB72     		strb	r3, [r7, #11]
+ 171:game.c        ****     note_group->num_notes += lowest_hole - lowest_hole_raw;
+ 1013              		.loc 1 171 0
+ 1014 002a 7B68     		ldr	r3, [r7, #4]
+ 1015 002c 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+ 1016 002e F97A     		ldrb	r1, [r7, #11]	@ zero_extendqisi2
+ 1017 0030 3B7B     		ldrb	r3, [r7, #12]	@ zero_extendqisi2
+ 1018 0032 CB1A     		subs	r3, r1, r3
+ 1019 0034 DBB2     		uxtb	r3, r3
+ 1020 0036 1344     		add	r3, r3, r2
+ 1021 0038 DAB2     		uxtb	r2, r3
+ 1022 003a 7B68     		ldr	r3, [r7, #4]
+ 1023 003c 1A70     		strb	r2, [r3]
+ 1024              	.LBB8:
+ 172:game.c        **** //        int8 hole_offset = (num_notes_played / 2);
+ 173:game.c        **** //    int8 lowest_hole_raw = ((int)active_hole - hole_offset);
+ 174:game.c        **** //    HOLE lowest_hole =  (lowest_hole_raw < ZERO) ? ZERO : (HOLE) (lowest_hole_raw);
+ 175:game.c        ****     
+ 176:game.c        ****     for(uint8 idx = 0; idx <= note_group->num_notes; idx++) {
+ 1025              		.loc 1 176 0
+ 1026 003e 0023     		movs	r3, #0
+ 1027 0040 FB73     		strb	r3, [r7, #15]
+ 1028 0042 0BE0     		b	.L54
+ 1029              	.L55:
+ 177:game.c        ****         note_group->holes[idx] = idx + (uint8) lowest_hole;
+ 1030              		.loc 1 177 0 discriminator 3
+ 1031 0044 FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+ 1032 0046 F97A     		ldrb	r1, [r7, #11]	@ zero_extendqisi2
+ 1033 0048 FA7B     		ldrb	r2, [r7, #15]
+ 1034 004a 0A44     		add	r2, r2, r1
+ 1035 004c D1B2     		uxtb	r1, r2
+ 1036 004e 7A68     		ldr	r2, [r7, #4]
+ 1037 0050 1344     		add	r3, r3, r2
+ 1038 0052 0A46     		mov	r2, r1
+ 1039 0054 5A73     		strb	r2, [r3, #13]
+ 176:game.c        ****         note_group->holes[idx] = idx + (uint8) lowest_hole;
+ 1040              		.loc 1 176 0 discriminator 3
+ 1041 0056 FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+ 1042 0058 0133     		adds	r3, r3, #1
+ 1043 005a FB73     		strb	r3, [r7, #15]
+ 1044              	.L54:
+ 176:game.c        ****         note_group->holes[idx] = idx + (uint8) lowest_hole;
+ 1045              		.loc 1 176 0 is_stmt 0 discriminator 1
+ 1046 005c 7B68     		ldr	r3, [r7, #4]
+ 1047 005e 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 1048 0060 FA7B     		ldrb	r2, [r7, #15]	@ zero_extendqisi2
+ 1049 0062 9A42     		cmp	r2, r3
+ 1050 0064 EED9     		bls	.L55
+ 1051              	.LBE8:
+ 178:game.c        ****     }
+ 179:game.c        **** }
+ 1052              		.loc 1 179 0 is_stmt 1
+ 1053 0066 00BF     		nop
+ 1054 0068 1437     		adds	r7, r7, #20
+ 1055              		.cfi_def_cfa_offset 4
+ 1056 006a BD46     		mov	sp, r7
+ 1057              		.cfi_def_cfa_register 13
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cc8zrVxn.s 			page 23
+
+
+ 1058              		@ sp needed
+ 1059 006c 80BC     		pop	{r7}
+ 1060              		.cfi_restore 7
+ 1061              		.cfi_def_cfa_offset 0
+ 1062 006e 7047     		bx	lr
+ 1063              		.cfi_endproc
+ 1064              	.LFE10:
+ 1065              		.size	write_note_group_holes, .-write_note_group_holes
+ 1066              		.section	.text.handle_note_group_spawn,"ax",%progbits
+ 1067              		.align	2
+ 1068              		.global	handle_note_group_spawn
+ 1069              		.thumb
+ 1070              		.thumb_func
+ 1071              		.type	handle_note_group_spawn, %function
+ 1072              	handle_note_group_spawn:
+ 1073              	.LFB11:
+ 180:game.c        **** 
+ 181:game.c        **** void handle_note_group_spawn(NOTE_GROUP* note_groups) {
+ 1074              		.loc 1 181 0
+ 1075              		.cfi_startproc
+ 1076              		@ args = 0, pretend = 0, frame = 32
+ 1077              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1078 0000 80B5     		push	{r7, lr}
+ 1079              		.cfi_def_cfa_offset 8
+ 1080              		.cfi_offset 7, -8
+ 1081              		.cfi_offset 14, -4
+ 1082 0002 88B0     		sub	sp, sp, #32
+ 1083              		.cfi_def_cfa_offset 40
+ 1084 0004 00AF     		add	r7, sp, #0
+ 1085              		.cfi_def_cfa_register 7
+ 1086 0006 7860     		str	r0, [r7, #4]
+ 182:game.c        ****     hBool all_note_groups_past_threshold = TRUE;
+ 1087              		.loc 1 182 0
+ 1088 0008 0123     		movs	r3, #1
+ 1089 000a FB77     		strb	r3, [r7, #31]
+ 1090              	.LBB9:
+ 183:game.c        ****     
+ 184:game.c        ****     for(int idx = 0; idx < num_note_groups; idx++) {
+ 1091              		.loc 1 184 0
+ 1092 000c 0023     		movs	r3, #0
+ 1093 000e BB61     		str	r3, [r7, #24]
+ 1094 0010 15E0     		b	.L57
+ 1095              	.L59:
+ 1096              	.LBB10:
+ 185:game.c        ****         NOTE_GROUP* ng = &note_groups[idx];
+ 1097              		.loc 1 185 0
+ 1098 0012 BA69     		ldr	r2, [r7, #24]
+ 1099 0014 1346     		mov	r3, r2
+ 1100 0016 9B00     		lsls	r3, r3, #2
+ 1101 0018 1344     		add	r3, r3, r2
+ 1102 001a 9B00     		lsls	r3, r3, #2
+ 1103 001c 1A46     		mov	r2, r3
+ 1104 001e 7B68     		ldr	r3, [r7, #4]
+ 1105 0020 1344     		add	r3, r3, r2
+ 1106 0022 3B61     		str	r3, [r7, #16]
+ 186:game.c        ****         if(ng->pos.y < NOTE_GROUP_SPAWN_Y_THRESH && ng->active == TRUE) {
+ 1107              		.loc 1 186 0
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cc8zrVxn.s 			page 24
+
+
+ 1108 0024 3B69     		ldr	r3, [r7, #16]
+ 1109 0026 9B68     		ldr	r3, [r3, #8]
+ 1110 0028 0E2B     		cmp	r3, #14
+ 1111 002a 05DC     		bgt	.L58
+ 1112              		.loc 1 186 0 is_stmt 0 discriminator 1
+ 1113 002c 3B69     		ldr	r3, [r7, #16]
+ 1114 002e DB78     		ldrb	r3, [r3, #3]	@ zero_extendqisi2
+ 1115 0030 012B     		cmp	r3, #1
+ 1116 0032 01D1     		bne	.L58
+ 187:game.c        ****             all_note_groups_past_threshold = FALSE;
+ 1117              		.loc 1 187 0 is_stmt 1
+ 1118 0034 0023     		movs	r3, #0
+ 1119 0036 FB77     		strb	r3, [r7, #31]
+ 1120              	.L58:
+ 1121              	.LBE10:
+ 184:game.c        ****         NOTE_GROUP* ng = &note_groups[idx];
+ 1122              		.loc 1 184 0 discriminator 2
+ 1123 0038 BB69     		ldr	r3, [r7, #24]
+ 1124 003a 0133     		adds	r3, r3, #1
+ 1125 003c BB61     		str	r3, [r7, #24]
+ 1126              	.L57:
+ 184:game.c        ****         NOTE_GROUP* ng = &note_groups[idx];
+ 1127              		.loc 1 184 0 is_stmt 0 discriminator 1
+ 1128 003e 0323     		movs	r3, #3
+ 1129 0040 1A46     		mov	r2, r3
+ 1130 0042 BB69     		ldr	r3, [r7, #24]
+ 1131 0044 9A42     		cmp	r2, r3
+ 1132 0046 E4DC     		bgt	.L59
+ 1133              	.LBE9:
+ 1134              	.LBB11:
+ 188:game.c        ****         }
+ 189:game.c        ****     }
+ 190:game.c        ****     for(int idx = 0; idx < num_note_groups; idx++) {
+ 1135              		.loc 1 190 0 is_stmt 1
+ 1136 0048 0023     		movs	r3, #0
+ 1137 004a 7B61     		str	r3, [r7, #20]
+ 1138 004c 19E0     		b	.L60
+ 1139              	.L63:
+ 1140              	.LBB12:
+ 191:game.c        ****         NOTE_GROUP* ng = &note_groups[idx];
+ 1141              		.loc 1 191 0
+ 1142 004e 7A69     		ldr	r2, [r7, #20]
+ 1143 0050 1346     		mov	r3, r2
+ 1144 0052 9B00     		lsls	r3, r3, #2
+ 1145 0054 1344     		add	r3, r3, r2
+ 1146 0056 9B00     		lsls	r3, r3, #2
+ 1147 0058 1A46     		mov	r2, r3
+ 1148 005a 7B68     		ldr	r3, [r7, #4]
+ 1149 005c 1344     		add	r3, r3, r2
+ 1150 005e FB60     		str	r3, [r7, #12]
+ 192:game.c        ****         if(ng->active == FALSE && all_note_groups_past_threshold) {
+ 1151              		.loc 1 192 0
+ 1152 0060 FB68     		ldr	r3, [r7, #12]
+ 1153 0062 DB78     		ldrb	r3, [r3, #3]	@ zero_extendqisi2
+ 1154 0064 002B     		cmp	r3, #0
+ 1155 0066 09D1     		bne	.L61
+ 1156              		.loc 1 192 0 is_stmt 0 discriminator 1
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cc8zrVxn.s 			page 25
+
+
+ 1157 0068 FB7F     		ldrb	r3, [r7, #31]	@ zero_extendqisi2
+ 1158 006a 002B     		cmp	r3, #0
+ 1159 006c 06D0     		beq	.L61
+ 193:game.c        ****             ng->active = TRUE;
+ 1160              		.loc 1 193 0 is_stmt 1
+ 1161 006e FB68     		ldr	r3, [r7, #12]
+ 1162 0070 0122     		movs	r2, #1
+ 1163 0072 DA70     		strb	r2, [r3, #3]
+ 194:game.c        ****             generate_random_note_group(ng);
+ 1164              		.loc 1 194 0
+ 1165 0074 F868     		ldr	r0, [r7, #12]
+ 1166 0076 FFF7FEFF 		bl	generate_random_note_group
+ 195:game.c        ****             return;
+ 1167              		.loc 1 195 0
+ 1168 007a 07E0     		b	.L56
+ 1169              	.L61:
+ 1170              	.LBE12:
+ 190:game.c        ****         NOTE_GROUP* ng = &note_groups[idx];
+ 1171              		.loc 1 190 0 discriminator 2
+ 1172 007c 7B69     		ldr	r3, [r7, #20]
+ 1173 007e 0133     		adds	r3, r3, #1
+ 1174 0080 7B61     		str	r3, [r7, #20]
+ 1175              	.L60:
+ 190:game.c        ****         NOTE_GROUP* ng = &note_groups[idx];
+ 1176              		.loc 1 190 0 is_stmt 0 discriminator 1
+ 1177 0082 0323     		movs	r3, #3
+ 1178 0084 1A46     		mov	r2, r3
+ 1179 0086 7B69     		ldr	r3, [r7, #20]
+ 1180 0088 9A42     		cmp	r2, r3
+ 1181 008a E0DC     		bgt	.L63
+ 1182              	.L56:
+ 1183              	.LBE11:
+ 196:game.c        ****         } 
+ 197:game.c        ****     }
+ 198:game.c        ****     
+ 199:game.c        **** }
+ 1184              		.loc 1 199 0 is_stmt 1
+ 1185 008c 2037     		adds	r7, r7, #32
+ 1186              		.cfi_def_cfa_offset 8
+ 1187 008e BD46     		mov	sp, r7
+ 1188              		.cfi_def_cfa_register 13
+ 1189              		@ sp needed
+ 1190 0090 80BD     		pop	{r7, pc}
+ 1191              		.cfi_endproc
+ 1192              	.LFE11:
+ 1193              		.size	handle_note_group_spawn, .-handle_note_group_spawn
+ 1194 0092 00BF     		.section	.text.draw_all_note_groups,"ax",%progbits
+ 1195              		.align	2
+ 1196              		.global	draw_all_note_groups
+ 1197              		.thumb
+ 1198              		.thumb_func
+ 1199              		.type	draw_all_note_groups, %function
+ 1200              	draw_all_note_groups:
+ 1201              	.LFB12:
+ 200:game.c        **** 
+ 201:game.c        **** void draw_all_note_groups(Harmonica* h) {
+ 1202              		.loc 1 201 0
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cc8zrVxn.s 			page 26
+
+
+ 1203              		.cfi_startproc
+ 1204              		@ args = 0, pretend = 0, frame = 16
+ 1205              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1206 0000 80B5     		push	{r7, lr}
+ 1207              		.cfi_def_cfa_offset 8
+ 1208              		.cfi_offset 7, -8
+ 1209              		.cfi_offset 14, -4
+ 1210 0002 84B0     		sub	sp, sp, #16
+ 1211              		.cfi_def_cfa_offset 24
+ 1212 0004 00AF     		add	r7, sp, #0
+ 1213              		.cfi_def_cfa_register 7
+ 1214 0006 7860     		str	r0, [r7, #4]
+ 1215              	.LBB13:
+ 202:game.c        ****     for(int idx = 0; idx < num_note_groups; idx++) {
+ 1216              		.loc 1 202 0
+ 1217 0008 0023     		movs	r3, #0
+ 1218 000a FB60     		str	r3, [r7, #12]
+ 1219 000c 0DE0     		b	.L65
+ 1220              	.L66:
+ 203:game.c        ****         draw_note_group(&note_groups[idx], h);
+ 1221              		.loc 1 203 0 discriminator 3
+ 1222 000e FA68     		ldr	r2, [r7, #12]
+ 1223 0010 1346     		mov	r3, r2
+ 1224 0012 9B00     		lsls	r3, r3, #2
+ 1225 0014 1344     		add	r3, r3, r2
+ 1226 0016 9B00     		lsls	r3, r3, #2
+ 1227 0018 084A     		ldr	r2, .L67
+ 1228 001a 1344     		add	r3, r3, r2
+ 1229 001c 7968     		ldr	r1, [r7, #4]
+ 1230 001e 1846     		mov	r0, r3
+ 1231 0020 FFF7FEFF 		bl	draw_note_group
+ 202:game.c        ****     for(int idx = 0; idx < num_note_groups; idx++) {
+ 1232              		.loc 1 202 0 discriminator 3
+ 1233 0024 FB68     		ldr	r3, [r7, #12]
+ 1234 0026 0133     		adds	r3, r3, #1
+ 1235 0028 FB60     		str	r3, [r7, #12]
+ 1236              	.L65:
+ 202:game.c        ****     for(int idx = 0; idx < num_note_groups; idx++) {
+ 1237              		.loc 1 202 0 is_stmt 0 discriminator 1
+ 1238 002a 0323     		movs	r3, #3
+ 1239 002c 1A46     		mov	r2, r3
+ 1240 002e FB68     		ldr	r3, [r7, #12]
+ 1241 0030 9A42     		cmp	r2, r3
+ 1242 0032 ECDC     		bgt	.L66
+ 1243              	.LBE13:
+ 204:game.c        ****     }
+ 205:game.c        **** }
+ 1244              		.loc 1 205 0 is_stmt 1
+ 1245 0034 00BF     		nop
+ 1246 0036 1037     		adds	r7, r7, #16
+ 1247              		.cfi_def_cfa_offset 8
+ 1248 0038 BD46     		mov	sp, r7
+ 1249              		.cfi_def_cfa_register 13
+ 1250              		@ sp needed
+ 1251 003a 80BD     		pop	{r7, pc}
+ 1252              	.L68:
+ 1253              		.align	2
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cc8zrVxn.s 			page 27
+
+
+ 1254              	.L67:
+ 1255 003c 00000000 		.word	note_groups
+ 1256              		.cfi_endproc
+ 1257              	.LFE12:
+ 1258              		.size	draw_all_note_groups, .-draw_all_note_groups
+ 1259              		.text
+ 1260              	.Letext0:
+ 1261              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.2\\psoc creator\\import\\gnu\\arm\\5.4.
+ 1262              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.2\\psoc creator\\import\\gnu\\arm\\5.4.
+ 1263              		.file 4 "Generated_Source\\PSoC5/cytypes.h"
+ 1264              		.file 5 "harmonica_control.h"
+ 1265              		.file 6 "game.h"
+ 1266              		.section	.debug_info,"",%progbits
+ 1267              	.Ldebug_info0:
+ 1268 0000 76090000 		.4byte	0x976
+ 1269 0004 0400     		.2byte	0x4
+ 1270 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 1271 000a 04       		.byte	0x4
+ 1272 000b 01       		.uleb128 0x1
+ 1273 000c 51000000 		.4byte	.LASF125
+ 1274 0010 0C       		.byte	0xc
+ 1275 0011 E9000000 		.4byte	.LASF126
+ 1276 0015 65010000 		.4byte	.LASF127
+ 1277 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 1278 001d 00000000 		.4byte	0
+ 1279 0021 00000000 		.4byte	.Ldebug_line0
+ 1280 0025 02       		.uleb128 0x2
+ 1281 0026 01       		.byte	0x1
+ 1282 0027 06       		.byte	0x6
+ 1283 0028 73060000 		.4byte	.LASF0
+ 1284 002c 02       		.uleb128 0x2
+ 1285 002d 01       		.byte	0x1
+ 1286 002e 08       		.byte	0x8
+ 1287 002f 3F060000 		.4byte	.LASF1
+ 1288 0033 02       		.uleb128 0x2
+ 1289 0034 02       		.byte	0x2
+ 1290 0035 05       		.byte	0x5
+ 1291 0036 EC040000 		.4byte	.LASF2
+ 1292 003a 03       		.uleb128 0x3
+ 1293 003b 21020000 		.4byte	.LASF9
+ 1294 003f 02       		.byte	0x2
+ 1295 0040 2B       		.byte	0x2b
+ 1296 0041 45000000 		.4byte	0x45
+ 1297 0045 02       		.uleb128 0x2
+ 1298 0046 02       		.byte	0x2
+ 1299 0047 07       		.byte	0x7
+ 1300 0048 7F060000 		.4byte	.LASF3
+ 1301 004c 02       		.uleb128 0x2
+ 1302 004d 04       		.byte	0x4
+ 1303 004e 05       		.byte	0x5
+ 1304 004f 2B050000 		.4byte	.LASF4
+ 1305 0053 02       		.uleb128 0x2
+ 1306 0054 04       		.byte	0x4
+ 1307 0055 07       		.byte	0x7
+ 1308 0056 CC050000 		.4byte	.LASF5
+ 1309 005a 02       		.uleb128 0x2
+ 1310 005b 08       		.byte	0x8
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cc8zrVxn.s 			page 28
+
+
+ 1311 005c 05       		.byte	0x5
+ 1312 005d C3030000 		.4byte	.LASF6
+ 1313 0061 02       		.uleb128 0x2
+ 1314 0062 08       		.byte	0x8
+ 1315 0063 07       		.byte	0x7
+ 1316 0064 00020000 		.4byte	.LASF7
+ 1317 0068 04       		.uleb128 0x4
+ 1318 0069 04       		.byte	0x4
+ 1319 006a 05       		.byte	0x5
+ 1320 006b 696E7400 		.ascii	"int\000"
+ 1321 006f 02       		.uleb128 0x2
+ 1322 0070 04       		.byte	0x4
+ 1323 0071 07       		.byte	0x7
+ 1324 0072 35000000 		.4byte	.LASF8
+ 1325 0076 03       		.uleb128 0x3
+ 1326 0077 C6040000 		.4byte	.LASF10
+ 1327 007b 03       		.byte	0x3
+ 1328 007c 24       		.byte	0x24
+ 1329 007d 3A000000 		.4byte	0x3a
+ 1330 0081 05       		.uleb128 0x5
+ 1331 0082 AA060000 		.4byte	.LASF11
+ 1332 0086 04       		.byte	0x4
+ 1333 0087 9201     		.2byte	0x192
+ 1334 0089 2C000000 		.4byte	0x2c
+ 1335 008d 05       		.uleb128 0x5
+ 1336 008e 6C030000 		.4byte	.LASF12
+ 1337 0092 04       		.byte	0x4
+ 1338 0093 9301     		.2byte	0x193
+ 1339 0095 45000000 		.4byte	0x45
+ 1340 0099 05       		.uleb128 0x5
+ 1341 009a 26040000 		.4byte	.LASF13
+ 1342 009e 04       		.byte	0x4
+ 1343 009f 9401     		.2byte	0x194
+ 1344 00a1 53000000 		.4byte	0x53
+ 1345 00a5 05       		.uleb128 0x5
+ 1346 00a6 73030000 		.4byte	.LASF14
+ 1347 00aa 04       		.byte	0x4
+ 1348 00ab 9501     		.2byte	0x195
+ 1349 00ad 25000000 		.4byte	0x25
+ 1350 00b1 02       		.uleb128 0x2
+ 1351 00b2 04       		.byte	0x4
+ 1352 00b3 04       		.byte	0x4
+ 1353 00b4 3E010000 		.4byte	.LASF15
+ 1354 00b8 02       		.uleb128 0x2
+ 1355 00b9 08       		.byte	0x8
+ 1356 00ba 04       		.byte	0x4
+ 1357 00bb B0060000 		.4byte	.LASF16
+ 1358 00bf 02       		.uleb128 0x2
+ 1359 00c0 01       		.byte	0x1
+ 1360 00c1 08       		.byte	0x8
+ 1361 00c2 60030000 		.4byte	.LASF17
+ 1362 00c6 02       		.uleb128 0x2
+ 1363 00c7 08       		.byte	0x8
+ 1364 00c8 04       		.byte	0x4
+ 1365 00c9 BA040000 		.4byte	.LASF18
+ 1366 00cd 02       		.uleb128 0x2
+ 1367 00ce 04       		.byte	0x4
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cc8zrVxn.s 			page 29
+
+
+ 1368 00cf 07       		.byte	0x7
+ 1369 00d0 C3050000 		.4byte	.LASF19
+ 1370 00d4 06       		.uleb128 0x6
+ 1371 00d5 01       		.byte	0x1
+ 1372 00d6 2C000000 		.4byte	0x2c
+ 1373 00da 05       		.byte	0x5
+ 1374 00db 22       		.byte	0x22
+ 1375 00dc ED000000 		.4byte	0xed
+ 1376 00e0 07       		.uleb128 0x7
+ 1377 00e1 6B050000 		.4byte	.LASF20
+ 1378 00e5 00       		.byte	0
+ 1379 00e6 07       		.uleb128 0x7
+ 1380 00e7 2B010000 		.4byte	.LASF21
+ 1381 00eb 01       		.byte	0x1
+ 1382 00ec 00       		.byte	0
+ 1383 00ed 03       		.uleb128 0x3
+ 1384 00ee 30010000 		.4byte	.LASF22
+ 1385 00f2 05       		.byte	0x5
+ 1386 00f3 25       		.byte	0x25
+ 1387 00f4 D4000000 		.4byte	0xd4
+ 1388 00f8 06       		.uleb128 0x6
+ 1389 00f9 01       		.byte	0x1
+ 1390 00fa 2C000000 		.4byte	0x2c
+ 1391 00fe 05       		.byte	0x5
+ 1392 00ff 26       		.byte	0x26
+ 1393 0100 17010000 		.4byte	0x117
+ 1394 0104 07       		.uleb128 0x7
+ 1395 0105 29000000 		.4byte	.LASF23
+ 1396 0109 00       		.byte	0
+ 1397 010a 07       		.uleb128 0x7
+ 1398 010b 52060000 		.4byte	.LASF24
+ 1399 010f 01       		.byte	0x1
+ 1400 0110 07       		.uleb128 0x7
+ 1401 0111 88050000 		.4byte	.LASF25
+ 1402 0115 02       		.byte	0x2
+ 1403 0116 00       		.byte	0
+ 1404 0117 03       		.uleb128 0x3
+ 1405 0118 69060000 		.4byte	.LASF26
+ 1406 011c 05       		.byte	0x5
+ 1407 011d 2A       		.byte	0x2a
+ 1408 011e F8000000 		.4byte	0xf8
+ 1409 0122 06       		.uleb128 0x6
+ 1410 0123 01       		.byte	0x1
+ 1411 0124 2C000000 		.4byte	0x2c
+ 1412 0128 05       		.byte	0x5
+ 1413 0129 2C       		.byte	0x2c
+ 1414 012a 47010000 		.4byte	0x147
+ 1415 012e 07       		.uleb128 0x7
+ 1416 012f 65030000 		.4byte	.LASF27
+ 1417 0133 00       		.byte	0
+ 1418 0134 07       		.uleb128 0x7
+ 1419 0135 9D050000 		.4byte	.LASF28
+ 1420 0139 01       		.byte	0x1
+ 1421 013a 07       		.uleb128 0x7
+ 1422 013b 7B040000 		.4byte	.LASF29
+ 1423 013f 02       		.byte	0x2
+ 1424 0140 07       		.uleb128 0x7
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cc8zrVxn.s 			page 30
+
+
+ 1425 0141 6A040000 		.4byte	.LASF30
+ 1426 0145 03       		.byte	0x3
+ 1427 0146 00       		.byte	0
+ 1428 0147 03       		.uleb128 0x3
+ 1429 0148 C7060000 		.4byte	.LASF31
+ 1430 014c 05       		.byte	0x5
+ 1431 014d 31       		.byte	0x31
+ 1432 014e 22010000 		.4byte	0x122
+ 1433 0152 06       		.uleb128 0x6
+ 1434 0153 01       		.byte	0x1
+ 1435 0154 2C000000 		.4byte	0x2c
+ 1436 0158 05       		.byte	0x5
+ 1437 0159 33       		.byte	0x33
+ 1438 015a A1010000 		.4byte	0x1a1
+ 1439 015e 07       		.uleb128 0x7
+ 1440 015f 67020000 		.4byte	.LASF32
+ 1441 0163 00       		.byte	0
+ 1442 0164 08       		.uleb128 0x8
+ 1443 0165 4F4E4500 		.ascii	"ONE\000"
+ 1444 0169 01       		.byte	0x1
+ 1445 016a 08       		.uleb128 0x8
+ 1446 016b 54574F00 		.ascii	"TWO\000"
+ 1447 016f 02       		.byte	0x2
+ 1448 0170 07       		.uleb128 0x7
+ 1449 0171 A0020000 		.4byte	.LASF33
+ 1450 0175 03       		.byte	0x3
+ 1451 0176 07       		.uleb128 0x7
+ 1452 0177 B7060000 		.4byte	.LASF34
+ 1453 017b 04       		.byte	0x4
+ 1454 017c 07       		.uleb128 0x7
+ 1455 017d B5040000 		.4byte	.LASF35
+ 1456 0181 05       		.byte	0x5
+ 1457 0182 08       		.uleb128 0x8
+ 1458 0183 53495800 		.ascii	"SIX\000"
+ 1459 0187 06       		.byte	0x6
+ 1460 0188 07       		.uleb128 0x7
+ 1461 0189 15040000 		.4byte	.LASF36
+ 1462 018d 07       		.byte	0x7
+ 1463 018e 07       		.uleb128 0x7
+ 1464 018f D3060000 		.4byte	.LASF37
+ 1465 0193 08       		.byte	0x8
+ 1466 0194 07       		.uleb128 0x7
+ 1467 0195 49050000 		.4byte	.LASF38
+ 1468 0199 09       		.byte	0x9
+ 1469 019a 07       		.uleb128 0x7
+ 1470 019b 73040000 		.4byte	.LASF39
+ 1471 019f 0A       		.byte	0xa
+ 1472 01a0 00       		.byte	0
+ 1473 01a1 03       		.uleb128 0x3
+ 1474 01a2 D1030000 		.4byte	.LASF40
+ 1475 01a6 05       		.byte	0x5
+ 1476 01a7 3F       		.byte	0x3f
+ 1477 01a8 52010000 		.4byte	0x152
+ 1478 01ac 06       		.uleb128 0x6
+ 1479 01ad 01       		.byte	0x1
+ 1480 01ae 2C000000 		.4byte	0x2c
+ 1481 01b2 05       		.byte	0x5
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cc8zrVxn.s 			page 31
+
+
+ 1482 01b3 41       		.byte	0x41
+ 1483 01b4 1E020000 		.4byte	0x21e
+ 1484 01b8 08       		.uleb128 0x8
+ 1485 01b9 433400   		.ascii	"C4\000"
+ 1486 01bc 00       		.byte	0
+ 1487 01bd 08       		.uleb128 0x8
+ 1488 01be 443400   		.ascii	"D4\000"
+ 1489 01c1 01       		.byte	0x1
+ 1490 01c2 08       		.uleb128 0x8
+ 1491 01c3 453400   		.ascii	"E4\000"
+ 1492 01c6 02       		.byte	0x2
+ 1493 01c7 08       		.uleb128 0x8
+ 1494 01c8 473400   		.ascii	"G4\000"
+ 1495 01cb 03       		.byte	0x3
+ 1496 01cc 08       		.uleb128 0x8
+ 1497 01cd 473500   		.ascii	"G5\000"
+ 1498 01d0 04       		.byte	0x4
+ 1499 01d1 08       		.uleb128 0x8
+ 1500 01d2 423400   		.ascii	"B4\000"
+ 1501 01d5 05       		.byte	0x5
+ 1502 01d6 08       		.uleb128 0x8
+ 1503 01d7 433500   		.ascii	"C5\000"
+ 1504 01da 06       		.byte	0x6
+ 1505 01db 08       		.uleb128 0x8
+ 1506 01dc 443500   		.ascii	"D5\000"
+ 1507 01df 07       		.byte	0x7
+ 1508 01e0 08       		.uleb128 0x8
+ 1509 01e1 453500   		.ascii	"E5\000"
+ 1510 01e4 08       		.byte	0x8
+ 1511 01e5 08       		.uleb128 0x8
+ 1512 01e6 463500   		.ascii	"F5\000"
+ 1513 01e9 09       		.byte	0x9
+ 1514 01ea 08       		.uleb128 0x8
+ 1515 01eb 473600   		.ascii	"G6\000"
+ 1516 01ee 0A       		.byte	0xa
+ 1517 01ef 08       		.uleb128 0x8
+ 1518 01f0 413500   		.ascii	"A5\000"
+ 1519 01f3 0B       		.byte	0xb
+ 1520 01f4 08       		.uleb128 0x8
+ 1521 01f5 433600   		.ascii	"C6\000"
+ 1522 01f8 0C       		.byte	0xc
+ 1523 01f9 08       		.uleb128 0x8
+ 1524 01fa 423500   		.ascii	"B5\000"
+ 1525 01fd 0D       		.byte	0xd
+ 1526 01fe 08       		.uleb128 0x8
+ 1527 01ff 453600   		.ascii	"E6\000"
+ 1528 0202 0E       		.byte	0xe
+ 1529 0203 08       		.uleb128 0x8
+ 1530 0204 443600   		.ascii	"D6\000"
+ 1531 0207 0F       		.byte	0xf
+ 1532 0208 08       		.uleb128 0x8
+ 1533 0209 463600   		.ascii	"F6\000"
+ 1534 020c 10       		.byte	0x10
+ 1535 020d 08       		.uleb128 0x8
+ 1536 020e 433700   		.ascii	"C7\000"
+ 1537 0211 11       		.byte	0x11
+ 1538 0212 08       		.uleb128 0x8
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cc8zrVxn.s 			page 32
+
+
+ 1539 0213 413600   		.ascii	"A6\000"
+ 1540 0216 12       		.byte	0x12
+ 1541 0217 07       		.uleb128 0x7
+ 1542 0218 B9050000 		.4byte	.LASF41
+ 1543 021c 13       		.byte	0x13
+ 1544 021d 00       		.byte	0
+ 1545 021e 03       		.uleb128 0x3
+ 1546 021f B3030000 		.4byte	.LASF42
+ 1547 0223 05       		.byte	0x5
+ 1548 0224 56       		.byte	0x56
+ 1549 0225 AC010000 		.4byte	0x1ac
+ 1550 0229 09       		.uleb128 0x9
+ 1551 022a 0B       		.byte	0xb
+ 1552 022b 05       		.byte	0x5
+ 1553 022c 59       		.byte	0x59
+ 1554 022d 4A020000 		.4byte	0x24a
+ 1555 0231 0A       		.uleb128 0xa
+ 1556 0232 20030000 		.4byte	.LASF43
+ 1557 0236 05       		.byte	0x5
+ 1558 0237 5A       		.byte	0x5a
+ 1559 0238 4A020000 		.4byte	0x24a
+ 1560 023c 00       		.byte	0
+ 1561 023d 0A       		.uleb128 0xa
+ 1562 023e ED050000 		.4byte	.LASF44
+ 1563 0242 05       		.byte	0x5
+ 1564 0243 5B       		.byte	0x5b
+ 1565 0244 A5000000 		.4byte	0xa5
+ 1566 0248 0A       		.byte	0xa
+ 1567 0249 00       		.byte	0
+ 1568 024a 0B       		.uleb128 0xb
+ 1569 024b 1E020000 		.4byte	0x21e
+ 1570 024f 5A020000 		.4byte	0x25a
+ 1571 0253 0C       		.uleb128 0xc
+ 1572 0254 CD000000 		.4byte	0xcd
+ 1573 0258 09       		.byte	0x9
+ 1574 0259 00       		.byte	0
+ 1575 025a 03       		.uleb128 0x3
+ 1576 025b 1A010000 		.4byte	.LASF45
+ 1577 025f 05       		.byte	0x5
+ 1578 0260 5C       		.byte	0x5c
+ 1579 0261 29020000 		.4byte	0x229
+ 1580 0265 09       		.uleb128 0x9
+ 1581 0266 14       		.byte	0x14
+ 1582 0267 05       		.byte	0x5
+ 1583 0268 5E       		.byte	0x5e
+ 1584 0269 9E020000 		.4byte	0x29e
+ 1585 026d 0A       		.uleb128 0xa
+ 1586 026e 20030000 		.4byte	.LASF43
+ 1587 0272 05       		.byte	0x5
+ 1588 0273 5F       		.byte	0x5f
+ 1589 0274 4A020000 		.4byte	0x24a
+ 1590 0278 00       		.byte	0
+ 1591 0279 0A       		.uleb128 0xa
+ 1592 027a ED050000 		.4byte	.LASF44
+ 1593 027e 05       		.byte	0x5
+ 1594 027f 60       		.byte	0x60
+ 1595 0280 A5000000 		.4byte	0xa5
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cc8zrVxn.s 			page 33
+
+
+ 1596 0284 0A       		.byte	0xa
+ 1597 0285 0A       		.uleb128 0xa
+ 1598 0286 E0010000 		.4byte	.LASF46
+ 1599 028a 05       		.byte	0x5
+ 1600 028b 61       		.byte	0x61
+ 1601 028c 99000000 		.4byte	0x99
+ 1602 0290 0C       		.byte	0xc
+ 1603 0291 0A       		.uleb128 0xa
+ 1604 0292 1B040000 		.4byte	.LASF47
+ 1605 0296 05       		.byte	0x5
+ 1606 0297 62       		.byte	0x62
+ 1607 0298 99000000 		.4byte	0x99
+ 1608 029c 10       		.byte	0x10
+ 1609 029d 00       		.byte	0
+ 1610 029e 03       		.uleb128 0x3
+ 1611 029f A7040000 		.4byte	.LASF48
+ 1612 02a3 05       		.byte	0x5
+ 1613 02a4 63       		.byte	0x63
+ 1614 02a5 65020000 		.4byte	0x265
+ 1615 02a9 0D       		.uleb128 0xd
+ 1616 02aa 9C01     		.2byte	0x19c
+ 1617 02ac 05       		.byte	0x5
+ 1618 02ad 65       		.byte	0x65
+ 1619 02ae 00030000 		.4byte	0x300
+ 1620 02b2 0A       		.uleb128 0xa
+ 1621 02b3 86020000 		.4byte	.LASF49
+ 1622 02b7 05       		.byte	0x5
+ 1623 02b8 66       		.byte	0x66
+ 1624 02b9 00030000 		.4byte	0x300
+ 1625 02bd 00       		.byte	0
+ 1626 02be 0E       		.uleb128 0xe
+ 1627 02bf 91020000 		.4byte	.LASF50
+ 1628 02c3 05       		.byte	0x5
+ 1629 02c4 67       		.byte	0x67
+ 1630 02c5 81000000 		.4byte	0x81
+ 1631 02c9 9001     		.2byte	0x190
+ 1632 02cb 0E       		.uleb128 0xe
+ 1633 02cc 2D040000 		.4byte	.LASF51
+ 1634 02d0 05       		.byte	0x5
+ 1635 02d1 68       		.byte	0x68
+ 1636 02d2 99000000 		.4byte	0x99
+ 1637 02d6 9401     		.2byte	0x194
+ 1638 02d8 0E       		.uleb128 0xe
+ 1639 02d9 4E050000 		.4byte	.LASF52
+ 1640 02dd 05       		.byte	0x5
+ 1641 02de 69       		.byte	0x69
+ 1642 02df ED000000 		.4byte	0xed
+ 1643 02e3 9801     		.2byte	0x198
+ 1644 02e5 0E       		.uleb128 0xe
+ 1645 02e6 26030000 		.4byte	.LASF53
+ 1646 02ea 05       		.byte	0x5
+ 1647 02eb 6A       		.byte	0x6a
+ 1648 02ec ED000000 		.4byte	0xed
+ 1649 02f0 9901     		.2byte	0x199
+ 1650 02f2 0E       		.uleb128 0xe
+ 1651 02f3 42000000 		.4byte	.LASF54
+ 1652 02f7 05       		.byte	0x5
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cc8zrVxn.s 			page 34
+
+
+ 1653 02f8 6B       		.byte	0x6b
+ 1654 02f9 81000000 		.4byte	0x81
+ 1655 02fd 9A01     		.2byte	0x19a
+ 1656 02ff 00       		.byte	0
+ 1657 0300 0B       		.uleb128 0xb
+ 1658 0301 9E020000 		.4byte	0x29e
+ 1659 0305 10030000 		.4byte	0x310
+ 1660 0309 0C       		.uleb128 0xc
+ 1661 030a CD000000 		.4byte	0xcd
+ 1662 030e 13       		.byte	0x13
+ 1663 030f 00       		.byte	0
+ 1664 0310 03       		.uleb128 0x3
+ 1665 0311 44010000 		.4byte	.LASF55
+ 1666 0315 05       		.byte	0x5
+ 1667 0316 6C       		.byte	0x6c
+ 1668 0317 A9020000 		.4byte	0x2a9
+ 1669 031b 09       		.uleb128 0x9
+ 1670 031c 2C       		.byte	0x2c
+ 1671 031d 05       		.byte	0x5
+ 1672 031e 6E       		.byte	0x6e
+ 1673 031f 90030000 		.4byte	0x390
+ 1674 0323 0A       		.uleb128 0xa
+ 1675 0324 3C040000 		.4byte	.LASF56
+ 1676 0328 05       		.byte	0x5
+ 1677 0329 6F       		.byte	0x6f
+ 1678 032a 9E020000 		.4byte	0x29e
+ 1679 032e 00       		.byte	0
+ 1680 032f 0A       		.uleb128 0xa
+ 1681 0330 92060000 		.4byte	.LASF57
+ 1682 0334 05       		.byte	0x5
+ 1683 0335 70       		.byte	0x70
+ 1684 0336 ED000000 		.4byte	0xed
+ 1685 033a 14       		.byte	0x14
+ 1686 033b 0A       		.uleb128 0xa
+ 1687 033c 4D040000 		.4byte	.LASF58
+ 1688 0340 05       		.byte	0x5
+ 1689 0341 71       		.byte	0x71
+ 1690 0342 ED000000 		.4byte	0xed
+ 1691 0346 15       		.byte	0x15
+ 1692 0347 0A       		.uleb128 0xa
+ 1693 0348 DE020000 		.4byte	.LASF59
+ 1694 034c 05       		.byte	0x5
+ 1695 034d 72       		.byte	0x72
+ 1696 034e B1000000 		.4byte	0xb1
+ 1697 0352 18       		.byte	0x18
+ 1698 0353 0A       		.uleb128 0xa
+ 1699 0354 E5060000 		.4byte	.LASF60
+ 1700 0358 05       		.byte	0x5
+ 1701 0359 73       		.byte	0x73
+ 1702 035a 99000000 		.4byte	0x99
+ 1703 035e 1C       		.byte	0x1c
+ 1704 035f 0A       		.uleb128 0xa
+ 1705 0360 99030000 		.4byte	.LASF61
+ 1706 0364 05       		.byte	0x5
+ 1707 0365 74       		.byte	0x74
+ 1708 0366 99000000 		.4byte	0x99
+ 1709 036a 20       		.byte	0x20
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cc8zrVxn.s 			page 35
+
+
+ 1710 036b 0A       		.uleb128 0xa
+ 1711 036c A6020000 		.4byte	.LASF62
+ 1712 0370 05       		.byte	0x5
+ 1713 0371 75       		.byte	0x75
+ 1714 0372 99000000 		.4byte	0x99
+ 1715 0376 24       		.byte	0x24
+ 1716 0377 0A       		.uleb128 0xa
+ 1717 0378 DF000000 		.4byte	.LASF63
+ 1718 037c 05       		.byte	0x5
+ 1719 037d 76       		.byte	0x76
+ 1720 037e ED000000 		.4byte	0xed
+ 1721 0382 28       		.byte	0x28
+ 1722 0383 0A       		.uleb128 0xa
+ 1723 0384 F8030000 		.4byte	.LASF64
+ 1724 0388 05       		.byte	0x5
+ 1725 0389 77       		.byte	0x77
+ 1726 038a 81000000 		.4byte	0x81
+ 1727 038e 29       		.byte	0x29
+ 1728 038f 00       		.byte	0
+ 1729 0390 03       		.uleb128 0x3
+ 1730 0391 9D040000 		.4byte	.LASF65
+ 1731 0395 05       		.byte	0x5
+ 1732 0396 78       		.byte	0x78
+ 1733 0397 1B030000 		.4byte	0x31b
+ 1734 039b 0D       		.uleb128 0xd
+ 1735 039c E001     		.2byte	0x1e0
+ 1736 039e 05       		.byte	0x5
+ 1737 039f 7A       		.byte	0x7a
+ 1738 03a0 12040000 		.4byte	0x412
+ 1739 03a4 0A       		.uleb128 0xa
+ 1740 03a5 1D060000 		.4byte	.LASF66
+ 1741 03a9 05       		.byte	0x5
+ 1742 03aa 7B       		.byte	0x7b
+ 1743 03ab 17010000 		.4byte	0x117
+ 1744 03af 00       		.byte	0
+ 1745 03b0 0A       		.uleb128 0xa
+ 1746 03b1 D9060000 		.4byte	.LASF67
+ 1747 03b5 05       		.byte	0x5
+ 1748 03b6 7C       		.byte	0x7c
+ 1749 03b7 A1010000 		.4byte	0x1a1
+ 1750 03bb 01       		.byte	0x1
+ 1751 03bc 0A       		.uleb128 0xa
+ 1752 03bd B8030000 		.4byte	.LASF68
+ 1753 03c1 05       		.byte	0x5
+ 1754 03c2 7D       		.byte	0x7d
+ 1755 03c3 A5000000 		.4byte	0xa5
+ 1756 03c7 02       		.byte	0x2
+ 1757 03c8 0A       		.uleb128 0xa
+ 1758 03c9 FE050000 		.4byte	.LASF69
+ 1759 03cd 05       		.byte	0x5
+ 1760 03ce 7E       		.byte	0x7e
+ 1761 03cf 5A020000 		.4byte	0x25a
+ 1762 03d3 03       		.byte	0x3
+ 1763 03d4 0A       		.uleb128 0xa
+ 1764 03d5 1D050000 		.4byte	.LASF70
+ 1765 03d9 05       		.byte	0x5
+ 1766 03da 7F       		.byte	0x7f
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cc8zrVxn.s 			page 36
+
+
+ 1767 03db ED000000 		.4byte	0xed
+ 1768 03df 0E       		.byte	0xe
+ 1769 03e0 0A       		.uleb128 0xa
+ 1770 03e1 53010000 		.4byte	.LASF71
+ 1771 03e5 05       		.byte	0x5
+ 1772 03e6 80       		.byte	0x80
+ 1773 03e7 B1000000 		.4byte	0xb1
+ 1774 03eb 10       		.byte	0x10
+ 1775 03ec 0A       		.uleb128 0xa
+ 1776 03ed 03030000 		.4byte	.LASF72
+ 1777 03f1 05       		.byte	0x5
+ 1778 03f2 81       		.byte	0x81
+ 1779 03f3 47010000 		.4byte	0x147
+ 1780 03f7 14       		.byte	0x14
+ 1781 03f8 0A       		.uleb128 0xa
+ 1782 03f9 A4030000 		.4byte	.LASF73
+ 1783 03fd 05       		.byte	0x5
+ 1784 03fe 82       		.byte	0x82
+ 1785 03ff 10030000 		.4byte	0x310
+ 1786 0403 18       		.byte	0x18
+ 1787 0404 0E       		.uleb128 0xe
+ 1788 0405 5F060000 		.4byte	.LASF74
+ 1789 0409 05       		.byte	0x5
+ 1790 040a 83       		.byte	0x83
+ 1791 040b 90030000 		.4byte	0x390
+ 1792 040f B401     		.2byte	0x1b4
+ 1793 0411 00       		.byte	0
+ 1794 0412 03       		.uleb128 0x3
+ 1795 0413 D6030000 		.4byte	.LASF75
+ 1796 0417 05       		.byte	0x5
+ 1797 0418 84       		.byte	0x84
+ 1798 0419 9B030000 		.4byte	0x39b
+ 1799 041d 09       		.uleb128 0x9
+ 1800 041e 08       		.byte	0x8
+ 1801 041f 06       		.byte	0x6
+ 1802 0420 28       		.byte	0x28
+ 1803 0421 3A040000 		.4byte	0x43a
+ 1804 0425 0F       		.uleb128 0xf
+ 1805 0426 7800     		.ascii	"x\000"
+ 1806 0428 06       		.byte	0x6
+ 1807 0429 29       		.byte	0x29
+ 1808 042a 81000000 		.4byte	0x81
+ 1809 042e 00       		.byte	0
+ 1810 042f 0F       		.uleb128 0xf
+ 1811 0430 7900     		.ascii	"y\000"
+ 1812 0432 06       		.byte	0x6
+ 1813 0433 2A       		.byte	0x2a
+ 1814 0434 68000000 		.4byte	0x68
+ 1815 0438 04       		.byte	0x4
+ 1816 0439 00       		.byte	0
+ 1817 043a 03       		.uleb128 0x3
+ 1818 043b 41030000 		.4byte	.LASF76
+ 1819 043f 06       		.byte	0x6
+ 1820 0440 2B       		.byte	0x2b
+ 1821 0441 1D040000 		.4byte	0x41d
+ 1822 0445 09       		.uleb128 0x9
+ 1823 0446 14       		.byte	0x14
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cc8zrVxn.s 			page 37
+
+
+ 1824 0447 06       		.byte	0x6
+ 1825 0448 2D       		.byte	0x2d
+ 1826 0449 AE040000 		.4byte	0x4ae
+ 1827 044d 0A       		.uleb128 0xa
+ 1828 044e 13060000 		.4byte	.LASF77
+ 1829 0452 06       		.byte	0x6
+ 1830 0453 2E       		.byte	0x2e
+ 1831 0454 81000000 		.4byte	0x81
+ 1832 0458 00       		.byte	0
+ 1833 0459 0A       		.uleb128 0xa
+ 1834 045a A2050000 		.4byte	.LASF78
+ 1835 045e 06       		.byte	0x6
+ 1836 045f 2F       		.byte	0x2f
+ 1837 0460 81000000 		.4byte	0x81
+ 1838 0464 01       		.byte	0x1
+ 1839 0465 0A       		.uleb128 0xa
+ 1840 0466 F0000000 		.4byte	.LASF79
+ 1841 046a 06       		.byte	0x6
+ 1842 046b 30       		.byte	0x30
+ 1843 046c 17010000 		.4byte	0x117
+ 1844 0470 02       		.byte	0x2
+ 1845 0471 0A       		.uleb128 0xa
+ 1846 0472 06010000 		.4byte	.LASF80
+ 1847 0476 06       		.byte	0x6
+ 1848 0477 31       		.byte	0x31
+ 1849 0478 ED000000 		.4byte	0xed
+ 1850 047c 03       		.byte	0x3
+ 1851 047d 0F       		.uleb128 0xf
+ 1852 047e 706F7300 		.ascii	"pos\000"
+ 1853 0482 06       		.byte	0x6
+ 1854 0483 32       		.byte	0x32
+ 1855 0484 3A040000 		.4byte	0x43a
+ 1856 0488 04       		.byte	0x4
+ 1857 0489 0A       		.uleb128 0xa
+ 1858 048a 00010000 		.4byte	.LASF81
+ 1859 048e 06       		.byte	0x6
+ 1860 048f 33       		.byte	0x33
+ 1861 0490 81000000 		.4byte	0x81
+ 1862 0494 0C       		.byte	0xc
+ 1863 0495 0A       		.uleb128 0xa
+ 1864 0496 6C020000 		.4byte	.LASF82
+ 1865 049a 06       		.byte	0x6
+ 1866 049b 34       		.byte	0x34
+ 1867 049c AE040000 		.4byte	0x4ae
+ 1868 04a0 0D       		.byte	0xd
+ 1869 04a1 0A       		.uleb128 0xa
+ 1870 04a2 3A050000 		.4byte	.LASF83
+ 1871 04a6 06       		.byte	0x6
+ 1872 04a7 35       		.byte	0x35
+ 1873 04a8 81000000 		.4byte	0x81
+ 1874 04ac 13       		.byte	0x13
+ 1875 04ad 00       		.byte	0
+ 1876 04ae 0B       		.uleb128 0xb
+ 1877 04af 81000000 		.4byte	0x81
+ 1878 04b3 BE040000 		.4byte	0x4be
+ 1879 04b7 0C       		.uleb128 0xc
+ 1880 04b8 CD000000 		.4byte	0xcd
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cc8zrVxn.s 			page 38
+
+
+ 1881 04bc 05       		.byte	0x5
+ 1882 04bd 00       		.byte	0
+ 1883 04be 03       		.uleb128 0x3
+ 1884 04bf 4A030000 		.4byte	.LASF84
+ 1885 04c3 06       		.byte	0x6
+ 1886 04c4 36       		.byte	0x36
+ 1887 04c5 45040000 		.4byte	0x445
+ 1888 04c9 10       		.uleb128 0x10
+ 1889 04ca 00000000 		.4byte	.LASF128
+ 1890 04ce 01       		.byte	0x1
+ 1891 04cf 15       		.byte	0x15
+ 1892 04d0 00000000 		.4byte	.LFB0
+ 1893 04d4 A0000000 		.4byte	.LFE0-.LFB0
+ 1894 04d8 01       		.uleb128 0x1
+ 1895 04d9 9C       		.byte	0x9c
+ 1896 04da F7040000 		.4byte	0x4f7
+ 1897 04de 11       		.uleb128 0x11
+ 1898 04df 06000000 		.4byte	.LBB2
+ 1899 04e3 2A000000 		.4byte	.LBE2-.LBB2
+ 1900 04e7 12       		.uleb128 0x12
+ 1901 04e8 69647800 		.ascii	"idx\000"
+ 1902 04ec 01       		.byte	0x1
+ 1903 04ed 17       		.byte	0x17
+ 1904 04ee 68000000 		.4byte	0x68
+ 1905 04f2 02       		.uleb128 0x2
+ 1906 04f3 91       		.byte	0x91
+ 1907 04f4 6C       		.sleb128 -20
+ 1908 04f5 00       		.byte	0
+ 1909 04f6 00       		.byte	0
+ 1910 04f7 13       		.uleb128 0x13
+ 1911 04f8 34050000 		.4byte	.LASF105
+ 1912 04fc 01       		.byte	0x1
+ 1913 04fd 29       		.byte	0x29
+ 1914 04fe 81000000 		.4byte	0x81
+ 1915 0502 00000000 		.4byte	.LFB1
+ 1916 0506 2E000000 		.4byte	.LFE1-.LFB1
+ 1917 050a 01       		.uleb128 0x1
+ 1918 050b 9C       		.byte	0x9c
+ 1919 050c 1F050000 		.4byte	0x51f
+ 1920 0510 14       		.uleb128 0x14
+ 1921 0511 BE050000 		.4byte	.LASF85
+ 1922 0515 01       		.byte	0x1
+ 1923 0516 29       		.byte	0x29
+ 1924 0517 81000000 		.4byte	0x81
+ 1925 051b 02       		.uleb128 0x2
+ 1926 051c 91       		.byte	0x91
+ 1927 051d 77       		.sleb128 -9
+ 1928 051e 00       		.byte	0
+ 1929 051f 15       		.uleb128 0x15
+ 1930 0520 D7040000 		.4byte	.LASF86
+ 1931 0524 01       		.byte	0x1
+ 1932 0525 32       		.byte	0x32
+ 1933 0526 00000000 		.4byte	.LFB2
+ 1934 052a 78000000 		.4byte	.LFE2-.LFB2
+ 1935 052e 01       		.uleb128 0x1
+ 1936 052f 9C       		.byte	0x9c
+ 1937 0530 41050000 		.4byte	0x541
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cc8zrVxn.s 			page 39
+
+
+ 1938 0534 16       		.uleb128 0x16
+ 1939 0535 6800     		.ascii	"h\000"
+ 1940 0537 01       		.byte	0x1
+ 1941 0538 32       		.byte	0x32
+ 1942 0539 41050000 		.4byte	0x541
+ 1943 053d 02       		.uleb128 0x2
+ 1944 053e 91       		.byte	0x91
+ 1945 053f 74       		.sleb128 -12
+ 1946 0540 00       		.byte	0
+ 1947 0541 17       		.uleb128 0x17
+ 1948 0542 04       		.byte	0x4
+ 1949 0543 12040000 		.4byte	0x412
+ 1950 0547 15       		.uleb128 0x15
+ 1951 0548 89030000 		.4byte	.LASF87
+ 1952 054c 01       		.byte	0x1
+ 1953 054d 43       		.byte	0x43
+ 1954 054e 00000000 		.4byte	.LFB3
+ 1955 0552 44000000 		.4byte	.LFE3-.LFB3
+ 1956 0556 01       		.uleb128 0x1
+ 1957 0557 9C       		.byte	0x9c
+ 1958 0558 9F050000 		.4byte	0x59f
+ 1959 055c 14       		.uleb128 0x14
+ 1960 055d 61020000 		.4byte	.LASF88
+ 1961 0561 01       		.byte	0x1
+ 1962 0562 43       		.byte	0x43
+ 1963 0563 76000000 		.4byte	0x76
+ 1964 0567 02       		.uleb128 0x2
+ 1965 0568 91       		.byte	0x91
+ 1966 0569 66       		.sleb128 -26
+ 1967 056a 18       		.uleb128 0x18
+ 1968 056b 36010000 		.4byte	.LASF89
+ 1969 056f 01       		.byte	0x1
+ 1970 0570 44       		.byte	0x44
+ 1971 0571 81000000 		.4byte	0x81
+ 1972 0575 02       		.uleb128 0x2
+ 1973 0576 91       		.byte	0x91
+ 1974 0577 77       		.sleb128 -9
+ 1975 0578 18       		.uleb128 0x18
+ 1976 0579 CF040000 		.4byte	.LASF90
+ 1977 057d 01       		.byte	0x1
+ 1978 057e 45       		.byte	0x45
+ 1979 057f 81000000 		.4byte	0x81
+ 1980 0583 02       		.uleb128 0x2
+ 1981 0584 91       		.byte	0x91
+ 1982 0585 6F       		.sleb128 -17
+ 1983 0586 11       		.uleb128 0x11
+ 1984 0587 12000000 		.4byte	.LBB3
+ 1985 058b 2A000000 		.4byte	.LBE3-.LBB3
+ 1986 058f 18       		.uleb128 0x18
+ 1987 0590 4D060000 		.4byte	.LASF91
+ 1988 0594 01       		.byte	0x1
+ 1989 0595 46       		.byte	0x46
+ 1990 0596 68000000 		.4byte	0x68
+ 1991 059a 02       		.uleb128 0x2
+ 1992 059b 91       		.byte	0x91
+ 1993 059c 70       		.sleb128 -16
+ 1994 059d 00       		.byte	0
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cc8zrVxn.s 			page 40
+
+
+ 1995 059e 00       		.byte	0
+ 1996 059f 15       		.uleb128 0x15
+ 1997 05a0 0A000000 		.4byte	.LASF92
+ 1998 05a4 01       		.byte	0x1
+ 1999 05a5 4C       		.byte	0x4c
+ 2000 05a6 00000000 		.4byte	.LFB4
+ 2001 05aa 28000000 		.4byte	.LFE4-.LFB4
+ 2002 05ae 01       		.uleb128 0x1
+ 2003 05af 9C       		.byte	0x9c
+ 2004 05b0 CF050000 		.4byte	0x5cf
+ 2005 05b4 14       		.uleb128 0x14
+ 2006 05b5 61020000 		.4byte	.LASF88
+ 2007 05b9 01       		.byte	0x1
+ 2008 05ba 4C       		.byte	0x4c
+ 2009 05bb 76000000 		.4byte	0x76
+ 2010 05bf 02       		.uleb128 0x2
+ 2011 05c0 91       		.byte	0x91
+ 2012 05c1 6E       		.sleb128 -18
+ 2013 05c2 12       		.uleb128 0x12
+ 2014 05c3 7900     		.ascii	"y\000"
+ 2015 05c5 01       		.byte	0x1
+ 2016 05c6 4D       		.byte	0x4d
+ 2017 05c7 81000000 		.4byte	0x81
+ 2018 05cb 02       		.uleb128 0x2
+ 2019 05cc 91       		.byte	0x91
+ 2020 05cd 77       		.sleb128 -9
+ 2021 05ce 00       		.byte	0
+ 2022 05cf 15       		.uleb128 0x15
+ 2023 05d0 51020000 		.4byte	.LASF93
+ 2024 05d4 01       		.byte	0x1
+ 2025 05d5 51       		.byte	0x51
+ 2026 05d6 00000000 		.4byte	.LFB5
+ 2027 05da F8000000 		.4byte	.LFE5-.LFB5
+ 2028 05de 01       		.uleb128 0x1
+ 2029 05df 9C       		.byte	0x9c
+ 2030 05e0 9F060000 		.4byte	0x69f
+ 2031 05e4 14       		.uleb128 0x14
+ 2032 05e5 E1040000 		.4byte	.LASF94
+ 2033 05e9 01       		.byte	0x1
+ 2034 05ea 51       		.byte	0x51
+ 2035 05eb 9F060000 		.4byte	0x69f
+ 2036 05ef 02       		.uleb128 0x2
+ 2037 05f0 91       		.byte	0x91
+ 2038 05f1 54       		.sleb128 -44
+ 2039 05f2 16       		.uleb128 0x16
+ 2040 05f3 6800     		.ascii	"h\000"
+ 2041 05f5 01       		.byte	0x1
+ 2042 05f6 51       		.byte	0x51
+ 2043 05f7 41050000 		.4byte	0x541
+ 2044 05fb 02       		.uleb128 0x2
+ 2045 05fc 91       		.byte	0x91
+ 2046 05fd 50       		.sleb128 -48
+ 2047 05fe 18       		.uleb128 0x18
+ 2048 05ff AE050000 		.4byte	.LASF95
+ 2049 0603 01       		.byte	0x1
+ 2050 0604 55       		.byte	0x55
+ 2051 0605 ED000000 		.4byte	0xed
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cc8zrVxn.s 			page 41
+
+
+ 2052 0609 02       		.uleb128 0x2
+ 2053 060a 91       		.byte	0x91
+ 2054 060b 67       		.sleb128 -25
+ 2055 060c 18       		.uleb128 0x18
+ 2056 060d 41050000 		.4byte	.LASF96
+ 2057 0611 01       		.byte	0x1
+ 2058 0612 56       		.byte	0x56
+ 2059 0613 81000000 		.4byte	0x81
+ 2060 0617 02       		.uleb128 0x2
+ 2061 0618 91       		.byte	0x91
+ 2062 0619 66       		.sleb128 -26
+ 2063 061a 18       		.uleb128 0x18
+ 2064 061b 0D010000 		.4byte	.LASF97
+ 2065 061f 01       		.byte	0x1
+ 2066 0620 57       		.byte	0x57
+ 2067 0621 A5000000 		.4byte	0xa5
+ 2068 0625 02       		.uleb128 0x2
+ 2069 0626 91       		.byte	0x91
+ 2070 0627 65       		.sleb128 -27
+ 2071 0628 18       		.uleb128 0x18
+ 2072 0629 DA010000 		.4byte	.LASF98
+ 2073 062d 01       		.byte	0x1
+ 2074 062e 58       		.byte	0x58
+ 2075 062f 81000000 		.4byte	0x81
+ 2076 0633 02       		.uleb128 0x2
+ 2077 0634 91       		.byte	0x91
+ 2078 0635 64       		.sleb128 -28
+ 2079 0636 18       		.uleb128 0x18
+ 2080 0637 2F060000 		.4byte	.LASF99
+ 2081 063b 01       		.byte	0x1
+ 2082 063c 59       		.byte	0x59
+ 2083 063d ED000000 		.4byte	0xed
+ 2084 0641 02       		.uleb128 0x2
+ 2085 0642 91       		.byte	0x91
+ 2086 0643 63       		.sleb128 -29
+ 2087 0644 18       		.uleb128 0x18
+ 2088 0645 F5020000 		.4byte	.LASF100
+ 2089 0649 01       		.byte	0x1
+ 2090 064a 5B       		.byte	0x5b
+ 2091 064b 8D000000 		.4byte	0x8d
+ 2092 064f 02       		.uleb128 0x2
+ 2093 0650 91       		.byte	0x91
+ 2094 0651 6E       		.sleb128 -18
+ 2095 0652 18       		.uleb128 0x18
+ 2096 0653 55030000 		.4byte	.LASF101
+ 2097 0657 01       		.byte	0x1
+ 2098 0658 5C       		.byte	0x5c
+ 2099 0659 8D000000 		.4byte	0x8d
+ 2100 065d 02       		.uleb128 0x2
+ 2101 065e 91       		.byte	0x91
+ 2102 065f 60       		.sleb128 -32
+ 2103 0660 11       		.uleb128 0x11
+ 2104 0661 A4000000 		.4byte	.LBB4
+ 2105 0665 4C000000 		.4byte	.LBE4-.LBB4
+ 2106 0669 12       		.uleb128 0x12
+ 2107 066a 69647800 		.ascii	"idx\000"
+ 2108 066e 01       		.byte	0x1
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cc8zrVxn.s 			page 42
+
+
+ 2109 066f 63       		.byte	0x63
+ 2110 0670 68000000 		.4byte	0x68
+ 2111 0674 02       		.uleb128 0x2
+ 2112 0675 91       		.byte	0x91
+ 2113 0676 68       		.sleb128 -24
+ 2114 0677 11       		.uleb128 0x11
+ 2115 0678 AA000000 		.4byte	.LBB5
+ 2116 067c 32000000 		.4byte	.LBE5-.LBB5
+ 2117 0680 18       		.uleb128 0x18
+ 2118 0681 36010000 		.4byte	.LASF89
+ 2119 0685 01       		.byte	0x1
+ 2120 0686 64       		.byte	0x64
+ 2121 0687 81000000 		.4byte	0x81
+ 2122 068b 02       		.uleb128 0x2
+ 2123 068c 91       		.byte	0x91
+ 2124 068d 5F       		.sleb128 -33
+ 2125 068e 18       		.uleb128 0x18
+ 2126 068f D4010000 		.4byte	.LASF102
+ 2127 0693 01       		.byte	0x1
+ 2128 0694 65       		.byte	0x65
+ 2129 0695 81000000 		.4byte	0x81
+ 2130 0699 02       		.uleb128 0x2
+ 2131 069a 91       		.byte	0x91
+ 2132 069b 5E       		.sleb128 -34
+ 2133 069c 00       		.byte	0
+ 2134 069d 00       		.byte	0
+ 2135 069e 00       		.byte	0
+ 2136 069f 17       		.uleb128 0x17
+ 2137 06a0 04       		.byte	0x4
+ 2138 06a1 BE040000 		.4byte	0x4be
+ 2139 06a5 19       		.uleb128 0x19
+ 2140 06a6 85040000 		.4byte	.LASF103
+ 2141 06aa 01       		.byte	0x1
+ 2142 06ab 6B       		.byte	0x6b
+ 2143 06ac 00000000 		.4byte	.LFB6
+ 2144 06b0 70000000 		.4byte	.LFE6-.LFB6
+ 2145 06b4 01       		.uleb128 0x1
+ 2146 06b5 9C       		.byte	0x9c
+ 2147 06b6 F9060000 		.4byte	0x6f9
+ 2148 06ba 14       		.uleb128 0x14
+ 2149 06bb 09040000 		.4byte	.LASF104
+ 2150 06bf 01       		.byte	0x1
+ 2151 06c0 6B       		.byte	0x6b
+ 2152 06c1 9F060000 		.4byte	0x69f
+ 2153 06c5 02       		.uleb128 0x2
+ 2154 06c6 91       		.byte	0x91
+ 2155 06c7 6C       		.sleb128 -20
+ 2156 06c8 11       		.uleb128 0x11
+ 2157 06c9 10000000 		.4byte	.LBB6
+ 2158 06cd 4C000000 		.4byte	.LBE6-.LBB6
+ 2159 06d1 12       		.uleb128 0x12
+ 2160 06d2 69647800 		.ascii	"idx\000"
+ 2161 06d6 01       		.byte	0x1
+ 2162 06d7 6D       		.byte	0x6d
+ 2163 06d8 68000000 		.4byte	0x68
+ 2164 06dc 02       		.uleb128 0x2
+ 2165 06dd 91       		.byte	0x91
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cc8zrVxn.s 			page 43
+
+
+ 2166 06de 74       		.sleb128 -12
+ 2167 06df 11       		.uleb128 0x11
+ 2168 06e0 16000000 		.4byte	.LBB7
+ 2169 06e4 36000000 		.4byte	.LBE7-.LBB7
+ 2170 06e8 18       		.uleb128 0x18
+ 2171 06e9 E1040000 		.4byte	.LASF94
+ 2172 06ed 01       		.byte	0x1
+ 2173 06ee 6E       		.byte	0x6e
+ 2174 06ef 9F060000 		.4byte	0x69f
+ 2175 06f3 02       		.uleb128 0x2
+ 2176 06f4 91       		.byte	0x91
+ 2177 06f5 70       		.sleb128 -16
+ 2178 06f6 00       		.byte	0
+ 2179 06f7 00       		.byte	0
+ 2180 06f8 00       		.byte	0
+ 2181 06f9 13       		.uleb128 0x13
+ 2182 06fa DE050000 		.4byte	.LASF106
+ 2183 06fe 01       		.byte	0x1
+ 2184 06ff 7E       		.byte	0x7e
+ 2185 0700 8D000000 		.4byte	0x8d
+ 2186 0704 00000000 		.4byte	.LFB7
+ 2187 0708 22000000 		.4byte	.LFE7-.LFB7
+ 2188 070c 01       		.uleb128 0x1
+ 2189 070d 9C       		.byte	0x9c
+ 2190 070e 21070000 		.4byte	0x721
+ 2191 0712 14       		.uleb128 0x14
+ 2192 0713 E1040000 		.4byte	.LASF94
+ 2193 0717 01       		.byte	0x1
+ 2194 0718 7E       		.byte	0x7e
+ 2195 0719 9F060000 		.4byte	0x69f
+ 2196 071d 02       		.uleb128 0x2
+ 2197 071e 91       		.byte	0x91
+ 2198 071f 74       		.sleb128 -12
+ 2199 0720 00       		.byte	0
+ 2200 0721 13       		.uleb128 0x13
+ 2201 0722 B8030000 		.4byte	.LASF68
+ 2202 0726 01       		.byte	0x1
+ 2203 0727 82       		.byte	0x82
+ 2204 0728 ED000000 		.4byte	0xed
+ 2205 072c 00000000 		.4byte	.LFB8
+ 2206 0730 52000000 		.4byte	.LFE8-.LFB8
+ 2207 0734 01       		.uleb128 0x1
+ 2208 0735 9C       		.byte	0x9c
+ 2209 0736 71070000 		.4byte	0x771
+ 2210 073a 16       		.uleb128 0x16
+ 2211 073b 6800     		.ascii	"h\000"
+ 2212 073d 01       		.byte	0x1
+ 2213 073e 82       		.byte	0x82
+ 2214 073f 41050000 		.4byte	0x541
+ 2215 0743 02       		.uleb128 0x2
+ 2216 0744 91       		.byte	0x91
+ 2217 0745 6C       		.sleb128 -20
+ 2218 0746 14       		.uleb128 0x14
+ 2219 0747 E1040000 		.4byte	.LASF94
+ 2220 074b 01       		.byte	0x1
+ 2221 074c 82       		.byte	0x82
+ 2222 074d 9F060000 		.4byte	0x69f
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cc8zrVxn.s 			page 44
+
+
+ 2223 0751 02       		.uleb128 0x2
+ 2224 0752 91       		.byte	0x91
+ 2225 0753 68       		.sleb128 -24
+ 2226 0754 18       		.uleb128 0x18
+ 2227 0755 72020000 		.4byte	.LASF107
+ 2228 0759 01       		.byte	0x1
+ 2229 075a 83       		.byte	0x83
+ 2230 075b 81000000 		.4byte	0x81
+ 2231 075f 02       		.uleb128 0x2
+ 2232 0760 91       		.byte	0x91
+ 2233 0761 77       		.sleb128 -9
+ 2234 0762 18       		.uleb128 0x18
+ 2235 0763 A2050000 		.4byte	.LASF78
+ 2236 0767 01       		.byte	0x1
+ 2237 0768 84       		.byte	0x84
+ 2238 0769 A1010000 		.4byte	0x1a1
+ 2239 076d 02       		.uleb128 0x2
+ 2240 076e 91       		.byte	0x91
+ 2241 076f 76       		.sleb128 -10
+ 2242 0770 00       		.byte	0
+ 2243 0771 15       		.uleb128 0x15
+ 2244 0772 F6040000 		.4byte	.LASF108
+ 2245 0776 01       		.byte	0x1
+ 2246 0777 8C       		.byte	0x8c
+ 2247 0778 00000000 		.4byte	.LFB9
+ 2248 077c E8000000 		.4byte	.LFE9-.LFB9
+ 2249 0780 01       		.uleb128 0x1
+ 2250 0781 9C       		.byte	0x9c
+ 2251 0782 CD070000 		.4byte	0x7cd
+ 2252 0786 14       		.uleb128 0x14
+ 2253 0787 E1040000 		.4byte	.LASF94
+ 2254 078b 01       		.byte	0x1
+ 2255 078c 8C       		.byte	0x8c
+ 2256 078d 9F060000 		.4byte	0x69f
+ 2257 0791 02       		.uleb128 0x2
+ 2258 0792 91       		.byte	0x91
+ 2259 0793 64       		.sleb128 -28
+ 2260 0794 18       		.uleb128 0x18
+ 2261 0795 71050000 		.4byte	.LASF109
+ 2262 0799 01       		.byte	0x1
+ 2263 079a 8E       		.byte	0x8e
+ 2264 079b 81000000 		.4byte	0x81
+ 2265 079f 02       		.uleb128 0x2
+ 2266 07a0 91       		.byte	0x91
+ 2267 07a1 6F       		.sleb128 -17
+ 2268 07a2 18       		.uleb128 0x18
+ 2269 07a3 BC060000 		.4byte	.LASF110
+ 2270 07a7 01       		.byte	0x1
+ 2271 07a8 92       		.byte	0x92
+ 2272 07a9 81000000 		.4byte	0x81
+ 2273 07ad 02       		.uleb128 0x2
+ 2274 07ae 91       		.byte	0x91
+ 2275 07af 6E       		.sleb128 -18
+ 2276 07b0 18       		.uleb128 0x18
+ 2277 07b1 F5000000 		.4byte	.LASF111
+ 2278 07b5 01       		.byte	0x1
+ 2279 07b6 93       		.byte	0x93
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cc8zrVxn.s 			page 45
+
+
+ 2280 07b7 81000000 		.4byte	0x81
+ 2281 07bb 02       		.uleb128 0x2
+ 2282 07bc 91       		.byte	0x91
+ 2283 07bd 6D       		.sleb128 -19
+ 2284 07be 18       		.uleb128 0x18
+ 2285 07bf 7A050000 		.4byte	.LASF112
+ 2286 07c3 01       		.byte	0x1
+ 2287 07c4 95       		.byte	0x95
+ 2288 07c5 81000000 		.4byte	0x81
+ 2289 07c9 02       		.uleb128 0x2
+ 2290 07ca 91       		.byte	0x91
+ 2291 07cb 6C       		.sleb128 -20
+ 2292 07cc 00       		.byte	0
+ 2293 07cd 19       		.uleb128 0x19
+ 2294 07ce E9010000 		.4byte	.LASF113
+ 2295 07d2 01       		.byte	0x1
+ 2296 07d3 A5       		.byte	0xa5
+ 2297 07d4 00000000 		.4byte	.LFB10
+ 2298 07d8 70000000 		.4byte	.LFE10-.LFB10
+ 2299 07dc 01       		.uleb128 0x1
+ 2300 07dd 9C       		.byte	0x9c
+ 2301 07de 41080000 		.4byte	0x841
+ 2302 07e2 14       		.uleb128 0x14
+ 2303 07e3 E1040000 		.4byte	.LASF94
+ 2304 07e7 01       		.byte	0x1
+ 2305 07e8 A5       		.byte	0xa5
+ 2306 07e9 9F060000 		.4byte	0x69f
+ 2307 07ed 02       		.uleb128 0x2
+ 2308 07ee 91       		.byte	0x91
+ 2309 07ef 6C       		.sleb128 -20
+ 2310 07f0 18       		.uleb128 0x18
+ 2311 07f1 91050000 		.4byte	.LASF114
+ 2312 07f5 01       		.byte	0x1
+ 2313 07f6 A7       		.byte	0xa7
+ 2314 07f7 81000000 		.4byte	0x81
+ 2315 07fb 02       		.uleb128 0x2
+ 2316 07fc 91       		.byte	0x91
+ 2317 07fd 76       		.sleb128 -10
+ 2318 07fe 18       		.uleb128 0x18
+ 2319 07ff 78030000 		.4byte	.LASF115
+ 2320 0803 01       		.byte	0x1
+ 2321 0804 A8       		.byte	0xa8
+ 2322 0805 A5000000 		.4byte	0xa5
+ 2323 0809 02       		.uleb128 0x2
+ 2324 080a 91       		.byte	0x91
+ 2325 080b 75       		.sleb128 -11
+ 2326 080c 18       		.uleb128 0x18
+ 2327 080d 19000000 		.4byte	.LASF116
+ 2328 0811 01       		.byte	0x1
+ 2329 0812 A9       		.byte	0xa9
+ 2330 0813 A5000000 		.4byte	0xa5
+ 2331 0817 02       		.uleb128 0x2
+ 2332 0818 91       		.byte	0x91
+ 2333 0819 74       		.sleb128 -12
+ 2334 081a 18       		.uleb128 0x18
+ 2335 081b 11050000 		.4byte	.LASF117
+ 2336 081f 01       		.byte	0x1
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cc8zrVxn.s 			page 46
+
+
+ 2337 0820 AA       		.byte	0xaa
+ 2338 0821 A5000000 		.4byte	0xa5
+ 2339 0825 02       		.uleb128 0x2
+ 2340 0826 91       		.byte	0x91
+ 2341 0827 73       		.sleb128 -13
+ 2342 0828 11       		.uleb128 0x11
+ 2343 0829 3E000000 		.4byte	.LBB8
+ 2344 082d 28000000 		.4byte	.LBE8-.LBB8
+ 2345 0831 12       		.uleb128 0x12
+ 2346 0832 69647800 		.ascii	"idx\000"
+ 2347 0836 01       		.byte	0x1
+ 2348 0837 B0       		.byte	0xb0
+ 2349 0838 81000000 		.4byte	0x81
+ 2350 083c 02       		.uleb128 0x2
+ 2351 083d 91       		.byte	0x91
+ 2352 083e 77       		.sleb128 -9
+ 2353 083f 00       		.byte	0
+ 2354 0840 00       		.byte	0
+ 2355 0841 15       		.uleb128 0x15
+ 2356 0842 E0030000 		.4byte	.LASF118
+ 2357 0846 01       		.byte	0x1
+ 2358 0847 B5       		.byte	0xb5
+ 2359 0848 00000000 		.4byte	.LFB11
+ 2360 084c 92000000 		.4byte	.LFE11-.LFB11
+ 2361 0850 01       		.uleb128 0x1
+ 2362 0851 9C       		.byte	0x9c
+ 2363 0852 D5080000 		.4byte	0x8d5
+ 2364 0856 14       		.uleb128 0x14
+ 2365 0857 09040000 		.4byte	.LASF104
+ 2366 085b 01       		.byte	0x1
+ 2367 085c B5       		.byte	0xb5
+ 2368 085d 9F060000 		.4byte	0x69f
+ 2369 0861 02       		.uleb128 0x2
+ 2370 0862 91       		.byte	0x91
+ 2371 0863 5C       		.sleb128 -36
+ 2372 0864 18       		.uleb128 0x18
+ 2373 0865 B4020000 		.4byte	.LASF119
+ 2374 0869 01       		.byte	0x1
+ 2375 086a B6       		.byte	0xb6
+ 2376 086b ED000000 		.4byte	0xed
+ 2377 086f 02       		.uleb128 0x2
+ 2378 0870 91       		.byte	0x91
+ 2379 0871 77       		.sleb128 -9
+ 2380 0872 1A       		.uleb128 0x1a
+ 2381 0873 0C000000 		.4byte	.LBB9
+ 2382 0877 3C000000 		.4byte	.LBE9-.LBB9
+ 2383 087b A5080000 		.4byte	0x8a5
+ 2384 087f 12       		.uleb128 0x12
+ 2385 0880 69647800 		.ascii	"idx\000"
+ 2386 0884 01       		.byte	0x1
+ 2387 0885 B8       		.byte	0xb8
+ 2388 0886 68000000 		.4byte	0x68
+ 2389 088a 02       		.uleb128 0x2
+ 2390 088b 91       		.byte	0x91
+ 2391 088c 70       		.sleb128 -16
+ 2392 088d 11       		.uleb128 0x11
+ 2393 088e 12000000 		.4byte	.LBB10
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cc8zrVxn.s 			page 47
+
+
+ 2394 0892 26000000 		.4byte	.LBE10-.LBB10
+ 2395 0896 12       		.uleb128 0x12
+ 2396 0897 6E6700   		.ascii	"ng\000"
+ 2397 089a 01       		.byte	0x1
+ 2398 089b B9       		.byte	0xb9
+ 2399 089c 9F060000 		.4byte	0x69f
+ 2400 08a0 02       		.uleb128 0x2
+ 2401 08a1 91       		.byte	0x91
+ 2402 08a2 68       		.sleb128 -24
+ 2403 08a3 00       		.byte	0
+ 2404 08a4 00       		.byte	0
+ 2405 08a5 11       		.uleb128 0x11
+ 2406 08a6 48000000 		.4byte	.LBB11
+ 2407 08aa 44000000 		.4byte	.LBE11-.LBB11
+ 2408 08ae 12       		.uleb128 0x12
+ 2409 08af 69647800 		.ascii	"idx\000"
+ 2410 08b3 01       		.byte	0x1
+ 2411 08b4 BE       		.byte	0xbe
+ 2412 08b5 68000000 		.4byte	0x68
+ 2413 08b9 02       		.uleb128 0x2
+ 2414 08ba 91       		.byte	0x91
+ 2415 08bb 6C       		.sleb128 -20
+ 2416 08bc 11       		.uleb128 0x11
+ 2417 08bd 4E000000 		.4byte	.LBB12
+ 2418 08c1 2E000000 		.4byte	.LBE12-.LBB12
+ 2419 08c5 12       		.uleb128 0x12
+ 2420 08c6 6E6700   		.ascii	"ng\000"
+ 2421 08c9 01       		.byte	0x1
+ 2422 08ca BF       		.byte	0xbf
+ 2423 08cb 9F060000 		.4byte	0x69f
+ 2424 08cf 02       		.uleb128 0x2
+ 2425 08d0 91       		.byte	0x91
+ 2426 08d1 64       		.sleb128 -28
+ 2427 08d2 00       		.byte	0
+ 2428 08d3 00       		.byte	0
+ 2429 08d4 00       		.byte	0
+ 2430 08d5 15       		.uleb128 0x15
+ 2431 08d6 2C020000 		.4byte	.LASF120
+ 2432 08da 01       		.byte	0x1
+ 2433 08db C9       		.byte	0xc9
+ 2434 08dc 00000000 		.4byte	.LFB12
+ 2435 08e0 40000000 		.4byte	.LFE12-.LFB12
+ 2436 08e4 01       		.uleb128 0x1
+ 2437 08e5 9C       		.byte	0x9c
+ 2438 08e6 0F090000 		.4byte	0x90f
+ 2439 08ea 16       		.uleb128 0x16
+ 2440 08eb 6800     		.ascii	"h\000"
+ 2441 08ed 01       		.byte	0x1
+ 2442 08ee C9       		.byte	0xc9
+ 2443 08ef 41050000 		.4byte	0x541
+ 2444 08f3 02       		.uleb128 0x2
+ 2445 08f4 91       		.byte	0x91
+ 2446 08f5 6C       		.sleb128 -20
+ 2447 08f6 11       		.uleb128 0x11
+ 2448 08f7 08000000 		.4byte	.LBB13
+ 2449 08fb 2C000000 		.4byte	.LBE13-.LBB13
+ 2450 08ff 12       		.uleb128 0x12
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cc8zrVxn.s 			page 48
+
+
+ 2451 0900 69647800 		.ascii	"idx\000"
+ 2452 0904 01       		.byte	0x1
+ 2453 0905 CA       		.byte	0xca
+ 2454 0906 68000000 		.4byte	0x68
+ 2455 090a 02       		.uleb128 0x2
+ 2456 090b 91       		.byte	0x91
+ 2457 090c 74       		.sleb128 -12
+ 2458 090d 00       		.byte	0
+ 2459 090e 00       		.byte	0
+ 2460 090f 1B       		.uleb128 0x1b
+ 2461 0910 0F030000 		.4byte	.LASF121
+ 2462 0914 01       		.byte	0x1
+ 2463 0915 0E       		.byte	0xe
+ 2464 0916 99000000 		.4byte	0x99
+ 2465 091a 05       		.uleb128 0x5
+ 2466 091b 03       		.byte	0x3
+ 2467 091c 00000000 		.4byte	last_game_update
+ 2468 0920 1B       		.uleb128 0x1b
+ 2469 0921 17020000 		.4byte	.LASF122
+ 2470 0925 01       		.byte	0x1
+ 2471 0926 0F       		.byte	0xf
+ 2472 0927 99000000 		.4byte	0x99
+ 2473 092b 05       		.uleb128 0x5
+ 2474 092c 03       		.byte	0x3
+ 2475 092d 00000000 		.4byte	num_ticks
+ 2476 0931 1B       		.uleb128 0x1b
+ 2477 0932 D3020000 		.4byte	.LASF123
+ 2478 0936 01       		.byte	0x1
+ 2479 0937 10       		.byte	0x10
+ 2480 0938 BE040000 		.4byte	0x4be
+ 2481 093c 05       		.uleb128 0x5
+ 2482 093d 03       		.byte	0x3
+ 2483 093e 00000000 		.4byte	test_group
+ 2484 0942 1B       		.uleb128 0x1b
+ 2485 0943 41020000 		.4byte	.LASF124
+ 2486 0947 01       		.byte	0x1
+ 2487 0948 12       		.byte	0x12
+ 2488 0949 53090000 		.4byte	0x953
+ 2489 094d 05       		.uleb128 0x5
+ 2490 094e 03       		.byte	0x3
+ 2491 094f 00000000 		.4byte	num_note_groups
+ 2492 0953 1C       		.uleb128 0x1c
+ 2493 0954 81000000 		.4byte	0x81
+ 2494 0958 0B       		.uleb128 0xb
+ 2495 0959 BE040000 		.4byte	0x4be
+ 2496 095d 68090000 		.4byte	0x968
+ 2497 0961 0C       		.uleb128 0xc
+ 2498 0962 CD000000 		.4byte	0xcd
+ 2499 0966 02       		.byte	0x2
+ 2500 0967 00       		.byte	0
+ 2501 0968 1B       		.uleb128 0x1b
+ 2502 0969 09040000 		.4byte	.LASF104
+ 2503 096d 01       		.byte	0x1
+ 2504 096e 13       		.byte	0x13
+ 2505 096f 58090000 		.4byte	0x958
+ 2506 0973 05       		.uleb128 0x5
+ 2507 0974 03       		.byte	0x3
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cc8zrVxn.s 			page 49
+
+
+ 2508 0975 00000000 		.4byte	note_groups
+ 2509 0979 00       		.byte	0
+ 2510              		.section	.debug_abbrev,"",%progbits
+ 2511              	.Ldebug_abbrev0:
+ 2512 0000 01       		.uleb128 0x1
+ 2513 0001 11       		.uleb128 0x11
+ 2514 0002 01       		.byte	0x1
+ 2515 0003 25       		.uleb128 0x25
+ 2516 0004 0E       		.uleb128 0xe
+ 2517 0005 13       		.uleb128 0x13
+ 2518 0006 0B       		.uleb128 0xb
+ 2519 0007 03       		.uleb128 0x3
+ 2520 0008 0E       		.uleb128 0xe
+ 2521 0009 1B       		.uleb128 0x1b
+ 2522 000a 0E       		.uleb128 0xe
+ 2523 000b 55       		.uleb128 0x55
+ 2524 000c 17       		.uleb128 0x17
+ 2525 000d 11       		.uleb128 0x11
+ 2526 000e 01       		.uleb128 0x1
+ 2527 000f 10       		.uleb128 0x10
+ 2528 0010 17       		.uleb128 0x17
+ 2529 0011 00       		.byte	0
+ 2530 0012 00       		.byte	0
+ 2531 0013 02       		.uleb128 0x2
+ 2532 0014 24       		.uleb128 0x24
+ 2533 0015 00       		.byte	0
+ 2534 0016 0B       		.uleb128 0xb
+ 2535 0017 0B       		.uleb128 0xb
+ 2536 0018 3E       		.uleb128 0x3e
+ 2537 0019 0B       		.uleb128 0xb
+ 2538 001a 03       		.uleb128 0x3
+ 2539 001b 0E       		.uleb128 0xe
+ 2540 001c 00       		.byte	0
+ 2541 001d 00       		.byte	0
+ 2542 001e 03       		.uleb128 0x3
+ 2543 001f 16       		.uleb128 0x16
+ 2544 0020 00       		.byte	0
+ 2545 0021 03       		.uleb128 0x3
+ 2546 0022 0E       		.uleb128 0xe
+ 2547 0023 3A       		.uleb128 0x3a
+ 2548 0024 0B       		.uleb128 0xb
+ 2549 0025 3B       		.uleb128 0x3b
+ 2550 0026 0B       		.uleb128 0xb
+ 2551 0027 49       		.uleb128 0x49
+ 2552 0028 13       		.uleb128 0x13
+ 2553 0029 00       		.byte	0
+ 2554 002a 00       		.byte	0
+ 2555 002b 04       		.uleb128 0x4
+ 2556 002c 24       		.uleb128 0x24
+ 2557 002d 00       		.byte	0
+ 2558 002e 0B       		.uleb128 0xb
+ 2559 002f 0B       		.uleb128 0xb
+ 2560 0030 3E       		.uleb128 0x3e
+ 2561 0031 0B       		.uleb128 0xb
+ 2562 0032 03       		.uleb128 0x3
+ 2563 0033 08       		.uleb128 0x8
+ 2564 0034 00       		.byte	0
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cc8zrVxn.s 			page 50
+
+
+ 2565 0035 00       		.byte	0
+ 2566 0036 05       		.uleb128 0x5
+ 2567 0037 16       		.uleb128 0x16
+ 2568 0038 00       		.byte	0
+ 2569 0039 03       		.uleb128 0x3
+ 2570 003a 0E       		.uleb128 0xe
+ 2571 003b 3A       		.uleb128 0x3a
+ 2572 003c 0B       		.uleb128 0xb
+ 2573 003d 3B       		.uleb128 0x3b
+ 2574 003e 05       		.uleb128 0x5
+ 2575 003f 49       		.uleb128 0x49
+ 2576 0040 13       		.uleb128 0x13
+ 2577 0041 00       		.byte	0
+ 2578 0042 00       		.byte	0
+ 2579 0043 06       		.uleb128 0x6
+ 2580 0044 04       		.uleb128 0x4
+ 2581 0045 01       		.byte	0x1
+ 2582 0046 0B       		.uleb128 0xb
+ 2583 0047 0B       		.uleb128 0xb
+ 2584 0048 49       		.uleb128 0x49
+ 2585 0049 13       		.uleb128 0x13
+ 2586 004a 3A       		.uleb128 0x3a
+ 2587 004b 0B       		.uleb128 0xb
+ 2588 004c 3B       		.uleb128 0x3b
+ 2589 004d 0B       		.uleb128 0xb
+ 2590 004e 01       		.uleb128 0x1
+ 2591 004f 13       		.uleb128 0x13
+ 2592 0050 00       		.byte	0
+ 2593 0051 00       		.byte	0
+ 2594 0052 07       		.uleb128 0x7
+ 2595 0053 28       		.uleb128 0x28
+ 2596 0054 00       		.byte	0
+ 2597 0055 03       		.uleb128 0x3
+ 2598 0056 0E       		.uleb128 0xe
+ 2599 0057 1C       		.uleb128 0x1c
+ 2600 0058 0B       		.uleb128 0xb
+ 2601 0059 00       		.byte	0
+ 2602 005a 00       		.byte	0
+ 2603 005b 08       		.uleb128 0x8
+ 2604 005c 28       		.uleb128 0x28
+ 2605 005d 00       		.byte	0
+ 2606 005e 03       		.uleb128 0x3
+ 2607 005f 08       		.uleb128 0x8
+ 2608 0060 1C       		.uleb128 0x1c
+ 2609 0061 0B       		.uleb128 0xb
+ 2610 0062 00       		.byte	0
+ 2611 0063 00       		.byte	0
+ 2612 0064 09       		.uleb128 0x9
+ 2613 0065 13       		.uleb128 0x13
+ 2614 0066 01       		.byte	0x1
+ 2615 0067 0B       		.uleb128 0xb
+ 2616 0068 0B       		.uleb128 0xb
+ 2617 0069 3A       		.uleb128 0x3a
+ 2618 006a 0B       		.uleb128 0xb
+ 2619 006b 3B       		.uleb128 0x3b
+ 2620 006c 0B       		.uleb128 0xb
+ 2621 006d 01       		.uleb128 0x1
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cc8zrVxn.s 			page 51
+
+
+ 2622 006e 13       		.uleb128 0x13
+ 2623 006f 00       		.byte	0
+ 2624 0070 00       		.byte	0
+ 2625 0071 0A       		.uleb128 0xa
+ 2626 0072 0D       		.uleb128 0xd
+ 2627 0073 00       		.byte	0
+ 2628 0074 03       		.uleb128 0x3
+ 2629 0075 0E       		.uleb128 0xe
+ 2630 0076 3A       		.uleb128 0x3a
+ 2631 0077 0B       		.uleb128 0xb
+ 2632 0078 3B       		.uleb128 0x3b
+ 2633 0079 0B       		.uleb128 0xb
+ 2634 007a 49       		.uleb128 0x49
+ 2635 007b 13       		.uleb128 0x13
+ 2636 007c 38       		.uleb128 0x38
+ 2637 007d 0B       		.uleb128 0xb
+ 2638 007e 00       		.byte	0
+ 2639 007f 00       		.byte	0
+ 2640 0080 0B       		.uleb128 0xb
+ 2641 0081 01       		.uleb128 0x1
+ 2642 0082 01       		.byte	0x1
+ 2643 0083 49       		.uleb128 0x49
+ 2644 0084 13       		.uleb128 0x13
+ 2645 0085 01       		.uleb128 0x1
+ 2646 0086 13       		.uleb128 0x13
+ 2647 0087 00       		.byte	0
+ 2648 0088 00       		.byte	0
+ 2649 0089 0C       		.uleb128 0xc
+ 2650 008a 21       		.uleb128 0x21
+ 2651 008b 00       		.byte	0
+ 2652 008c 49       		.uleb128 0x49
+ 2653 008d 13       		.uleb128 0x13
+ 2654 008e 2F       		.uleb128 0x2f
+ 2655 008f 0B       		.uleb128 0xb
+ 2656 0090 00       		.byte	0
+ 2657 0091 00       		.byte	0
+ 2658 0092 0D       		.uleb128 0xd
+ 2659 0093 13       		.uleb128 0x13
+ 2660 0094 01       		.byte	0x1
+ 2661 0095 0B       		.uleb128 0xb
+ 2662 0096 05       		.uleb128 0x5
+ 2663 0097 3A       		.uleb128 0x3a
+ 2664 0098 0B       		.uleb128 0xb
+ 2665 0099 3B       		.uleb128 0x3b
+ 2666 009a 0B       		.uleb128 0xb
+ 2667 009b 01       		.uleb128 0x1
+ 2668 009c 13       		.uleb128 0x13
+ 2669 009d 00       		.byte	0
+ 2670 009e 00       		.byte	0
+ 2671 009f 0E       		.uleb128 0xe
+ 2672 00a0 0D       		.uleb128 0xd
+ 2673 00a1 00       		.byte	0
+ 2674 00a2 03       		.uleb128 0x3
+ 2675 00a3 0E       		.uleb128 0xe
+ 2676 00a4 3A       		.uleb128 0x3a
+ 2677 00a5 0B       		.uleb128 0xb
+ 2678 00a6 3B       		.uleb128 0x3b
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cc8zrVxn.s 			page 52
+
+
+ 2679 00a7 0B       		.uleb128 0xb
+ 2680 00a8 49       		.uleb128 0x49
+ 2681 00a9 13       		.uleb128 0x13
+ 2682 00aa 38       		.uleb128 0x38
+ 2683 00ab 05       		.uleb128 0x5
+ 2684 00ac 00       		.byte	0
+ 2685 00ad 00       		.byte	0
+ 2686 00ae 0F       		.uleb128 0xf
+ 2687 00af 0D       		.uleb128 0xd
+ 2688 00b0 00       		.byte	0
+ 2689 00b1 03       		.uleb128 0x3
+ 2690 00b2 08       		.uleb128 0x8
+ 2691 00b3 3A       		.uleb128 0x3a
+ 2692 00b4 0B       		.uleb128 0xb
+ 2693 00b5 3B       		.uleb128 0x3b
+ 2694 00b6 0B       		.uleb128 0xb
+ 2695 00b7 49       		.uleb128 0x49
+ 2696 00b8 13       		.uleb128 0x13
+ 2697 00b9 38       		.uleb128 0x38
+ 2698 00ba 0B       		.uleb128 0xb
+ 2699 00bb 00       		.byte	0
+ 2700 00bc 00       		.byte	0
+ 2701 00bd 10       		.uleb128 0x10
+ 2702 00be 2E       		.uleb128 0x2e
+ 2703 00bf 01       		.byte	0x1
+ 2704 00c0 3F       		.uleb128 0x3f
+ 2705 00c1 19       		.uleb128 0x19
+ 2706 00c2 03       		.uleb128 0x3
+ 2707 00c3 0E       		.uleb128 0xe
+ 2708 00c4 3A       		.uleb128 0x3a
+ 2709 00c5 0B       		.uleb128 0xb
+ 2710 00c6 3B       		.uleb128 0x3b
+ 2711 00c7 0B       		.uleb128 0xb
+ 2712 00c8 11       		.uleb128 0x11
+ 2713 00c9 01       		.uleb128 0x1
+ 2714 00ca 12       		.uleb128 0x12
+ 2715 00cb 06       		.uleb128 0x6
+ 2716 00cc 40       		.uleb128 0x40
+ 2717 00cd 18       		.uleb128 0x18
+ 2718 00ce 9642     		.uleb128 0x2116
+ 2719 00d0 19       		.uleb128 0x19
+ 2720 00d1 01       		.uleb128 0x1
+ 2721 00d2 13       		.uleb128 0x13
+ 2722 00d3 00       		.byte	0
+ 2723 00d4 00       		.byte	0
+ 2724 00d5 11       		.uleb128 0x11
+ 2725 00d6 0B       		.uleb128 0xb
+ 2726 00d7 01       		.byte	0x1
+ 2727 00d8 11       		.uleb128 0x11
+ 2728 00d9 01       		.uleb128 0x1
+ 2729 00da 12       		.uleb128 0x12
+ 2730 00db 06       		.uleb128 0x6
+ 2731 00dc 00       		.byte	0
+ 2732 00dd 00       		.byte	0
+ 2733 00de 12       		.uleb128 0x12
+ 2734 00df 34       		.uleb128 0x34
+ 2735 00e0 00       		.byte	0
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cc8zrVxn.s 			page 53
+
+
+ 2736 00e1 03       		.uleb128 0x3
+ 2737 00e2 08       		.uleb128 0x8
+ 2738 00e3 3A       		.uleb128 0x3a
+ 2739 00e4 0B       		.uleb128 0xb
+ 2740 00e5 3B       		.uleb128 0x3b
+ 2741 00e6 0B       		.uleb128 0xb
+ 2742 00e7 49       		.uleb128 0x49
+ 2743 00e8 13       		.uleb128 0x13
+ 2744 00e9 02       		.uleb128 0x2
+ 2745 00ea 18       		.uleb128 0x18
+ 2746 00eb 00       		.byte	0
+ 2747 00ec 00       		.byte	0
+ 2748 00ed 13       		.uleb128 0x13
+ 2749 00ee 2E       		.uleb128 0x2e
+ 2750 00ef 01       		.byte	0x1
+ 2751 00f0 3F       		.uleb128 0x3f
+ 2752 00f1 19       		.uleb128 0x19
+ 2753 00f2 03       		.uleb128 0x3
+ 2754 00f3 0E       		.uleb128 0xe
+ 2755 00f4 3A       		.uleb128 0x3a
+ 2756 00f5 0B       		.uleb128 0xb
+ 2757 00f6 3B       		.uleb128 0x3b
+ 2758 00f7 0B       		.uleb128 0xb
+ 2759 00f8 27       		.uleb128 0x27
+ 2760 00f9 19       		.uleb128 0x19
+ 2761 00fa 49       		.uleb128 0x49
+ 2762 00fb 13       		.uleb128 0x13
+ 2763 00fc 11       		.uleb128 0x11
+ 2764 00fd 01       		.uleb128 0x1
+ 2765 00fe 12       		.uleb128 0x12
+ 2766 00ff 06       		.uleb128 0x6
+ 2767 0100 40       		.uleb128 0x40
+ 2768 0101 18       		.uleb128 0x18
+ 2769 0102 9742     		.uleb128 0x2117
+ 2770 0104 19       		.uleb128 0x19
+ 2771 0105 01       		.uleb128 0x1
+ 2772 0106 13       		.uleb128 0x13
+ 2773 0107 00       		.byte	0
+ 2774 0108 00       		.byte	0
+ 2775 0109 14       		.uleb128 0x14
+ 2776 010a 05       		.uleb128 0x5
+ 2777 010b 00       		.byte	0
+ 2778 010c 03       		.uleb128 0x3
+ 2779 010d 0E       		.uleb128 0xe
+ 2780 010e 3A       		.uleb128 0x3a
+ 2781 010f 0B       		.uleb128 0xb
+ 2782 0110 3B       		.uleb128 0x3b
+ 2783 0111 0B       		.uleb128 0xb
+ 2784 0112 49       		.uleb128 0x49
+ 2785 0113 13       		.uleb128 0x13
+ 2786 0114 02       		.uleb128 0x2
+ 2787 0115 18       		.uleb128 0x18
+ 2788 0116 00       		.byte	0
+ 2789 0117 00       		.byte	0
+ 2790 0118 15       		.uleb128 0x15
+ 2791 0119 2E       		.uleb128 0x2e
+ 2792 011a 01       		.byte	0x1
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cc8zrVxn.s 			page 54
+
+
+ 2793 011b 3F       		.uleb128 0x3f
+ 2794 011c 19       		.uleb128 0x19
+ 2795 011d 03       		.uleb128 0x3
+ 2796 011e 0E       		.uleb128 0xe
+ 2797 011f 3A       		.uleb128 0x3a
+ 2798 0120 0B       		.uleb128 0xb
+ 2799 0121 3B       		.uleb128 0x3b
+ 2800 0122 0B       		.uleb128 0xb
+ 2801 0123 27       		.uleb128 0x27
+ 2802 0124 19       		.uleb128 0x19
+ 2803 0125 11       		.uleb128 0x11
+ 2804 0126 01       		.uleb128 0x1
+ 2805 0127 12       		.uleb128 0x12
+ 2806 0128 06       		.uleb128 0x6
+ 2807 0129 40       		.uleb128 0x40
+ 2808 012a 18       		.uleb128 0x18
+ 2809 012b 9642     		.uleb128 0x2116
+ 2810 012d 19       		.uleb128 0x19
+ 2811 012e 01       		.uleb128 0x1
+ 2812 012f 13       		.uleb128 0x13
+ 2813 0130 00       		.byte	0
+ 2814 0131 00       		.byte	0
+ 2815 0132 16       		.uleb128 0x16
+ 2816 0133 05       		.uleb128 0x5
+ 2817 0134 00       		.byte	0
+ 2818 0135 03       		.uleb128 0x3
+ 2819 0136 08       		.uleb128 0x8
+ 2820 0137 3A       		.uleb128 0x3a
+ 2821 0138 0B       		.uleb128 0xb
+ 2822 0139 3B       		.uleb128 0x3b
+ 2823 013a 0B       		.uleb128 0xb
+ 2824 013b 49       		.uleb128 0x49
+ 2825 013c 13       		.uleb128 0x13
+ 2826 013d 02       		.uleb128 0x2
+ 2827 013e 18       		.uleb128 0x18
+ 2828 013f 00       		.byte	0
+ 2829 0140 00       		.byte	0
+ 2830 0141 17       		.uleb128 0x17
+ 2831 0142 0F       		.uleb128 0xf
+ 2832 0143 00       		.byte	0
+ 2833 0144 0B       		.uleb128 0xb
+ 2834 0145 0B       		.uleb128 0xb
+ 2835 0146 49       		.uleb128 0x49
+ 2836 0147 13       		.uleb128 0x13
+ 2837 0148 00       		.byte	0
+ 2838 0149 00       		.byte	0
+ 2839 014a 18       		.uleb128 0x18
+ 2840 014b 34       		.uleb128 0x34
+ 2841 014c 00       		.byte	0
+ 2842 014d 03       		.uleb128 0x3
+ 2843 014e 0E       		.uleb128 0xe
+ 2844 014f 3A       		.uleb128 0x3a
+ 2845 0150 0B       		.uleb128 0xb
+ 2846 0151 3B       		.uleb128 0x3b
+ 2847 0152 0B       		.uleb128 0xb
+ 2848 0153 49       		.uleb128 0x49
+ 2849 0154 13       		.uleb128 0x13
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cc8zrVxn.s 			page 55
+
+
+ 2850 0155 02       		.uleb128 0x2
+ 2851 0156 18       		.uleb128 0x18
+ 2852 0157 00       		.byte	0
+ 2853 0158 00       		.byte	0
+ 2854 0159 19       		.uleb128 0x19
+ 2855 015a 2E       		.uleb128 0x2e
+ 2856 015b 01       		.byte	0x1
+ 2857 015c 3F       		.uleb128 0x3f
+ 2858 015d 19       		.uleb128 0x19
+ 2859 015e 03       		.uleb128 0x3
+ 2860 015f 0E       		.uleb128 0xe
+ 2861 0160 3A       		.uleb128 0x3a
+ 2862 0161 0B       		.uleb128 0xb
+ 2863 0162 3B       		.uleb128 0x3b
+ 2864 0163 0B       		.uleb128 0xb
+ 2865 0164 27       		.uleb128 0x27
+ 2866 0165 19       		.uleb128 0x19
+ 2867 0166 11       		.uleb128 0x11
+ 2868 0167 01       		.uleb128 0x1
+ 2869 0168 12       		.uleb128 0x12
+ 2870 0169 06       		.uleb128 0x6
+ 2871 016a 40       		.uleb128 0x40
+ 2872 016b 18       		.uleb128 0x18
+ 2873 016c 9742     		.uleb128 0x2117
+ 2874 016e 19       		.uleb128 0x19
+ 2875 016f 01       		.uleb128 0x1
+ 2876 0170 13       		.uleb128 0x13
+ 2877 0171 00       		.byte	0
+ 2878 0172 00       		.byte	0
+ 2879 0173 1A       		.uleb128 0x1a
+ 2880 0174 0B       		.uleb128 0xb
+ 2881 0175 01       		.byte	0x1
+ 2882 0176 11       		.uleb128 0x11
+ 2883 0177 01       		.uleb128 0x1
+ 2884 0178 12       		.uleb128 0x12
+ 2885 0179 06       		.uleb128 0x6
+ 2886 017a 01       		.uleb128 0x1
+ 2887 017b 13       		.uleb128 0x13
+ 2888 017c 00       		.byte	0
+ 2889 017d 00       		.byte	0
+ 2890 017e 1B       		.uleb128 0x1b
+ 2891 017f 34       		.uleb128 0x34
+ 2892 0180 00       		.byte	0
+ 2893 0181 03       		.uleb128 0x3
+ 2894 0182 0E       		.uleb128 0xe
+ 2895 0183 3A       		.uleb128 0x3a
+ 2896 0184 0B       		.uleb128 0xb
+ 2897 0185 3B       		.uleb128 0x3b
+ 2898 0186 0B       		.uleb128 0xb
+ 2899 0187 49       		.uleb128 0x49
+ 2900 0188 13       		.uleb128 0x13
+ 2901 0189 3F       		.uleb128 0x3f
+ 2902 018a 19       		.uleb128 0x19
+ 2903 018b 02       		.uleb128 0x2
+ 2904 018c 18       		.uleb128 0x18
+ 2905 018d 00       		.byte	0
+ 2906 018e 00       		.byte	0
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cc8zrVxn.s 			page 56
+
+
+ 2907 018f 1C       		.uleb128 0x1c
+ 2908 0190 26       		.uleb128 0x26
+ 2909 0191 00       		.byte	0
+ 2910 0192 49       		.uleb128 0x49
+ 2911 0193 13       		.uleb128 0x13
+ 2912 0194 00       		.byte	0
+ 2913 0195 00       		.byte	0
+ 2914 0196 00       		.byte	0
+ 2915              		.section	.debug_aranges,"",%progbits
+ 2916 0000 7C000000 		.4byte	0x7c
+ 2917 0004 0200     		.2byte	0x2
+ 2918 0006 00000000 		.4byte	.Ldebug_info0
+ 2919 000a 04       		.byte	0x4
+ 2920 000b 00       		.byte	0
+ 2921 000c 0000     		.2byte	0
+ 2922 000e 0000     		.2byte	0
+ 2923 0010 00000000 		.4byte	.LFB0
+ 2924 0014 A0000000 		.4byte	.LFE0-.LFB0
+ 2925 0018 00000000 		.4byte	.LFB1
+ 2926 001c 2E000000 		.4byte	.LFE1-.LFB1
+ 2927 0020 00000000 		.4byte	.LFB2
+ 2928 0024 78000000 		.4byte	.LFE2-.LFB2
+ 2929 0028 00000000 		.4byte	.LFB3
+ 2930 002c 44000000 		.4byte	.LFE3-.LFB3
+ 2931 0030 00000000 		.4byte	.LFB4
+ 2932 0034 28000000 		.4byte	.LFE4-.LFB4
+ 2933 0038 00000000 		.4byte	.LFB5
+ 2934 003c F8000000 		.4byte	.LFE5-.LFB5
+ 2935 0040 00000000 		.4byte	.LFB6
+ 2936 0044 70000000 		.4byte	.LFE6-.LFB6
+ 2937 0048 00000000 		.4byte	.LFB7
+ 2938 004c 22000000 		.4byte	.LFE7-.LFB7
+ 2939 0050 00000000 		.4byte	.LFB8
+ 2940 0054 52000000 		.4byte	.LFE8-.LFB8
+ 2941 0058 00000000 		.4byte	.LFB9
+ 2942 005c E8000000 		.4byte	.LFE9-.LFB9
+ 2943 0060 00000000 		.4byte	.LFB10
+ 2944 0064 70000000 		.4byte	.LFE10-.LFB10
+ 2945 0068 00000000 		.4byte	.LFB11
+ 2946 006c 92000000 		.4byte	.LFE11-.LFB11
+ 2947 0070 00000000 		.4byte	.LFB12
+ 2948 0074 40000000 		.4byte	.LFE12-.LFB12
+ 2949 0078 00000000 		.4byte	0
+ 2950 007c 00000000 		.4byte	0
+ 2951              		.section	.debug_ranges,"",%progbits
+ 2952              	.Ldebug_ranges0:
+ 2953 0000 00000000 		.4byte	.LFB0
+ 2954 0004 A0000000 		.4byte	.LFE0
+ 2955 0008 00000000 		.4byte	.LFB1
+ 2956 000c 2E000000 		.4byte	.LFE1
+ 2957 0010 00000000 		.4byte	.LFB2
+ 2958 0014 78000000 		.4byte	.LFE2
+ 2959 0018 00000000 		.4byte	.LFB3
+ 2960 001c 44000000 		.4byte	.LFE3
+ 2961 0020 00000000 		.4byte	.LFB4
+ 2962 0024 28000000 		.4byte	.LFE4
+ 2963 0028 00000000 		.4byte	.LFB5
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cc8zrVxn.s 			page 57
+
+
+ 2964 002c F8000000 		.4byte	.LFE5
+ 2965 0030 00000000 		.4byte	.LFB6
+ 2966 0034 70000000 		.4byte	.LFE6
+ 2967 0038 00000000 		.4byte	.LFB7
+ 2968 003c 22000000 		.4byte	.LFE7
+ 2969 0040 00000000 		.4byte	.LFB8
+ 2970 0044 52000000 		.4byte	.LFE8
+ 2971 0048 00000000 		.4byte	.LFB9
+ 2972 004c E8000000 		.4byte	.LFE9
+ 2973 0050 00000000 		.4byte	.LFB10
+ 2974 0054 70000000 		.4byte	.LFE10
+ 2975 0058 00000000 		.4byte	.LFB11
+ 2976 005c 92000000 		.4byte	.LFE11
+ 2977 0060 00000000 		.4byte	.LFB12
+ 2978 0064 40000000 		.4byte	.LFE12
+ 2979 0068 00000000 		.4byte	0
+ 2980 006c 00000000 		.4byte	0
+ 2981              		.section	.debug_line,"",%progbits
+ 2982              	.Ldebug_line0:
+ 2983 0000 B7030000 		.section	.debug_str,"MS",%progbits,1
+ 2983      02005F01 
+ 2983      00000201 
+ 2983      FB0E0D00 
+ 2983      01010101 
+ 2984              	.LASF128:
+ 2985 0000 67616D65 		.ascii	"game_init\000"
+ 2985      5F696E69 
+ 2985      7400
+ 2986              	.LASF92:
+ 2987 000a 64726177 		.ascii	"draw_play_line\000"
+ 2987      5F706C61 
+ 2987      795F6C69 
+ 2987      6E6500
+ 2988              	.LASF116:
+ 2989 0019 6C6F7765 		.ascii	"lowest_hole_raw\000"
+ 2989      73745F68 
+ 2989      6F6C655F 
+ 2989      72617700 
+ 2990              	.LASF23:
+ 2991 0029 424C4F57 		.ascii	"BLOWN_NOTES\000"
+ 2991      4E5F4E4F 
+ 2991      54455300 
+ 2992              	.LASF8:
+ 2993 0035 756E7369 		.ascii	"unsigned int\000"
+ 2993      676E6564 
+ 2993      20696E74 
+ 2993      00
+ 2994              	.LASF54:
+ 2995 0042 6E756D5F 		.ascii	"num_recordings\000"
+ 2995      7265636F 
+ 2995      7264696E 
+ 2995      677300
+ 2996              	.LASF125:
+ 2997 0051 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 2997      43313120 
+ 2997      352E342E 
+ 2997      31203230 
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cc8zrVxn.s 			page 58
+
+
+ 2997      31363036 
+ 2998 0084 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 2998      20726576 
+ 2998      6973696F 
+ 2998      6E203233 
+ 2998      37373135 
+ 2999 00b7 30202D66 		.ascii	"0 -ffunction-sections -ffat-lto-objects\000"
+ 2999      66756E63 
+ 2999      74696F6E 
+ 2999      2D736563 
+ 2999      74696F6E 
+ 3000              	.LASF63:
+ 3001 00df 706C6179 		.ascii	"play_echo\000"
+ 3001      5F656368 
+ 3001      6F00
+ 3002              	.LASF126:
+ 3003 00e9 67616D65 		.ascii	"game.c\000"
+ 3003      2E6300
+ 3004              	.LASF79:
+ 3005 00f0 6D6F6465 		.ascii	"mode\000"
+ 3005      00
+ 3006              	.LASF111:
+ 3007 00f5 6C6F7765 		.ascii	"lower_dist\000"
+ 3007      725F6469 
+ 3007      737400
+ 3008              	.LASF81:
+ 3009 0100 73706565 		.ascii	"speed\000"
+ 3009      6400
+ 3010              	.LASF80:
+ 3011 0106 61637469 		.ascii	"active\000"
+ 3011      766500
+ 3012              	.LASF97:
+ 3013 010d 656E645F 		.ascii	"end_y_signed\000"
+ 3013      795F7369 
+ 3013      676E6564 
+ 3013      00
+ 3014              	.LASF45:
+ 3015 011a 4841524D 		.ascii	"HARMONICA_OUTPUT\000"
+ 3015      4F4E4943 
+ 3015      415F4F55 
+ 3015      54505554 
+ 3015      00
+ 3016              	.LASF21:
+ 3017 012b 54525545 		.ascii	"TRUE\000"
+ 3017      00
+ 3018              	.LASF22:
+ 3019 0130 68426F6F 		.ascii	"hBool\000"
+ 3019      6C00
+ 3020              	.LASF89:
+ 3021 0136 73746172 		.ascii	"start_x\000"
+ 3021      745F7800 
+ 3022              	.LASF15:
+ 3023 013e 666C6F61 		.ascii	"float\000"
+ 3023      7400
+ 3024              	.LASF55:
+ 3025 0144 504C4159 		.ascii	"PLAYBACK_NOTES\000"
+ 3025      4241434B 
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cc8zrVxn.s 			page 59
+
+
+ 3025      5F4E4F54 
+ 3025      455300
+ 3026              	.LASF71:
+ 3027 0153 766F6C75 		.ascii	"volume_multiplier\000"
+ 3027      6D655F6D 
+ 3027      756C7469 
+ 3027      706C6965 
+ 3027      7200
+ 3028              	.LASF127:
+ 3029 0165 433A5C55 		.ascii	"C:\\Users\\Matthew\\Dropbox (MIT)\\Sophomore Spring"
+ 3029      73657273 
+ 3029      5C4D6174 
+ 3029      74686577 
+ 3029      5C44726F 
+ 3030 0194 5C362E31 		.ascii	"\\6.115\\6.115-Labs\\project\\DVDAC_Example01\\DVDA"
+ 3030      31355C36 
+ 3030      2E313135 
+ 3030      2D4C6162 
+ 3030      735C7072 
+ 3031 01c2 435F4578 		.ascii	"C_Example01.cydsn\000"
+ 3031      616D706C 
+ 3031      6530312E 
+ 3031      63796473 
+ 3031      6E00
+ 3032              	.LASF102:
+ 3033 01d4 656E645F 		.ascii	"end_x\000"
+ 3033      7800
+ 3034              	.LASF98:
+ 3035 01da 656E645F 		.ascii	"end_y\000"
+ 3035      7900
+ 3036              	.LASF46:
+ 3037 01e0 64757261 		.ascii	"duration\000"
+ 3037      74696F6E 
+ 3037      00
+ 3038              	.LASF113:
+ 3039 01e9 77726974 		.ascii	"write_note_group_holes\000"
+ 3039      655F6E6F 
+ 3039      74655F67 
+ 3039      726F7570 
+ 3039      5F686F6C 
+ 3040              	.LASF7:
+ 3041 0200 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 3041      206C6F6E 
+ 3041      6720756E 
+ 3041      7369676E 
+ 3041      65642069 
+ 3042              	.LASF122:
+ 3043 0217 6E756D5F 		.ascii	"num_ticks\000"
+ 3043      7469636B 
+ 3043      7300
+ 3044              	.LASF9:
+ 3045 0221 5F5F7569 		.ascii	"__uint16_t\000"
+ 3045      6E743136 
+ 3045      5F7400
+ 3046              	.LASF120:
+ 3047 022c 64726177 		.ascii	"draw_all_note_groups\000"
+ 3047      5F616C6C 
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cc8zrVxn.s 			page 60
+
+
+ 3047      5F6E6F74 
+ 3047      655F6772 
+ 3047      6F757073 
+ 3048              	.LASF124:
+ 3049 0241 6E756D5F 		.ascii	"num_note_groups\000"
+ 3049      6E6F7465 
+ 3049      5F67726F 
+ 3049      75707300 
+ 3050              	.LASF93:
+ 3051 0251 64726177 		.ascii	"draw_note_group\000"
+ 3051      5F6E6F74 
+ 3051      655F6772 
+ 3051      6F757000 
+ 3052              	.LASF88:
+ 3053 0261 636F6C6F 		.ascii	"color\000"
+ 3053      7200
+ 3054              	.LASF32:
+ 3055 0267 5A45524F 		.ascii	"ZERO\000"
+ 3055      00
+ 3056              	.LASF82:
+ 3057 026c 686F6C65 		.ascii	"holes\000"
+ 3057      7300
+ 3058              	.LASF107:
+ 3059 0272 6861726D 		.ascii	"harmonica_num_notes\000"
+ 3059      6F6E6963 
+ 3059      615F6E75 
+ 3059      6D5F6E6F 
+ 3059      74657300 
+ 3060              	.LASF49:
+ 3061 0286 7265636F 		.ascii	"recordings\000"
+ 3061      7264696E 
+ 3061      677300
+ 3062              	.LASF50:
+ 3063 0291 7265636F 		.ascii	"recordings_idx\000"
+ 3063      7264696E 
+ 3063      67735F69 
+ 3063      647800
+ 3064              	.LASF33:
+ 3065 02a0 54485245 		.ascii	"THREE\000"
+ 3065      4500
+ 3066              	.LASF62:
+ 3067 02a6 6563686F 		.ascii	"echo_duration\000"
+ 3067      5F647572 
+ 3067      6174696F 
+ 3067      6E00
+ 3068              	.LASF119:
+ 3069 02b4 616C6C5F 		.ascii	"all_note_groups_past_threshold\000"
+ 3069      6E6F7465 
+ 3069      5F67726F 
+ 3069      7570735F 
+ 3069      70617374 
+ 3070              	.LASF123:
+ 3071 02d3 74657374 		.ascii	"test_group\000"
+ 3071      5F67726F 
+ 3071      757000
+ 3072              	.LASF59:
+ 3073 02de 6563686F 		.ascii	"echo_volume_multiplier\000"
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cc8zrVxn.s 			page 61
+
+
+ 3073      5F766F6C 
+ 3073      756D655F 
+ 3073      6D756C74 
+ 3073      69706C69 
+ 3074              	.LASF100:
+ 3075 02f5 6F75746C 		.ascii	"outline_color\000"
+ 3075      696E655F 
+ 3075      636F6C6F 
+ 3075      7200
+ 3076              	.LASF72:
+ 3077 0303 6F757470 		.ascii	"output_mode\000"
+ 3077      75745F6D 
+ 3077      6F646500 
+ 3078              	.LASF121:
+ 3079 030f 6C617374 		.ascii	"last_game_update\000"
+ 3079      5F67616D 
+ 3079      655F7570 
+ 3079      64617465 
+ 3079      00
+ 3080              	.LASF43:
+ 3081 0320 6E6F7465 		.ascii	"notes\000"
+ 3081      7300
+ 3082              	.LASF53:
+ 3083 0326 73746172 		.ascii	"started_playing_first_note\000"
+ 3083      7465645F 
+ 3083      706C6179 
+ 3083      696E675F 
+ 3083      66697273 
+ 3084              	.LASF76:
+ 3085 0341 506F7369 		.ascii	"Position\000"
+ 3085      74696F6E 
+ 3085      00
+ 3086              	.LASF84:
+ 3087 034a 4E4F5445 		.ascii	"NOTE_GROUP\000"
+ 3087      5F47524F 
+ 3087      555000
+ 3088              	.LASF101:
+ 3089 0355 626F6479 		.ascii	"body_color\000"
+ 3089      5F636F6C 
+ 3089      6F7200
+ 3090              	.LASF17:
+ 3091 0360 63686172 		.ascii	"char\000"
+ 3091      00
+ 3092              	.LASF27:
+ 3093 0365 4E4F524D 		.ascii	"NORMAL\000"
+ 3093      414C00
+ 3094              	.LASF12:
+ 3095 036c 75696E74 		.ascii	"uint16\000"
+ 3095      313600
+ 3096              	.LASF14:
+ 3097 0373 696E7438 		.ascii	"int8\000"
+ 3097      00
+ 3098              	.LASF115:
+ 3099 0378 63656E74 		.ascii	"center_hole_int8\000"
+ 3099      65725F68 
+ 3099      6F6C655F 
+ 3099      696E7438 
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cc8zrVxn.s 			page 62
+
+
+ 3099      00
+ 3100              	.LASF87:
+ 3101 0389 64726177 		.ascii	"draw_note_lines\000"
+ 3101      5F6E6F74 
+ 3101      655F6C69 
+ 3101      6E657300 
+ 3102              	.LASF61:
+ 3103 0399 6563686F 		.ascii	"echo_delay\000"
+ 3103      5F64656C 
+ 3103      617900
+ 3104              	.LASF73:
+ 3105 03a4 706C6179 		.ascii	"playback_notes\000"
+ 3105      6261636B 
+ 3105      5F6E6F74 
+ 3105      657300
+ 3106              	.LASF42:
+ 3107 03b3 4E4F5445 		.ascii	"NOTE\000"
+ 3107      00
+ 3108              	.LASF68:
+ 3109 03b8 69735F70 		.ascii	"is_playing\000"
+ 3109      6C617969 
+ 3109      6E6700
+ 3110              	.LASF6:
+ 3111 03c3 6C6F6E67 		.ascii	"long long int\000"
+ 3111      206C6F6E 
+ 3111      6720696E 
+ 3111      7400
+ 3112              	.LASF40:
+ 3113 03d1 484F4C45 		.ascii	"HOLE\000"
+ 3113      00
+ 3114              	.LASF75:
+ 3115 03d6 4861726D 		.ascii	"Harmonica\000"
+ 3115      6F6E6963 
+ 3115      6100
+ 3116              	.LASF118:
+ 3117 03e0 68616E64 		.ascii	"handle_note_group_spawn\000"
+ 3117      6C655F6E 
+ 3117      6F74655F 
+ 3117      67726F75 
+ 3117      705F7370 
+ 3118              	.LASF64:
+ 3119 03f8 6E756D5F 		.ascii	"num_echos_played\000"
+ 3119      6563686F 
+ 3119      735F706C 
+ 3119      61796564 
+ 3119      00
+ 3120              	.LASF104:
+ 3121 0409 6E6F7465 		.ascii	"note_groups\000"
+ 3121      5F67726F 
+ 3121      75707300 
+ 3122              	.LASF36:
+ 3123 0415 53455645 		.ascii	"SEVEN\000"
+ 3123      4E00
+ 3124              	.LASF47:
+ 3125 041b 73746172 		.ascii	"start_time\000"
+ 3125      745F7469 
+ 3125      6D6500
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cc8zrVxn.s 			page 63
+
+
+ 3126              	.LASF13:
+ 3127 0426 75696E74 		.ascii	"uint32\000"
+ 3127      333200
+ 3128              	.LASF51:
+ 3129 042d 6C617374 		.ascii	"last_note_time\000"
+ 3129      5F6E6F74 
+ 3129      655F7469 
+ 3129      6D6500
+ 3130              	.LASF56:
+ 3131 043c 6C617374 		.ascii	"last_played_note\000"
+ 3131      5F706C61 
+ 3131      7965645F 
+ 3131      6E6F7465 
+ 3131      00
+ 3132              	.LASF58:
+ 3133 044d 6C617374 		.ascii	"last_played_note_initialized\000"
+ 3133      5F706C61 
+ 3133      7965645F 
+ 3133      6E6F7465 
+ 3133      5F696E69 
+ 3134              	.LASF30:
+ 3135 046a 504C4159 		.ascii	"PLAYBACK\000"
+ 3135      4241434B 
+ 3135      00
+ 3136              	.LASF39:
+ 3137 0473 4E4F5F48 		.ascii	"NO_HOLE\000"
+ 3137      4F4C4500 
+ 3138              	.LASF29:
+ 3139 047b 5245434F 		.ascii	"RECORDING\000"
+ 3139      5244494E 
+ 3139      4700
+ 3140              	.LASF103:
+ 3141 0485 68616E64 		.ascii	"handle_move_note_groups\000"
+ 3141      6C655F6D 
+ 3141      6F76655F 
+ 3141      6E6F7465 
+ 3141      5F67726F 
+ 3142              	.LASF65:
+ 3143 049d 4543484F 		.ascii	"ECHO_DATA\000"
+ 3143      5F444154 
+ 3143      4100
+ 3144              	.LASF48:
+ 3145 04a7 504C4159 		.ascii	"PLAYBACK_NOTE\000"
+ 3145      4241434B 
+ 3145      5F4E4F54 
+ 3145      4500
+ 3146              	.LASF35:
+ 3147 04b5 46495645 		.ascii	"FIVE\000"
+ 3147      00
+ 3148              	.LASF18:
+ 3149 04ba 6C6F6E67 		.ascii	"long double\000"
+ 3149      20646F75 
+ 3149      626C6500 
+ 3150              	.LASF10:
+ 3151 04c6 75696E74 		.ascii	"uint16_t\000"
+ 3151      31365F74 
+ 3151      00
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cc8zrVxn.s 			page 64
+
+
+ 3152              	.LASF90:
+ 3153 04cf 785F6465 		.ascii	"x_delta\000"
+ 3153      6C746100 
+ 3154              	.LASF86:
+ 3155 04d7 67616D65 		.ascii	"game_tick\000"
+ 3155      5F746963 
+ 3155      6B00
+ 3156              	.LASF94:
+ 3157 04e1 6E6F7465 		.ascii	"note_group\000"
+ 3157      5F67726F 
+ 3157      757000
+ 3158              	.LASF2:
+ 3159 04ec 73686F72 		.ascii	"short int\000"
+ 3159      7420696E 
+ 3159      7400
+ 3160              	.LASF108:
+ 3161 04f6 67656E65 		.ascii	"generate_random_note_group\000"
+ 3161      72617465 
+ 3161      5F72616E 
+ 3161      646F6D5F 
+ 3161      6E6F7465 
+ 3162              	.LASF117:
+ 3163 0511 6C6F7765 		.ascii	"lowest_hole\000"
+ 3163      73745F68 
+ 3163      6F6C6500 
+ 3164              	.LASF70:
+ 3165 051d 72656365 		.ascii	"recent_change\000"
+ 3165      6E745F63 
+ 3165      68616E67 
+ 3165      6500
+ 3166              	.LASF4:
+ 3167 052b 6C6F6E67 		.ascii	"long int\000"
+ 3167      20696E74 
+ 3167      00
+ 3168              	.LASF105:
+ 3169 0534 6765745F 		.ascii	"get_x\000"
+ 3169      7800
+ 3170              	.LASF83:
+ 3171 053a 6C656E67 		.ascii	"length\000"
+ 3171      746800
+ 3172              	.LASF96:
+ 3173 0541 73746172 		.ascii	"start_y\000"
+ 3173      745F7900 
+ 3174              	.LASF38:
+ 3175 0549 4E494E45 		.ascii	"NINE\000"
+ 3175      00
+ 3176              	.LASF52:
+ 3177 054e 73746172 		.ascii	"started_recording_first_note\000"
+ 3177      7465645F 
+ 3177      7265636F 
+ 3177      7264696E 
+ 3177      675F6669 
+ 3178              	.LASF20:
+ 3179 056b 46414C53 		.ascii	"FALSE\000"
+ 3179      4500
+ 3180              	.LASF109:
+ 3181 0571 72616E64 		.ascii	"rand_val\000"
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cc8zrVxn.s 			page 65
+
+
+ 3181      5F76616C 
+ 3181      00
+ 3182              	.LASF112:
+ 3183 057a 6D61785F 		.ascii	"max_num_notes\000"
+ 3183      6E756D5F 
+ 3183      6E6F7465 
+ 3183      7300
+ 3184              	.LASF25:
+ 3185 0588 4E4F5F4E 		.ascii	"NO_NOTES\000"
+ 3185      4F544553 
+ 3185      00
+ 3186              	.LASF114:
+ 3187 0591 686F6C65 		.ascii	"hole_offset\000"
+ 3187      5F6F6666 
+ 3187      73657400 
+ 3188              	.LASF28:
+ 3189 059d 4543484F 		.ascii	"ECHO\000"
+ 3189      00
+ 3190              	.LASF78:
+ 3191 05a2 63656E74 		.ascii	"center_hole\000"
+ 3191      65725F68 
+ 3191      6F6C6500 
+ 3192              	.LASF95:
+ 3193 05ae 69734E65 		.ascii	"isNegative\000"
+ 3193      67617469 
+ 3193      766500
+ 3194              	.LASF41:
+ 3195 05b9 52455354 		.ascii	"REST\000"
+ 3195      00
+ 3196              	.LASF85:
+ 3197 05be 686F6C65 		.ascii	"hole\000"
+ 3197      00
+ 3198              	.LASF19:
+ 3199 05c3 73697A65 		.ascii	"sizetype\000"
+ 3199      74797065 
+ 3199      00
+ 3200              	.LASF5:
+ 3201 05cc 6C6F6E67 		.ascii	"long unsigned int\000"
+ 3201      20756E73 
+ 3201      69676E65 
+ 3201      6420696E 
+ 3201      7400
+ 3202              	.LASF106:
+ 3203 05de 6765745F 		.ascii	"get_body_color\000"
+ 3203      626F6479 
+ 3203      5F636F6C 
+ 3203      6F7200
+ 3204              	.LASF44:
+ 3205 05ed 6E756D5F 		.ascii	"num_notes_played\000"
+ 3205      6E6F7465 
+ 3205      735F706C 
+ 3205      61796564 
+ 3205      00
+ 3206              	.LASF69:
+ 3207 05fe 7261775F 		.ascii	"raw_harmonica_output\000"
+ 3207      6861726D 
+ 3207      6F6E6963 
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cc8zrVxn.s 			page 66
+
+
+ 3207      615F6F75 
+ 3207      74707574 
+ 3208              	.LASF77:
+ 3209 0613 6E756D5F 		.ascii	"num_notes\000"
+ 3209      6E6F7465 
+ 3209      7300
+ 3210              	.LASF66:
+ 3211 061d 63757272 		.ascii	"current_note_mode\000"
+ 3211      656E745F 
+ 3211      6E6F7465 
+ 3211      5F6D6F64 
+ 3211      6500
+ 3212              	.LASF99:
+ 3213 062f 63726F73 		.ascii	"cross_play_line\000"
+ 3213      735F706C 
+ 3213      61795F6C 
+ 3213      696E6500 
+ 3214              	.LASF1:
+ 3215 063f 756E7369 		.ascii	"unsigned char\000"
+ 3215      676E6564 
+ 3215      20636861 
+ 3215      7200
+ 3216              	.LASF91:
+ 3217 064d 6C696E65 		.ascii	"line\000"
+ 3217      00
+ 3218              	.LASF24:
+ 3219 0652 5355434B 		.ascii	"SUCKED_NOTES\000"
+ 3219      45445F4E 
+ 3219      4F544553 
+ 3219      00
+ 3220              	.LASF74:
+ 3221 065f 6563686F 		.ascii	"echo_data\000"
+ 3221      5F646174 
+ 3221      6100
+ 3222              	.LASF26:
+ 3223 0669 4E4F5445 		.ascii	"NOTE_MODE\000"
+ 3223      5F4D4F44 
+ 3223      4500
+ 3224              	.LASF0:
+ 3225 0673 7369676E 		.ascii	"signed char\000"
+ 3225      65642063 
+ 3225      68617200 
+ 3226              	.LASF3:
+ 3227 067f 73686F72 		.ascii	"short unsigned int\000"
+ 3227      7420756E 
+ 3227      7369676E 
+ 3227      65642069 
+ 3227      6E7400
+ 3228              	.LASF57:
+ 3229 0692 77616974 		.ascii	"waiting_for_note_finish\000"
+ 3229      696E675F 
+ 3229      666F725F 
+ 3229      6E6F7465 
+ 3229      5F66696E 
+ 3230              	.LASF11:
+ 3231 06aa 75696E74 		.ascii	"uint8\000"
+ 3231      3800
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cc8zrVxn.s 			page 67
+
+
+ 3232              	.LASF16:
+ 3233 06b0 646F7562 		.ascii	"double\000"
+ 3233      6C6500
+ 3234              	.LASF34:
+ 3235 06b7 464F5552 		.ascii	"FOUR\000"
+ 3235      00
+ 3236              	.LASF110:
+ 3237 06bc 75707065 		.ascii	"upper_dist\000"
+ 3237      725F6469 
+ 3237      737400
+ 3238              	.LASF31:
+ 3239 06c7 4F555450 		.ascii	"OUTPUT_MODE\000"
+ 3239      55545F4D 
+ 3239      4F444500 
+ 3240              	.LASF37:
+ 3241 06d3 45494748 		.ascii	"EIGHT\000"
+ 3241      5400
+ 3242              	.LASF67:
+ 3243 06d9 61637469 		.ascii	"active_hole\000"
+ 3243      76655F68 
+ 3243      6F6C6500 
+ 3244              	.LASF60:
+ 3245 06e5 6C617374 		.ascii	"last_echo_time\000"
+ 3245      5F656368 
+ 3245      6F5F7469 
+ 3245      6D6500
+ 3246              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

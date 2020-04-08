@@ -1,0 +1,977 @@
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccQU4WZ4.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"button.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.global	DEBOUNCE_TIME
+  20              		.section	.rodata
+  21              		.type	DEBOUNCE_TIME, %object
+  22              		.size	DEBOUNCE_TIME, 1
+  23              	DEBOUNCE_TIME:
+  24 0000 3C       		.byte	60
+  25              		.section	.text.init_button,"ax",%progbits
+  26              		.align	2
+  27              		.global	init_button
+  28              		.thumb
+  29              		.thumb_func
+  30              		.type	init_button, %function
+  31              	init_button:
+  32              	.LFB0:
+  33              		.file 1 "button.c"
+   1:button.c      **** /* ========================================
+   2:button.c      ****  *
+   3:button.c      ****  * Copyright YOUR COMPANY, THE YEAR
+   4:button.c      ****  * All Rights Reserved
+   5:button.c      ****  * UNPUBLISHED, LICENSED SOFTWARE.
+   6:button.c      ****  *
+   7:button.c      ****  * CONFIDENTIAL AND PROPRIETARY INFORMATION
+   8:button.c      ****  * WHICH IS THE PROPERTY OF your company.
+   9:button.c      ****  *
+  10:button.c      ****  * ========================================
+  11:button.c      **** */
+  12:button.c      **** #include "button.h"
+  13:button.c      **** const uint8 DEBOUNCE_TIME = 60;
+  14:button.c      **** void init_button(Button* b) {
+  34              		.loc 1 14 0
+  35              		.cfi_startproc
+  36              		@ args = 0, pretend = 0, frame = 8
+  37              		@ frame_needed = 1, uses_anonymous_args = 0
+  38 0000 80B5     		push	{r7, lr}
+  39              		.cfi_def_cfa_offset 8
+  40              		.cfi_offset 7, -8
+  41              		.cfi_offset 14, -4
+  42 0002 82B0     		sub	sp, sp, #8
+  43              		.cfi_def_cfa_offset 16
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccQU4WZ4.s 			page 2
+
+
+  44 0004 00AF     		add	r7, sp, #0
+  45              		.cfi_def_cfa_register 7
+  46 0006 7860     		str	r0, [r7, #4]
+  15:button.c      ****     b->edge = 0;
+  47              		.loc 1 15 0
+  48 0008 7B68     		ldr	r3, [r7, #4]
+  49 000a 0022     		movs	r2, #0
+  50 000c 1A73     		strb	r2, [r3, #12]
+  16:button.c      ****     b->last_edge_time = CySysTickGetValue();
+  51              		.loc 1 16 0
+  52 000e FFF7FEFF 		bl	CySysTickGetValue
+  53 0012 0346     		mov	r3, r0
+  54 0014 1A46     		mov	r2, r3
+  55 0016 7B68     		ldr	r3, [r7, #4]
+  56 0018 1A60     		str	r2, [r3]
+  17:button.c      ****     b->last_state = UNHELD;
+  57              		.loc 1 17 0
+  58 001a 7B68     		ldr	r3, [r7, #4]
+  59 001c 0122     		movs	r2, #1
+  60 001e 1A71     		strb	r2, [r3, #4]
+  18:button.c      ****     b->num_presses = 0;
+  61              		.loc 1 18 0
+  62 0020 7B68     		ldr	r3, [r7, #4]
+  63 0022 0022     		movs	r2, #0
+  64 0024 9A60     		str	r2, [r3, #8]
+  19:button.c      **** }
+  65              		.loc 1 19 0
+  66 0026 00BF     		nop
+  67 0028 0837     		adds	r7, r7, #8
+  68              		.cfi_def_cfa_offset 8
+  69 002a BD46     		mov	sp, r7
+  70              		.cfi_def_cfa_register 13
+  71              		@ sp needed
+  72 002c 80BD     		pop	{r7, pc}
+  73              		.cfi_endproc
+  74              	.LFE0:
+  75              		.size	init_button, .-init_button
+  76 002e 00BF     		.section	.text.poll_button,"ax",%progbits
+  77              		.align	2
+  78              		.global	poll_button
+  79              		.thumb
+  80              		.thumb_func
+  81              		.type	poll_button, %function
+  82              	poll_button:
+  83              	.LFB1:
+  20:button.c      **** 
+  21:button.c      **** Button_State poll_button(Button* b, uint8 pin_value) {
+  84              		.loc 1 21 0
+  85              		.cfi_startproc
+  86              		@ args = 0, pretend = 0, frame = 16
+  87              		@ frame_needed = 1, uses_anonymous_args = 0
+  88 0000 80B5     		push	{r7, lr}
+  89              		.cfi_def_cfa_offset 8
+  90              		.cfi_offset 7, -8
+  91              		.cfi_offset 14, -4
+  92 0002 84B0     		sub	sp, sp, #16
+  93              		.cfi_def_cfa_offset 24
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccQU4WZ4.s 			page 3
+
+
+  94 0004 00AF     		add	r7, sp, #0
+  95              		.cfi_def_cfa_register 7
+  96 0006 7860     		str	r0, [r7, #4]
+  97 0008 0B46     		mov	r3, r1
+  98 000a FB70     		strb	r3, [r7, #3]
+  22:button.c      ****     
+  23:button.c      ****     Button_State current_state = (pin_value == 0) ? HELD : UNHELD;
+  99              		.loc 1 23 0
+ 100 000c FB78     		ldrb	r3, [r7, #3]	@ zero_extendqisi2
+ 101 000e 002B     		cmp	r3, #0
+ 102 0010 14BF     		ite	ne
+ 103 0012 0123     		movne	r3, #1
+ 104 0014 0023     		moveq	r3, #0
+ 105 0016 DBB2     		uxtb	r3, r3
+ 106 0018 FB73     		strb	r3, [r7, #15]
+  24:button.c      ****     
+  25:button.c      ****     if(current_state != b->last_state) {
+ 107              		.loc 1 25 0
+ 108 001a 7B68     		ldr	r3, [r7, #4]
+ 109 001c 1B79     		ldrb	r3, [r3, #4]	@ zero_extendqisi2
+ 110 001e FA7B     		ldrb	r2, [r7, #15]	@ zero_extendqisi2
+ 111 0020 9A42     		cmp	r2, r3
+ 112 0022 0CD0     		beq	.L3
+ 113              	.LBB2:
+  26:button.c      ****         // edge detected
+  27:button.c      ****         b->last_state = current_state;
+ 114              		.loc 1 27 0
+ 115 0024 7B68     		ldr	r3, [r7, #4]
+ 116 0026 FA7B     		ldrb	r2, [r7, #15]
+ 117 0028 1A71     		strb	r2, [r3, #4]
+  28:button.c      ****         b->last_edge_time = ms_counter_ReadCounter();
+ 118              		.loc 1 28 0
+ 119 002a FFF7FEFF 		bl	ms_counter_ReadCounter
+ 120 002e 0346     		mov	r3, r0
+ 121 0030 1A46     		mov	r2, r3
+ 122 0032 7B68     		ldr	r3, [r7, #4]
+ 123 0034 1A60     		str	r2, [r3]
+  29:button.c      ****         b->edge = 1;
+ 124              		.loc 1 29 0
+ 125 0036 7B68     		ldr	r3, [r7, #4]
+ 126 0038 0122     		movs	r2, #1
+ 127 003a 1A73     		strb	r2, [r3, #12]
+ 128              	.LBE2:
+ 129 003c 15E0     		b	.L4
+ 130              	.L3:
+  30:button.c      ****     } else {
+  31:button.c      ****         
+  32:button.c      ****         if(b->edge == 1) {
+ 131              		.loc 1 32 0
+ 132 003e 7B68     		ldr	r3, [r7, #4]
+ 133 0040 1B7B     		ldrb	r3, [r3, #12]	@ zero_extendqisi2
+ 134 0042 012B     		cmp	r3, #1
+ 135 0044 11D1     		bne	.L4
+  33:button.c      ****             b->edge = 0;
+ 136              		.loc 1 33 0
+ 137 0046 7B68     		ldr	r3, [r7, #4]
+ 138 0048 0022     		movs	r2, #0
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccQU4WZ4.s 			page 4
+
+
+ 139 004a 1A73     		strb	r2, [r3, #12]
+  34:button.c      ****             
+  35:button.c      ****             if(current_state == UNHELD) {
+ 140              		.loc 1 35 0
+ 141 004c FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+ 142 004e 012B     		cmp	r3, #1
+ 143 0050 04D1     		bne	.L5
+  36:button.c      ****                 b->num_presses++;
+ 144              		.loc 1 36 0
+ 145 0052 7B68     		ldr	r3, [r7, #4]
+ 146 0054 9B68     		ldr	r3, [r3, #8]
+ 147 0056 5A1C     		adds	r2, r3, #1
+ 148 0058 7B68     		ldr	r3, [r7, #4]
+ 149 005a 9A60     		str	r2, [r3, #8]
+ 150              	.L5:
+  37:button.c      ****             }
+  38:button.c      ****             
+  39:button.c      ****             return (current_state == UNHELD) ? FALLING_EDGE : RISING_EDGE;
+ 151              		.loc 1 39 0
+ 152 005c FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+ 153 005e 012B     		cmp	r3, #1
+ 154 0060 01D1     		bne	.L6
+ 155              		.loc 1 39 0 is_stmt 0 discriminator 1
+ 156 0062 0323     		movs	r3, #3
+ 157 0064 02E0     		b	.L8
+ 158              	.L6:
+ 159              		.loc 1 39 0 discriminator 2
+ 160 0066 0223     		movs	r3, #2
+ 161 0068 00E0     		b	.L8
+ 162              	.L4:
+  40:button.c      ****         }
+  41:button.c      ****         
+  42:button.c      ****     }
+  43:button.c      ****     return current_state;
+ 163              		.loc 1 43 0 is_stmt 1
+ 164 006a FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+ 165              	.L8:
+  44:button.c      **** }
+ 166              		.loc 1 44 0
+ 167 006c 1846     		mov	r0, r3
+ 168 006e 1037     		adds	r7, r7, #16
+ 169              		.cfi_def_cfa_offset 8
+ 170 0070 BD46     		mov	sp, r7
+ 171              		.cfi_def_cfa_register 13
+ 172              		@ sp needed
+ 173 0072 80BD     		pop	{r7, pc}
+ 174              		.cfi_endproc
+ 175              	.LFE1:
+ 176              		.size	poll_button, .-poll_button
+ 177              		.text
+ 178              	.Letext0:
+ 179              		.file 2 "Generated_Source\\PSoC5/cytypes.h"
+ 180              		.file 3 "button.h"
+ 181              		.section	.debug_info,"",%progbits
+ 182              	.Ldebug_info0:
+ 183 0000 AD010000 		.4byte	0x1ad
+ 184 0004 0400     		.2byte	0x4
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccQU4WZ4.s 			page 5
+
+
+ 185 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 186 000a 04       		.byte	0x4
+ 187 000b 01       		.uleb128 0x1
+ 188 000c 3D000000 		.4byte	.LASF27
+ 189 0010 0C       		.byte	0xc
+ 190 0011 6B020000 		.4byte	.LASF28
+ 191 0015 D0010000 		.4byte	.LASF29
+ 192 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 193 001d 00000000 		.4byte	0
+ 194 0021 00000000 		.4byte	.Ldebug_line0
+ 195 0025 02       		.uleb128 0x2
+ 196 0026 01       		.byte	0x1
+ 197 0027 06       		.byte	0x6
+ 198 0028 4B010000 		.4byte	.LASF0
+ 199 002c 02       		.uleb128 0x2
+ 200 002d 01       		.byte	0x1
+ 201 002e 08       		.byte	0x8
+ 202 002f 3D010000 		.4byte	.LASF1
+ 203 0033 02       		.uleb128 0x2
+ 204 0034 02       		.byte	0x2
+ 205 0035 05       		.byte	0x5
+ 206 0036 33000000 		.4byte	.LASF2
+ 207 003a 02       		.uleb128 0x2
+ 208 003b 02       		.byte	0x2
+ 209 003c 07       		.byte	0x7
+ 210 003d 9D010000 		.4byte	.LASF3
+ 211 0041 02       		.uleb128 0x2
+ 212 0042 04       		.byte	0x4
+ 213 0043 05       		.byte	0x5
+ 214 0044 01010000 		.4byte	.LASF4
+ 215 0048 02       		.uleb128 0x2
+ 216 0049 04       		.byte	0x4
+ 217 004a 07       		.byte	0x7
+ 218 004b 46020000 		.4byte	.LASF5
+ 219 004f 02       		.uleb128 0x2
+ 220 0050 08       		.byte	0x8
+ 221 0051 05       		.byte	0x5
+ 222 0052 F3000000 		.4byte	.LASF6
+ 223 0056 02       		.uleb128 0x2
+ 224 0057 08       		.byte	0x8
+ 225 0058 07       		.byte	0x7
+ 226 0059 57010000 		.4byte	.LASF7
+ 227 005d 03       		.uleb128 0x3
+ 228 005e 04       		.byte	0x4
+ 229 005f 05       		.byte	0x5
+ 230 0060 696E7400 		.ascii	"int\000"
+ 231 0064 02       		.uleb128 0x2
+ 232 0065 04       		.byte	0x4
+ 233 0066 07       		.byte	0x7
+ 234 0067 89010000 		.4byte	.LASF8
+ 235 006b 04       		.uleb128 0x4
+ 236 006c E7000000 		.4byte	.LASF9
+ 237 0070 02       		.byte	0x2
+ 238 0071 9201     		.2byte	0x192
+ 239 0073 2C000000 		.4byte	0x2c
+ 240 0077 04       		.uleb128 0x4
+ 241 0078 3F020000 		.4byte	.LASF10
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccQU4WZ4.s 			page 6
+
+
+ 242 007c 02       		.byte	0x2
+ 243 007d 9401     		.2byte	0x194
+ 244 007f 48000000 		.4byte	0x48
+ 245 0083 02       		.uleb128 0x2
+ 246 0084 04       		.byte	0x4
+ 247 0085 04       		.byte	0x4
+ 248 0086 ED000000 		.4byte	.LASF11
+ 249 008a 02       		.uleb128 0x2
+ 250 008b 08       		.byte	0x8
+ 251 008c 04       		.byte	0x4
+ 252 008d 58020000 		.4byte	.LASF12
+ 253 0091 02       		.uleb128 0x2
+ 254 0092 01       		.byte	0x1
+ 255 0093 08       		.byte	0x8
+ 256 0094 B0010000 		.4byte	.LASF13
+ 257 0098 05       		.uleb128 0x5
+ 258 0099 01       		.byte	0x1
+ 259 009a 2C000000 		.4byte	0x2c
+ 260 009e 03       		.byte	0x3
+ 261 009f 14       		.byte	0x14
+ 262 00a0 BD000000 		.4byte	0xbd
+ 263 00a4 06       		.uleb128 0x6
+ 264 00a5 66020000 		.4byte	.LASF14
+ 265 00a9 00       		.byte	0
+ 266 00aa 06       		.uleb128 0x6
+ 267 00ab 5F020000 		.4byte	.LASF15
+ 268 00af 01       		.byte	0x1
+ 269 00b0 06       		.uleb128 0x6
+ 270 00b1 0D000000 		.4byte	.LASF16
+ 271 00b5 02       		.byte	0x2
+ 272 00b6 06       		.uleb128 0x6
+ 273 00b7 B5010000 		.4byte	.LASF17
+ 274 00bb 03       		.byte	0x3
+ 275 00bc 00       		.byte	0
+ 276 00bd 07       		.uleb128 0x7
+ 277 00be 00000000 		.4byte	.LASF18
+ 278 00c2 03       		.byte	0x3
+ 279 00c3 19       		.byte	0x19
+ 280 00c4 98000000 		.4byte	0x98
+ 281 00c8 08       		.uleb128 0x8
+ 282 00c9 10       		.byte	0x10
+ 283 00ca 03       		.byte	0x3
+ 284 00cb 1B       		.byte	0x1b
+ 285 00cc 01010000 		.4byte	0x101
+ 286 00d0 09       		.uleb128 0x9
+ 287 00d1 6E010000 		.4byte	.LASF19
+ 288 00d5 03       		.byte	0x3
+ 289 00d6 1C       		.byte	0x1c
+ 290 00d7 77000000 		.4byte	0x77
+ 291 00db 00       		.byte	0
+ 292 00dc 09       		.uleb128 0x9
+ 293 00dd 32010000 		.4byte	.LASF20
+ 294 00e1 03       		.byte	0x3
+ 295 00e2 1D       		.byte	0x1d
+ 296 00e3 BD000000 		.4byte	0xbd
+ 297 00e7 04       		.byte	0x4
+ 298 00e8 09       		.uleb128 0x9
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccQU4WZ4.s 			page 7
+
+
+ 299 00e9 1C010000 		.4byte	.LASF21
+ 300 00ed 03       		.byte	0x3
+ 301 00ee 1E       		.byte	0x1e
+ 302 00ef 77000000 		.4byte	0x77
+ 303 00f3 08       		.byte	0x8
+ 304 00f4 09       		.uleb128 0x9
+ 305 00f5 CB000000 		.4byte	.LASF22
+ 306 00f9 03       		.byte	0x3
+ 307 00fa 1F       		.byte	0x1f
+ 308 00fb 6B000000 		.4byte	0x6b
+ 309 00ff 0C       		.byte	0xc
+ 310 0100 00       		.byte	0
+ 311 0101 07       		.uleb128 0x7
+ 312 0102 96010000 		.4byte	.LASF23
+ 313 0106 03       		.byte	0x3
+ 314 0107 20       		.byte	0x20
+ 315 0108 C8000000 		.4byte	0xc8
+ 316 010c 0A       		.uleb128 0xa
+ 317 010d 7D010000 		.4byte	.LASF30
+ 318 0111 01       		.byte	0x1
+ 319 0112 0E       		.byte	0xe
+ 320 0113 00000000 		.4byte	.LFB0
+ 321 0117 2E000000 		.4byte	.LFE0-.LFB0
+ 322 011b 01       		.uleb128 0x1
+ 323 011c 9C       		.byte	0x9c
+ 324 011d 3B010000 		.4byte	0x13b
+ 325 0121 0B       		.uleb128 0xb
+ 326 0122 6200     		.ascii	"b\000"
+ 327 0124 01       		.byte	0x1
+ 328 0125 0E       		.byte	0xe
+ 329 0126 3B010000 		.4byte	0x13b
+ 330 012a 02       		.uleb128 0x2
+ 331 012b 91       		.byte	0x91
+ 332 012c 74       		.sleb128 -12
+ 333 012d 0C       		.uleb128 0xc
+ 334 012e 0A010000 		.4byte	.LASF25
+ 335 0132 01       		.byte	0x1
+ 336 0133 10       		.byte	0x10
+ 337 0134 5D000000 		.4byte	0x5d
+ 338 0138 0D       		.uleb128 0xd
+ 339 0139 00       		.byte	0
+ 340 013a 00       		.byte	0
+ 341 013b 0E       		.uleb128 0xe
+ 342 013c 04       		.byte	0x4
+ 343 013d 01010000 		.4byte	0x101
+ 344 0141 0F       		.uleb128 0xf
+ 345 0142 19000000 		.4byte	.LASF31
+ 346 0146 01       		.byte	0x1
+ 347 0147 15       		.byte	0x15
+ 348 0148 BD000000 		.4byte	0xbd
+ 349 014c 00000000 		.4byte	.LFB1
+ 350 0150 74000000 		.4byte	.LFE1-.LFB1
+ 351 0154 01       		.uleb128 0x1
+ 352 0155 9C       		.byte	0x9c
+ 353 0156 9A010000 		.4byte	0x19a
+ 354 015a 0B       		.uleb128 0xb
+ 355 015b 6200     		.ascii	"b\000"
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccQU4WZ4.s 			page 8
+
+
+ 356 015d 01       		.byte	0x1
+ 357 015e 15       		.byte	0x15
+ 358 015f 3B010000 		.4byte	0x13b
+ 359 0163 02       		.uleb128 0x2
+ 360 0164 91       		.byte	0x91
+ 361 0165 6C       		.sleb128 -20
+ 362 0166 10       		.uleb128 0x10
+ 363 0167 28010000 		.4byte	.LASF24
+ 364 016b 01       		.byte	0x1
+ 365 016c 15       		.byte	0x15
+ 366 016d 6B000000 		.4byte	0x6b
+ 367 0171 02       		.uleb128 0x2
+ 368 0172 91       		.byte	0x91
+ 369 0173 6B       		.sleb128 -21
+ 370 0174 11       		.uleb128 0x11
+ 371 0175 25000000 		.4byte	.LASF32
+ 372 0179 01       		.byte	0x1
+ 373 017a 17       		.byte	0x17
+ 374 017b BD000000 		.4byte	0xbd
+ 375 017f 02       		.uleb128 0x2
+ 376 0180 91       		.byte	0x91
+ 377 0181 77       		.sleb128 -9
+ 378 0182 12       		.uleb128 0x12
+ 379 0183 24000000 		.4byte	.LBB2
+ 380 0187 18000000 		.4byte	.LBE2-.LBB2
+ 381 018b 0C       		.uleb128 0xc
+ 382 018c D0000000 		.4byte	.LASF26
+ 383 0190 01       		.byte	0x1
+ 384 0191 1C       		.byte	0x1c
+ 385 0192 5D000000 		.4byte	0x5d
+ 386 0196 0D       		.uleb128 0xd
+ 387 0197 00       		.byte	0
+ 388 0198 00       		.byte	0
+ 389 0199 00       		.byte	0
+ 390 019a 13       		.uleb128 0x13
+ 391 019b C2010000 		.4byte	.LASF33
+ 392 019f 01       		.byte	0x1
+ 393 01a0 0D       		.byte	0xd
+ 394 01a1 AB010000 		.4byte	0x1ab
+ 395 01a5 05       		.uleb128 0x5
+ 396 01a6 03       		.byte	0x3
+ 397 01a7 00000000 		.4byte	DEBOUNCE_TIME
+ 398 01ab 14       		.uleb128 0x14
+ 399 01ac 6B000000 		.4byte	0x6b
+ 400 01b0 00       		.byte	0
+ 401              		.section	.debug_abbrev,"",%progbits
+ 402              	.Ldebug_abbrev0:
+ 403 0000 01       		.uleb128 0x1
+ 404 0001 11       		.uleb128 0x11
+ 405 0002 01       		.byte	0x1
+ 406 0003 25       		.uleb128 0x25
+ 407 0004 0E       		.uleb128 0xe
+ 408 0005 13       		.uleb128 0x13
+ 409 0006 0B       		.uleb128 0xb
+ 410 0007 03       		.uleb128 0x3
+ 411 0008 0E       		.uleb128 0xe
+ 412 0009 1B       		.uleb128 0x1b
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccQU4WZ4.s 			page 9
+
+
+ 413 000a 0E       		.uleb128 0xe
+ 414 000b 55       		.uleb128 0x55
+ 415 000c 17       		.uleb128 0x17
+ 416 000d 11       		.uleb128 0x11
+ 417 000e 01       		.uleb128 0x1
+ 418 000f 10       		.uleb128 0x10
+ 419 0010 17       		.uleb128 0x17
+ 420 0011 00       		.byte	0
+ 421 0012 00       		.byte	0
+ 422 0013 02       		.uleb128 0x2
+ 423 0014 24       		.uleb128 0x24
+ 424 0015 00       		.byte	0
+ 425 0016 0B       		.uleb128 0xb
+ 426 0017 0B       		.uleb128 0xb
+ 427 0018 3E       		.uleb128 0x3e
+ 428 0019 0B       		.uleb128 0xb
+ 429 001a 03       		.uleb128 0x3
+ 430 001b 0E       		.uleb128 0xe
+ 431 001c 00       		.byte	0
+ 432 001d 00       		.byte	0
+ 433 001e 03       		.uleb128 0x3
+ 434 001f 24       		.uleb128 0x24
+ 435 0020 00       		.byte	0
+ 436 0021 0B       		.uleb128 0xb
+ 437 0022 0B       		.uleb128 0xb
+ 438 0023 3E       		.uleb128 0x3e
+ 439 0024 0B       		.uleb128 0xb
+ 440 0025 03       		.uleb128 0x3
+ 441 0026 08       		.uleb128 0x8
+ 442 0027 00       		.byte	0
+ 443 0028 00       		.byte	0
+ 444 0029 04       		.uleb128 0x4
+ 445 002a 16       		.uleb128 0x16
+ 446 002b 00       		.byte	0
+ 447 002c 03       		.uleb128 0x3
+ 448 002d 0E       		.uleb128 0xe
+ 449 002e 3A       		.uleb128 0x3a
+ 450 002f 0B       		.uleb128 0xb
+ 451 0030 3B       		.uleb128 0x3b
+ 452 0031 05       		.uleb128 0x5
+ 453 0032 49       		.uleb128 0x49
+ 454 0033 13       		.uleb128 0x13
+ 455 0034 00       		.byte	0
+ 456 0035 00       		.byte	0
+ 457 0036 05       		.uleb128 0x5
+ 458 0037 04       		.uleb128 0x4
+ 459 0038 01       		.byte	0x1
+ 460 0039 0B       		.uleb128 0xb
+ 461 003a 0B       		.uleb128 0xb
+ 462 003b 49       		.uleb128 0x49
+ 463 003c 13       		.uleb128 0x13
+ 464 003d 3A       		.uleb128 0x3a
+ 465 003e 0B       		.uleb128 0xb
+ 466 003f 3B       		.uleb128 0x3b
+ 467 0040 0B       		.uleb128 0xb
+ 468 0041 01       		.uleb128 0x1
+ 469 0042 13       		.uleb128 0x13
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccQU4WZ4.s 			page 10
+
+
+ 470 0043 00       		.byte	0
+ 471 0044 00       		.byte	0
+ 472 0045 06       		.uleb128 0x6
+ 473 0046 28       		.uleb128 0x28
+ 474 0047 00       		.byte	0
+ 475 0048 03       		.uleb128 0x3
+ 476 0049 0E       		.uleb128 0xe
+ 477 004a 1C       		.uleb128 0x1c
+ 478 004b 0B       		.uleb128 0xb
+ 479 004c 00       		.byte	0
+ 480 004d 00       		.byte	0
+ 481 004e 07       		.uleb128 0x7
+ 482 004f 16       		.uleb128 0x16
+ 483 0050 00       		.byte	0
+ 484 0051 03       		.uleb128 0x3
+ 485 0052 0E       		.uleb128 0xe
+ 486 0053 3A       		.uleb128 0x3a
+ 487 0054 0B       		.uleb128 0xb
+ 488 0055 3B       		.uleb128 0x3b
+ 489 0056 0B       		.uleb128 0xb
+ 490 0057 49       		.uleb128 0x49
+ 491 0058 13       		.uleb128 0x13
+ 492 0059 00       		.byte	0
+ 493 005a 00       		.byte	0
+ 494 005b 08       		.uleb128 0x8
+ 495 005c 13       		.uleb128 0x13
+ 496 005d 01       		.byte	0x1
+ 497 005e 0B       		.uleb128 0xb
+ 498 005f 0B       		.uleb128 0xb
+ 499 0060 3A       		.uleb128 0x3a
+ 500 0061 0B       		.uleb128 0xb
+ 501 0062 3B       		.uleb128 0x3b
+ 502 0063 0B       		.uleb128 0xb
+ 503 0064 01       		.uleb128 0x1
+ 504 0065 13       		.uleb128 0x13
+ 505 0066 00       		.byte	0
+ 506 0067 00       		.byte	0
+ 507 0068 09       		.uleb128 0x9
+ 508 0069 0D       		.uleb128 0xd
+ 509 006a 00       		.byte	0
+ 510 006b 03       		.uleb128 0x3
+ 511 006c 0E       		.uleb128 0xe
+ 512 006d 3A       		.uleb128 0x3a
+ 513 006e 0B       		.uleb128 0xb
+ 514 006f 3B       		.uleb128 0x3b
+ 515 0070 0B       		.uleb128 0xb
+ 516 0071 49       		.uleb128 0x49
+ 517 0072 13       		.uleb128 0x13
+ 518 0073 38       		.uleb128 0x38
+ 519 0074 0B       		.uleb128 0xb
+ 520 0075 00       		.byte	0
+ 521 0076 00       		.byte	0
+ 522 0077 0A       		.uleb128 0xa
+ 523 0078 2E       		.uleb128 0x2e
+ 524 0079 01       		.byte	0x1
+ 525 007a 3F       		.uleb128 0x3f
+ 526 007b 19       		.uleb128 0x19
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccQU4WZ4.s 			page 11
+
+
+ 527 007c 03       		.uleb128 0x3
+ 528 007d 0E       		.uleb128 0xe
+ 529 007e 3A       		.uleb128 0x3a
+ 530 007f 0B       		.uleb128 0xb
+ 531 0080 3B       		.uleb128 0x3b
+ 532 0081 0B       		.uleb128 0xb
+ 533 0082 27       		.uleb128 0x27
+ 534 0083 19       		.uleb128 0x19
+ 535 0084 11       		.uleb128 0x11
+ 536 0085 01       		.uleb128 0x1
+ 537 0086 12       		.uleb128 0x12
+ 538 0087 06       		.uleb128 0x6
+ 539 0088 40       		.uleb128 0x40
+ 540 0089 18       		.uleb128 0x18
+ 541 008a 9642     		.uleb128 0x2116
+ 542 008c 19       		.uleb128 0x19
+ 543 008d 01       		.uleb128 0x1
+ 544 008e 13       		.uleb128 0x13
+ 545 008f 00       		.byte	0
+ 546 0090 00       		.byte	0
+ 547 0091 0B       		.uleb128 0xb
+ 548 0092 05       		.uleb128 0x5
+ 549 0093 00       		.byte	0
+ 550 0094 03       		.uleb128 0x3
+ 551 0095 08       		.uleb128 0x8
+ 552 0096 3A       		.uleb128 0x3a
+ 553 0097 0B       		.uleb128 0xb
+ 554 0098 3B       		.uleb128 0x3b
+ 555 0099 0B       		.uleb128 0xb
+ 556 009a 49       		.uleb128 0x49
+ 557 009b 13       		.uleb128 0x13
+ 558 009c 02       		.uleb128 0x2
+ 559 009d 18       		.uleb128 0x18
+ 560 009e 00       		.byte	0
+ 561 009f 00       		.byte	0
+ 562 00a0 0C       		.uleb128 0xc
+ 563 00a1 2E       		.uleb128 0x2e
+ 564 00a2 01       		.byte	0x1
+ 565 00a3 3F       		.uleb128 0x3f
+ 566 00a4 19       		.uleb128 0x19
+ 567 00a5 03       		.uleb128 0x3
+ 568 00a6 0E       		.uleb128 0xe
+ 569 00a7 3A       		.uleb128 0x3a
+ 570 00a8 0B       		.uleb128 0xb
+ 571 00a9 3B       		.uleb128 0x3b
+ 572 00aa 0B       		.uleb128 0xb
+ 573 00ab 49       		.uleb128 0x49
+ 574 00ac 13       		.uleb128 0x13
+ 575 00ad 3C       		.uleb128 0x3c
+ 576 00ae 19       		.uleb128 0x19
+ 577 00af 00       		.byte	0
+ 578 00b0 00       		.byte	0
+ 579 00b1 0D       		.uleb128 0xd
+ 580 00b2 18       		.uleb128 0x18
+ 581 00b3 00       		.byte	0
+ 582 00b4 00       		.byte	0
+ 583 00b5 00       		.byte	0
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccQU4WZ4.s 			page 12
+
+
+ 584 00b6 0E       		.uleb128 0xe
+ 585 00b7 0F       		.uleb128 0xf
+ 586 00b8 00       		.byte	0
+ 587 00b9 0B       		.uleb128 0xb
+ 588 00ba 0B       		.uleb128 0xb
+ 589 00bb 49       		.uleb128 0x49
+ 590 00bc 13       		.uleb128 0x13
+ 591 00bd 00       		.byte	0
+ 592 00be 00       		.byte	0
+ 593 00bf 0F       		.uleb128 0xf
+ 594 00c0 2E       		.uleb128 0x2e
+ 595 00c1 01       		.byte	0x1
+ 596 00c2 3F       		.uleb128 0x3f
+ 597 00c3 19       		.uleb128 0x19
+ 598 00c4 03       		.uleb128 0x3
+ 599 00c5 0E       		.uleb128 0xe
+ 600 00c6 3A       		.uleb128 0x3a
+ 601 00c7 0B       		.uleb128 0xb
+ 602 00c8 3B       		.uleb128 0x3b
+ 603 00c9 0B       		.uleb128 0xb
+ 604 00ca 27       		.uleb128 0x27
+ 605 00cb 19       		.uleb128 0x19
+ 606 00cc 49       		.uleb128 0x49
+ 607 00cd 13       		.uleb128 0x13
+ 608 00ce 11       		.uleb128 0x11
+ 609 00cf 01       		.uleb128 0x1
+ 610 00d0 12       		.uleb128 0x12
+ 611 00d1 06       		.uleb128 0x6
+ 612 00d2 40       		.uleb128 0x40
+ 613 00d3 18       		.uleb128 0x18
+ 614 00d4 9642     		.uleb128 0x2116
+ 615 00d6 19       		.uleb128 0x19
+ 616 00d7 01       		.uleb128 0x1
+ 617 00d8 13       		.uleb128 0x13
+ 618 00d9 00       		.byte	0
+ 619 00da 00       		.byte	0
+ 620 00db 10       		.uleb128 0x10
+ 621 00dc 05       		.uleb128 0x5
+ 622 00dd 00       		.byte	0
+ 623 00de 03       		.uleb128 0x3
+ 624 00df 0E       		.uleb128 0xe
+ 625 00e0 3A       		.uleb128 0x3a
+ 626 00e1 0B       		.uleb128 0xb
+ 627 00e2 3B       		.uleb128 0x3b
+ 628 00e3 0B       		.uleb128 0xb
+ 629 00e4 49       		.uleb128 0x49
+ 630 00e5 13       		.uleb128 0x13
+ 631 00e6 02       		.uleb128 0x2
+ 632 00e7 18       		.uleb128 0x18
+ 633 00e8 00       		.byte	0
+ 634 00e9 00       		.byte	0
+ 635 00ea 11       		.uleb128 0x11
+ 636 00eb 34       		.uleb128 0x34
+ 637 00ec 00       		.byte	0
+ 638 00ed 03       		.uleb128 0x3
+ 639 00ee 0E       		.uleb128 0xe
+ 640 00ef 3A       		.uleb128 0x3a
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccQU4WZ4.s 			page 13
+
+
+ 641 00f0 0B       		.uleb128 0xb
+ 642 00f1 3B       		.uleb128 0x3b
+ 643 00f2 0B       		.uleb128 0xb
+ 644 00f3 49       		.uleb128 0x49
+ 645 00f4 13       		.uleb128 0x13
+ 646 00f5 02       		.uleb128 0x2
+ 647 00f6 18       		.uleb128 0x18
+ 648 00f7 00       		.byte	0
+ 649 00f8 00       		.byte	0
+ 650 00f9 12       		.uleb128 0x12
+ 651 00fa 0B       		.uleb128 0xb
+ 652 00fb 01       		.byte	0x1
+ 653 00fc 11       		.uleb128 0x11
+ 654 00fd 01       		.uleb128 0x1
+ 655 00fe 12       		.uleb128 0x12
+ 656 00ff 06       		.uleb128 0x6
+ 657 0100 00       		.byte	0
+ 658 0101 00       		.byte	0
+ 659 0102 13       		.uleb128 0x13
+ 660 0103 34       		.uleb128 0x34
+ 661 0104 00       		.byte	0
+ 662 0105 03       		.uleb128 0x3
+ 663 0106 0E       		.uleb128 0xe
+ 664 0107 3A       		.uleb128 0x3a
+ 665 0108 0B       		.uleb128 0xb
+ 666 0109 3B       		.uleb128 0x3b
+ 667 010a 0B       		.uleb128 0xb
+ 668 010b 49       		.uleb128 0x49
+ 669 010c 13       		.uleb128 0x13
+ 670 010d 3F       		.uleb128 0x3f
+ 671 010e 19       		.uleb128 0x19
+ 672 010f 02       		.uleb128 0x2
+ 673 0110 18       		.uleb128 0x18
+ 674 0111 00       		.byte	0
+ 675 0112 00       		.byte	0
+ 676 0113 14       		.uleb128 0x14
+ 677 0114 26       		.uleb128 0x26
+ 678 0115 00       		.byte	0
+ 679 0116 49       		.uleb128 0x49
+ 680 0117 13       		.uleb128 0x13
+ 681 0118 00       		.byte	0
+ 682 0119 00       		.byte	0
+ 683 011a 00       		.byte	0
+ 684              		.section	.debug_aranges,"",%progbits
+ 685 0000 24000000 		.4byte	0x24
+ 686 0004 0200     		.2byte	0x2
+ 687 0006 00000000 		.4byte	.Ldebug_info0
+ 688 000a 04       		.byte	0x4
+ 689 000b 00       		.byte	0
+ 690 000c 0000     		.2byte	0
+ 691 000e 0000     		.2byte	0
+ 692 0010 00000000 		.4byte	.LFB0
+ 693 0014 2E000000 		.4byte	.LFE0-.LFB0
+ 694 0018 00000000 		.4byte	.LFB1
+ 695 001c 74000000 		.4byte	.LFE1-.LFB1
+ 696 0020 00000000 		.4byte	0
+ 697 0024 00000000 		.4byte	0
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccQU4WZ4.s 			page 14
+
+
+ 698              		.section	.debug_ranges,"",%progbits
+ 699              	.Ldebug_ranges0:
+ 700 0000 00000000 		.4byte	.LFB0
+ 701 0004 2E000000 		.4byte	.LFE0
+ 702 0008 00000000 		.4byte	.LFB1
+ 703 000c 74000000 		.4byte	.LFE1
+ 704 0010 00000000 		.4byte	0
+ 705 0014 00000000 		.4byte	0
+ 706              		.section	.debug_line,"",%progbits
+ 707              	.Ldebug_line0:
+ 708 0000 90000000 		.section	.debug_str,"MS",%progbits,1
+ 708      02004F00 
+ 708      00000201 
+ 708      FB0E0D00 
+ 708      01010101 
+ 709              	.LASF18:
+ 710 0000 42757474 		.ascii	"Button_State\000"
+ 710      6F6E5F53 
+ 710      74617465 
+ 710      00
+ 711              	.LASF16:
+ 712 000d 52495349 		.ascii	"RISING_EDGE\000"
+ 712      4E475F45 
+ 712      44474500 
+ 713              	.LASF31:
+ 714 0019 706F6C6C 		.ascii	"poll_button\000"
+ 714      5F627574 
+ 714      746F6E00 
+ 715              	.LASF32:
+ 716 0025 63757272 		.ascii	"current_state\000"
+ 716      656E745F 
+ 716      73746174 
+ 716      6500
+ 717              	.LASF2:
+ 718 0033 73686F72 		.ascii	"short int\000"
+ 718      7420696E 
+ 718      7400
+ 719              	.LASF27:
+ 720 003d 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 720      43313120 
+ 720      352E342E 
+ 720      31203230 
+ 720      31363036 
+ 721 0070 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 721      20726576 
+ 721      6973696F 
+ 721      6E203233 
+ 721      37373135 
+ 722 00a3 30202D66 		.ascii	"0 -ffunction-sections -ffat-lto-objects\000"
+ 722      66756E63 
+ 722      74696F6E 
+ 722      2D736563 
+ 722      74696F6E 
+ 723              	.LASF22:
+ 724 00cb 65646765 		.ascii	"edge\000"
+ 724      00
+ 725              	.LASF26:
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccQU4WZ4.s 			page 15
+
+
+ 726 00d0 6D735F63 		.ascii	"ms_counter_ReadCounter\000"
+ 726      6F756E74 
+ 726      65725F52 
+ 726      65616443 
+ 726      6F756E74 
+ 727              	.LASF9:
+ 728 00e7 75696E74 		.ascii	"uint8\000"
+ 728      3800
+ 729              	.LASF11:
+ 730 00ed 666C6F61 		.ascii	"float\000"
+ 730      7400
+ 731              	.LASF6:
+ 732 00f3 6C6F6E67 		.ascii	"long long int\000"
+ 732      206C6F6E 
+ 732      6720696E 
+ 732      7400
+ 733              	.LASF4:
+ 734 0101 6C6F6E67 		.ascii	"long int\000"
+ 734      20696E74 
+ 734      00
+ 735              	.LASF25:
+ 736 010a 43795379 		.ascii	"CySysTickGetValue\000"
+ 736      73546963 
+ 736      6B476574 
+ 736      56616C75 
+ 736      6500
+ 737              	.LASF21:
+ 738 011c 6E756D5F 		.ascii	"num_presses\000"
+ 738      70726573 
+ 738      73657300 
+ 739              	.LASF24:
+ 740 0128 70696E5F 		.ascii	"pin_value\000"
+ 740      76616C75 
+ 740      6500
+ 741              	.LASF20:
+ 742 0132 6C617374 		.ascii	"last_state\000"
+ 742      5F737461 
+ 742      746500
+ 743              	.LASF1:
+ 744 013d 756E7369 		.ascii	"unsigned char\000"
+ 744      676E6564 
+ 744      20636861 
+ 744      7200
+ 745              	.LASF0:
+ 746 014b 7369676E 		.ascii	"signed char\000"
+ 746      65642063 
+ 746      68617200 
+ 747              	.LASF7:
+ 748 0157 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 748      206C6F6E 
+ 748      6720756E 
+ 748      7369676E 
+ 748      65642069 
+ 749              	.LASF19:
+ 750 016e 6C617374 		.ascii	"last_edge_time\000"
+ 750      5F656467 
+ 750      655F7469 
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccQU4WZ4.s 			page 16
+
+
+ 750      6D6500
+ 751              	.LASF30:
+ 752 017d 696E6974 		.ascii	"init_button\000"
+ 752      5F627574 
+ 752      746F6E00 
+ 753              	.LASF8:
+ 754 0189 756E7369 		.ascii	"unsigned int\000"
+ 754      676E6564 
+ 754      20696E74 
+ 754      00
+ 755              	.LASF23:
+ 756 0196 42757474 		.ascii	"Button\000"
+ 756      6F6E00
+ 757              	.LASF3:
+ 758 019d 73686F72 		.ascii	"short unsigned int\000"
+ 758      7420756E 
+ 758      7369676E 
+ 758      65642069 
+ 758      6E7400
+ 759              	.LASF13:
+ 760 01b0 63686172 		.ascii	"char\000"
+ 760      00
+ 761              	.LASF17:
+ 762 01b5 46414C4C 		.ascii	"FALLING_EDGE\000"
+ 762      494E475F 
+ 762      45444745 
+ 762      00
+ 763              	.LASF33:
+ 764 01c2 4445424F 		.ascii	"DEBOUNCE_TIME\000"
+ 764      554E4345 
+ 764      5F54494D 
+ 764      4500
+ 765              	.LASF29:
+ 766 01d0 433A5C55 		.ascii	"C:\\Users\\Matthew\\Dropbox (MIT)\\Sophomore Spring"
+ 766      73657273 
+ 766      5C4D6174 
+ 766      74686577 
+ 766      5C44726F 
+ 767 01ff 5C362E31 		.ascii	"\\6.115\\6.115-Labs\\project\\DVDAC_Example01\\DVDA"
+ 767      31355C36 
+ 767      2E313135 
+ 767      2D4C6162 
+ 767      735C7072 
+ 768 022d 435F4578 		.ascii	"C_Example01.cydsn\000"
+ 768      616D706C 
+ 768      6530312E 
+ 768      63796473 
+ 768      6E00
+ 769              	.LASF10:
+ 770 023f 75696E74 		.ascii	"uint32\000"
+ 770      333200
+ 771              	.LASF5:
+ 772 0246 6C6F6E67 		.ascii	"long unsigned int\000"
+ 772      20756E73 
+ 772      69676E65 
+ 772      6420696E 
+ 772      7400
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccQU4WZ4.s 			page 17
+
+
+ 773              	.LASF12:
+ 774 0258 646F7562 		.ascii	"double\000"
+ 774      6C6500
+ 775              	.LASF15:
+ 776 025f 554E4845 		.ascii	"UNHELD\000"
+ 776      4C4400
+ 777              	.LASF14:
+ 778 0266 48454C44 		.ascii	"HELD\000"
+ 778      00
+ 779              	.LASF28:
+ 780 026b 62757474 		.ascii	"button.c\000"
+ 780      6F6E2E63 
+ 780      00
+ 781              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

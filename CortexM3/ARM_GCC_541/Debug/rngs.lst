@@ -1,0 +1,1636 @@
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccJtD6J2.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"rngs.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.data
+  20              		.align	2
+  21              		.type	seed, %object
+  22              		.size	seed, 1024
+  23              	seed:
+  24 0000 15CD5B07 		.word	123456789
+  25 0004 00000000 		.space	1020
+  25      00000000 
+  25      00000000 
+  25      00000000 
+  25      00000000 
+  26              		.bss
+  27              		.align	2
+  28              	stream:
+  29 0000 00000000 		.space	4
+  30              		.align	2
+  31              	initialized:
+  32 0004 00000000 		.space	4
+  33              		.global	__aeabi_i2d
+  34              		.global	__aeabi_ddiv
+  35              		.section	.text.Random,"ax",%progbits
+  36              		.align	2
+  37              		.global	Random
+  38              		.thumb
+  39              		.thumb_func
+  40              		.type	Random, %function
+  41              	Random:
+  42              	.LFB1:
+  43              		.file 1 "rngs.c"
+   1:rngs.c        **** /* -------------------------------------------------------------------------
+   2:rngs.c        ****  * This is an ANSI C library for multi-stream random number generation.  
+   3:rngs.c        ****  * The use of this library is recommended as a replacement for the ANSI C 
+   4:rngs.c        ****  * rand() and srand() functions, particularly in simulation applications 
+   5:rngs.c        ****  * where the statistical 'goodness' of the random number generator is 
+   6:rngs.c        ****  * important.  The library supplies 256 streams of random numbers; use 
+   7:rngs.c        ****  * SelectStream(s) to switch between streams indexed s = 0,1,...,255.
+   8:rngs.c        ****  *
+   9:rngs.c        ****  * The streams must be initialized.  The recommended way to do this is by
+  10:rngs.c        ****  * using the function PlantSeeds(x) with the value of x used to initialize 
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccJtD6J2.s 			page 2
+
+
+  11:rngs.c        ****  * the default stream and all other streams initialized automatically with
+  12:rngs.c        ****  * values dependent on the value of x.  The following convention is used 
+  13:rngs.c        ****  * to initialize the default stream:
+  14:rngs.c        ****  *    if x > 0 then x is the state
+  15:rngs.c        ****  *    if x < 0 then the state is obtained from the system clock
+  16:rngs.c        ****  *    if x = 0 then the state is to be supplied interactively.
+  17:rngs.c        ****  *
+  18:rngs.c        ****  * The generator used in this library is a so-called 'Lehmer random number
+  19:rngs.c        ****  * generator' which returns a pseudo-random number uniformly distributed
+  20:rngs.c        ****  * 0.0 and 1.0.  The period is (m - 1) where m = 2,147,483,647 and the
+  21:rngs.c        ****  * smallest and largest possible values are (1 / m) and 1 - (1 / m)
+  22:rngs.c        ****  * respectively.  For more details see:
+  23:rngs.c        ****  * 
+  24:rngs.c        ****  *       "Random Number Generators: Good Ones Are Hard To Find"
+  25:rngs.c        ****  *                   Steve Park and Keith Miller
+  26:rngs.c        ****  *              Communications of the ACM, October 1988
+  27:rngs.c        ****  *
+  28:rngs.c        ****  * Name            : rngs.c  (Random Number Generation - Multiple Streams)
+  29:rngs.c        ****  * Authors         : Steve Park & Dave Geyer
+  30:rngs.c        ****  * Language        : ANSI C
+  31:rngs.c        ****  * Latest Revision : 09-22-98
+  32:rngs.c        ****  * ------------------------------------------------------------------------- 
+  33:rngs.c        ****  */
+  34:rngs.c        **** 
+  35:rngs.c        **** #include <stdio.h>
+  36:rngs.c        **** #include <time.h>
+  37:rngs.c        **** #include "rngs.h"
+  38:rngs.c        **** 
+  39:rngs.c        **** #define MODULUS    2147483647 /* DON'T CHANGE THIS VALUE                  */
+  40:rngs.c        **** #define MULTIPLIER 48271      /* DON'T CHANGE THIS VALUE                  */
+  41:rngs.c        **** #define CHECK      399268537  /* DON'T CHANGE THIS VALUE                  */
+  42:rngs.c        **** #define STREAMS    256        /* # of streams, DON'T CHANGE THIS VALUE    */
+  43:rngs.c        **** #define A256       22925      /* jump multiplier, DON'T CHANGE THIS VALUE */
+  44:rngs.c        **** #define DEFAULT    123456789  /* initial seed, use 0 < DEFAULT < MODULUS  */
+  45:rngs.c        ****       
+  46:rngs.c        **** static long seed[STREAMS] = {DEFAULT};  /* current state of each stream   */
+  47:rngs.c        **** static int  stream        = 0;          /* stream index, 0 is the default */
+  48:rngs.c        **** static int  initialized   = 0;          /* test for stream initialization */
+  49:rngs.c        **** 
+  50:rngs.c        **** 
+  51:rngs.c        ****    double Random(void)
+  52:rngs.c        **** /* ----------------------------------------------------------------
+  53:rngs.c        ****  * Random returns a pseudo-random real number uniformly distributed 
+  54:rngs.c        ****  * between 0.0 and 1.0. 
+  55:rngs.c        ****  * ----------------------------------------------------------------
+  56:rngs.c        ****  */
+  57:rngs.c        **** {
+  44              		.loc 1 57 0
+  45              		.cfi_startproc
+  46              		@ args = 0, pretend = 0, frame = 16
+  47              		@ frame_needed = 1, uses_anonymous_args = 0
+  48 0000 90B5     		push	{r4, r7, lr}
+  49              		.cfi_def_cfa_offset 12
+  50              		.cfi_offset 4, -12
+  51              		.cfi_offset 7, -8
+  52              		.cfi_offset 14, -4
+  53 0002 85B0     		sub	sp, sp, #20
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccJtD6J2.s 			page 3
+
+
+  54              		.cfi_def_cfa_offset 32
+  55 0004 00AF     		add	r7, sp, #0
+  56              		.cfi_def_cfa_register 7
+  58:rngs.c        ****   const long Q = MODULUS / MULTIPLIER;
+  57              		.loc 1 58 0
+  58 0006 4AF6C853 		movw	r3, #44488
+  59 000a FB60     		str	r3, [r7, #12]
+  59:rngs.c        ****   const long R = MODULUS % MULTIPLIER;
+  60              		.loc 1 59 0
+  61 000c 40F64753 		movw	r3, #3399
+  62 0010 BB60     		str	r3, [r7, #8]
+  60:rngs.c        ****         long t;
+  61:rngs.c        **** 
+  62:rngs.c        ****   t = MULTIPLIER * (seed[stream] % Q) - R * (seed[stream] / Q);
+  63              		.loc 1 62 0
+  64 0012 254B     		ldr	r3, .L5+8
+  65 0014 1B68     		ldr	r3, [r3]
+  66 0016 254A     		ldr	r2, .L5+12
+  67 0018 52F82330 		ldr	r3, [r2, r3, lsl #2]
+  68 001c FA68     		ldr	r2, [r7, #12]
+  69 001e 93FBF2F2 		sdiv	r2, r3, r2
+  70 0022 F968     		ldr	r1, [r7, #12]
+  71 0024 01FB02F2 		mul	r2, r1, r2
+  72 0028 9B1A     		subs	r3, r3, r2
+  73 002a 4BF68F42 		movw	r2, #48271
+  74 002e 02FB03F2 		mul	r2, r2, r3
+  75 0032 1D4B     		ldr	r3, .L5+8
+  76 0034 1B68     		ldr	r3, [r3]
+  77 0036 1D49     		ldr	r1, .L5+12
+  78 0038 51F82310 		ldr	r1, [r1, r3, lsl #2]
+  79 003c FB68     		ldr	r3, [r7, #12]
+  80 003e 91FBF3F3 		sdiv	r3, r1, r3
+  81 0042 B968     		ldr	r1, [r7, #8]
+  82 0044 01FB03F3 		mul	r3, r1, r3
+  83 0048 D31A     		subs	r3, r2, r3
+  84 004a 7B60     		str	r3, [r7, #4]
+  63:rngs.c        ****   if (t > 0) 
+  85              		.loc 1 63 0
+  86 004c 7B68     		ldr	r3, [r7, #4]
+  87 004e 002B     		cmp	r3, #0
+  88 0050 06DD     		ble	.L2
+  64:rngs.c        ****     seed[stream] = t;
+  89              		.loc 1 64 0
+  90 0052 154B     		ldr	r3, .L5+8
+  91 0054 1B68     		ldr	r3, [r3]
+  92 0056 1549     		ldr	r1, .L5+12
+  93 0058 7A68     		ldr	r2, [r7, #4]
+  94 005a 41F82320 		str	r2, [r1, r3, lsl #2]
+  95 005e 08E0     		b	.L3
+  96              	.L2:
+  65:rngs.c        ****   else 
+  66:rngs.c        ****     seed[stream] = t + MODULUS;
+  97              		.loc 1 66 0
+  98 0060 114B     		ldr	r3, .L5+8
+  99 0062 1A68     		ldr	r2, [r3]
+ 100 0064 7B68     		ldr	r3, [r7, #4]
+ 101 0066 03F10043 		add	r3, r3, #-2147483648
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccJtD6J2.s 			page 4
+
+
+ 102 006a 013B     		subs	r3, r3, #1
+ 103 006c 0F49     		ldr	r1, .L5+12
+ 104 006e 41F82230 		str	r3, [r1, r2, lsl #2]
+ 105              	.L3:
+  67:rngs.c        ****   return ((double) seed[stream] / MODULUS);
+ 106              		.loc 1 67 0
+ 107 0072 0D4B     		ldr	r3, .L5+8
+ 108 0074 1B68     		ldr	r3, [r3]
+ 109 0076 0D4A     		ldr	r2, .L5+12
+ 110 0078 52F82330 		ldr	r3, [r2, r3, lsl #2]
+ 111 007c 1846     		mov	r0, r3
+ 112 007e FFF7FEFF 		bl	__aeabi_i2d
+ 113 0082 07A3     		adr	r3, .L5
+ 114 0084 D3E90023 		ldrd	r2, [r3]
+ 115 0088 FFF7FEFF 		bl	__aeabi_ddiv
+ 116 008c 0346     		mov	r3, r0
+ 117 008e 0C46     		mov	r4, r1
+  68:rngs.c        **** }
+ 118              		.loc 1 68 0
+ 119 0090 1846     		mov	r0, r3
+ 120 0092 2146     		mov	r1, r4
+ 121 0094 1437     		adds	r7, r7, #20
+ 122              		.cfi_def_cfa_offset 12
+ 123 0096 BD46     		mov	sp, r7
+ 124              		.cfi_def_cfa_register 13
+ 125              		@ sp needed
+ 126 0098 90BD     		pop	{r4, r7, pc}
+ 127              	.L6:
+ 128 009a 00BFAFF3 		.align	3
+ 128      0080
+ 129              	.L5:
+ 130 00a0 0000C0FF 		.word	-4194304
+ 131 00a4 FFFFDF41 		.word	1105199103
+ 132 00a8 00000000 		.word	stream
+ 133 00ac 00000000 		.word	seed
+ 134              		.cfi_endproc
+ 135              	.LFE1:
+ 136              		.size	Random, .-Random
+ 137              		.section	.text.PlantSeeds,"ax",%progbits
+ 138              		.align	2
+ 139              		.global	PlantSeeds
+ 140              		.thumb
+ 141              		.thumb_func
+ 142              		.type	PlantSeeds, %function
+ 143              	PlantSeeds:
+ 144              	.LFB2:
+  69:rngs.c        **** 
+  70:rngs.c        **** 
+  71:rngs.c        ****    void PlantSeeds(long x)
+  72:rngs.c        **** /* ---------------------------------------------------------------------
+  73:rngs.c        ****  * Use this function to set the state of all the random number generator 
+  74:rngs.c        ****  * streams by "planting" a sequence of states (seeds), one per stream, 
+  75:rngs.c        ****  * with all states dictated by the state of the default stream. 
+  76:rngs.c        ****  * The sequence of planted states is separated one from the next by 
+  77:rngs.c        ****  * 8,367,782 calls to Random().
+  78:rngs.c        ****  * ---------------------------------------------------------------------
+  79:rngs.c        ****  */
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccJtD6J2.s 			page 5
+
+
+  80:rngs.c        **** {
+ 145              		.loc 1 80 0
+ 146              		.cfi_startproc
+ 147              		@ args = 0, pretend = 0, frame = 24
+ 148              		@ frame_needed = 1, uses_anonymous_args = 0
+ 149 0000 80B5     		push	{r7, lr}
+ 150              		.cfi_def_cfa_offset 8
+ 151              		.cfi_offset 7, -8
+ 152              		.cfi_offset 14, -4
+ 153 0002 86B0     		sub	sp, sp, #24
+ 154              		.cfi_def_cfa_offset 32
+ 155 0004 00AF     		add	r7, sp, #0
+ 156              		.cfi_def_cfa_register 7
+ 157 0006 7860     		str	r0, [r7, #4]
+  81:rngs.c        ****   const long Q = MODULUS / A256;
+ 158              		.loc 1 81 0
+ 159 0008 274B     		ldr	r3, .L12
+ 160 000a 3B61     		str	r3, [r7, #16]
+  82:rngs.c        ****   const long R = MODULUS % A256;
+ 161              		.loc 1 82 0
+ 162 000c 41F61D43 		movw	r3, #7197
+ 163 0010 FB60     		str	r3, [r7, #12]
+  83:rngs.c        ****         int  j;
+  84:rngs.c        ****         int  s;
+  85:rngs.c        **** 
+  86:rngs.c        ****   initialized = 1;
+ 164              		.loc 1 86 0
+ 165 0012 264B     		ldr	r3, .L12+4
+ 166 0014 0122     		movs	r2, #1
+ 167 0016 1A60     		str	r2, [r3]
+  87:rngs.c        ****   s = stream;                            /* remember the current stream */
+ 168              		.loc 1 87 0
+ 169 0018 254B     		ldr	r3, .L12+8
+ 170 001a 1B68     		ldr	r3, [r3]
+ 171 001c BB60     		str	r3, [r7, #8]
+  88:rngs.c        ****   SelectStream(0);                       /* change to stream 0          */
+ 172              		.loc 1 88 0
+ 173 001e 0020     		movs	r0, #0
+ 174 0020 FFF7FEFF 		bl	SelectStream
+  89:rngs.c        ****   PutSeed(x);                            /* set seed[0]                 */
+ 175              		.loc 1 89 0
+ 176 0024 7868     		ldr	r0, [r7, #4]
+ 177 0026 FFF7FEFF 		bl	PutSeed
+  90:rngs.c        ****   stream = s;                            /* reset the current stream    */
+ 178              		.loc 1 90 0
+ 179 002a 214A     		ldr	r2, .L12+8
+ 180 002c BB68     		ldr	r3, [r7, #8]
+ 181 002e 1360     		str	r3, [r2]
+  91:rngs.c        ****   for (j = 1; j < STREAMS; j++) {
+ 182              		.loc 1 91 0
+ 183 0030 0123     		movs	r3, #1
+ 184 0032 7B61     		str	r3, [r7, #20]
+ 185 0034 30E0     		b	.L8
+ 186              	.L11:
+  92:rngs.c        ****     x = A256 * (seed[j - 1] % Q) - R * (seed[j - 1] / Q);
+ 187              		.loc 1 92 0
+ 188 0036 7B69     		ldr	r3, [r7, #20]
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccJtD6J2.s 			page 6
+
+
+ 189 0038 013B     		subs	r3, r3, #1
+ 190 003a 1E4A     		ldr	r2, .L12+12
+ 191 003c 52F82330 		ldr	r3, [r2, r3, lsl #2]
+ 192 0040 3A69     		ldr	r2, [r7, #16]
+ 193 0042 93FBF2F2 		sdiv	r2, r3, r2
+ 194 0046 3969     		ldr	r1, [r7, #16]
+ 195 0048 01FB02F2 		mul	r2, r1, r2
+ 196 004c 9B1A     		subs	r3, r3, r2
+ 197 004e 45F68D12 		movw	r2, #22925
+ 198 0052 02FB03F2 		mul	r2, r2, r3
+ 199 0056 7B69     		ldr	r3, [r7, #20]
+ 200 0058 013B     		subs	r3, r3, #1
+ 201 005a 1649     		ldr	r1, .L12+12
+ 202 005c 51F82310 		ldr	r1, [r1, r3, lsl #2]
+ 203 0060 3B69     		ldr	r3, [r7, #16]
+ 204 0062 91FBF3F3 		sdiv	r3, r1, r3
+ 205 0066 F968     		ldr	r1, [r7, #12]
+ 206 0068 01FB03F3 		mul	r3, r1, r3
+ 207 006c D31A     		subs	r3, r2, r3
+ 208 006e 7B60     		str	r3, [r7, #4]
+  93:rngs.c        ****     if (x > 0)
+ 209              		.loc 1 93 0
+ 210 0070 7B68     		ldr	r3, [r7, #4]
+ 211 0072 002B     		cmp	r3, #0
+ 212 0074 05DD     		ble	.L9
+  94:rngs.c        ****       seed[j] = x;
+ 213              		.loc 1 94 0
+ 214 0076 0F49     		ldr	r1, .L12+12
+ 215 0078 7B69     		ldr	r3, [r7, #20]
+ 216 007a 7A68     		ldr	r2, [r7, #4]
+ 217 007c 41F82320 		str	r2, [r1, r3, lsl #2]
+ 218 0080 07E0     		b	.L10
+ 219              	.L9:
+  95:rngs.c        ****     else
+  96:rngs.c        ****       seed[j] = x + MODULUS;
+ 220              		.loc 1 96 0
+ 221 0082 7B68     		ldr	r3, [r7, #4]
+ 222 0084 03F10043 		add	r3, r3, #-2147483648
+ 223 0088 013B     		subs	r3, r3, #1
+ 224 008a 0A49     		ldr	r1, .L12+12
+ 225 008c 7A69     		ldr	r2, [r7, #20]
+ 226 008e 41F82230 		str	r3, [r1, r2, lsl #2]
+ 227              	.L10:
+  91:rngs.c        ****     x = A256 * (seed[j - 1] % Q) - R * (seed[j - 1] / Q);
+ 228              		.loc 1 91 0 discriminator 2
+ 229 0092 7B69     		ldr	r3, [r7, #20]
+ 230 0094 0133     		adds	r3, r3, #1
+ 231 0096 7B61     		str	r3, [r7, #20]
+ 232              	.L8:
+  91:rngs.c        ****     x = A256 * (seed[j - 1] % Q) - R * (seed[j - 1] / Q);
+ 233              		.loc 1 91 0 is_stmt 0 discriminator 1
+ 234 0098 7B69     		ldr	r3, [r7, #20]
+ 235 009a FF2B     		cmp	r3, #255
+ 236 009c CBDD     		ble	.L11
+  97:rngs.c        ****    }
+  98:rngs.c        **** }
+ 237              		.loc 1 98 0 is_stmt 1
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccJtD6J2.s 			page 7
+
+
+ 238 009e 00BF     		nop
+ 239 00a0 1837     		adds	r7, r7, #24
+ 240              		.cfi_def_cfa_offset 8
+ 241 00a2 BD46     		mov	sp, r7
+ 242              		.cfi_def_cfa_register 13
+ 243              		@ sp needed
+ 244 00a4 80BD     		pop	{r7, pc}
+ 245              	.L13:
+ 246 00a6 00BF     		.align	2
+ 247              	.L12:
+ 248 00a8 EA6D0100 		.word	93674
+ 249 00ac 04000000 		.word	initialized
+ 250 00b0 00000000 		.word	stream
+ 251 00b4 00000000 		.word	seed
+ 252              		.cfi_endproc
+ 253              	.LFE2:
+ 254              		.size	PlantSeeds, .-PlantSeeds
+ 255              		.section	.rodata
+ 256              		.align	2
+ 257              	.LC0:
+ 258 0000 0A456E74 		.ascii	"\012Enter a positive integer seed (9 digits or less"
+ 258      65722061 
+ 258      20706F73 
+ 258      69746976 
+ 258      6520696E 
+ 259 0030 29203E3E 		.ascii	") >> \000"
+ 259      2000
+ 260 0036 0000     		.align	2
+ 261              	.LC1:
+ 262 0038 256C6400 		.ascii	"%ld\000"
+ 263              		.align	2
+ 264              	.LC2:
+ 265 003c 0A496E70 		.ascii	"\012Input out of range ... try again\000"
+ 265      7574206F 
+ 265      7574206F 
+ 265      66207261 
+ 265      6E676520 
+ 266              		.section	.text.PutSeed,"ax",%progbits
+ 267              		.align	2
+ 268              		.global	PutSeed
+ 269              		.thumb
+ 270              		.thumb_func
+ 271              		.type	PutSeed, %function
+ 272              	PutSeed:
+ 273              	.LFB3:
+  99:rngs.c        **** 
+ 100:rngs.c        **** 
+ 101:rngs.c        ****    void PutSeed(long x)
+ 102:rngs.c        **** /* ---------------------------------------------------------------
+ 103:rngs.c        ****  * Use this function to set the state of the current random number 
+ 104:rngs.c        ****  * generator stream according to the following conventions:
+ 105:rngs.c        ****  *    if x > 0 then x is the state (unless too large)
+ 106:rngs.c        ****  *    if x < 0 then the state is obtained from the system clock
+ 107:rngs.c        ****  *    if x = 0 then the state is to be supplied interactively
+ 108:rngs.c        ****  * ---------------------------------------------------------------
+ 109:rngs.c        ****  */
+ 110:rngs.c        **** {
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccJtD6J2.s 			page 8
+
+
+ 274              		.loc 1 110 0
+ 275              		.cfi_startproc
+ 276              		@ args = 0, pretend = 0, frame = 16
+ 277              		@ frame_needed = 1, uses_anonymous_args = 0
+ 278 0000 90B5     		push	{r4, r7, lr}
+ 279              		.cfi_def_cfa_offset 12
+ 280              		.cfi_offset 4, -12
+ 281              		.cfi_offset 7, -8
+ 282              		.cfi_offset 14, -4
+ 283 0002 85B0     		sub	sp, sp, #20
+ 284              		.cfi_def_cfa_offset 32
+ 285 0004 00AF     		add	r7, sp, #0
+ 286              		.cfi_def_cfa_register 7
+ 287 0006 7860     		str	r0, [r7, #4]
+ 111:rngs.c        ****   char ok = 0;
+ 288              		.loc 1 111 0
+ 289 0008 0023     		movs	r3, #0
+ 290 000a FB73     		strb	r3, [r7, #15]
+ 112:rngs.c        **** 
+ 113:rngs.c        ****   if (x > 0)
+ 291              		.loc 1 113 0
+ 292 000c 7B68     		ldr	r3, [r7, #4]
+ 293 000e 002B     		cmp	r3, #0
+ 294 0010 0BDD     		ble	.L15
+ 114:rngs.c        ****     x = x % MODULUS;                       /* correct if x is too large  */
+ 295              		.loc 1 114 0
+ 296 0012 7968     		ldr	r1, [r7, #4]
+ 297 0014 254B     		ldr	r3, .L22
+ 298 0016 83FB0123 		smull	r2, r3, r3, r1
+ 299 001a 5A17     		asrs	r2, r3, #29
+ 300 001c CB17     		asrs	r3, r1, #31
+ 301 001e D21A     		subs	r2, r2, r3
+ 302 0020 1346     		mov	r3, r2
+ 303 0022 DB07     		lsls	r3, r3, #31
+ 304 0024 9B1A     		subs	r3, r3, r2
+ 305 0026 CA1A     		subs	r2, r1, r3
+ 306 0028 7A60     		str	r2, [r7, #4]
+ 307              	.L15:
+ 115:rngs.c        ****   if (x < 0)                                 
+ 308              		.loc 1 115 0
+ 309 002a 7B68     		ldr	r3, [r7, #4]
+ 310 002c 002B     		cmp	r3, #0
+ 311 002e 11DA     		bge	.L16
+ 116:rngs.c        ****     x = ((unsigned long) time((time_t *) NULL)) % MODULUS;              
+ 312              		.loc 1 116 0
+ 313 0030 0020     		movs	r0, #0
+ 314 0032 FFF7FEFF 		bl	time
+ 315 0036 0346     		mov	r3, r0
+ 316 0038 1946     		mov	r1, r3
+ 317 003a 0323     		movs	r3, #3
+ 318 003c A1FB0334 		umull	r3, r4, r1, r3
+ 319 0040 0A1B     		subs	r2, r1, r4
+ 320 0042 5208     		lsrs	r2, r2, #1
+ 321 0044 1319     		adds	r3, r2, r4
+ 322 0046 9A0F     		lsrs	r2, r3, #30
+ 323 0048 1346     		mov	r3, r2
+ 324 004a DB07     		lsls	r3, r3, #31
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccJtD6J2.s 			page 9
+
+
+ 325 004c 9B1A     		subs	r3, r3, r2
+ 326 004e CA1A     		subs	r2, r1, r3
+ 327 0050 1346     		mov	r3, r2
+ 328 0052 7B60     		str	r3, [r7, #4]
+ 329              	.L16:
+ 117:rngs.c        ****   if (x == 0)                                
+ 330              		.loc 1 117 0
+ 331 0054 7B68     		ldr	r3, [r7, #4]
+ 332 0056 002B     		cmp	r3, #0
+ 333 0058 1DD1     		bne	.L17
+ 118:rngs.c        ****     while (!ok) {
+ 334              		.loc 1 118 0
+ 335 005a 19E0     		b	.L18
+ 336              	.L21:
+ 119:rngs.c        ****       printf("\nEnter a positive integer seed (9 digits or less) >> ");
+ 337              		.loc 1 119 0
+ 338 005c 1448     		ldr	r0, .L22+4
+ 339 005e FFF7FEFF 		bl	printf
+ 120:rngs.c        ****       scanf("%ld", &x);
+ 340              		.loc 1 120 0
+ 341 0062 3B1D     		adds	r3, r7, #4
+ 342 0064 1946     		mov	r1, r3
+ 343 0066 1348     		ldr	r0, .L22+8
+ 344 0068 FFF7FEFF 		bl	scanf
+ 121:rngs.c        ****       ok = (0 < x) && (x < MODULUS);
+ 345              		.loc 1 121 0
+ 346 006c 7B68     		ldr	r3, [r7, #4]
+ 347 006e 002B     		cmp	r3, #0
+ 348 0070 06DD     		ble	.L19
+ 349              		.loc 1 121 0 is_stmt 0 discriminator 1
+ 350 0072 7B68     		ldr	r3, [r7, #4]
+ 351 0074 6FF00042 		mvn	r2, #-2147483648
+ 352 0078 9342     		cmp	r3, r2
+ 353 007a 01D0     		beq	.L19
+ 354              		.loc 1 121 0 discriminator 3
+ 355 007c 0123     		movs	r3, #1
+ 356 007e 00E0     		b	.L20
+ 357              	.L19:
+ 358              		.loc 1 121 0 discriminator 4
+ 359 0080 0023     		movs	r3, #0
+ 360              	.L20:
+ 361              		.loc 1 121 0 discriminator 6
+ 362 0082 FB73     		strb	r3, [r7, #15]
+ 122:rngs.c        ****       if (!ok)
+ 363              		.loc 1 122 0 is_stmt 1 discriminator 6
+ 364 0084 FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+ 365 0086 002B     		cmp	r3, #0
+ 366 0088 02D1     		bne	.L18
+ 123:rngs.c        ****         printf("\nInput out of range ... try again\n");
+ 367              		.loc 1 123 0
+ 368 008a 0B48     		ldr	r0, .L22+12
+ 369 008c FFF7FEFF 		bl	puts
+ 370              	.L18:
+ 118:rngs.c        ****       printf("\nEnter a positive integer seed (9 digits or less) >> ");
+ 371              		.loc 1 118 0
+ 372 0090 FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+ 373 0092 002B     		cmp	r3, #0
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccJtD6J2.s 			page 10
+
+
+ 374 0094 E2D0     		beq	.L21
+ 375              	.L17:
+ 124:rngs.c        ****     }
+ 125:rngs.c        ****   seed[stream] = x;
+ 376              		.loc 1 125 0
+ 377 0096 094B     		ldr	r3, .L22+16
+ 378 0098 1B68     		ldr	r3, [r3]
+ 379 009a 7A68     		ldr	r2, [r7, #4]
+ 380 009c 0849     		ldr	r1, .L22+20
+ 381 009e 41F82320 		str	r2, [r1, r3, lsl #2]
+ 126:rngs.c        **** }
+ 382              		.loc 1 126 0
+ 383 00a2 00BF     		nop
+ 384 00a4 1437     		adds	r7, r7, #20
+ 385              		.cfi_def_cfa_offset 12
+ 386 00a6 BD46     		mov	sp, r7
+ 387              		.cfi_def_cfa_register 13
+ 388              		@ sp needed
+ 389 00a8 90BD     		pop	{r4, r7, pc}
+ 390              	.L23:
+ 391 00aa 00BF     		.align	2
+ 392              	.L22:
+ 393 00ac 01000040 		.word	1073741825
+ 394 00b0 00000000 		.word	.LC0
+ 395 00b4 38000000 		.word	.LC1
+ 396 00b8 3C000000 		.word	.LC2
+ 397 00bc 00000000 		.word	stream
+ 398 00c0 00000000 		.word	seed
+ 399              		.cfi_endproc
+ 400              	.LFE3:
+ 401              		.size	PutSeed, .-PutSeed
+ 402              		.section	.text.GetSeed,"ax",%progbits
+ 403              		.align	2
+ 404              		.global	GetSeed
+ 405              		.thumb
+ 406              		.thumb_func
+ 407              		.type	GetSeed, %function
+ 408              	GetSeed:
+ 409              	.LFB4:
+ 127:rngs.c        **** 
+ 128:rngs.c        **** 
+ 129:rngs.c        ****    void GetSeed(long *x)
+ 130:rngs.c        **** /* ---------------------------------------------------------------
+ 131:rngs.c        ****  * Use this function to get the state of the current random number 
+ 132:rngs.c        ****  * generator stream.                                                   
+ 133:rngs.c        ****  * ---------------------------------------------------------------
+ 134:rngs.c        ****  */
+ 135:rngs.c        **** {
+ 410              		.loc 1 135 0
+ 411              		.cfi_startproc
+ 412              		@ args = 0, pretend = 0, frame = 8
+ 413              		@ frame_needed = 1, uses_anonymous_args = 0
+ 414              		@ link register save eliminated.
+ 415 0000 80B4     		push	{r7}
+ 416              		.cfi_def_cfa_offset 4
+ 417              		.cfi_offset 7, -4
+ 418 0002 83B0     		sub	sp, sp, #12
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccJtD6J2.s 			page 11
+
+
+ 419              		.cfi_def_cfa_offset 16
+ 420 0004 00AF     		add	r7, sp, #0
+ 421              		.cfi_def_cfa_register 7
+ 422 0006 7860     		str	r0, [r7, #4]
+ 136:rngs.c        ****   *x = seed[stream];
+ 423              		.loc 1 136 0
+ 424 0008 054B     		ldr	r3, .L25
+ 425 000a 1B68     		ldr	r3, [r3]
+ 426 000c 054A     		ldr	r2, .L25+4
+ 427 000e 52F82320 		ldr	r2, [r2, r3, lsl #2]
+ 428 0012 7B68     		ldr	r3, [r7, #4]
+ 429 0014 1A60     		str	r2, [r3]
+ 137:rngs.c        **** }
+ 430              		.loc 1 137 0
+ 431 0016 00BF     		nop
+ 432 0018 0C37     		adds	r7, r7, #12
+ 433              		.cfi_def_cfa_offset 4
+ 434 001a BD46     		mov	sp, r7
+ 435              		.cfi_def_cfa_register 13
+ 436              		@ sp needed
+ 437 001c 80BC     		pop	{r7}
+ 438              		.cfi_restore 7
+ 439              		.cfi_def_cfa_offset 0
+ 440 001e 7047     		bx	lr
+ 441              	.L26:
+ 442              		.align	2
+ 443              	.L25:
+ 444 0020 00000000 		.word	stream
+ 445 0024 00000000 		.word	seed
+ 446              		.cfi_endproc
+ 447              	.LFE4:
+ 448              		.size	GetSeed, .-GetSeed
+ 449              		.section	.text.SelectStream,"ax",%progbits
+ 450              		.align	2
+ 451              		.global	SelectStream
+ 452              		.thumb
+ 453              		.thumb_func
+ 454              		.type	SelectStream, %function
+ 455              	SelectStream:
+ 456              	.LFB5:
+ 138:rngs.c        **** 
+ 139:rngs.c        **** 
+ 140:rngs.c        ****    void SelectStream(int index)
+ 141:rngs.c        **** /* ------------------------------------------------------------------
+ 142:rngs.c        ****  * Use this function to set the current random number generator
+ 143:rngs.c        ****  * stream -- that stream from which the next random number will come.
+ 144:rngs.c        ****  * ------------------------------------------------------------------
+ 145:rngs.c        ****  */
+ 146:rngs.c        **** {
+ 457              		.loc 1 146 0
+ 458              		.cfi_startproc
+ 459              		@ args = 0, pretend = 0, frame = 8
+ 460              		@ frame_needed = 1, uses_anonymous_args = 0
+ 461 0000 80B5     		push	{r7, lr}
+ 462              		.cfi_def_cfa_offset 8
+ 463              		.cfi_offset 7, -8
+ 464              		.cfi_offset 14, -4
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccJtD6J2.s 			page 12
+
+
+ 465 0002 82B0     		sub	sp, sp, #8
+ 466              		.cfi_def_cfa_offset 16
+ 467 0004 00AF     		add	r7, sp, #0
+ 468              		.cfi_def_cfa_register 7
+ 469 0006 7860     		str	r0, [r7, #4]
+ 147:rngs.c        ****   stream = ((unsigned int) index) % STREAMS;
+ 470              		.loc 1 147 0
+ 471 0008 7B68     		ldr	r3, [r7, #4]
+ 472 000a DBB2     		uxtb	r3, r3
+ 473 000c 084A     		ldr	r2, .L30
+ 474 000e 1360     		str	r3, [r2]
+ 148:rngs.c        ****   if ((initialized == 0) && (stream != 0))   /* protect against        */
+ 475              		.loc 1 148 0
+ 476 0010 084B     		ldr	r3, .L30+4
+ 477 0012 1B68     		ldr	r3, [r3]
+ 478 0014 002B     		cmp	r3, #0
+ 479 0016 06D1     		bne	.L29
+ 480              		.loc 1 148 0 is_stmt 0 discriminator 1
+ 481 0018 054B     		ldr	r3, .L30
+ 482 001a 1B68     		ldr	r3, [r3]
+ 483 001c 002B     		cmp	r3, #0
+ 484 001e 02D0     		beq	.L29
+ 149:rngs.c        ****     PlantSeeds(DEFAULT);                     /* un-initialized streams */
+ 485              		.loc 1 149 0 is_stmt 1
+ 486 0020 0548     		ldr	r0, .L30+8
+ 487 0022 FFF7FEFF 		bl	PlantSeeds
+ 488              	.L29:
+ 150:rngs.c        **** }
+ 489              		.loc 1 150 0
+ 490 0026 00BF     		nop
+ 491 0028 0837     		adds	r7, r7, #8
+ 492              		.cfi_def_cfa_offset 8
+ 493 002a BD46     		mov	sp, r7
+ 494              		.cfi_def_cfa_register 13
+ 495              		@ sp needed
+ 496 002c 80BD     		pop	{r7, pc}
+ 497              	.L31:
+ 498 002e 00BF     		.align	2
+ 499              	.L30:
+ 500 0030 00000000 		.word	stream
+ 501 0034 04000000 		.word	initialized
+ 502 0038 15CD5B07 		.word	123456789
+ 503              		.cfi_endproc
+ 504              	.LFE5:
+ 505              		.size	SelectStream, .-SelectStream
+ 506              		.section	.rodata
+ 507 005e 0000     		.align	2
+ 508              	.LC3:
+ 509 0060 0A205468 		.ascii	"\012 The implementation of rngs.c is correct.\012\000"
+ 509      6520696D 
+ 509      706C656D 
+ 509      656E7461 
+ 509      74696F6E 
+ 510              		.align	2
+ 511              	.LC4:
+ 512 008c 0A072045 		.ascii	"\012\007 ERROR -- the implementation of rngs.c is n"
+ 512      52524F52 
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccJtD6J2.s 			page 13
+
+
+ 512      202D2D20 
+ 512      74686520 
+ 512      696D706C 
+ 513 00b9 6F742063 		.ascii	"ot correct.\012\000"
+ 513      6F727265 
+ 513      63742E0A 
+ 513      00
+ 514              		.section	.text.TestRandom,"ax",%progbits
+ 515              		.align	2
+ 516              		.global	TestRandom
+ 517              		.thumb
+ 518              		.thumb_func
+ 519              		.type	TestRandom, %function
+ 520              	TestRandom:
+ 521              	.LFB6:
+ 151:rngs.c        **** 
+ 152:rngs.c        **** 
+ 153:rngs.c        ****    void TestRandom(void)
+ 154:rngs.c        **** /* ------------------------------------------------------------------
+ 155:rngs.c        ****  * Use this (optional) function to test for a correct implementation.
+ 156:rngs.c        ****  * ------------------------------------------------------------------    
+ 157:rngs.c        ****  */
+ 158:rngs.c        **** {
+ 522              		.loc 1 158 0
+ 523              		.cfi_startproc
+ 524              		@ args = 0, pretend = 0, frame = 24
+ 525              		@ frame_needed = 1, uses_anonymous_args = 0
+ 526 0000 80B5     		push	{r7, lr}
+ 527              		.cfi_def_cfa_offset 8
+ 528              		.cfi_offset 7, -8
+ 529              		.cfi_offset 14, -4
+ 530 0002 86B0     		sub	sp, sp, #24
+ 531              		.cfi_def_cfa_offset 32
+ 532 0004 00AF     		add	r7, sp, #0
+ 533              		.cfi_def_cfa_register 7
+ 159:rngs.c        ****   long   i;
+ 160:rngs.c        ****   long   x;
+ 161:rngs.c        ****   double u;
+ 162:rngs.c        ****   char   ok = 0;  
+ 534              		.loc 1 162 0
+ 535 0006 0023     		movs	r3, #0
+ 536 0008 FB74     		strb	r3, [r7, #19]
+ 163:rngs.c        **** 
+ 164:rngs.c        ****   SelectStream(0);                  /* select the default stream */
+ 537              		.loc 1 164 0
+ 538 000a 0020     		movs	r0, #0
+ 539 000c FFF7FEFF 		bl	SelectStream
+ 165:rngs.c        ****   PutSeed(1);                       /* and set the state to 1    */
+ 540              		.loc 1 165 0
+ 541 0010 0120     		movs	r0, #1
+ 542 0012 FFF7FEFF 		bl	PutSeed
+ 166:rngs.c        ****   for(i = 0; i < 10000; i++)
+ 543              		.loc 1 166 0
+ 544 0016 0023     		movs	r3, #0
+ 545 0018 7B61     		str	r3, [r7, #20]
+ 546 001a 06E0     		b	.L33
+ 547              	.L34:
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccJtD6J2.s 			page 14
+
+
+ 167:rngs.c        ****     u = Random();
+ 548              		.loc 1 167 0 discriminator 3
+ 549 001c FFF7FEFF 		bl	Random
+ 550 0020 C7E90201 		strd	r0, [r7, #8]
+ 166:rngs.c        ****   for(i = 0; i < 10000; i++)
+ 551              		.loc 1 166 0 discriminator 3
+ 552 0024 7B69     		ldr	r3, [r7, #20]
+ 553 0026 0133     		adds	r3, r3, #1
+ 554 0028 7B61     		str	r3, [r7, #20]
+ 555              	.L33:
+ 166:rngs.c        ****   for(i = 0; i < 10000; i++)
+ 556              		.loc 1 166 0 is_stmt 0 discriminator 1
+ 557 002a 7B69     		ldr	r3, [r7, #20]
+ 558 002c 42F20F72 		movw	r2, #9999
+ 559 0030 9342     		cmp	r3, r2
+ 560 0032 F3DD     		ble	.L34
+ 168:rngs.c        ****   GetSeed(&x);                      /* get the new state value   */
+ 561              		.loc 1 168 0 is_stmt 1
+ 562 0034 3B1D     		adds	r3, r7, #4
+ 563 0036 1846     		mov	r0, r3
+ 564 0038 FFF7FEFF 		bl	GetSeed
+ 169:rngs.c        ****   ok = (x == CHECK);                /* and check for correctness */
+ 565              		.loc 1 169 0
+ 566 003c 7B68     		ldr	r3, [r7, #4]
+ 567 003e 154A     		ldr	r2, .L40
+ 568 0040 9342     		cmp	r3, r2
+ 569 0042 0CBF     		ite	eq
+ 570 0044 0123     		moveq	r3, #1
+ 571 0046 0023     		movne	r3, #0
+ 572 0048 DBB2     		uxtb	r3, r3
+ 573 004a FB74     		strb	r3, [r7, #19]
+ 170:rngs.c        **** 
+ 171:rngs.c        ****   SelectStream(1);                  /* select stream 1                 */ 
+ 574              		.loc 1 171 0
+ 575 004c 0120     		movs	r0, #1
+ 576 004e FFF7FEFF 		bl	SelectStream
+ 172:rngs.c        ****   PlantSeeds(1);                    /* set the state of all streams    */
+ 577              		.loc 1 172 0
+ 578 0052 0120     		movs	r0, #1
+ 579 0054 FFF7FEFF 		bl	PlantSeeds
+ 173:rngs.c        ****   GetSeed(&x);                      /* get the state of stream 1       */
+ 580              		.loc 1 173 0
+ 581 0058 3B1D     		adds	r3, r7, #4
+ 582 005a 1846     		mov	r0, r3
+ 583 005c FFF7FEFF 		bl	GetSeed
+ 174:rngs.c        ****   ok = ok && (x == A256);           /* x should be the jump multiplier */    
+ 584              		.loc 1 174 0
+ 585 0060 FB7C     		ldrb	r3, [r7, #19]	@ zero_extendqisi2
+ 586 0062 002B     		cmp	r3, #0
+ 587 0064 06D0     		beq	.L35
+ 588              		.loc 1 174 0 is_stmt 0 discriminator 1
+ 589 0066 7B68     		ldr	r3, [r7, #4]
+ 590 0068 45F68D12 		movw	r2, #22925
+ 591 006c 9342     		cmp	r3, r2
+ 592 006e 01D1     		bne	.L35
+ 593              		.loc 1 174 0 discriminator 3
+ 594 0070 0123     		movs	r3, #1
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccJtD6J2.s 			page 15
+
+
+ 595 0072 00E0     		b	.L36
+ 596              	.L35:
+ 597              		.loc 1 174 0 discriminator 4
+ 598 0074 0023     		movs	r3, #0
+ 599              	.L36:
+ 600              		.loc 1 174 0 discriminator 6
+ 601 0076 FB74     		strb	r3, [r7, #19]
+ 175:rngs.c        ****   if (ok)
+ 602              		.loc 1 175 0 is_stmt 1 discriminator 6
+ 603 0078 FB7C     		ldrb	r3, [r7, #19]	@ zero_extendqisi2
+ 604 007a 002B     		cmp	r3, #0
+ 605 007c 03D0     		beq	.L37
+ 176:rngs.c        ****     printf("\n The implementation of rngs.c is correct.\n\n");
+ 606              		.loc 1 176 0
+ 607 007e 0648     		ldr	r0, .L40+4
+ 608 0080 FFF7FEFF 		bl	puts
+ 177:rngs.c        ****   else
+ 178:rngs.c        ****     printf("\n\a ERROR -- the implementation of rngs.c is not correct.\n\n");
+ 179:rngs.c        **** }...
+ 609              		.loc 1 179 0
+ 610 0084 02E0     		b	.L39
+ 611              	.L37:
+ 178:rngs.c        ****     printf("\n\a ERROR -- the implementation of rngs.c is not correct.\n\n");
+ 612              		.loc 1 178 0
+ 613 0086 0548     		ldr	r0, .L40+8
+ 614 0088 FFF7FEFF 		bl	puts
+ 615              	.L39:
+ 616              		.loc 1 179 0
+ 617 008c 00BF     		nop
+ 618 008e 1837     		adds	r7, r7, #24
+ 619              		.cfi_def_cfa_offset 8
+ 620 0090 BD46     		mov	sp, r7
+ 621              		.cfi_def_cfa_register 13
+ 622              		@ sp needed
+ 623 0092 80BD     		pop	{r7, pc}
+ 624              	.L41:
+ 625              		.align	2
+ 626              	.L40:
+ 627 0094 B95ACC17 		.word	399268537
+ 628 0098 60000000 		.word	.LC3
+ 629 009c 8C000000 		.word	.LC4
+ 630              		.cfi_endproc
+ 631              	.LFE6:
+ 632              		.size	TestRandom, .-TestRandom
+ 633              		.text
+ 634              	.Letext0:
+ 635              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.2\\psoc creator\\import\\gnu\\arm\\5.4.
+ 636              		.section	.debug_info,"",%progbits
+ 637              	.Ldebug_info0:
+ 638 0000 29020000 		.4byte	0x229
+ 639 0004 0400     		.2byte	0x4
+ 640 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 641 000a 04       		.byte	0x4
+ 642 000b 01       		.uleb128 0x1
+ 643 000c 00000000 		.4byte	.LASF22
+ 644 0010 0C       		.byte	0xc
+ 645 0011 C6010000 		.4byte	.LASF23
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccJtD6J2.s 			page 16
+
+
+ 646 0015 39010000 		.4byte	.LASF24
+ 647 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 648 001d 00000000 		.4byte	0
+ 649 0021 00000000 		.4byte	.Ldebug_line0
+ 650 0025 02       		.uleb128 0x2
+ 651 0026 01       		.byte	0x1
+ 652 0027 06       		.byte	0x6
+ 653 0028 FC010000 		.4byte	.LASF0
+ 654 002c 02       		.uleb128 0x2
+ 655 002d 01       		.byte	0x1
+ 656 002e 08       		.byte	0x8
+ 657 002f A4000000 		.4byte	.LASF1
+ 658 0033 02       		.uleb128 0x2
+ 659 0034 02       		.byte	0x2
+ 660 0035 05       		.byte	0x5
+ 661 0036 D8010000 		.4byte	.LASF2
+ 662 003a 02       		.uleb128 0x2
+ 663 003b 02       		.byte	0x2
+ 664 003c 07       		.byte	0x7
+ 665 003d DD000000 		.4byte	.LASF3
+ 666 0041 02       		.uleb128 0x2
+ 667 0042 04       		.byte	0x4
+ 668 0043 05       		.byte	0x5
+ 669 0044 E7010000 		.4byte	.LASF4
+ 670 0048 02       		.uleb128 0x2
+ 671 0049 04       		.byte	0x4
+ 672 004a 07       		.byte	0x7
+ 673 004b CB000000 		.4byte	.LASF5
+ 674 004f 02       		.uleb128 0x2
+ 675 0050 08       		.byte	0x8
+ 676 0051 05       		.byte	0x5
+ 677 0052 B8010000 		.4byte	.LASF6
+ 678 0056 02       		.uleb128 0x2
+ 679 0057 08       		.byte	0x8
+ 680 0058 07       		.byte	0x7
+ 681 0059 22010000 		.4byte	.LASF7
+ 682 005d 03       		.uleb128 0x3
+ 683 005e 04       		.byte	0x4
+ 684 005f 05       		.byte	0x5
+ 685 0060 696E7400 		.ascii	"int\000"
+ 686 0064 02       		.uleb128 0x2
+ 687 0065 04       		.byte	0x4
+ 688 0066 07       		.byte	0x7
+ 689 0067 15010000 		.4byte	.LASF8
+ 690 006b 02       		.uleb128 0x2
+ 691 006c 08       		.byte	0x8
+ 692 006d 04       		.byte	0x4
+ 693 006e F0010000 		.4byte	.LASF9
+ 694 0072 02       		.uleb128 0x2
+ 695 0073 04       		.byte	0x4
+ 696 0074 07       		.byte	0x7
+ 697 0075 AF010000 		.4byte	.LASF10
+ 698 0079 02       		.uleb128 0x2
+ 699 007a 01       		.byte	0x1
+ 700 007b 08       		.byte	0x8
+ 701 007c CD010000 		.4byte	.LASF11
+ 702 0080 04       		.uleb128 0x4
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccJtD6J2.s 			page 17
+
+
+ 703 0081 A8010000 		.4byte	.LASF25
+ 704 0085 02       		.byte	0x2
+ 705 0086 28       		.byte	0x28
+ 706 0087 41000000 		.4byte	0x41
+ 707 008b 05       		.uleb128 0x5
+ 708 008c 8E000000 		.4byte	.LASF26
+ 709 0090 01       		.byte	0x1
+ 710 0091 33       		.byte	0x33
+ 711 0092 C9000000 		.4byte	0xc9
+ 712 0096 00000000 		.4byte	.LFB1
+ 713 009a B0000000 		.4byte	.LFE1-.LFB1
+ 714 009e 01       		.uleb128 0x1
+ 715 009f 9C       		.byte	0x9c
+ 716 00a0 C9000000 		.4byte	0xc9
+ 717 00a4 06       		.uleb128 0x6
+ 718 00a5 5100     		.ascii	"Q\000"
+ 719 00a7 01       		.byte	0x1
+ 720 00a8 3A       		.byte	0x3a
+ 721 00a9 D0000000 		.4byte	0xd0
+ 722 00ad 02       		.uleb128 0x2
+ 723 00ae 91       		.byte	0x91
+ 724 00af 6C       		.sleb128 -20
+ 725 00b0 06       		.uleb128 0x6
+ 726 00b1 5200     		.ascii	"R\000"
+ 727 00b3 01       		.byte	0x1
+ 728 00b4 3B       		.byte	0x3b
+ 729 00b5 D0000000 		.4byte	0xd0
+ 730 00b9 02       		.uleb128 0x2
+ 731 00ba 91       		.byte	0x91
+ 732 00bb 68       		.sleb128 -24
+ 733 00bc 06       		.uleb128 0x6
+ 734 00bd 7400     		.ascii	"t\000"
+ 735 00bf 01       		.byte	0x1
+ 736 00c0 3C       		.byte	0x3c
+ 737 00c1 41000000 		.4byte	0x41
+ 738 00c5 02       		.uleb128 0x2
+ 739 00c6 91       		.byte	0x91
+ 740 00c7 64       		.sleb128 -28
+ 741 00c8 00       		.byte	0
+ 742 00c9 02       		.uleb128 0x2
+ 743 00ca 08       		.byte	0x8
+ 744 00cb 04       		.byte	0x4
+ 745 00cc 03010000 		.4byte	.LASF12
+ 746 00d0 07       		.uleb128 0x7
+ 747 00d1 41000000 		.4byte	0x41
+ 748 00d5 08       		.uleb128 0x8
+ 749 00d6 0A010000 		.4byte	.LASF13
+ 750 00da 01       		.byte	0x1
+ 751 00db 47       		.byte	0x47
+ 752 00dc 00000000 		.4byte	.LFB2
+ 753 00e0 B8000000 		.4byte	.LFE2-.LFB2
+ 754 00e4 01       		.uleb128 0x1
+ 755 00e5 9C       		.byte	0x9c
+ 756 00e6 27010000 		.4byte	0x127
+ 757 00ea 09       		.uleb128 0x9
+ 758 00eb 7800     		.ascii	"x\000"
+ 759 00ed 01       		.byte	0x1
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccJtD6J2.s 			page 18
+
+
+ 760 00ee 47       		.byte	0x47
+ 761 00ef 41000000 		.4byte	0x41
+ 762 00f3 02       		.uleb128 0x2
+ 763 00f4 91       		.byte	0x91
+ 764 00f5 64       		.sleb128 -28
+ 765 00f6 06       		.uleb128 0x6
+ 766 00f7 5100     		.ascii	"Q\000"
+ 767 00f9 01       		.byte	0x1
+ 768 00fa 51       		.byte	0x51
+ 769 00fb D0000000 		.4byte	0xd0
+ 770 00ff 02       		.uleb128 0x2
+ 771 0100 91       		.byte	0x91
+ 772 0101 70       		.sleb128 -16
+ 773 0102 06       		.uleb128 0x6
+ 774 0103 5200     		.ascii	"R\000"
+ 775 0105 01       		.byte	0x1
+ 776 0106 52       		.byte	0x52
+ 777 0107 D0000000 		.4byte	0xd0
+ 778 010b 02       		.uleb128 0x2
+ 779 010c 91       		.byte	0x91
+ 780 010d 6C       		.sleb128 -20
+ 781 010e 06       		.uleb128 0x6
+ 782 010f 6A00     		.ascii	"j\000"
+ 783 0111 01       		.byte	0x1
+ 784 0112 53       		.byte	0x53
+ 785 0113 5D000000 		.4byte	0x5d
+ 786 0117 02       		.uleb128 0x2
+ 787 0118 91       		.byte	0x91
+ 788 0119 74       		.sleb128 -12
+ 789 011a 06       		.uleb128 0x6
+ 790 011b 7300     		.ascii	"s\000"
+ 791 011d 01       		.byte	0x1
+ 792 011e 54       		.byte	0x54
+ 793 011f 5D000000 		.4byte	0x5d
+ 794 0123 02       		.uleb128 0x2
+ 795 0124 91       		.byte	0x91
+ 796 0125 68       		.sleb128 -24
+ 797 0126 00       		.byte	0
+ 798 0127 08       		.uleb128 0x8
+ 799 0128 95000000 		.4byte	.LASF14
+ 800 012c 01       		.byte	0x1
+ 801 012d 65       		.byte	0x65
+ 802 012e 00000000 		.4byte	.LFB3
+ 803 0132 C4000000 		.4byte	.LFE3-.LFB3
+ 804 0136 01       		.uleb128 0x1
+ 805 0137 9C       		.byte	0x9c
+ 806 0138 56010000 		.4byte	0x156
+ 807 013c 09       		.uleb128 0x9
+ 808 013d 7800     		.ascii	"x\000"
+ 809 013f 01       		.byte	0x1
+ 810 0140 65       		.byte	0x65
+ 811 0141 41000000 		.4byte	0x41
+ 812 0145 02       		.uleb128 0x2
+ 813 0146 91       		.byte	0x91
+ 814 0147 64       		.sleb128 -28
+ 815 0148 06       		.uleb128 0x6
+ 816 0149 6F6B00   		.ascii	"ok\000"
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccJtD6J2.s 			page 19
+
+
+ 817 014c 01       		.byte	0x1
+ 818 014d 6F       		.byte	0x6f
+ 819 014e 79000000 		.4byte	0x79
+ 820 0152 02       		.uleb128 0x2
+ 821 0153 91       		.byte	0x91
+ 822 0154 6F       		.sleb128 -17
+ 823 0155 00       		.byte	0
+ 824 0156 0A       		.uleb128 0xa
+ 825 0157 FB000000 		.4byte	.LASF15
+ 826 015b 01       		.byte	0x1
+ 827 015c 81       		.byte	0x81
+ 828 015d 00000000 		.4byte	.LFB4
+ 829 0161 28000000 		.4byte	.LFE4-.LFB4
+ 830 0165 01       		.uleb128 0x1
+ 831 0166 9C       		.byte	0x9c
+ 832 0167 78010000 		.4byte	0x178
+ 833 016b 09       		.uleb128 0x9
+ 834 016c 7800     		.ascii	"x\000"
+ 835 016e 01       		.byte	0x1
+ 836 016f 81       		.byte	0x81
+ 837 0170 78010000 		.4byte	0x178
+ 838 0174 02       		.uleb128 0x2
+ 839 0175 91       		.byte	0x91
+ 840 0176 74       		.sleb128 -12
+ 841 0177 00       		.byte	0
+ 842 0178 0B       		.uleb128 0xb
+ 843 0179 04       		.byte	0x4
+ 844 017a 41000000 		.4byte	0x41
+ 845 017e 08       		.uleb128 0x8
+ 846 017f BE000000 		.4byte	.LASF16
+ 847 0183 01       		.byte	0x1
+ 848 0184 8C       		.byte	0x8c
+ 849 0185 00000000 		.4byte	.LFB5
+ 850 0189 3C000000 		.4byte	.LFE5-.LFB5
+ 851 018d 01       		.uleb128 0x1
+ 852 018e 9C       		.byte	0x9c
+ 853 018f A2010000 		.4byte	0x1a2
+ 854 0193 0C       		.uleb128 0xc
+ 855 0194 D2010000 		.4byte	.LASF17
+ 856 0198 01       		.byte	0x1
+ 857 0199 8C       		.byte	0x8c
+ 858 019a 5D000000 		.4byte	0x5d
+ 859 019e 02       		.uleb128 0x2
+ 860 019f 91       		.byte	0x91
+ 861 01a0 74       		.sleb128 -12
+ 862 01a1 00       		.byte	0
+ 863 01a2 08       		.uleb128 0x8
+ 864 01a3 F0000000 		.4byte	.LASF18
+ 865 01a7 01       		.byte	0x1
+ 866 01a8 99       		.byte	0x99
+ 867 01a9 00000000 		.4byte	.LFB6
+ 868 01ad A0000000 		.4byte	.LFE6-.LFB6
+ 869 01b1 01       		.uleb128 0x1
+ 870 01b2 9C       		.byte	0x9c
+ 871 01b3 E9010000 		.4byte	0x1e9
+ 872 01b7 06       		.uleb128 0x6
+ 873 01b8 6900     		.ascii	"i\000"
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccJtD6J2.s 			page 20
+
+
+ 874 01ba 01       		.byte	0x1
+ 875 01bb 9F       		.byte	0x9f
+ 876 01bc 41000000 		.4byte	0x41
+ 877 01c0 02       		.uleb128 0x2
+ 878 01c1 91       		.byte	0x91
+ 879 01c2 74       		.sleb128 -12
+ 880 01c3 06       		.uleb128 0x6
+ 881 01c4 7800     		.ascii	"x\000"
+ 882 01c6 01       		.byte	0x1
+ 883 01c7 A0       		.byte	0xa0
+ 884 01c8 41000000 		.4byte	0x41
+ 885 01cc 02       		.uleb128 0x2
+ 886 01cd 91       		.byte	0x91
+ 887 01ce 64       		.sleb128 -28
+ 888 01cf 06       		.uleb128 0x6
+ 889 01d0 7500     		.ascii	"u\000"
+ 890 01d2 01       		.byte	0x1
+ 891 01d3 A1       		.byte	0xa1
+ 892 01d4 C9000000 		.4byte	0xc9
+ 893 01d8 02       		.uleb128 0x2
+ 894 01d9 91       		.byte	0x91
+ 895 01da 68       		.sleb128 -24
+ 896 01db 06       		.uleb128 0x6
+ 897 01dc 6F6B00   		.ascii	"ok\000"
+ 898 01df 01       		.byte	0x1
+ 899 01e0 A2       		.byte	0xa2
+ 900 01e1 79000000 		.4byte	0x79
+ 901 01e5 02       		.uleb128 0x2
+ 902 01e6 91       		.byte	0x91
+ 903 01e7 73       		.sleb128 -13
+ 904 01e8 00       		.byte	0
+ 905 01e9 0D       		.uleb128 0xd
+ 906 01ea 41000000 		.4byte	0x41
+ 907 01ee F9010000 		.4byte	0x1f9
+ 908 01f2 0E       		.uleb128 0xe
+ 909 01f3 72000000 		.4byte	0x72
+ 910 01f7 FF       		.byte	0xff
+ 911 01f8 00       		.byte	0
+ 912 01f9 0F       		.uleb128 0xf
+ 913 01fa E2010000 		.4byte	.LASF19
+ 914 01fe 01       		.byte	0x1
+ 915 01ff 2E       		.byte	0x2e
+ 916 0200 E9010000 		.4byte	0x1e9
+ 917 0204 05       		.uleb128 0x5
+ 918 0205 03       		.byte	0x3
+ 919 0206 00000000 		.4byte	seed
+ 920 020a 0F       		.uleb128 0xf
+ 921 020b 9D000000 		.4byte	.LASF20
+ 922 020f 01       		.byte	0x1
+ 923 0210 2F       		.byte	0x2f
+ 924 0211 5D000000 		.4byte	0x5d
+ 925 0215 05       		.uleb128 0x5
+ 926 0216 03       		.byte	0x3
+ 927 0217 00000000 		.4byte	stream
+ 928 021b 0F       		.uleb128 0xf
+ 929 021c B2000000 		.4byte	.LASF21
+ 930 0220 01       		.byte	0x1
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccJtD6J2.s 			page 21
+
+
+ 931 0221 30       		.byte	0x30
+ 932 0222 5D000000 		.4byte	0x5d
+ 933 0226 05       		.uleb128 0x5
+ 934 0227 03       		.byte	0x3
+ 935 0228 04000000 		.4byte	initialized
+ 936 022c 00       		.byte	0
+ 937              		.section	.debug_abbrev,"",%progbits
+ 938              	.Ldebug_abbrev0:
+ 939 0000 01       		.uleb128 0x1
+ 940 0001 11       		.uleb128 0x11
+ 941 0002 01       		.byte	0x1
+ 942 0003 25       		.uleb128 0x25
+ 943 0004 0E       		.uleb128 0xe
+ 944 0005 13       		.uleb128 0x13
+ 945 0006 0B       		.uleb128 0xb
+ 946 0007 03       		.uleb128 0x3
+ 947 0008 0E       		.uleb128 0xe
+ 948 0009 1B       		.uleb128 0x1b
+ 949 000a 0E       		.uleb128 0xe
+ 950 000b 55       		.uleb128 0x55
+ 951 000c 17       		.uleb128 0x17
+ 952 000d 11       		.uleb128 0x11
+ 953 000e 01       		.uleb128 0x1
+ 954 000f 10       		.uleb128 0x10
+ 955 0010 17       		.uleb128 0x17
+ 956 0011 00       		.byte	0
+ 957 0012 00       		.byte	0
+ 958 0013 02       		.uleb128 0x2
+ 959 0014 24       		.uleb128 0x24
+ 960 0015 00       		.byte	0
+ 961 0016 0B       		.uleb128 0xb
+ 962 0017 0B       		.uleb128 0xb
+ 963 0018 3E       		.uleb128 0x3e
+ 964 0019 0B       		.uleb128 0xb
+ 965 001a 03       		.uleb128 0x3
+ 966 001b 0E       		.uleb128 0xe
+ 967 001c 00       		.byte	0
+ 968 001d 00       		.byte	0
+ 969 001e 03       		.uleb128 0x3
+ 970 001f 24       		.uleb128 0x24
+ 971 0020 00       		.byte	0
+ 972 0021 0B       		.uleb128 0xb
+ 973 0022 0B       		.uleb128 0xb
+ 974 0023 3E       		.uleb128 0x3e
+ 975 0024 0B       		.uleb128 0xb
+ 976 0025 03       		.uleb128 0x3
+ 977 0026 08       		.uleb128 0x8
+ 978 0027 00       		.byte	0
+ 979 0028 00       		.byte	0
+ 980 0029 04       		.uleb128 0x4
+ 981 002a 16       		.uleb128 0x16
+ 982 002b 00       		.byte	0
+ 983 002c 03       		.uleb128 0x3
+ 984 002d 0E       		.uleb128 0xe
+ 985 002e 3A       		.uleb128 0x3a
+ 986 002f 0B       		.uleb128 0xb
+ 987 0030 3B       		.uleb128 0x3b
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccJtD6J2.s 			page 22
+
+
+ 988 0031 0B       		.uleb128 0xb
+ 989 0032 49       		.uleb128 0x49
+ 990 0033 13       		.uleb128 0x13
+ 991 0034 00       		.byte	0
+ 992 0035 00       		.byte	0
+ 993 0036 05       		.uleb128 0x5
+ 994 0037 2E       		.uleb128 0x2e
+ 995 0038 01       		.byte	0x1
+ 996 0039 3F       		.uleb128 0x3f
+ 997 003a 19       		.uleb128 0x19
+ 998 003b 03       		.uleb128 0x3
+ 999 003c 0E       		.uleb128 0xe
+ 1000 003d 3A       		.uleb128 0x3a
+ 1001 003e 0B       		.uleb128 0xb
+ 1002 003f 3B       		.uleb128 0x3b
+ 1003 0040 0B       		.uleb128 0xb
+ 1004 0041 27       		.uleb128 0x27
+ 1005 0042 19       		.uleb128 0x19
+ 1006 0043 49       		.uleb128 0x49
+ 1007 0044 13       		.uleb128 0x13
+ 1008 0045 11       		.uleb128 0x11
+ 1009 0046 01       		.uleb128 0x1
+ 1010 0047 12       		.uleb128 0x12
+ 1011 0048 06       		.uleb128 0x6
+ 1012 0049 40       		.uleb128 0x40
+ 1013 004a 18       		.uleb128 0x18
+ 1014 004b 9642     		.uleb128 0x2116
+ 1015 004d 19       		.uleb128 0x19
+ 1016 004e 01       		.uleb128 0x1
+ 1017 004f 13       		.uleb128 0x13
+ 1018 0050 00       		.byte	0
+ 1019 0051 00       		.byte	0
+ 1020 0052 06       		.uleb128 0x6
+ 1021 0053 34       		.uleb128 0x34
+ 1022 0054 00       		.byte	0
+ 1023 0055 03       		.uleb128 0x3
+ 1024 0056 08       		.uleb128 0x8
+ 1025 0057 3A       		.uleb128 0x3a
+ 1026 0058 0B       		.uleb128 0xb
+ 1027 0059 3B       		.uleb128 0x3b
+ 1028 005a 0B       		.uleb128 0xb
+ 1029 005b 49       		.uleb128 0x49
+ 1030 005c 13       		.uleb128 0x13
+ 1031 005d 02       		.uleb128 0x2
+ 1032 005e 18       		.uleb128 0x18
+ 1033 005f 00       		.byte	0
+ 1034 0060 00       		.byte	0
+ 1035 0061 07       		.uleb128 0x7
+ 1036 0062 26       		.uleb128 0x26
+ 1037 0063 00       		.byte	0
+ 1038 0064 49       		.uleb128 0x49
+ 1039 0065 13       		.uleb128 0x13
+ 1040 0066 00       		.byte	0
+ 1041 0067 00       		.byte	0
+ 1042 0068 08       		.uleb128 0x8
+ 1043 0069 2E       		.uleb128 0x2e
+ 1044 006a 01       		.byte	0x1
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccJtD6J2.s 			page 23
+
+
+ 1045 006b 3F       		.uleb128 0x3f
+ 1046 006c 19       		.uleb128 0x19
+ 1047 006d 03       		.uleb128 0x3
+ 1048 006e 0E       		.uleb128 0xe
+ 1049 006f 3A       		.uleb128 0x3a
+ 1050 0070 0B       		.uleb128 0xb
+ 1051 0071 3B       		.uleb128 0x3b
+ 1052 0072 0B       		.uleb128 0xb
+ 1053 0073 27       		.uleb128 0x27
+ 1054 0074 19       		.uleb128 0x19
+ 1055 0075 11       		.uleb128 0x11
+ 1056 0076 01       		.uleb128 0x1
+ 1057 0077 12       		.uleb128 0x12
+ 1058 0078 06       		.uleb128 0x6
+ 1059 0079 40       		.uleb128 0x40
+ 1060 007a 18       		.uleb128 0x18
+ 1061 007b 9642     		.uleb128 0x2116
+ 1062 007d 19       		.uleb128 0x19
+ 1063 007e 01       		.uleb128 0x1
+ 1064 007f 13       		.uleb128 0x13
+ 1065 0080 00       		.byte	0
+ 1066 0081 00       		.byte	0
+ 1067 0082 09       		.uleb128 0x9
+ 1068 0083 05       		.uleb128 0x5
+ 1069 0084 00       		.byte	0
+ 1070 0085 03       		.uleb128 0x3
+ 1071 0086 08       		.uleb128 0x8
+ 1072 0087 3A       		.uleb128 0x3a
+ 1073 0088 0B       		.uleb128 0xb
+ 1074 0089 3B       		.uleb128 0x3b
+ 1075 008a 0B       		.uleb128 0xb
+ 1076 008b 49       		.uleb128 0x49
+ 1077 008c 13       		.uleb128 0x13
+ 1078 008d 02       		.uleb128 0x2
+ 1079 008e 18       		.uleb128 0x18
+ 1080 008f 00       		.byte	0
+ 1081 0090 00       		.byte	0
+ 1082 0091 0A       		.uleb128 0xa
+ 1083 0092 2E       		.uleb128 0x2e
+ 1084 0093 01       		.byte	0x1
+ 1085 0094 3F       		.uleb128 0x3f
+ 1086 0095 19       		.uleb128 0x19
+ 1087 0096 03       		.uleb128 0x3
+ 1088 0097 0E       		.uleb128 0xe
+ 1089 0098 3A       		.uleb128 0x3a
+ 1090 0099 0B       		.uleb128 0xb
+ 1091 009a 3B       		.uleb128 0x3b
+ 1092 009b 0B       		.uleb128 0xb
+ 1093 009c 27       		.uleb128 0x27
+ 1094 009d 19       		.uleb128 0x19
+ 1095 009e 11       		.uleb128 0x11
+ 1096 009f 01       		.uleb128 0x1
+ 1097 00a0 12       		.uleb128 0x12
+ 1098 00a1 06       		.uleb128 0x6
+ 1099 00a2 40       		.uleb128 0x40
+ 1100 00a3 18       		.uleb128 0x18
+ 1101 00a4 9742     		.uleb128 0x2117
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccJtD6J2.s 			page 24
+
+
+ 1102 00a6 19       		.uleb128 0x19
+ 1103 00a7 01       		.uleb128 0x1
+ 1104 00a8 13       		.uleb128 0x13
+ 1105 00a9 00       		.byte	0
+ 1106 00aa 00       		.byte	0
+ 1107 00ab 0B       		.uleb128 0xb
+ 1108 00ac 0F       		.uleb128 0xf
+ 1109 00ad 00       		.byte	0
+ 1110 00ae 0B       		.uleb128 0xb
+ 1111 00af 0B       		.uleb128 0xb
+ 1112 00b0 49       		.uleb128 0x49
+ 1113 00b1 13       		.uleb128 0x13
+ 1114 00b2 00       		.byte	0
+ 1115 00b3 00       		.byte	0
+ 1116 00b4 0C       		.uleb128 0xc
+ 1117 00b5 05       		.uleb128 0x5
+ 1118 00b6 00       		.byte	0
+ 1119 00b7 03       		.uleb128 0x3
+ 1120 00b8 0E       		.uleb128 0xe
+ 1121 00b9 3A       		.uleb128 0x3a
+ 1122 00ba 0B       		.uleb128 0xb
+ 1123 00bb 3B       		.uleb128 0x3b
+ 1124 00bc 0B       		.uleb128 0xb
+ 1125 00bd 49       		.uleb128 0x49
+ 1126 00be 13       		.uleb128 0x13
+ 1127 00bf 02       		.uleb128 0x2
+ 1128 00c0 18       		.uleb128 0x18
+ 1129 00c1 00       		.byte	0
+ 1130 00c2 00       		.byte	0
+ 1131 00c3 0D       		.uleb128 0xd
+ 1132 00c4 01       		.uleb128 0x1
+ 1133 00c5 01       		.byte	0x1
+ 1134 00c6 49       		.uleb128 0x49
+ 1135 00c7 13       		.uleb128 0x13
+ 1136 00c8 01       		.uleb128 0x1
+ 1137 00c9 13       		.uleb128 0x13
+ 1138 00ca 00       		.byte	0
+ 1139 00cb 00       		.byte	0
+ 1140 00cc 0E       		.uleb128 0xe
+ 1141 00cd 21       		.uleb128 0x21
+ 1142 00ce 00       		.byte	0
+ 1143 00cf 49       		.uleb128 0x49
+ 1144 00d0 13       		.uleb128 0x13
+ 1145 00d1 2F       		.uleb128 0x2f
+ 1146 00d2 0B       		.uleb128 0xb
+ 1147 00d3 00       		.byte	0
+ 1148 00d4 00       		.byte	0
+ 1149 00d5 0F       		.uleb128 0xf
+ 1150 00d6 34       		.uleb128 0x34
+ 1151 00d7 00       		.byte	0
+ 1152 00d8 03       		.uleb128 0x3
+ 1153 00d9 0E       		.uleb128 0xe
+ 1154 00da 3A       		.uleb128 0x3a
+ 1155 00db 0B       		.uleb128 0xb
+ 1156 00dc 3B       		.uleb128 0x3b
+ 1157 00dd 0B       		.uleb128 0xb
+ 1158 00de 49       		.uleb128 0x49
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccJtD6J2.s 			page 25
+
+
+ 1159 00df 13       		.uleb128 0x13
+ 1160 00e0 02       		.uleb128 0x2
+ 1161 00e1 18       		.uleb128 0x18
+ 1162 00e2 00       		.byte	0
+ 1163 00e3 00       		.byte	0
+ 1164 00e4 00       		.byte	0
+ 1165              		.section	.debug_aranges,"",%progbits
+ 1166 0000 44000000 		.4byte	0x44
+ 1167 0004 0200     		.2byte	0x2
+ 1168 0006 00000000 		.4byte	.Ldebug_info0
+ 1169 000a 04       		.byte	0x4
+ 1170 000b 00       		.byte	0
+ 1171 000c 0000     		.2byte	0
+ 1172 000e 0000     		.2byte	0
+ 1173 0010 00000000 		.4byte	.LFB1
+ 1174 0014 B0000000 		.4byte	.LFE1-.LFB1
+ 1175 0018 00000000 		.4byte	.LFB2
+ 1176 001c B8000000 		.4byte	.LFE2-.LFB2
+ 1177 0020 00000000 		.4byte	.LFB3
+ 1178 0024 C4000000 		.4byte	.LFE3-.LFB3
+ 1179 0028 00000000 		.4byte	.LFB4
+ 1180 002c 28000000 		.4byte	.LFE4-.LFB4
+ 1181 0030 00000000 		.4byte	.LFB5
+ 1182 0034 3C000000 		.4byte	.LFE5-.LFB5
+ 1183 0038 00000000 		.4byte	.LFB6
+ 1184 003c A0000000 		.4byte	.LFE6-.LFB6
+ 1185 0040 00000000 		.4byte	0
+ 1186 0044 00000000 		.4byte	0
+ 1187              		.section	.debug_ranges,"",%progbits
+ 1188              	.Ldebug_ranges0:
+ 1189 0000 00000000 		.4byte	.LFB1
+ 1190 0004 B0000000 		.4byte	.LFE1
+ 1191 0008 00000000 		.4byte	.LFB2
+ 1192 000c B8000000 		.4byte	.LFE2
+ 1193 0010 00000000 		.4byte	.LFB3
+ 1194 0014 C4000000 		.4byte	.LFE3
+ 1195 0018 00000000 		.4byte	.LFB4
+ 1196 001c 28000000 		.4byte	.LFE4
+ 1197 0020 00000000 		.4byte	.LFB5
+ 1198 0024 3C000000 		.4byte	.LFE5
+ 1199 0028 00000000 		.4byte	.LFB6
+ 1200 002c A0000000 		.4byte	.LFE6
+ 1201 0030 00000000 		.4byte	0
+ 1202 0034 00000000 		.4byte	0
+ 1203              		.section	.debug_line,"",%progbits
+ 1204              	.Ldebug_line0:
+ 1205 0000 8F010000 		.section	.debug_str,"MS",%progbits,1
+ 1205      02009700 
+ 1205      00000201 
+ 1205      FB0E0D00 
+ 1205      01010101 
+ 1206              	.LASF22:
+ 1207 0000 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 1207      43313120 
+ 1207      352E342E 
+ 1207      31203230 
+ 1207      31363036 
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccJtD6J2.s 			page 26
+
+
+ 1208 0033 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 1208      20726576 
+ 1208      6973696F 
+ 1208      6E203233 
+ 1208      37373135 
+ 1209 0066 30202D66 		.ascii	"0 -ffunction-sections -ffat-lto-objects\000"
+ 1209      66756E63 
+ 1209      74696F6E 
+ 1209      2D736563 
+ 1209      74696F6E 
+ 1210              	.LASF26:
+ 1211 008e 52616E64 		.ascii	"Random\000"
+ 1211      6F6D00
+ 1212              	.LASF14:
+ 1213 0095 50757453 		.ascii	"PutSeed\000"
+ 1213      65656400 
+ 1214              	.LASF20:
+ 1215 009d 73747265 		.ascii	"stream\000"
+ 1215      616D00
+ 1216              	.LASF1:
+ 1217 00a4 756E7369 		.ascii	"unsigned char\000"
+ 1217      676E6564 
+ 1217      20636861 
+ 1217      7200
+ 1218              	.LASF21:
+ 1219 00b2 696E6974 		.ascii	"initialized\000"
+ 1219      69616C69 
+ 1219      7A656400 
+ 1220              	.LASF16:
+ 1221 00be 53656C65 		.ascii	"SelectStream\000"
+ 1221      63745374 
+ 1221      7265616D 
+ 1221      00
+ 1222              	.LASF5:
+ 1223 00cb 6C6F6E67 		.ascii	"long unsigned int\000"
+ 1223      20756E73 
+ 1223      69676E65 
+ 1223      6420696E 
+ 1223      7400
+ 1224              	.LASF3:
+ 1225 00dd 73686F72 		.ascii	"short unsigned int\000"
+ 1225      7420756E 
+ 1225      7369676E 
+ 1225      65642069 
+ 1225      6E7400
+ 1226              	.LASF18:
+ 1227 00f0 54657374 		.ascii	"TestRandom\000"
+ 1227      52616E64 
+ 1227      6F6D00
+ 1228              	.LASF15:
+ 1229 00fb 47657453 		.ascii	"GetSeed\000"
+ 1229      65656400 
+ 1230              	.LASF12:
+ 1231 0103 646F7562 		.ascii	"double\000"
+ 1231      6C6500
+ 1232              	.LASF13:
+ 1233 010a 506C616E 		.ascii	"PlantSeeds\000"
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccJtD6J2.s 			page 27
+
+
+ 1233      74536565 
+ 1233      647300
+ 1234              	.LASF8:
+ 1235 0115 756E7369 		.ascii	"unsigned int\000"
+ 1235      676E6564 
+ 1235      20696E74 
+ 1235      00
+ 1236              	.LASF7:
+ 1237 0122 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 1237      206C6F6E 
+ 1237      6720756E 
+ 1237      7369676E 
+ 1237      65642069 
+ 1238              	.LASF24:
+ 1239 0139 433A5C55 		.ascii	"C:\\Users\\Matthew\\Dropbox (MIT)\\Sophomore Spring"
+ 1239      73657273 
+ 1239      5C4D6174 
+ 1239      74686577 
+ 1239      5C44726F 
+ 1240 0168 5C362E31 		.ascii	"\\6.115\\6.115-Labs\\project\\DVDAC_Example01\\DVDA"
+ 1240      31355C36 
+ 1240      2E313135 
+ 1240      2D4C6162 
+ 1240      735C7072 
+ 1241 0196 435F4578 		.ascii	"C_Example01.cydsn\000"
+ 1241      616D706C 
+ 1241      6530312E 
+ 1241      63796473 
+ 1241      6E00
+ 1242              	.LASF25:
+ 1243 01a8 74696D65 		.ascii	"time_t\000"
+ 1243      5F7400
+ 1244              	.LASF10:
+ 1245 01af 73697A65 		.ascii	"sizetype\000"
+ 1245      74797065 
+ 1245      00
+ 1246              	.LASF6:
+ 1247 01b8 6C6F6E67 		.ascii	"long long int\000"
+ 1247      206C6F6E 
+ 1247      6720696E 
+ 1247      7400
+ 1248              	.LASF23:
+ 1249 01c6 726E6773 		.ascii	"rngs.c\000"
+ 1249      2E6300
+ 1250              	.LASF11:
+ 1251 01cd 63686172 		.ascii	"char\000"
+ 1251      00
+ 1252              	.LASF17:
+ 1253 01d2 696E6465 		.ascii	"index\000"
+ 1253      7800
+ 1254              	.LASF2:
+ 1255 01d8 73686F72 		.ascii	"short int\000"
+ 1255      7420696E 
+ 1255      7400
+ 1256              	.LASF19:
+ 1257 01e2 73656564 		.ascii	"seed\000"
+ 1257      00
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\ccJtD6J2.s 			page 28
+
+
+ 1258              	.LASF4:
+ 1259 01e7 6C6F6E67 		.ascii	"long int\000"
+ 1259      20696E74 
+ 1259      00
+ 1260              	.LASF9:
+ 1261 01f0 6C6F6E67 		.ascii	"long double\000"
+ 1261      20646F75 
+ 1261      626C6500 
+ 1262              	.LASF0:
+ 1263 01fc 7369676E 		.ascii	"signed char\000"
+ 1263      65642063 
+ 1263      68617200 
+ 1264              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

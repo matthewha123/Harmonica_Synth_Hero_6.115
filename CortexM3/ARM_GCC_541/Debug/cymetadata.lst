@@ -1,0 +1,2128 @@
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cckeU7PV.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"cymetadata.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.global	cy_meta_configecc
+  20              		.section	.cyconfigecc,"a",%progbits
+  21              		.align	2
+  22              		.type	cy_meta_configecc, %object
+  23              		.size	cy_meta_configecc, 1536
+  24              	cy_meta_configecc:
+  25 0000 04       		.byte	4
+  26 0001 4F       		.byte	79
+  27 0002 00       		.byte	0
+  28 0003 40       		.byte	64
+  29 0004 03       		.byte	3
+  30 0005 52       		.byte	82
+  31 0006 00       		.byte	0
+  32 0007 40       		.byte	64
+  33 0008 01       		.byte	1
+  34 0009 64       		.byte	100
+  35 000a 00       		.byte	0
+  36 000b 40       		.byte	64
+  37 000c 02       		.byte	2
+  38 000d 65       		.byte	101
+  39 000e 00       		.byte	0
+  40 000f 40       		.byte	64
+  41 0010 01       		.byte	1
+  42 0011 03       		.byte	3
+  43 0012 01       		.byte	1
+  44 0013 40       		.byte	64
+  45 0014 41       		.byte	65
+  46 0015 04       		.byte	4
+  47 0016 01       		.byte	1
+  48 0017 40       		.byte	64
+  49 0018 2A       		.byte	42
+  50 0019 05       		.byte	5
+  51 001a 01       		.byte	1
+  52 001b 40       		.byte	64
+  53 001c 0C       		.byte	12
+  54 001d 06       		.byte	6
+  55 001e 01       		.byte	1
+  56 001f 40       		.byte	64
+  57 0020 39       		.byte	57
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cckeU7PV.s 			page 2
+
+
+  58 0021 07       		.byte	7
+  59 0022 01       		.byte	1
+  60 0023 40       		.byte	64
+  61 0024 01       		.byte	1
+  62 0025 09       		.byte	9
+  63 0026 01       		.byte	1
+  64 0027 40       		.byte	64
+  65 0028 01       		.byte	1
+  66 0029 0B       		.byte	11
+  67 002a 01       		.byte	1
+  68 002b 40       		.byte	64
+  69 002c 02       		.byte	2
+  70 002d 0D       		.byte	13
+  71 002e 01       		.byte	1
+  72 002f 40       		.byte	64
+  73 0030 40       		.byte	64
+  74 0031 14       		.byte	20
+  75 0032 01       		.byte	1
+  76 0033 40       		.byte	64
+  77 0034 26       		.byte	38
+  78 0035 15       		.byte	21
+  79 0036 01       		.byte	1
+  80 0037 40       		.byte	64
+  81 0038 53       		.byte	83
+  82 0039 16       		.byte	22
+  83 003a 01       		.byte	1
+  84 003b 40       		.byte	64
+  85 003c 39       		.byte	57
+  86 003d 17       		.byte	23
+  87 003e 01       		.byte	1
+  88 003f 40       		.byte	64
+  89 0040 37       		.byte	55
+  90 0041 18       		.byte	24
+  91 0042 01       		.byte	1
+  92 0043 40       		.byte	64
+  93 0044 18       		.byte	24
+  94 0045 19       		.byte	25
+  95 0046 01       		.byte	1
+  96 0047 40       		.byte	64
+  97 0048 04       		.byte	4
+  98 0049 1A       		.byte	26
+  99 004a 01       		.byte	1
+ 100 004b 40       		.byte	64
+ 101 004c 09       		.byte	9
+ 102 004d 1B       		.byte	27
+ 103 004e 01       		.byte	1
+ 104 004f 40       		.byte	64
+ 105 0050 04       		.byte	4
+ 106 0051 40       		.byte	64
+ 107 0052 01       		.byte	1
+ 108 0053 40       		.byte	64
+ 109 0054 04       		.byte	4
+ 110 0055 41       		.byte	65
+ 111 0056 01       		.byte	1
+ 112 0057 40       		.byte	64
+ 113 0058 02       		.byte	2
+ 114 0059 42       		.byte	66
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cckeU7PV.s 			page 3
+
+
+ 115 005a 01       		.byte	1
+ 116 005b 40       		.byte	64
+ 117 005c 04       		.byte	4
+ 118 005d 43       		.byte	67
+ 119 005e 01       		.byte	1
+ 120 005f 40       		.byte	64
+ 121 0060 02       		.byte	2
+ 122 0061 44       		.byte	68
+ 123 0062 01       		.byte	1
+ 124 0063 40       		.byte	64
+ 125 0064 01       		.byte	1
+ 126 0065 45       		.byte	69
+ 127 0066 01       		.byte	1
+ 128 0067 40       		.byte	64
+ 129 0068 03       		.byte	3
+ 130 0069 46       		.byte	70
+ 131 006a 01       		.byte	1
+ 132 006b 40       		.byte	64
+ 133 006c 01       		.byte	1
+ 134 006d 47       		.byte	71
+ 135 006e 01       		.byte	1
+ 136 006f 40       		.byte	64
+ 137 0070 0D       		.byte	13
+ 138 0071 48       		.byte	72
+ 139 0072 01       		.byte	1
+ 140 0073 40       		.byte	64
+ 141 0074 18       		.byte	24
+ 142 0075 49       		.byte	73
+ 143 0076 01       		.byte	1
+ 144 0077 40       		.byte	64
+ 145 0078 05       		.byte	5
+ 146 0079 4C       		.byte	76
+ 147 007a 01       		.byte	1
+ 148 007b 40       		.byte	64
+ 149 007c 07       		.byte	7
+ 150 007d 4D       		.byte	77
+ 151 007e 01       		.byte	1
+ 152 007f 40       		.byte	64
+ 153 0080 07       		.byte	7
+ 154 0081 50       		.byte	80
+ 155 0082 01       		.byte	1
+ 156 0083 40       		.byte	64
+ 157 0084 01       		.byte	1
+ 158 0085 51       		.byte	81
+ 159 0086 01       		.byte	1
+ 160 0087 40       		.byte	64
+ 161 0088 01       		.byte	1
+ 162 0089 40       		.byte	64
+ 163 008a 0A       		.byte	10
+ 164 008b 1B       		.byte	27
+ 165 008c 0D       		.byte	13
+ 166 008d 20       		.byte	32
+ 167 008e 16       		.byte	22
+ 168 008f 36       		.byte	54
+ 169 0090 08       		.byte	8
+ 170 0091 80       		.byte	-128
+ 171 0092 19       		.byte	25
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cckeU7PV.s 			page 4
+
+
+ 172 0093 04       		.byte	4
+ 173 0094 1A       		.byte	26
+ 174 0095 02       		.byte	2
+ 175 0096 85       		.byte	-123
+ 176 0097 0F       		.byte	15
+ 177 0098 87       		.byte	-121
+ 178 0099 67       		.byte	103
+ 179 009a 89       		.byte	-119
+ 180 009b 0D       		.byte	13
+ 181 009c EE       		.byte	-18
+ 182 009d 04       		.byte	4
+ 183 009e 05       		.byte	5
+ 184 009f 01       		.byte	1
+ 185 00a0 07       		.byte	7
+ 186 00a1 02       		.byte	2
+ 187 00a2 08       		.byte	8
+ 188 00a3 02       		.byte	2
+ 189 00a4 09       		.byte	9
+ 190 00a5 04       		.byte	4
+ 191 00a6 0A       		.byte	10
+ 192 00a7 0D       		.byte	13
+ 193 00a8 14       		.byte	20
+ 194 00a9 05       		.byte	5
+ 195 00aa 15       		.byte	21
+ 196 00ab 06       		.byte	6
+ 197 00ac 16       		.byte	22
+ 198 00ad 0A       		.byte	10
+ 199 00ae 17       		.byte	23
+ 200 00af 01       		.byte	1
+ 201 00b0 18       		.byte	24
+ 202 00b1 09       		.byte	9
+ 203 00b2 1A       		.byte	26
+ 204 00b3 06       		.byte	6
+ 205 00b4 24       		.byte	36
+ 206 00b5 03       		.byte	3
+ 207 00b6 25       		.byte	37
+ 208 00b7 04       		.byte	4
+ 209 00b8 26       		.byte	38
+ 210 00b9 0C       		.byte	12
+ 211 00ba 30       		.byte	48
+ 212 00bb 0F       		.byte	15
+ 213 00bc 32       		.byte	50
+ 214 00bd 0F       		.byte	15
+ 215 00be 35       		.byte	53
+ 216 00bf 07       		.byte	7
+ 217 00c0 3A       		.byte	58
+ 218 00c1 0A       		.byte	10
+ 219 00c2 3B       		.byte	59
+ 220 00c3 20       		.byte	32
+ 221 00c4 58       		.byte	88
+ 222 00c5 04       		.byte	4
+ 223 00c6 59       		.byte	89
+ 224 00c7 04       		.byte	4
+ 225 00c8 5C       		.byte	92
+ 226 00c9 11       		.byte	17
+ 227 00ca 5F       		.byte	95
+ 228 00cb 01       		.byte	1
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cckeU7PV.s 			page 5
+
+
+ 229 00cc 80       		.byte	-128
+ 230 00cd 0D       		.byte	13
+ 231 00ce 84       		.byte	-124
+ 232 00cf 02       		.byte	2
+ 233 00d0 85       		.byte	-123
+ 234 00d1 18       		.byte	24
+ 235 00d2 86       		.byte	-122
+ 236 00d3 08       		.byte	8
+ 237 00d4 87       		.byte	-121
+ 238 00d5 02       		.byte	2
+ 239 00d6 88       		.byte	-120
+ 240 00d7 01       		.byte	1
+ 241 00d8 89       		.byte	-119
+ 242 00d9 02       		.byte	2
+ 243 00da 8A       		.byte	-118
+ 244 00db 02       		.byte	2
+ 245 00dc 8B       		.byte	-117
+ 246 00dd 18       		.byte	24
+ 247 00de 8C       		.byte	-116
+ 248 00df 0D       		.byte	13
+ 249 00e0 8D       		.byte	-115
+ 250 00e1 1A       		.byte	26
+ 251 00e2 90       		.byte	-112
+ 252 00e3 02       		.byte	2
+ 253 00e4 91       		.byte	-111
+ 254 00e5 18       		.byte	24
+ 255 00e6 92       		.byte	-110
+ 256 00e7 0D       		.byte	13
+ 257 00e8 93       		.byte	-109
+ 258 00e9 02       		.byte	2
+ 259 00ea 94       		.byte	-108
+ 260 00eb 02       		.byte	2
+ 261 00ec 95       		.byte	-107
+ 262 00ed 13       		.byte	19
+ 263 00ee 96       		.byte	-106
+ 264 00ef 04       		.byte	4
+ 265 00f0 97       		.byte	-105
+ 266 00f1 04       		.byte	4
+ 267 00f2 98       		.byte	-104
+ 268 00f3 0D       		.byte	13
+ 269 00f4 99       		.byte	-103
+ 270 00f5 01       		.byte	1
+ 271 00f6 9B       		.byte	-101
+ 272 00f7 18       		.byte	24
+ 273 00f8 9D       		.byte	-99
+ 274 00f9 1A       		.byte	26
+ 275 00fa A0       		.byte	-96
+ 276 00fb 0D       		.byte	13
+ 277 00fc A1       		.byte	-95
+ 278 00fd 18       		.byte	24
+ 279 00fe A5       		.byte	-91
+ 280 00ff 1C       		.byte	28
+ 281 0100 A7       		.byte	-89
+ 282 0101 03       		.byte	3
+ 283 0102 A8       		.byte	-88
+ 284 0103 0D       		.byte	13
+ 285 0104 AD       		.byte	-83
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cckeU7PV.s 			page 6
+
+
+ 286 0105 02       		.byte	2
+ 287 0106 B0       		.byte	-80
+ 288 0107 0F       		.byte	15
+ 289 0108 B3       		.byte	-77
+ 290 0109 0F       		.byte	15
+ 291 010a B5       		.byte	-75
+ 292 010b 13       		.byte	19
+ 293 010c BA       		.byte	-70
+ 294 010d 02       		.byte	2
+ 295 010e BB       		.byte	-69
+ 296 010f 08       		.byte	8
+ 297 0110 D6       		.byte	-42
+ 298 0111 02       		.byte	2
+ 299 0112 D7       		.byte	-41
+ 300 0113 2C       		.byte	44
+ 301 0114 D8       		.byte	-40
+ 302 0115 04       		.byte	4
+ 303 0116 D9       		.byte	-39
+ 304 0117 04       		.byte	4
+ 305 0118 DB       		.byte	-37
+ 306 0119 04       		.byte	4
+ 307 011a DC       		.byte	-36
+ 308 011b 11       		.byte	17
+ 309 011c DD       		.byte	-35
+ 310 011d 10       		.byte	16
+ 311 011e DF       		.byte	-33
+ 312 011f 01       		.byte	1
+ 313 0120 00       		.byte	0
+ 314 0121 10       		.byte	16
+ 315 0122 04       		.byte	4
+ 316 0123 04       		.byte	4
+ 317 0124 06       		.byte	6
+ 318 0125 02       		.byte	2
+ 319 0126 07       		.byte	7
+ 320 0127 48       		.byte	72
+ 321 0128 09       		.byte	9
+ 322 0129 28       		.byte	40
+ 323 012a 0D       		.byte	13
+ 324 012b 08       		.byte	8
+ 325 012c 0E       		.byte	14
+ 326 012d 84       		.byte	-124
+ 327 012e 13       		.byte	19
+ 328 012f 08       		.byte	8
+ 329 0130 15       		.byte	21
+ 330 0131 10       		.byte	16
+ 331 0132 17       		.byte	23
+ 332 0133 01       		.byte	1
+ 333 0134 18       		.byte	24
+ 334 0135 10       		.byte	16
+ 335 0136 19       		.byte	25
+ 336 0137 02       		.byte	2
+ 337 0138 1E       		.byte	30
+ 338 0139 80       		.byte	-128
+ 339 013a 20       		.byte	32
+ 340 013b 04       		.byte	4
+ 341 013c 21       		.byte	33
+ 342 013d 30       		.byte	48
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cckeU7PV.s 			page 7
+
+
+ 343 013e 24       		.byte	36
+ 344 013f 08       		.byte	8
+ 345 0140 25       		.byte	37
+ 346 0141 08       		.byte	8
+ 347 0142 26       		.byte	38
+ 348 0143 14       		.byte	20
+ 349 0144 27       		.byte	39
+ 350 0145 18       		.byte	24
+ 351 0146 2A       		.byte	42
+ 352 0147 04       		.byte	4
+ 353 0148 2E       		.byte	46
+ 354 0149 80       		.byte	-128
+ 355 014a 2F       		.byte	47
+ 356 014b 90       		.byte	-112
+ 357 014c 31       		.byte	49
+ 358 014d 08       		.byte	8
+ 359 014e 37       		.byte	55
+ 360 014f 59       		.byte	89
+ 361 0150 38       		.byte	56
+ 362 0151 08       		.byte	8
+ 363 0152 39       		.byte	57
+ 364 0153 20       		.byte	32
+ 365 0154 3B       		.byte	59
+ 366 0155 20       		.byte	32
+ 367 0156 3C       		.byte	60
+ 368 0157 80       		.byte	-128
+ 369 0158 3E       		.byte	62
+ 370 0159 14       		.byte	20
+ 371 015a 65       		.byte	101
+ 372 015b 02       		.byte	2
+ 373 015c 6D       		.byte	109
+ 374 015d 10       		.byte	16
+ 375 015e 6E       		.byte	110
+ 376 015f 14       		.byte	20
+ 377 0160 6F       		.byte	111
+ 378 0161 47       		.byte	71
+ 379 0162 74       		.byte	116
+ 380 0163 40       		.byte	64
+ 381 0164 76       		.byte	118
+ 382 0165 02       		.byte	2
+ 383 0166 C0       		.byte	-64
+ 384 0167 F2       		.byte	-14
+ 385 0168 C2       		.byte	-62
+ 386 0169 76       		.byte	118
+ 387 016a C4       		.byte	-60
+ 388 016b 54       		.byte	84
+ 389 016c CA       		.byte	-54
+ 390 016d D2       		.byte	-46
+ 391 016e CC       		.byte	-52
+ 392 016f F2       		.byte	-14
+ 393 0170 CE       		.byte	-50
+ 394 0171 76       		.byte	118
+ 395 0172 D8       		.byte	-40
+ 396 0173 80       		.byte	-128
+ 397 0174 89       		.byte	-119
+ 398 0175 04       		.byte	4
+ 399 0176 8B       		.byte	-117
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cckeU7PV.s 			page 8
+
+
+ 400 0177 09       		.byte	9
+ 401 0178 91       		.byte	-111
+ 402 0179 0E       		.byte	14
+ 403 017a 99       		.byte	-103
+ 404 017b 05       		.byte	5
+ 405 017c 9B       		.byte	-101
+ 406 017d 0A       		.byte	10
+ 407 017e A5       		.byte	-91
+ 408 017f 03       		.byte	3
+ 409 0180 A7       		.byte	-89
+ 410 0181 04       		.byte	4
+ 411 0182 B1       		.byte	-79
+ 412 0183 0F       		.byte	15
+ 413 0184 B9       		.byte	-71
+ 414 0185 02       		.byte	2
+ 415 0186 D9       		.byte	-39
+ 416 0187 04       		.byte	4
+ 417 0188 DC       		.byte	-36
+ 418 0189 10       		.byte	16
+ 419 018a DF       		.byte	-33
+ 420 018b 01       		.byte	1
+ 421 018c 04       		.byte	4
+ 422 018d 04       		.byte	4
+ 423 018e 06       		.byte	6
+ 424 018f 02       		.byte	2
+ 425 0190 07       		.byte	7
+ 426 0191 40       		.byte	64
+ 427 0192 0D       		.byte	13
+ 428 0193 10       		.byte	16
+ 429 0194 0E       		.byte	14
+ 430 0195 A0       		.byte	-96
+ 431 0196 0F       		.byte	15
+ 432 0197 02       		.byte	2
+ 433 0198 16       		.byte	22
+ 434 0199 80       		.byte	-128
+ 435 019a 17       		.byte	23
+ 436 019b 14       		.byte	20
+ 437 019c 1E       		.byte	30
+ 438 019d 80       		.byte	-128
+ 439 019e 1F       		.byte	31
+ 440 019f 90       		.byte	-112
+ 441 01a0 21       		.byte	33
+ 442 01a1 02       		.byte	2
+ 443 01a2 25       		.byte	37
+ 444 01a3 80       		.byte	-128
+ 445 01a4 26       		.byte	38
+ 446 01a5 08       		.byte	8
+ 447 01a6 28       		.byte	40
+ 448 01a7 20       		.byte	32
+ 449 01a8 29       		.byte	41
+ 450 01a9 08       		.byte	8
+ 451 01aa 2D       		.byte	45
+ 452 01ab 08       		.byte	8
+ 453 01ac 2E       		.byte	46
+ 454 01ad A0       		.byte	-96
+ 455 01ae 2F       		.byte	47
+ 456 01af 82       		.byte	-126
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cckeU7PV.s 			page 9
+
+
+ 457 01b0 31       		.byte	49
+ 458 01b1 02       		.byte	2
+ 459 01b2 33       		.byte	51
+ 460 01b3 10       		.byte	16
+ 461 01b4 36       		.byte	54
+ 462 01b5 08       		.byte	8
+ 463 01b6 37       		.byte	55
+ 464 01b7 50       		.byte	80
+ 465 01b8 39       		.byte	57
+ 466 01b9 20       		.byte	32
+ 467 01ba 3A       		.byte	58
+ 468 01bb 20       		.byte	32
+ 469 01bc 3B       		.byte	59
+ 470 01bd 10       		.byte	16
+ 471 01be 3C       		.byte	60
+ 472 01bf 04       		.byte	4
+ 473 01c0 3E       		.byte	62
+ 474 01c1 16       		.byte	22
+ 475 01c2 3F       		.byte	63
+ 476 01c3 80       		.byte	-128
+ 477 01c4 44       		.byte	68
+ 478 01c5 22       		.byte	34
+ 479 01c6 45       		.byte	69
+ 480 01c7 81       		.byte	-127
+ 481 01c8 47       		.byte	71
+ 482 01c9 10       		.byte	16
+ 483 01ca 4D       		.byte	77
+ 484 01cb 04       		.byte	4
+ 485 01cc 4F       		.byte	79
+ 486 01cd 13       		.byte	19
+ 487 01ce 56       		.byte	86
+ 488 01cf 14       		.byte	20
+ 489 01d0 57       		.byte	87
+ 490 01d1 40       		.byte	64
+ 491 01d2 5C       		.byte	92
+ 492 01d3 20       		.byte	32
+ 493 01d4 5E       		.byte	94
+ 494 01d5 20       		.byte	32
+ 495 01d6 66       		.byte	102
+ 496 01d7 10       		.byte	16
+ 497 01d8 67       		.byte	103
+ 498 01d9 21       		.byte	33
+ 499 01da 91       		.byte	-111
+ 500 01db 20       		.byte	32
+ 501 01dc 92       		.byte	-110
+ 502 01dd 14       		.byte	20
+ 503 01de 9A       		.byte	-102
+ 504 01df 02       		.byte	2
+ 505 01e0 9B       		.byte	-101
+ 506 01e1 54       		.byte	84
+ 507 01e2 9E       		.byte	-98
+ 508 01e3 04       		.byte	4
+ 509 01e4 A2       		.byte	-94
+ 510 01e5 14       		.byte	20
+ 511 01e6 A3       		.byte	-93
+ 512 01e7 02       		.byte	2
+ 513 01e8 A7       		.byte	-89
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cckeU7PV.s 			page 10
+
+
+ 514 01e9 80       		.byte	-128
+ 515 01ea AA       		.byte	-86
+ 516 01eb 84       		.byte	-124
+ 517 01ec C0       		.byte	-64
+ 518 01ed B0       		.byte	-80
+ 519 01ee C2       		.byte	-62
+ 520 01ef F0       		.byte	-16
+ 521 01f0 C4       		.byte	-60
+ 522 01f1 70       		.byte	112
+ 523 01f2 CA       		.byte	-54
+ 524 01f3 F2       		.byte	-14
+ 525 01f4 CC       		.byte	-52
+ 526 01f5 75       		.byte	117
+ 527 01f6 CE       		.byte	-50
+ 528 01f7 F4       		.byte	-12
+ 529 01f8 D0       		.byte	-48
+ 530 01f9 F0       		.byte	-16
+ 531 01fa D2       		.byte	-46
+ 532 01fb 20       		.byte	32
+ 533 01fc D8       		.byte	-40
+ 534 01fd 70       		.byte	112
+ 535 01fe 94       		.byte	-108
+ 536 01ff 40       		.byte	64
+ 537 0200 94       		.byte	-108
+ 538 0201 40       		.byte	64
+ 539 0202 94       		.byte	-108
+ 540 0203 40       		.byte	64
+ 541 0204 A8       		.byte	-88
+ 542 0205 40       		.byte	64
+ 543 0206 0C       		.byte	12
+ 544 0207 01       		.byte	1
+ 545 0208 12       		.byte	18
+ 546 0209 0C       		.byte	12
+ 547 020a 14       		.byte	20
+ 548 020b 08       		.byte	8
+ 549 020c 1E       		.byte	30
+ 550 020d 03       		.byte	3
+ 551 020e 2E       		.byte	46
+ 552 020f 01       		.byte	1
+ 553 0210 30       		.byte	48
+ 554 0211 02       		.byte	2
+ 555 0212 32       		.byte	50
+ 556 0213 04       		.byte	4
+ 557 0214 34       		.byte	52
+ 558 0215 08       		.byte	8
+ 559 0216 36       		.byte	54
+ 560 0217 01       		.byte	1
+ 561 0218 3E       		.byte	62
+ 562 0219 50       		.byte	80
+ 563 021a 40       		.byte	64
+ 564 021b 15       		.byte	21
+ 565 021c 41       		.byte	65
+ 566 021d 04       		.byte	4
+ 567 021e 49       		.byte	73
+ 568 021f FF       		.byte	-1
+ 569 0220 4A       		.byte	74
+ 570 0221 FF       		.byte	-1
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cckeU7PV.s 			page 11
+
+
+ 571 0222 4B       		.byte	75
+ 572 0223 FF       		.byte	-1
+ 573 0224 4D       		.byte	77
+ 574 0225 A0       		.byte	-96
+ 575 0226 4F       		.byte	79
+ 576 0227 01       		.byte	1
+ 577 0228 50       		.byte	80
+ 578 0229 18       		.byte	24
+ 579 022a 52       		.byte	82
+ 580 022b 80       		.byte	-128
+ 581 022c 56       		.byte	86
+ 582 022d 08       		.byte	8
+ 583 022e 58       		.byte	88
+ 584 022f 04       		.byte	4
+ 585 0230 5A       		.byte	90
+ 586 0231 04       		.byte	4
+ 587 0232 5B       		.byte	91
+ 588 0233 04       		.byte	4
+ 589 0234 5C       		.byte	92
+ 590 0235 09       		.byte	9
+ 591 0236 5D       		.byte	93
+ 592 0237 99       		.byte	-103
+ 593 0238 5F       		.byte	95
+ 594 0239 01       		.byte	1
+ 595 023a 60       		.byte	96
+ 596 023b 40       		.byte	64
+ 597 023c 62       		.byte	98
+ 598 023d 80       		.byte	-128
+ 599 023e 64       		.byte	100
+ 600 023f 40       		.byte	64
+ 601 0240 65       		.byte	101
+ 602 0241 40       		.byte	64
+ 603 0242 66       		.byte	102
+ 604 0243 80       		.byte	-128
+ 605 0244 68       		.byte	104
+ 606 0245 40       		.byte	64
+ 607 0246 6A       		.byte	106
+ 608 0247 50       		.byte	80
+ 609 0248 6B       		.byte	107
+ 610 0249 A8       		.byte	-88
+ 611 024a 6C       		.byte	108
+ 612 024b 40       		.byte	64
+ 613 024c 6D       		.byte	109
+ 614 024d 20       		.byte	32
+ 615 024e 6E       		.byte	110
+ 616 024f 50       		.byte	80
+ 617 0250 6F       		.byte	111
+ 618 0251 A8       		.byte	-88
+ 619 0252 C0       		.byte	-64
+ 620 0253 51       		.byte	81
+ 621 0254 C1       		.byte	-63
+ 622 0255 04       		.byte	4
+ 623 0256 C9       		.byte	-55
+ 624 0257 FF       		.byte	-1
+ 625 0258 CA       		.byte	-54
+ 626 0259 FF       		.byte	-1
+ 627 025a CB       		.byte	-53
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cckeU7PV.s 			page 12
+
+
+ 628 025b FF       		.byte	-1
+ 629 025c CD       		.byte	-51
+ 630 025d AF       		.byte	-81
+ 631 025e CE       		.byte	-50
+ 632 025f 07       		.byte	7
+ 633 0260 CF       		.byte	-49
+ 634 0261 01       		.byte	1
+ 635 0262 D0       		.byte	-48
+ 636 0263 18       		.byte	24
+ 637 0264 D2       		.byte	-46
+ 638 0265 01       		.byte	1
+ 639 0266 DA       		.byte	-38
+ 640 0267 04       		.byte	4
+ 641 0268 DB       		.byte	-37
+ 642 0269 04       		.byte	4
+ 643 026a DD       		.byte	-35
+ 644 026b 19       		.byte	25
+ 645 026c DF       		.byte	-33
+ 646 026d 01       		.byte	1
+ 647 026e E0       		.byte	-32
+ 648 026f 40       		.byte	64
+ 649 0270 E2       		.byte	-30
+ 650 0271 80       		.byte	-128
+ 651 0272 E4       		.byte	-28
+ 652 0273 40       		.byte	64
+ 653 0274 E5       		.byte	-27
+ 654 0275 40       		.byte	64
+ 655 0276 E6       		.byte	-26
+ 656 0277 80       		.byte	-128
+ 657 0278 E8       		.byte	-24
+ 658 0279 40       		.byte	64
+ 659 027a EA       		.byte	-22
+ 660 027b 50       		.byte	80
+ 661 027c EB       		.byte	-21
+ 662 027d A8       		.byte	-88
+ 663 027e EC       		.byte	-20
+ 664 027f 40       		.byte	64
+ 665 0280 ED       		.byte	-19
+ 666 0281 20       		.byte	32
+ 667 0282 EE       		.byte	-18
+ 668 0283 50       		.byte	80
+ 669 0284 EF       		.byte	-17
+ 670 0285 A8       		.byte	-88
+ 671 0286 00       		.byte	0
+ 672 0287 40       		.byte	64
+ 673 0288 09       		.byte	9
+ 674 0289 82       		.byte	-126
+ 675 028a 0A       		.byte	10
+ 676 028b 10       		.byte	16
+ 677 028c 13       		.byte	19
+ 678 028d 40       		.byte	64
+ 679 028e 18       		.byte	24
+ 680 028f 41       		.byte	65
+ 681 0290 1A       		.byte	26
+ 682 0291 14       		.byte	20
+ 683 0292 1B       		.byte	27
+ 684 0293 40       		.byte	64
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cckeU7PV.s 			page 13
+
+
+ 685 0294 40       		.byte	64
+ 686 0295 01       		.byte	1
+ 687 0296 42       		.byte	66
+ 688 0297 80       		.byte	-128
+ 689 0298 46       		.byte	70
+ 690 0299 81       		.byte	-127
+ 691 029a 48       		.byte	72
+ 692 029b 02       		.byte	2
+ 693 029c 4F       		.byte	79
+ 694 029d 80       		.byte	-128
+ 695 029e 59       		.byte	89
+ 696 029f 80       		.byte	-128
+ 697 02a0 61       		.byte	97
+ 698 02a1 80       		.byte	-128
+ 699 02a2 6C       		.byte	108
+ 700 02a3 01       		.byte	1
+ 701 02a4 73       		.byte	115
+ 702 02a5 40       		.byte	64
+ 703 02a6 80       		.byte	-128
+ 704 02a7 09       		.byte	9
+ 705 02a8 81       		.byte	-127
+ 706 02a9 81       		.byte	-127
+ 707 02aa 82       		.byte	-126
+ 708 02ab 80       		.byte	-128
+ 709 02ac 94       		.byte	-108
+ 710 02ad 01       		.byte	1
+ 711 02ae 96       		.byte	-106
+ 712 02af 04       		.byte	4
+ 713 02b0 9A       		.byte	-102
+ 714 02b1 01       		.byte	1
+ 715 02b2 A0       		.byte	-96
+ 716 02b3 02       		.byte	2
+ 717 02b4 A1       		.byte	-95
+ 718 02b5 02       		.byte	2
+ 719 02b6 A4       		.byte	-92
+ 720 02b7 08       		.byte	8
+ 721 02b8 A5       		.byte	-91
+ 722 02b9 01       		.byte	1
+ 723 02ba A7       		.byte	-89
+ 724 02bb 40       		.byte	64
+ 725 02bc C0       		.byte	-64
+ 726 02bd 01       		.byte	1
+ 727 02be C2       		.byte	-62
+ 728 02bf 0D       		.byte	13
+ 729 02c0 C4       		.byte	-60
+ 730 02c1 01       		.byte	1
+ 731 02c2 D0       		.byte	-48
+ 732 02c3 99       		.byte	-103
+ 733 02c4 D2       		.byte	-46
+ 734 02c5 18       		.byte	24
+ 735 02c6 D6       		.byte	-42
+ 736 02c7 08       		.byte	8
+ 737 02c8 D8       		.byte	-40
+ 738 02c9 08       		.byte	8
+ 739 02ca E2       		.byte	-30
+ 740 02cb 01       		.byte	1
+ 741 02cc E6       		.byte	-26
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cckeU7PV.s 			page 14
+
+
+ 742 02cd 20       		.byte	32
+ 743 02ce EC       		.byte	-20
+ 744 02cf 10       		.byte	16
+ 745 02d0 EE       		.byte	-18
+ 746 02d1 08       		.byte	8
+ 747 02d2 0B       		.byte	11
+ 748 02d3 03       		.byte	3
+ 749 02d4 16       		.byte	22
+ 750 02d5 01       		.byte	1
+ 751 02d6 17       		.byte	23
+ 752 02d7 03       		.byte	3
+ 753 02d8 18       		.byte	24
+ 754 02d9 01       		.byte	1
+ 755 02da 19       		.byte	25
+ 756 02db 01       		.byte	1
+ 757 02dc 1F       		.byte	31
+ 758 02dd 02       		.byte	2
+ 759 02de 2A       		.byte	42
+ 760 02df 01       		.byte	1
+ 761 02e0 30       		.byte	48
+ 762 02e1 01       		.byte	1
+ 763 02e2 31       		.byte	49
+ 764 02e3 03       		.byte	3
+ 765 02e4 3E       		.byte	62
+ 766 02e5 01       		.byte	1
+ 767 02e6 40       		.byte	64
+ 768 02e7 51       		.byte	81
+ 769 02e8 41       		.byte	65
+ 770 02e9 06       		.byte	6
+ 771 02ea 49       		.byte	73
+ 772 02eb FF       		.byte	-1
+ 773 02ec 4A       		.byte	74
+ 774 02ed FF       		.byte	-1
+ 775 02ee 4B       		.byte	75
+ 776 02ef FF       		.byte	-1
+ 777 02f0 4D       		.byte	77
+ 778 02f1 AF       		.byte	-81
+ 779 02f2 4E       		.byte	78
+ 780 02f3 07       		.byte	7
+ 781 02f4 4F       		.byte	79
+ 782 02f5 01       		.byte	1
+ 783 02f6 50       		.byte	80
+ 784 02f7 18       		.byte	24
+ 785 02f8 54       		.byte	84
+ 786 02f9 09       		.byte	9
+ 787 02fa 56       		.byte	86
+ 788 02fb 04       		.byte	4
+ 789 02fc 58       		.byte	88
+ 790 02fd 04       		.byte	4
+ 791 02fe 59       		.byte	89
+ 792 02ff 04       		.byte	4
+ 793 0300 5A       		.byte	90
+ 794 0301 04       		.byte	4
+ 795 0302 5B       		.byte	91
+ 796 0303 04       		.byte	4
+ 797 0304 5C       		.byte	92
+ 798 0305 10       		.byte	16
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cckeU7PV.s 			page 15
+
+
+ 799 0306 5D       		.byte	93
+ 800 0307 19       		.byte	25
+ 801 0308 5F       		.byte	95
+ 802 0309 01       		.byte	1
+ 803 030a 60       		.byte	96
+ 804 030b 40       		.byte	64
+ 805 030c 62       		.byte	98
+ 806 030d 80       		.byte	-128
+ 807 030e 64       		.byte	100
+ 808 030f 40       		.byte	64
+ 809 0310 65       		.byte	101
+ 810 0311 40       		.byte	64
+ 811 0312 66       		.byte	102
+ 812 0313 80       		.byte	-128
+ 813 0314 68       		.byte	104
+ 814 0315 40       		.byte	64
+ 815 0316 6A       		.byte	106
+ 816 0317 50       		.byte	80
+ 817 0318 6B       		.byte	107
+ 818 0319 A8       		.byte	-88
+ 819 031a 6C       		.byte	108
+ 820 031b 40       		.byte	64
+ 821 031c 6D       		.byte	109
+ 822 031d 20       		.byte	32
+ 823 031e 6E       		.byte	110
+ 824 031f 50       		.byte	80
+ 825 0320 6F       		.byte	111
+ 826 0321 A8       		.byte	-88
+ 827 0322 85       		.byte	-123
+ 828 0323 01       		.byte	1
+ 829 0324 88       		.byte	-120
+ 830 0325 01       		.byte	1
+ 831 0326 89       		.byte	-119
+ 832 0327 01       		.byte	1
+ 833 0328 A6       		.byte	-90
+ 834 0329 03       		.byte	3
+ 835 032a A9       		.byte	-87
+ 836 032b 01       		.byte	1
+ 837 032c B2       		.byte	-78
+ 838 032d 02       		.byte	2
+ 839 032e B6       		.byte	-74
+ 840 032f 01       		.byte	1
+ 841 0330 B7       		.byte	-73
+ 842 0331 01       		.byte	1
+ 843 0332 BE       		.byte	-66
+ 844 0333 40       		.byte	64
+ 845 0334 BF       		.byte	-65
+ 846 0335 40       		.byte	64
+ 847 0336 C0       		.byte	-64
+ 848 0337 15       		.byte	21
+ 849 0338 C1       		.byte	-63
+ 850 0339 06       		.byte	6
+ 851 033a C5       		.byte	-59
+ 852 033b 24       		.byte	36
+ 853 033c C6       		.byte	-58
+ 854 033d C0       		.byte	-64
+ 855 033e C7       		.byte	-57
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cckeU7PV.s 			page 16
+
+
+ 856 033f 0E       		.byte	14
+ 857 0340 C8       		.byte	-56
+ 858 0341 3B       		.byte	59
+ 859 0342 C9       		.byte	-55
+ 860 0343 FF       		.byte	-1
+ 861 0344 CA       		.byte	-54
+ 862 0345 FF       		.byte	-1
+ 863 0346 CB       		.byte	-53
+ 864 0347 FF       		.byte	-1
+ 865 0348 CD       		.byte	-51
+ 866 0349 AF       		.byte	-81
+ 867 034a CE       		.byte	-50
+ 868 034b 07       		.byte	7
+ 869 034c CF       		.byte	-49
+ 870 034d 01       		.byte	1
+ 871 034e D0       		.byte	-48
+ 872 034f 18       		.byte	24
+ 873 0350 D4       		.byte	-44
+ 874 0351 07       		.byte	7
+ 875 0352 D8       		.byte	-40
+ 876 0353 04       		.byte	4
+ 877 0354 D9       		.byte	-39
+ 878 0355 04       		.byte	4
+ 879 0356 DA       		.byte	-38
+ 880 0357 04       		.byte	4
+ 881 0358 DB       		.byte	-37
+ 882 0359 04       		.byte	4
+ 883 035a DC       		.byte	-36
+ 884 035b 09       		.byte	9
+ 885 035c DD       		.byte	-35
+ 886 035d 99       		.byte	-103
+ 887 035e DF       		.byte	-33
+ 888 035f 01       		.byte	1
+ 889 0360 E0       		.byte	-32
+ 890 0361 40       		.byte	64
+ 891 0362 E2       		.byte	-30
+ 892 0363 80       		.byte	-128
+ 893 0364 E4       		.byte	-28
+ 894 0365 40       		.byte	64
+ 895 0366 E5       		.byte	-27
+ 896 0367 40       		.byte	64
+ 897 0368 E6       		.byte	-26
+ 898 0369 80       		.byte	-128
+ 899 036a E8       		.byte	-24
+ 900 036b 40       		.byte	64
+ 901 036c EA       		.byte	-22
+ 902 036d 50       		.byte	80
+ 903 036e EB       		.byte	-21
+ 904 036f A8       		.byte	-88
+ 905 0370 EC       		.byte	-20
+ 906 0371 40       		.byte	64
+ 907 0372 ED       		.byte	-19
+ 908 0373 20       		.byte	32
+ 909 0374 EE       		.byte	-18
+ 910 0375 50       		.byte	80
+ 911 0376 EF       		.byte	-17
+ 912 0377 A8       		.byte	-88
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cckeU7PV.s 			page 17
+
+
+ 913 0378 00       		.byte	0
+ 914 0379 10       		.byte	16
+ 915 037a 05       		.byte	5
+ 916 037b 20       		.byte	32
+ 917 037c 06       		.byte	6
+ 918 037d 04       		.byte	4
+ 919 037e 0D       		.byte	13
+ 920 037f 04       		.byte	4
+ 921 0380 0E       		.byte	14
+ 922 0381 28       		.byte	40
+ 923 0382 0F       		.byte	15
+ 924 0383 08       		.byte	8
+ 925 0384 10       		.byte	16
+ 926 0385 20       		.byte	32
+ 927 0386 15       		.byte	21
+ 928 0387 20       		.byte	32
+ 929 0388 18       		.byte	24
+ 930 0389 10       		.byte	16
+ 931 038a 19       		.byte	25
+ 932 038b 40       		.byte	64
+ 933 038c 1E       		.byte	30
+ 934 038d 80       		.byte	-128
+ 935 038e 23       		.byte	35
+ 936 038f 01       		.byte	1
+ 937 0390 27       		.byte	39
+ 938 0391 40       		.byte	64
+ 939 0392 2B       		.byte	43
+ 940 0393 04       		.byte	4
+ 941 0394 36       		.byte	54
+ 942 0395 14       		.byte	20
+ 943 0396 37       		.byte	55
+ 944 0397 40       		.byte	64
+ 945 0398 39       		.byte	57
+ 946 0399 28       		.byte	40
+ 947 039a 3F       		.byte	63
+ 948 039b 10       		.byte	16
+ 949 039c 40       		.byte	64
+ 950 039d 01       		.byte	1
+ 951 039e 46       		.byte	70
+ 952 039f 01       		.byte	1
+ 953 03a0 48       		.byte	72
+ 954 03a1 2A       		.byte	42
+ 955 03a2 49       		.byte	73
+ 956 03a3 02       		.byte	2
+ 957 03a4 4C       		.byte	76
+ 958 03a5 08       		.byte	8
+ 959 03a6 4F       		.byte	79
+ 960 03a7 80       		.byte	-128
+ 961 03a8 50       		.byte	80
+ 962 03a9 02       		.byte	2
+ 963 03aa 51       		.byte	81
+ 964 03ab 0A       		.byte	10
+ 965 03ac 52       		.byte	82
+ 966 03ad 11       		.byte	17
+ 967 03ae 59       		.byte	89
+ 968 03af 50       		.byte	80
+ 969 03b0 5A       		.byte	90
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cckeU7PV.s 			page 18
+
+
+ 970 03b1 04       		.byte	4
+ 971 03b2 5C       		.byte	92
+ 972 03b3 02       		.byte	2
+ 973 03b4 5D       		.byte	93
+ 974 03b5 24       		.byte	36
+ 975 03b6 5E       		.byte	94
+ 976 03b7 80       		.byte	-128
+ 977 03b8 61       		.byte	97
+ 978 03b9 08       		.byte	8
+ 979 03ba 62       		.byte	98
+ 980 03bb 10       		.byte	16
+ 981 03bc 66       		.byte	102
+ 982 03bd 02       		.byte	2
+ 983 03be 67       		.byte	103
+ 984 03bf 01       		.byte	1
+ 985 03c0 81       		.byte	-127
+ 986 03c1 12       		.byte	18
+ 987 03c2 83       		.byte	-125
+ 988 03c3 40       		.byte	64
+ 989 03c4 8A       		.byte	-118
+ 990 03c5 02       		.byte	2
+ 991 03c6 91       		.byte	-111
+ 992 03c7 24       		.byte	36
+ 993 03c8 93       		.byte	-109
+ 994 03c9 10       		.byte	16
+ 995 03ca 98       		.byte	-104
+ 996 03cb 02       		.byte	2
+ 997 03cc 9A       		.byte	-102
+ 998 03cd 04       		.byte	4
+ 999 03ce A2       		.byte	-94
+ 1000 03cf 14       		.byte	20
+ 1001 03d0 A5       		.byte	-91
+ 1002 03d1 01       		.byte	1
+ 1003 03d2 AE       		.byte	-82
+ 1004 03d3 08       		.byte	8
+ 1005 03d4 C0       		.byte	-64
+ 1006 03d5 02       		.byte	2
+ 1007 03d6 C2       		.byte	-62
+ 1008 03d7 60       		.byte	96
+ 1009 03d8 C4       		.byte	-60
+ 1010 03d9 44       		.byte	68
+ 1011 03da CA       		.byte	-54
+ 1012 03db 04       		.byte	4
+ 1013 03dc CC       		.byte	-52
+ 1014 03dd 70       		.byte	112
+ 1015 03de CE       		.byte	-50
+ 1016 03df 26       		.byte	38
+ 1017 03e0 D0       		.byte	-48
+ 1018 03e1 18       		.byte	24
+ 1019 03e2 D2       		.byte	-46
+ 1020 03e3 3C       		.byte	60
+ 1021 03e4 D6       		.byte	-42
+ 1022 03e5 FE       		.byte	-2
+ 1023 03e6 D8       		.byte	-40
+ 1024 03e7 96       		.byte	-106
+ 1025 03e8 E2       		.byte	-30
+ 1026 03e9 80       		.byte	-128
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cckeU7PV.s 			page 19
+
+
+ 1027 03ea 40       		.byte	64
+ 1028 03eb 14       		.byte	20
+ 1029 03ec 49       		.byte	73
+ 1030 03ed FF       		.byte	-1
+ 1031 03ee 4A       		.byte	74
+ 1032 03ef FF       		.byte	-1
+ 1033 03f0 4B       		.byte	75
+ 1034 03f1 FF       		.byte	-1
+ 1035 03f2 4F       		.byte	79
+ 1036 03f3 01       		.byte	1
+ 1037 03f4 50       		.byte	80
+ 1038 03f5 18       		.byte	24
+ 1039 03f6 5A       		.byte	90
+ 1040 03f7 04       		.byte	4
+ 1041 03f8 5D       		.byte	93
+ 1042 03f9 09       		.byte	9
+ 1043 03fa 5F       		.byte	95
+ 1044 03fb 01       		.byte	1
+ 1045 03fc 60       		.byte	96
+ 1046 03fd 40       		.byte	64
+ 1047 03fe 62       		.byte	98
+ 1048 03ff 40       		.byte	64
+ 1049 0400 64       		.byte	100
+ 1050 0401 40       		.byte	64
+ 1051 0402 65       		.byte	101
+ 1052 0403 40       		.byte	64
+ 1053 0404 66       		.byte	102
+ 1054 0405 80       		.byte	-128
+ 1055 0406 68       		.byte	104
+ 1056 0407 80       		.byte	-128
+ 1057 0408 6A       		.byte	106
+ 1058 0409 80       		.byte	-128
+ 1059 040a 6C       		.byte	108
+ 1060 040b 80       		.byte	-128
+ 1061 040c 6E       		.byte	110
+ 1062 040d 80       		.byte	-128
+ 1063 040e 8F       		.byte	-113
+ 1064 040f 01       		.byte	1
+ 1065 0410 92       		.byte	-110
+ 1066 0411 01       		.byte	1
+ 1067 0412 93       		.byte	-109
+ 1068 0413 01       		.byte	1
+ 1069 0414 AE       		.byte	-82
+ 1070 0415 01       		.byte	1
+ 1071 0416 B6       		.byte	-74
+ 1072 0417 01       		.byte	1
+ 1073 0418 B7       		.byte	-73
+ 1074 0419 01       		.byte	1
+ 1075 041a BE       		.byte	-66
+ 1076 041b 40       		.byte	64
+ 1077 041c C0       		.byte	-64
+ 1078 041d 54       		.byte	84
+ 1079 041e C5       		.byte	-59
+ 1080 041f EC       		.byte	-20
+ 1081 0420 C7       		.byte	-57
+ 1082 0421 20       		.byte	32
+ 1083 0422 C8       		.byte	-56
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cckeU7PV.s 			page 20
+
+
+ 1084 0423 23       		.byte	35
+ 1085 0424 C9       		.byte	-55
+ 1086 0425 FF       		.byte	-1
+ 1087 0426 CA       		.byte	-54
+ 1088 0427 FF       		.byte	-1
+ 1089 0428 CB       		.byte	-53
+ 1090 0429 FF       		.byte	-1
+ 1091 042a CD       		.byte	-51
+ 1092 042b 83       		.byte	-125
+ 1093 042c CE       		.byte	-50
+ 1094 042d 03       		.byte	3
+ 1095 042e CF       		.byte	-49
+ 1096 042f 01       		.byte	1
+ 1097 0430 D0       		.byte	-48
+ 1098 0431 18       		.byte	24
+ 1099 0432 D2       		.byte	-46
+ 1100 0433 80       		.byte	-128
+ 1101 0434 D4       		.byte	-44
+ 1102 0435 01       		.byte	1
+ 1103 0436 D6       		.byte	-42
+ 1104 0437 04       		.byte	4
+ 1105 0438 D8       		.byte	-40
+ 1106 0439 04       		.byte	4
+ 1107 043a D9       		.byte	-39
+ 1108 043b 04       		.byte	4
+ 1109 043c DA       		.byte	-38
+ 1110 043d 04       		.byte	4
+ 1111 043e DB       		.byte	-37
+ 1112 043f 04       		.byte	4
+ 1113 0440 DC       		.byte	-36
+ 1114 0441 90       		.byte	-112
+ 1115 0442 DD       		.byte	-35
+ 1116 0443 99       		.byte	-103
+ 1117 0444 DF       		.byte	-33
+ 1118 0445 01       		.byte	1
+ 1119 0446 E0       		.byte	-32
+ 1120 0447 40       		.byte	64
+ 1121 0448 E2       		.byte	-30
+ 1122 0449 40       		.byte	64
+ 1123 044a E4       		.byte	-28
+ 1124 044b 40       		.byte	64
+ 1125 044c E5       		.byte	-27
+ 1126 044d 40       		.byte	64
+ 1127 044e E6       		.byte	-26
+ 1128 044f 80       		.byte	-128
+ 1129 0450 E8       		.byte	-24
+ 1130 0451 80       		.byte	-128
+ 1131 0452 EA       		.byte	-22
+ 1132 0453 80       		.byte	-128
+ 1133 0454 EC       		.byte	-20
+ 1134 0455 80       		.byte	-128
+ 1135 0456 EE       		.byte	-18
+ 1136 0457 80       		.byte	-128
+ 1137 0458 09       		.byte	9
+ 1138 0459 02       		.byte	2
+ 1139 045a 13       		.byte	19
+ 1140 045b 80       		.byte	-128
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cckeU7PV.s 			page 21
+
+
+ 1141 045c 19       		.byte	25
+ 1142 045d 40       		.byte	64
+ 1143 045e 20       		.byte	32
+ 1144 045f 02       		.byte	2
+ 1145 0460 31       		.byte	49
+ 1146 0461 02       		.byte	2
+ 1147 0462 3B       		.byte	59
+ 1148 0463 40       		.byte	64
+ 1149 0464 41       		.byte	65
+ 1150 0465 02       		.byte	2
+ 1151 0466 45       		.byte	69
+ 1152 0467 02       		.byte	2
+ 1153 0468 47       		.byte	71
+ 1154 0469 80       		.byte	-128
+ 1155 046a 49       		.byte	73
+ 1156 046b 05       		.byte	5
+ 1157 046c 4B       		.byte	75
+ 1158 046d 40       		.byte	64
+ 1159 046e 51       		.byte	81
+ 1160 046f 02       		.byte	2
+ 1161 0470 59       		.byte	89
+ 1162 0471 45       		.byte	69
+ 1163 0472 60       		.byte	96
+ 1164 0473 40       		.byte	64
+ 1165 0474 73       		.byte	115
+ 1166 0475 C0       		.byte	-64
+ 1167 0476 94       		.byte	-108
+ 1168 0477 40       		.byte	64
+ 1169 0478 C2       		.byte	-62
+ 1170 0479 08       		.byte	8
+ 1171 047a C4       		.byte	-60
+ 1172 047b 01       		.byte	1
+ 1173 047c CC       		.byte	-52
+ 1174 047d 01       		.byte	1
+ 1175 047e CE       		.byte	-50
+ 1176 047f 08       		.byte	8
+ 1177 0480 D0       		.byte	-48
+ 1178 0481 91       		.byte	-111
+ 1179 0482 D2       		.byte	-46
+ 1180 0483 08       		.byte	8
+ 1181 0484 D6       		.byte	-42
+ 1182 0485 0B       		.byte	11
+ 1183 0486 D8       		.byte	-40
+ 1184 0487 01       		.byte	1
+ 1185 0488 B8       		.byte	-72
+ 1186 0489 80       		.byte	-128
+ 1187 048a BE       		.byte	-66
+ 1188 048b 41       		.byte	65
+ 1189 048c D8       		.byte	-40
+ 1190 048d 04       		.byte	4
+ 1191 048e DF       		.byte	-33
+ 1192 048f 01       		.byte	1
+ 1193 0490 1C       		.byte	28
+ 1194 0491 01       		.byte	1
+ 1195 0492 1D       		.byte	29
+ 1196 0493 02       		.byte	2
+ 1197 0494 80       		.byte	-128
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cckeU7PV.s 			page 22
+
+
+ 1198 0495 01       		.byte	1
+ 1199 0496 89       		.byte	-119
+ 1200 0497 02       		.byte	2
+ 1201 0498 B0       		.byte	-80
+ 1202 0499 01       		.byte	1
+ 1203 049a E0       		.byte	-32
+ 1204 049b 01       		.byte	1
+ 1205 049c E6       		.byte	-26
+ 1206 049d 20       		.byte	32
+ 1207 049e EC       		.byte	-20
+ 1208 049f 10       		.byte	16
+ 1209 04a0 EE       		.byte	-18
+ 1210 04a1 08       		.byte	8
+ 1211 04a2 32       		.byte	50
+ 1212 04a3 04       		.byte	4
+ 1213 04a4 33       		.byte	51
+ 1214 04a5 20       		.byte	32
+ 1215 04a6 36       		.byte	54
+ 1216 04a7 80       		.byte	-128
+ 1217 04a8 CC       		.byte	-52
+ 1218 04a9 70       		.byte	112
+ 1219 04aa 96       		.byte	-106
+ 1220 04ab 08       		.byte	8
+ 1221 04ac A7       		.byte	-89
+ 1222 04ad 20       		.byte	32
+ 1223 04ae AA       		.byte	-86
+ 1224 04af 80       		.byte	-128
+ 1225 04b0 EE       		.byte	-18
+ 1226 04b1 20       		.byte	32
+ 1227 04b2 96       		.byte	-106
+ 1228 04b3 08       		.byte	8
+ 1229 04b4 A7       		.byte	-89
+ 1230 04b5 20       		.byte	32
+ 1231 04b6 62       		.byte	98
+ 1232 04b7 02       		.byte	2
+ 1233 04b8 96       		.byte	-106
+ 1234 04b9 08       		.byte	8
+ 1235 04ba A7       		.byte	-89
+ 1236 04bb 20       		.byte	32
+ 1237 04bc D8       		.byte	-40
+ 1238 04bd 40       		.byte	64
+ 1239 04be 7D       		.byte	125
+ 1240 04bf 20       		.byte	32
+ 1241 04c0 DE       		.byte	-34
+ 1242 04c1 01       		.byte	1
+ 1243 04c2 A5       		.byte	-91
+ 1244 04c3 10       		.byte	16
+ 1245 04c4 45       		.byte	69
+ 1246 04c5 08       		.byte	8
+ 1247 04c6 A5       		.byte	-91
+ 1248 04c7 10       		.byte	16
+ 1249 04c8 D0       		.byte	-48
+ 1250 04c9 01       		.byte	1
+ 1251 04ca A5       		.byte	-91
+ 1252 04cb 18       		.byte	24
+ 1253 04cc 25       		.byte	37
+ 1254 04cd 10       		.byte	16
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cckeU7PV.s 			page 23
+
+
+ 1255 04ce 6A       		.byte	106
+ 1256 04cf 04       		.byte	4
+ 1257 04d0 80       		.byte	-128
+ 1258 04d1 80       		.byte	-128
+ 1259 04d2 8A       		.byte	-118
+ 1260 04d3 04       		.byte	4
+ 1261 04d4 93       		.byte	-109
+ 1262 04d5 80       		.byte	-128
+ 1263 04d6 96       		.byte	-106
+ 1264 04d7 08       		.byte	8
+ 1265 04d8 A6       		.byte	-90
+ 1266 04d9 02       		.byte	2
+ 1267 04da A7       		.byte	-89
+ 1268 04db 20       		.byte	32
+ 1269 04dc AF       		.byte	-81
+ 1270 04dd 40       		.byte	64
+ 1271 04de C8       		.byte	-56
+ 1272 04df 20       		.byte	32
+ 1273 04e0 DA       		.byte	-38
+ 1274 04e1 40       		.byte	64
+ 1275 04e2 E6       		.byte	-26
+ 1276 04e3 80       		.byte	-128
+ 1277 04e4 EA       		.byte	-22
+ 1278 04e5 10       		.byte	16
+ 1279 04e6 07       		.byte	7
+ 1280 04e7 40       		.byte	64
+ 1281 04e8 18       		.byte	24
+ 1282 04e9 04       		.byte	4
+ 1283 04ea 53       		.byte	83
+ 1284 04eb 40       		.byte	64
+ 1285 04ec 58       		.byte	88
+ 1286 04ed 80       		.byte	-128
+ 1287 04ee 6F       		.byte	111
+ 1288 04ef 20       		.byte	32
+ 1289 04f0 80       		.byte	-128
+ 1290 04f1 04       		.byte	4
+ 1291 04f2 82       		.byte	-126
+ 1292 04f3 02       		.byte	2
+ 1293 04f4 83       		.byte	-125
+ 1294 04f5 60       		.byte	96
+ 1295 04f6 8A       		.byte	-118
+ 1296 04f7 04       		.byte	4
+ 1297 04f8 93       		.byte	-109
+ 1298 04f9 80       		.byte	-128
+ 1299 04fa 96       		.byte	-106
+ 1300 04fb 04       		.byte	4
+ 1301 04fc 98       		.byte	-104
+ 1302 04fd 80       		.byte	-128
+ 1303 04fe A6       		.byte	-90
+ 1304 04ff 02       		.byte	2
+ 1305 0500 AF       		.byte	-81
+ 1306 0501 20       		.byte	32
+ 1307 0502 B5       		.byte	-75
+ 1308 0503 10       		.byte	16
+ 1309 0504 C0       		.byte	-64
+ 1310 0505 20       		.byte	32
+ 1311 0506 C6       		.byte	-58
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cckeU7PV.s 			page 24
+
+
+ 1312 0507 40       		.byte	64
+ 1313 0508 D4       		.byte	-44
+ 1314 0509 A0       		.byte	-96
+ 1315 050a DA       		.byte	-38
+ 1316 050b 80       		.byte	-128
+ 1317 050c E0       		.byte	-32
+ 1318 050d 20       		.byte	32
+ 1319 050e E2       		.byte	-30
+ 1320 050f 80       		.byte	-128
+ 1321 0510 E4       		.byte	-28
+ 1322 0511 80       		.byte	-128
+ 1323 0512 E6       		.byte	-26
+ 1324 0513 20       		.byte	32
+ 1325 0514 EE       		.byte	-18
+ 1326 0515 10       		.byte	16
+ 1327 0516 1F       		.byte	31
+ 1328 0517 80       		.byte	-128
+ 1329 0518 5C       		.byte	92
+ 1330 0519 08       		.byte	8
+ 1331 051a A5       		.byte	-91
+ 1332 051b 18       		.byte	24
+ 1333 051c C6       		.byte	-58
+ 1334 051d 01       		.byte	1
+ 1335 051e D6       		.byte	-42
+ 1336 051f 01       		.byte	1
+ 1337 0520 81       		.byte	-127
+ 1338 0521 10       		.byte	16
+ 1339 0522 A5       		.byte	-91
+ 1340 0523 10       		.byte	16
+ 1341 0524 AF       		.byte	-81
+ 1342 0525 80       		.byte	-128
+ 1343 0526 B0       		.byte	-80
+ 1344 0527 08       		.byte	8
+ 1345 0528 B5       		.byte	-75
+ 1346 0529 08       		.byte	8
+ 1347 052a E8       		.byte	-24
+ 1348 052b 01       		.byte	1
+ 1349 052c EC       		.byte	-20
+ 1350 052d 08       		.byte	8
+ 1351 052e 00       		.byte	0
+ 1352 052f 02       		.byte	2
+ 1353 0530 0A       		.byte	10
+ 1354 0531 02       		.byte	2
+ 1355 0532 10       		.byte	16
+ 1356 0533 02       		.byte	2
+ 1357 0534 11       		.byte	17
+ 1358 0535 01       		.byte	1
+ 1359 0536 1A       		.byte	26
+ 1360 0537 02       		.byte	2
+ 1361 0538 1B       		.byte	27
+ 1362 0539 01       		.byte	1
+ 1363 053a 1D       		.byte	29
+ 1364 053b 01       		.byte	1
+ 1365 053c 00       		.byte	0
+ 1366 053d 3F       		.byte	63
+ 1367 053e 00       		.byte	0
+ 1368 053f 00       		.byte	0
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cckeU7PV.s 			page 25
+
+
+ 1369 0540 0C       		.byte	12
+ 1370 0541 09       		.byte	9
+ 1371 0542 00       		.byte	0
+ 1372 0543 00       		.byte	0
+ 1373 0544 0C       		.byte	12
+ 1374 0545 09       		.byte	9
+ 1375 0546 00       		.byte	0
+ 1376 0547 00       		.byte	0
+ 1377 0548 00       		.byte	0
+ 1378 0549 01       		.byte	1
+ 1379 054a 00       		.byte	0
+ 1380 054b 08       		.byte	8
+ 1381 054c 0C       		.byte	12
+ 1382 054d C0       		.byte	-64
+ 1383 054e 00       		.byte	0
+ 1384 054f 00       		.byte	0
+ 1385 0550 01       		.byte	1
+ 1386 0551 00       		.byte	0
+ 1387 0552 06       		.byte	6
+ 1388 0553 00       		.byte	0
+ 1389 0554 00       		.byte	0
+ 1390 0555 02       		.byte	2
+ 1391 0556 03       		.byte	3
+ 1392 0557 00       		.byte	0
+ 1393 0558 07       		.byte	7
+ 1394 0559 14       		.byte	20
+ 1395 055a 00       		.byte	0
+ 1396 055b 20       		.byte	32
+ 1397 055c 00       		.byte	0
+ 1398 055d 09       		.byte	9
+ 1399 055e 08       		.byte	8
+ 1400 055f 00       		.byte	0
+ 1401 0560 04       		.byte	4
+ 1402 0561 08       		.byte	8
+ 1403 0562 08       		.byte	8
+ 1404 0563 00       		.byte	0
+ 1405 0564 08       		.byte	8
+ 1406 0565 0E       		.byte	14
+ 1407 0566 04       		.byte	4
+ 1408 0567 70       		.byte	112
+ 1409 0568 01       		.byte	1
+ 1410 0569 AC       		.byte	-84
+ 1411 056a 06       		.byte	6
+ 1412 056b 12       		.byte	18
+ 1413 056c 00       		.byte	0
+ 1414 056d 08       		.byte	8
+ 1415 056e 00       		.byte	0
+ 1416 056f 01       		.byte	1
+ 1417 0570 07       		.byte	7
+ 1418 0571 00       		.byte	0
+ 1419 0572 00       		.byte	0
+ 1420 0573 FE       		.byte	-2
+ 1421 0574 08       		.byte	8
+ 1422 0575 00       		.byte	0
+ 1423 0576 07       		.byte	7
+ 1424 0577 01       		.byte	1
+ 1425 0578 00       		.byte	0
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cckeU7PV.s 			page 26
+
+
+ 1426 0579 08       		.byte	8
+ 1427 057a 82       		.byte	-126
+ 1428 057b 00       		.byte	0
+ 1429 057c 00       		.byte	0
+ 1430 057d 00       		.byte	0
+ 1431 057e 10       		.byte	16
+ 1432 057f 40       		.byte	64
+ 1433 0580 26       		.byte	38
+ 1434 0581 03       		.byte	3
+ 1435 0582 10       		.byte	16
+ 1436 0583 00       		.byte	0
+ 1437 0584 04       		.byte	4
+ 1438 0585 DE       		.byte	-34
+ 1439 0586 FB       		.byte	-5
+ 1440 0587 0C       		.byte	12
+ 1441 0588 1F       		.byte	31
+ 1442 0589 FF       		.byte	-1
+ 1443 058a FF       		.byte	-1
+ 1444 058b FF       		.byte	-1
+ 1445 058c 22       		.byte	34
+ 1446 058d 00       		.byte	0
+ 1447 058e F0       		.byte	-16
+ 1448 058f 08       		.byte	8
+ 1449 0590 04       		.byte	4
+ 1450 0591 00       		.byte	0
+ 1451 0592 00       		.byte	0
+ 1452 0593 00       		.byte	0
+ 1453 0594 40       		.byte	64
+ 1454 0595 00       		.byte	0
+ 1455 0596 00       		.byte	0
+ 1456 0597 00       		.byte	0
+ 1457 0598 04       		.byte	4
+ 1458 0599 04       		.byte	4
+ 1459 059a 04       		.byte	4
+ 1460 059b 04       		.byte	4
+ 1461 059c 11       		.byte	17
+ 1462 059d 11       		.byte	17
+ 1463 059e 00       		.byte	0
+ 1464 059f 01       		.byte	1
+ 1465 05a0 00       		.byte	0
+ 1466 05a1 00       		.byte	0
+ 1467 05a2 C0       		.byte	-64
+ 1468 05a3 00       		.byte	0
+ 1469 05a4 40       		.byte	64
+ 1470 05a5 01       		.byte	1
+ 1471 05a6 10       		.byte	16
+ 1472 05a7 11       		.byte	17
+ 1473 05a8 C0       		.byte	-64
+ 1474 05a9 01       		.byte	1
+ 1475 05aa 00       		.byte	0
+ 1476 05ab 11       		.byte	17
+ 1477 05ac 40       		.byte	64
+ 1478 05ad 01       		.byte	1
+ 1479 05ae 40       		.byte	64
+ 1480 05af 01       		.byte	1
+ 1481 05b0 00       		.byte	0
+ 1482 05b1 00       		.byte	0
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cckeU7PV.s 			page 27
+
+
+ 1483 05b2 00       		.byte	0
+ 1484 05b3 00       		.byte	0
+ 1485 05b4 00       		.byte	0
+ 1486 05b5 00       		.byte	0
+ 1487 05b6 00       		.byte	0
+ 1488 05b7 00       		.byte	0
+ 1489 05b8 00       		.byte	0
+ 1490 05b9 00       		.byte	0
+ 1491 05ba 00       		.byte	0
+ 1492 05bb 00       		.byte	0
+ 1493 05bc 00       		.byte	0
+ 1494 05bd 00       		.byte	0
+ 1495 05be 00       		.byte	0
+ 1496 05bf 00       		.byte	0
+ 1497 05c0 00       		.byte	0
+ 1498 05c1 0A       		.byte	10
+ 1499 05c2 0A       		.byte	10
+ 1500 05c3 00       		.byte	0
+ 1501 05c4 00       		.byte	0
+ 1502 05c5 00       		.byte	0
+ 1503 05c6 05       		.byte	5
+ 1504 05c7 00       		.byte	0
+ 1505 05c8 00       		.byte	0
+ 1506 05c9 8B       		.byte	-117
+ 1507 05ca 8B       		.byte	-117
+ 1508 05cb 00       		.byte	0
+ 1509 05cc 80       		.byte	-128
+ 1510 05cd 00       		.byte	0
+ 1511 05ce 40       		.byte	64
+ 1512 05cf 00       		.byte	0
+ 1513 05d0 00       		.byte	0
+ 1514 05d1 7F       		.byte	127
+ 1515 05d2 7F       		.byte	127
+ 1516 05d3 00       		.byte	0
+ 1517 05d4 00       		.byte	0
+ 1518 05d5 00       		.byte	0
+ 1519 05d6 00       		.byte	0
+ 1520 05d7 00       		.byte	0
+ 1521 05d8 F0       		.byte	-16
+ 1522 05d9 00       		.byte	0
+ 1523 05da 00       		.byte	0
+ 1524 05db F7       		.byte	-9
+ 1525 05dc 07       		.byte	7
+ 1526 05dd 00       		.byte	0
+ 1527 05de 06       		.byte	6
+ 1528 05df 02       		.byte	2
+ 1529 05e0 00       		.byte	0
+ 1530 05e1 00       		.byte	0
+ 1531 05e2 00       		.byte	0
+ 1532 05e3 00       		.byte	0
+ 1533 05e4 00       		.byte	0
+ 1534 05e5 1F       		.byte	31
+ 1535 05e6 1F       		.byte	31
+ 1536 05e7 00       		.byte	0
+ 1537 05e8 00       		.byte	0
+ 1538 05e9 00       		.byte	0
+ 1539 05ea 00       		.byte	0
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cckeU7PV.s 			page 28
+
+
+ 1540 05eb 00       		.byte	0
+ 1541 05ec 02       		.byte	2
+ 1542 05ed 00       		.byte	0
+ 1543 05ee 00       		.byte	0
+ 1544 05ef 0A       		.byte	10
+ 1545 05f0 08       		.byte	8
+ 1546 05f1 00       		.byte	0
+ 1547 05f2 00       		.byte	0
+ 1548 05f3 00       		.byte	0
+ 1549 05f4 20       		.byte	32
+ 1550 05f5 00       		.byte	0
+ 1551 05f6 00       		.byte	0
+ 1552 05f7 00       		.byte	0
+ 1553 05f8 01       		.byte	1
+ 1554 05f9 00       		.byte	0
+ 1555 05fa 18       		.byte	24
+ 1556 05fb 01       		.byte	1
+ 1557 05fc 0C       		.byte	12
+ 1558 05fd 00       		.byte	0
+ 1559 05fe 18       		.byte	24
+ 1560 05ff 01       		.byte	1
+ 1561              		.global	cy_meta_custnvl
+ 1562              		.section	.cycustnvl,"a",%progbits
+ 1563              		.align	2
+ 1564              		.type	cy_meta_custnvl, %object
+ 1565              		.size	cy_meta_custnvl, 4
+ 1566              	cy_meta_custnvl:
+ 1567 0000 00       		.byte	0
+ 1568 0001 00       		.byte	0
+ 1569 0002 40       		.byte	64
+ 1570 0003 05       		.byte	5
+ 1571              		.global	cy_meta_wonvl
+ 1572              		.section	.cywolatch,"a",%progbits
+ 1573              		.align	2
+ 1574              		.type	cy_meta_wonvl, %object
+ 1575              		.size	cy_meta_wonvl, 4
+ 1576              	cy_meta_wonvl:
+ 1577 0000 BC       		.byte	-68
+ 1578 0001 90       		.byte	-112
+ 1579 0002 AC       		.byte	-84
+ 1580 0003 AF       		.byte	-81
+ 1581              		.global	cy_meta_flashprotect
+ 1582              		.section	.cyflashprotect,"a",%progbits
+ 1583              		.align	2
+ 1584              		.type	cy_meta_flashprotect, %object
+ 1585              		.size	cy_meta_flashprotect, 256
+ 1586              	cy_meta_flashprotect:
+ 1587 0000 00000000 		.space	256
+ 1587      00000000 
+ 1587      00000000 
+ 1587      00000000 
+ 1587      00000000 
+ 1588              		.global	cy_metadata
+ 1589              		.section	.cymeta,"a",%progbits
+ 1590              		.align	2
+ 1591              		.type	cy_metadata, %object
+ 1592              		.size	cy_metadata, 12
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cckeU7PV.s 			page 29
+
+
+ 1593              	cy_metadata:
+ 1594 0000 00       		.byte	0
+ 1595 0001 01       		.byte	1
+ 1596 0002 2E       		.byte	46
+ 1597 0003 12       		.byte	18
+ 1598 0004 30       		.byte	48
+ 1599 0005 69       		.byte	105
+ 1600 0006 00       		.byte	0
+ 1601 0007 01       		.byte	1
+ 1602 0008 00       		.byte	0
+ 1603 0009 00       		.byte	0
+ 1604 000a 00       		.byte	0
+ 1605 000b 00       		.byte	0
+ 1606              		.text
+ 1607              	.Letext0:
+ 1608              		.file 1 "c:\\program files (x86)\\cypress\\psoc creator\\4.2\\psoc creator\\import\\gnu\\arm\\5.4.
+ 1609              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.2\\psoc creator\\import\\gnu\\arm\\5.4.
+ 1610              		.file 3 "Generated_Source\\PSoC5\\cymetadata.c"
+ 1611              		.section	.debug_info,"",%progbits
+ 1612              	.Ldebug_info0:
+ 1613 0000 33010000 		.4byte	0x133
+ 1614 0004 0400     		.2byte	0x4
+ 1615 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 1616 000a 04       		.byte	0x4
+ 1617 000b 01       		.uleb128 0x1
+ 1618 000c 0A000000 		.4byte	.LASF17
+ 1619 0010 0C       		.byte	0xc
+ 1620 0011 ED010000 		.4byte	.LASF18
+ 1621 0015 25010000 		.4byte	.LASF19
+ 1622 0019 00000000 		.4byte	.Ldebug_line0
+ 1623 001d 02       		.uleb128 0x2
+ 1624 001e 01       		.byte	0x1
+ 1625 001f 06       		.byte	0x6
+ 1626 0020 E1010000 		.4byte	.LASF0
+ 1627 0024 03       		.uleb128 0x3
+ 1628 0025 00000000 		.4byte	.LASF9
+ 1629 0029 01       		.byte	0x1
+ 1630 002a 1D       		.byte	0x1d
+ 1631 002b 2F000000 		.4byte	0x2f
+ 1632 002f 02       		.uleb128 0x2
+ 1633 0030 01       		.byte	0x1
+ 1634 0031 08       		.byte	0x8
+ 1635 0032 AC000000 		.4byte	.LASF1
+ 1636 0036 02       		.uleb128 0x2
+ 1637 0037 02       		.byte	0x2
+ 1638 0038 05       		.byte	0x5
+ 1639 0039 CE010000 		.4byte	.LASF2
+ 1640 003d 02       		.uleb128 0x2
+ 1641 003e 02       		.byte	0x2
+ 1642 003f 07       		.byte	0x7
+ 1643 0040 CC000000 		.4byte	.LASF3
+ 1644 0044 02       		.uleb128 0x2
+ 1645 0045 04       		.byte	0x4
+ 1646 0046 05       		.byte	0x5
+ 1647 0047 D8010000 		.4byte	.LASF4
+ 1648 004b 02       		.uleb128 0x2
+ 1649 004c 04       		.byte	0x4
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cckeU7PV.s 			page 30
+
+
+ 1650 004d 07       		.byte	0x7
+ 1651 004e BA000000 		.4byte	.LASF5
+ 1652 0052 02       		.uleb128 0x2
+ 1653 0053 08       		.byte	0x8
+ 1654 0054 05       		.byte	0x5
+ 1655 0055 C0010000 		.4byte	.LASF6
+ 1656 0059 02       		.uleb128 0x2
+ 1657 005a 08       		.byte	0x8
+ 1658 005b 07       		.byte	0x7
+ 1659 005c 0E010000 		.4byte	.LASF7
+ 1660 0060 04       		.uleb128 0x4
+ 1661 0061 04       		.byte	0x4
+ 1662 0062 05       		.byte	0x5
+ 1663 0063 696E7400 		.ascii	"int\000"
+ 1664 0067 02       		.uleb128 0x2
+ 1665 0068 04       		.byte	0x4
+ 1666 0069 07       		.byte	0x7
+ 1667 006a 01010000 		.4byte	.LASF8
+ 1668 006e 03       		.uleb128 0x3
+ 1669 006f 98000000 		.4byte	.LASF10
+ 1670 0073 02       		.byte	0x2
+ 1671 0074 18       		.byte	0x18
+ 1672 0075 24000000 		.4byte	0x24
+ 1673 0079 05       		.uleb128 0x5
+ 1674 007a 91000000 		.4byte	0x91
+ 1675 007e 8A000000 		.4byte	0x8a
+ 1676 0082 06       		.uleb128 0x6
+ 1677 0083 8A000000 		.4byte	0x8a
+ 1678 0087 FF05     		.2byte	0x5ff
+ 1679 0089 00       		.byte	0
+ 1680 008a 02       		.uleb128 0x2
+ 1681 008b 04       		.byte	0x4
+ 1682 008c 07       		.byte	0x7
+ 1683 008d B7010000 		.4byte	.LASF11
+ 1684 0091 07       		.uleb128 0x7
+ 1685 0092 6E000000 		.4byte	0x6e
+ 1686 0096 08       		.uleb128 0x8
+ 1687 0097 EF000000 		.4byte	.LASF12
+ 1688 009b 03       		.byte	0x3
+ 1689 009c 1F       		.byte	0x1f
+ 1690 009d A7000000 		.4byte	0xa7
+ 1691 00a1 05       		.uleb128 0x5
+ 1692 00a2 03       		.byte	0x3
+ 1693 00a3 00000000 		.4byte	cy_meta_configecc
+ 1694 00a7 07       		.uleb128 0x7
+ 1695 00a8 79000000 		.4byte	0x79
+ 1696 00ac 05       		.uleb128 0x5
+ 1697 00ad 91000000 		.4byte	0x91
+ 1698 00b1 BC000000 		.4byte	0xbc
+ 1699 00b5 09       		.uleb128 0x9
+ 1700 00b6 8A000000 		.4byte	0x8a
+ 1701 00ba 03       		.byte	0x3
+ 1702 00bb 00       		.byte	0
+ 1703 00bc 08       		.uleb128 0x8
+ 1704 00bd DF000000 		.4byte	.LASF13
+ 1705 00c1 03       		.byte	0x3
+ 1706 00c2 EC       		.byte	0xec
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cckeU7PV.s 			page 31
+
+
+ 1707 00c3 CD000000 		.4byte	0xcd
+ 1708 00c7 05       		.uleb128 0x5
+ 1709 00c8 03       		.byte	0x3
+ 1710 00c9 00000000 		.4byte	cy_meta_custnvl
+ 1711 00cd 07       		.uleb128 0x7
+ 1712 00ce AC000000 		.4byte	0xac
+ 1713 00d2 08       		.uleb128 0x8
+ 1714 00d3 A9010000 		.4byte	.LASF14
+ 1715 00d7 03       		.byte	0x3
+ 1716 00d8 FA       		.byte	0xfa
+ 1717 00d9 E3000000 		.4byte	0xe3
+ 1718 00dd 05       		.uleb128 0x5
+ 1719 00de 03       		.byte	0x3
+ 1720 00df 00000000 		.4byte	cy_meta_wonvl
+ 1721 00e3 07       		.uleb128 0x7
+ 1722 00e4 AC000000 		.4byte	0xac
+ 1723 00e8 05       		.uleb128 0x5
+ 1724 00e9 91000000 		.4byte	0x91
+ 1725 00ed F8000000 		.4byte	0xf8
+ 1726 00f1 09       		.uleb128 0x9
+ 1727 00f2 8A000000 		.4byte	0x8a
+ 1728 00f6 FF       		.byte	0xff
+ 1729 00f7 00       		.byte	0
+ 1730 00f8 0A       		.uleb128 0xa
+ 1731 00f9 94010000 		.4byte	.LASF15
+ 1732 00fd 03       		.byte	0x3
+ 1733 00fe 0801     		.2byte	0x108
+ 1734 0100 0A010000 		.4byte	0x10a
+ 1735 0104 05       		.uleb128 0x5
+ 1736 0105 03       		.byte	0x3
+ 1737 0106 00000000 		.4byte	cy_meta_flashprotect
+ 1738 010a 07       		.uleb128 0x7
+ 1739 010b E8000000 		.4byte	0xe8
+ 1740 010f 05       		.uleb128 0x5
+ 1741 0110 91000000 		.4byte	0x91
+ 1742 0114 1F010000 		.4byte	0x11f
+ 1743 0118 09       		.uleb128 0x9
+ 1744 0119 8A000000 		.4byte	0x8a
+ 1745 011d 0B       		.byte	0xb
+ 1746 011e 00       		.byte	0
+ 1747 011f 0A       		.uleb128 0xa
+ 1748 0120 A0000000 		.4byte	.LASF16
+ 1749 0124 03       		.byte	0x3
+ 1750 0125 3501     		.2byte	0x135
+ 1751 0127 31010000 		.4byte	0x131
+ 1752 012b 05       		.uleb128 0x5
+ 1753 012c 03       		.byte	0x3
+ 1754 012d 00000000 		.4byte	cy_metadata
+ 1755 0131 07       		.uleb128 0x7
+ 1756 0132 0F010000 		.4byte	0x10f
+ 1757 0136 00       		.byte	0
+ 1758              		.section	.debug_abbrev,"",%progbits
+ 1759              	.Ldebug_abbrev0:
+ 1760 0000 01       		.uleb128 0x1
+ 1761 0001 11       		.uleb128 0x11
+ 1762 0002 01       		.byte	0x1
+ 1763 0003 25       		.uleb128 0x25
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cckeU7PV.s 			page 32
+
+
+ 1764 0004 0E       		.uleb128 0xe
+ 1765 0005 13       		.uleb128 0x13
+ 1766 0006 0B       		.uleb128 0xb
+ 1767 0007 03       		.uleb128 0x3
+ 1768 0008 0E       		.uleb128 0xe
+ 1769 0009 1B       		.uleb128 0x1b
+ 1770 000a 0E       		.uleb128 0xe
+ 1771 000b 10       		.uleb128 0x10
+ 1772 000c 17       		.uleb128 0x17
+ 1773 000d 00       		.byte	0
+ 1774 000e 00       		.byte	0
+ 1775 000f 02       		.uleb128 0x2
+ 1776 0010 24       		.uleb128 0x24
+ 1777 0011 00       		.byte	0
+ 1778 0012 0B       		.uleb128 0xb
+ 1779 0013 0B       		.uleb128 0xb
+ 1780 0014 3E       		.uleb128 0x3e
+ 1781 0015 0B       		.uleb128 0xb
+ 1782 0016 03       		.uleb128 0x3
+ 1783 0017 0E       		.uleb128 0xe
+ 1784 0018 00       		.byte	0
+ 1785 0019 00       		.byte	0
+ 1786 001a 03       		.uleb128 0x3
+ 1787 001b 16       		.uleb128 0x16
+ 1788 001c 00       		.byte	0
+ 1789 001d 03       		.uleb128 0x3
+ 1790 001e 0E       		.uleb128 0xe
+ 1791 001f 3A       		.uleb128 0x3a
+ 1792 0020 0B       		.uleb128 0xb
+ 1793 0021 3B       		.uleb128 0x3b
+ 1794 0022 0B       		.uleb128 0xb
+ 1795 0023 49       		.uleb128 0x49
+ 1796 0024 13       		.uleb128 0x13
+ 1797 0025 00       		.byte	0
+ 1798 0026 00       		.byte	0
+ 1799 0027 04       		.uleb128 0x4
+ 1800 0028 24       		.uleb128 0x24
+ 1801 0029 00       		.byte	0
+ 1802 002a 0B       		.uleb128 0xb
+ 1803 002b 0B       		.uleb128 0xb
+ 1804 002c 3E       		.uleb128 0x3e
+ 1805 002d 0B       		.uleb128 0xb
+ 1806 002e 03       		.uleb128 0x3
+ 1807 002f 08       		.uleb128 0x8
+ 1808 0030 00       		.byte	0
+ 1809 0031 00       		.byte	0
+ 1810 0032 05       		.uleb128 0x5
+ 1811 0033 01       		.uleb128 0x1
+ 1812 0034 01       		.byte	0x1
+ 1813 0035 49       		.uleb128 0x49
+ 1814 0036 13       		.uleb128 0x13
+ 1815 0037 01       		.uleb128 0x1
+ 1816 0038 13       		.uleb128 0x13
+ 1817 0039 00       		.byte	0
+ 1818 003a 00       		.byte	0
+ 1819 003b 06       		.uleb128 0x6
+ 1820 003c 21       		.uleb128 0x21
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cckeU7PV.s 			page 33
+
+
+ 1821 003d 00       		.byte	0
+ 1822 003e 49       		.uleb128 0x49
+ 1823 003f 13       		.uleb128 0x13
+ 1824 0040 2F       		.uleb128 0x2f
+ 1825 0041 05       		.uleb128 0x5
+ 1826 0042 00       		.byte	0
+ 1827 0043 00       		.byte	0
+ 1828 0044 07       		.uleb128 0x7
+ 1829 0045 26       		.uleb128 0x26
+ 1830 0046 00       		.byte	0
+ 1831 0047 49       		.uleb128 0x49
+ 1832 0048 13       		.uleb128 0x13
+ 1833 0049 00       		.byte	0
+ 1834 004a 00       		.byte	0
+ 1835 004b 08       		.uleb128 0x8
+ 1836 004c 34       		.uleb128 0x34
+ 1837 004d 00       		.byte	0
+ 1838 004e 03       		.uleb128 0x3
+ 1839 004f 0E       		.uleb128 0xe
+ 1840 0050 3A       		.uleb128 0x3a
+ 1841 0051 0B       		.uleb128 0xb
+ 1842 0052 3B       		.uleb128 0x3b
+ 1843 0053 0B       		.uleb128 0xb
+ 1844 0054 49       		.uleb128 0x49
+ 1845 0055 13       		.uleb128 0x13
+ 1846 0056 3F       		.uleb128 0x3f
+ 1847 0057 19       		.uleb128 0x19
+ 1848 0058 02       		.uleb128 0x2
+ 1849 0059 18       		.uleb128 0x18
+ 1850 005a 00       		.byte	0
+ 1851 005b 00       		.byte	0
+ 1852 005c 09       		.uleb128 0x9
+ 1853 005d 21       		.uleb128 0x21
+ 1854 005e 00       		.byte	0
+ 1855 005f 49       		.uleb128 0x49
+ 1856 0060 13       		.uleb128 0x13
+ 1857 0061 2F       		.uleb128 0x2f
+ 1858 0062 0B       		.uleb128 0xb
+ 1859 0063 00       		.byte	0
+ 1860 0064 00       		.byte	0
+ 1861 0065 0A       		.uleb128 0xa
+ 1862 0066 34       		.uleb128 0x34
+ 1863 0067 00       		.byte	0
+ 1864 0068 03       		.uleb128 0x3
+ 1865 0069 0E       		.uleb128 0xe
+ 1866 006a 3A       		.uleb128 0x3a
+ 1867 006b 0B       		.uleb128 0xb
+ 1868 006c 3B       		.uleb128 0x3b
+ 1869 006d 05       		.uleb128 0x5
+ 1870 006e 49       		.uleb128 0x49
+ 1871 006f 13       		.uleb128 0x13
+ 1872 0070 3F       		.uleb128 0x3f
+ 1873 0071 19       		.uleb128 0x19
+ 1874 0072 02       		.uleb128 0x2
+ 1875 0073 18       		.uleb128 0x18
+ 1876 0074 00       		.byte	0
+ 1877 0075 00       		.byte	0
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cckeU7PV.s 			page 34
+
+
+ 1878 0076 00       		.byte	0
+ 1879              		.section	.debug_aranges,"",%progbits
+ 1880 0000 14000000 		.4byte	0x14
+ 1881 0004 0200     		.2byte	0x2
+ 1882 0006 00000000 		.4byte	.Ldebug_info0
+ 1883 000a 04       		.byte	0x4
+ 1884 000b 00       		.byte	0
+ 1885 000c 0000     		.2byte	0
+ 1886 000e 0000     		.2byte	0
+ 1887 0010 00000000 		.4byte	0
+ 1888 0014 00000000 		.4byte	0
+ 1889              		.section	.debug_line,"",%progbits
+ 1890              	.Ldebug_line0:
+ 1891 0000 3D010000 		.section	.debug_str,"MS",%progbits,1
+ 1891      02003701 
+ 1891      00000201 
+ 1891      FB0E0D00 
+ 1891      01010101 
+ 1892              	.LASF9:
+ 1893 0000 5F5F7569 		.ascii	"__uint8_t\000"
+ 1893      6E74385F 
+ 1893      7400
+ 1894              	.LASF17:
+ 1895 000a 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 1895      43313120 
+ 1895      352E342E 
+ 1895      31203230 
+ 1895      31363036 
+ 1896 003d 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 1896      20726576 
+ 1896      6973696F 
+ 1896      6E203233 
+ 1896      37373135 
+ 1897 0070 30202D66 		.ascii	"0 -ffunction-sections -ffat-lto-objects\000"
+ 1897      66756E63 
+ 1897      74696F6E 
+ 1897      2D736563 
+ 1897      74696F6E 
+ 1898              	.LASF10:
+ 1899 0098 75696E74 		.ascii	"uint8_t\000"
+ 1899      385F7400 
+ 1900              	.LASF16:
+ 1901 00a0 63795F6D 		.ascii	"cy_metadata\000"
+ 1901      65746164 
+ 1901      61746100 
+ 1902              	.LASF1:
+ 1903 00ac 756E7369 		.ascii	"unsigned char\000"
+ 1903      676E6564 
+ 1903      20636861 
+ 1903      7200
+ 1904              	.LASF5:
+ 1905 00ba 6C6F6E67 		.ascii	"long unsigned int\000"
+ 1905      20756E73 
+ 1905      69676E65 
+ 1905      6420696E 
+ 1905      7400
+ 1906              	.LASF3:
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cckeU7PV.s 			page 35
+
+
+ 1907 00cc 73686F72 		.ascii	"short unsigned int\000"
+ 1907      7420756E 
+ 1907      7369676E 
+ 1907      65642069 
+ 1907      6E7400
+ 1908              	.LASF13:
+ 1909 00df 63795F6D 		.ascii	"cy_meta_custnvl\000"
+ 1909      6574615F 
+ 1909      63757374 
+ 1909      6E766C00 
+ 1910              	.LASF12:
+ 1911 00ef 63795F6D 		.ascii	"cy_meta_configecc\000"
+ 1911      6574615F 
+ 1911      636F6E66 
+ 1911      69676563 
+ 1911      6300
+ 1912              	.LASF8:
+ 1913 0101 756E7369 		.ascii	"unsigned int\000"
+ 1913      676E6564 
+ 1913      20696E74 
+ 1913      00
+ 1914              	.LASF7:
+ 1915 010e 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 1915      206C6F6E 
+ 1915      6720756E 
+ 1915      7369676E 
+ 1915      65642069 
+ 1916              	.LASF19:
+ 1917 0125 433A5C55 		.ascii	"C:\\Users\\Matthew\\Dropbox (MIT)\\Sophomore Spring"
+ 1917      73657273 
+ 1917      5C4D6174 
+ 1917      74686577 
+ 1917      5C44726F 
+ 1918 0154 5C362E31 		.ascii	"\\6.115\\6.115-Labs\\project\\DVDAC_Example01\\DVDA"
+ 1918      31355C36 
+ 1918      2E313135 
+ 1918      2D4C6162 
+ 1918      735C7072 
+ 1919 0182 435F4578 		.ascii	"C_Example01.cydsn\000"
+ 1919      616D706C 
+ 1919      6530312E 
+ 1919      63796473 
+ 1919      6E00
+ 1920              	.LASF15:
+ 1921 0194 63795F6D 		.ascii	"cy_meta_flashprotect\000"
+ 1921      6574615F 
+ 1921      666C6173 
+ 1921      6870726F 
+ 1921      74656374 
+ 1922              	.LASF14:
+ 1923 01a9 63795F6D 		.ascii	"cy_meta_wonvl\000"
+ 1923      6574615F 
+ 1923      776F6E76 
+ 1923      6C00
+ 1924              	.LASF11:
+ 1925 01b7 73697A65 		.ascii	"sizetype\000"
+ 1925      74797065 
+ARM GAS  C:\Users\Matthew\AppData\Local\Temp\cckeU7PV.s 			page 36
+
+
+ 1925      00
+ 1926              	.LASF6:
+ 1927 01c0 6C6F6E67 		.ascii	"long long int\000"
+ 1927      206C6F6E 
+ 1927      6720696E 
+ 1927      7400
+ 1928              	.LASF2:
+ 1929 01ce 73686F72 		.ascii	"short int\000"
+ 1929      7420696E 
+ 1929      7400
+ 1930              	.LASF4:
+ 1931 01d8 6C6F6E67 		.ascii	"long int\000"
+ 1931      20696E74 
+ 1931      00
+ 1932              	.LASF0:
+ 1933 01e1 7369676E 		.ascii	"signed char\000"
+ 1933      65642063 
+ 1933      68617200 
+ 1934              	.LASF18:
+ 1935 01ed 47656E65 		.ascii	"Generated_Source\\PSoC5\\cymetadata.c\000"
+ 1935      72617465 
+ 1935      645F536F 
+ 1935      75726365 
+ 1935      5C50536F 
+ 1936              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
